@@ -25,6 +25,7 @@
       --control-height: 34px;
       --action-width: 104px;
       --control-radius: 5px;
+      --top-nav-height: 38px;
     }
 
     * { box-sizing: border-box; }
@@ -63,7 +64,10 @@
     }
 
     .logo {
-      height: 38px;
+      height: var(--top-nav-height);
+      position: sticky;
+      top: 0;
+      z-index: 30;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -140,7 +144,10 @@
     }
 
     .top-tabs {
-      height: 38px;
+      height: var(--top-nav-height);
+      position: sticky;
+      top: 0;
+      z-index: 28;
       display: flex;
       align-items: stretch;
       background: #fff;
@@ -588,6 +595,143 @@
       color: #9aa8bd;
     }
 
+    .form-field option:disabled {
+      color: #9aa8bd;
+    }
+
+    .aggregation-select {
+      display: grid;
+      gap: 4px;
+      position: relative;
+    }
+
+    .aggregation-trigger {
+      width: 100%;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      padding: 0 10px 0 12px;
+      background: #fff;
+      color: #334764;
+      font: inherit;
+      text-align: left;
+    }
+
+    .aggregation-trigger svg {
+      width: 14px;
+      height: 14px;
+      flex: 0 0 auto;
+      stroke: currentColor;
+      stroke-width: 2.3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.15s;
+    }
+
+    .aggregation-select.open .aggregation-trigger {
+      border-color: #8fa3ff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+    }
+
+    .aggregation-select.open .aggregation-trigger svg {
+      transform: rotate(180deg);
+    }
+
+    .aggregation-menu {
+      display: none;
+      width: 100%;
+      min-width: 0;
+      padding: 4px;
+      border: 1px solid #d8e2f2;
+      border-radius: 5px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(31, 47, 82, 0.12);
+      overflow: visible;
+    }
+
+    .aggregation-select.open .aggregation-menu {
+      display: grid;
+      gap: 2px;
+    }
+
+    .aggregation-option {
+      width: 100%;
+      min-width: 0;
+      min-height: 30px;
+      display: block;
+      position: relative;
+      border: 0;
+      border-radius: 4px;
+      padding: 7px 8px;
+      background: #fff;
+      color: #334764;
+      font: inherit;
+      font-size: 12px;
+      line-height: 1.35;
+      text-align: left;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .aggregation-option:hover,
+    .aggregation-option.active {
+      background: #f3f6ff;
+      color: #233ed8;
+    }
+
+    .aggregation-option.is-disabled {
+      background: #f6f8fc;
+      color: #9aa8bd;
+      cursor: not-allowed;
+    }
+
+    .aggregation-option-hint {
+      display: none;
+      position: absolute;
+      left: calc(100% + 8px);
+      top: 50%;
+      width: 260px;
+      max-width: min(260px, calc(100vw - 48px));
+      padding: 8px 10px;
+      border: 1px solid #cbd7ee;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 10px 24px rgba(23, 39, 82, 0.15);
+      color: #102346;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      transform: translateY(-50%);
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    .aggregation-option-hint::before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-left: 1px solid #cbd7ee;
+      border-bottom: 1px solid #cbd7ee;
+      background: rgba(255, 255, 255, 0.98);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .aggregation-option.is-disabled:hover .aggregation-option-hint,
+    .aggregation-option.is-disabled:focus-visible .aggregation-option-hint {
+      display: block;
+    }
+
     .date-range {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
@@ -624,7 +768,7 @@
       flex-direction: column;
       border: 1px solid #dfe7f4;
       border-radius: 6px;
-      overflow: hidden;
+      overflow: visible;
       background: #fff;
       transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
     }
@@ -912,8 +1056,8 @@
 
     .filter-panel {
       position: sticky;
-      top: 0;
-      z-index: 6;
+      top: var(--top-nav-height);
+      z-index: 22;
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -1404,6 +1548,17 @@
     .asin-tab.active {
       background: var(--blue);
       color: #fff;
+    }
+
+    .asin-tab.is-disabled {
+      background: #f4f6fb;
+      color: #9aa8bd;
+      cursor: not-allowed;
+    }
+
+    .asin-tab.is-disabled.active {
+      background: #f4f6fb;
+      color: #9aa8bd;
     }
 
     .download-btn,
@@ -2268,6 +2423,12 @@
 
     .tooltip-product .asin-product-title {
       font-size: 11px;
+    }
+
+    .tooltip-product .asin-product-link {
+      color: #111827;
+      cursor: default;
+      text-decoration: none;
     }
 
     .tooltip-rule-products {
@@ -3138,19 +3299,30 @@
                 <div class="selected-model-body">
                   <h3>购物篮分析模型</h3>
                   <div class="form-field">
-                    <label><span class="required">*</span>数据聚合方式</label>
-                    <select aria-label="数据聚合方式">
-                      <option selected>子ASIN</option>
-                      <option>父ASIN</option>
-                    </select>
-                  </div>
-                  <div class="form-field">
                     <label><span class="required">*</span>数据选择</label>
-                    <select aria-label="数据选择">
+                    <select id="createDataSelect" aria-label="数据选择">
                       <option selected>广告触达28天内数据</option>
                       <option>全量购买数据（FSI）</option>
                       <option>5年购买数据（ARP)</option>
                     </select>
+                  </div>
+                  <div class="form-field">
+                    <label><span class="required">*</span>数据聚合方式</label>
+                    <div class="aggregation-select" id="createAggregationSelect" data-value="子ASIN">
+                      <button class="aggregation-trigger" id="createAggregationTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="数据聚合方式">
+                        <span id="createAggregationValue">子ASIN</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                          <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                      </button>
+                      <div class="aggregation-menu" role="listbox" aria-label="数据聚合方式">
+                        <button class="aggregation-option active" type="button" role="option" aria-selected="true" data-aggregation-value="子ASIN">子ASIN</button>
+                        <button class="aggregation-option" id="createParentAsinOption" type="button" role="option" aria-selected="false" data-aggregation-value="父ASIN">
+                          <span>父ASIN</span>
+                          <span class="aggregation-option-hint">若需按父ASIN聚合，请先在Mapping upload上传ASIN映射。</span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -3168,7 +3340,8 @@
           <div class="intro-copy">
             <h1 id="pageTitle">购物篮分析模型 Demo V3</h1>
             <p>
-              购物篮分析模型，分析商品 A 与 B 共同出现时的支持度、置信度与提升度：1）支持度表示组合出现的概率，用于筛选冷热门商品；2）提升度表示在 A 人群中推 B的成功率是随机推送给全员的倍数。用于判断组合是否为有价值的强关联组合；3）置信度表示购买 A 后会购买 B 的概率。用于营销活动的预期效果参考。
+              购物篮分析模型，分析商品 A 与 B 共同出现时的支持度、提升度与置信度。<br>
+              支持度表示组合出现的概率，用于筛选冷热门商品；提升度表示在 A 人群中推 B的成功率是随机推送给全员的倍数，用于判断组合是否为有价值的强关联组合；置信度表示购买 A 后会购买 B 的概率，用于营销活动的预期效果参考。
             </p>
           </div>
           <button class="download-btn" id="downloadBtn">下载数据</button>
@@ -3179,7 +3352,7 @@
             <div class="filter-field">
               <div class="asin-tabs" role="tablist" aria-label="商品维度">
                 <button class="asin-tab active" type="button" data-asin-view="asin" role="tab" aria-selected="true">ASIN</button>
-                <button class="asin-tab" type="button" data-asin-view="parent" role="tab" aria-selected="false">父ASIN</button>
+                <button class="asin-tab is-disabled" type="button" data-asin-view="parent" role="tab" aria-selected="false" aria-disabled="true" title="若需按父ASIN聚合，请先在Mapping upload上传ASIN映射。">父ASIN</button>
               </div>
             </div>
             <div class="filter-field compact">
@@ -3245,9 +3418,9 @@
               <svg id="networkSvg" viewBox="0 0 760 430" role="img" aria-label="关联商品网络图"></svg>
             </div>
             <div class="legend">
-              <span class="legend-item"><span class="legend-dot" style="background:#0eb67f"></span>Lift ≥ 2.0 P1 强正相关</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#f5a640"></span>1.0 &lt; Lift &lt; 2.0 P2 弱正相关</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#ef6f7d"></span>Lift ≤ 1.0 P3 无关或负相关</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#0eb67f"></span>Lift ≥ 2.0  P1-强正相关</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#f5a640"></span>1.0 &lt; Lift &lt; 2.0  P2-弱正相关</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#ef6f7d"></span>Lift ≤ 1.0  P3-无关或负相关</span>
             </div>
           </article>
 
@@ -3546,10 +3719,13 @@
       const asin = productAsin(product);
       const url = productAmazonUrl(product);
       const tooltipClass = options.tooltip ? " tooltip-product" : "";
+      const asinMarkup = options.tooltip
+        ? `<span class="asin-product-link" title="${escapeHtml(asin)}">${escapeHtml(asin)}</span>`
+        : `<a class="asin-product-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(url)}">${escapeHtml(asin)}</a>`;
       return `<div class="asin-product${tooltipClass}">
         <img class="asin-product-img" src="${productImage(product)}" alt="${escapeHtml(title)}">
         <span class="asin-product-copy">
-          <a class="asin-product-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(url)}">${escapeHtml(asin)}</a>
+          ${asinMarkup}
           <span class="asin-product-title" title="${escapeHtml(title)}">${escapeHtml(title)}</span>
         </span>
       </div>`;
@@ -3672,9 +3848,9 @@
 
     function liftLegendHtml() {
       return `
-        <span class="legend-item"><span class="legend-dot" style="background:#0eb67f"></span>Lift ≥ 2.0 P1 强正相关</span>
-        <span class="legend-item"><span class="legend-dot" style="background:#f5a640"></span>1.0 &lt; Lift &lt; 2.0 P2 弱正相关</span>
-        <span class="legend-item"><span class="legend-dot" style="background:#ef6f7d"></span>Lift ≤ 1.0 P3 无关或负相关</span>`;
+        <span class="legend-item"><span class="legend-dot" style="background:#0eb67f"></span>Lift ≥ 2.0  P1-强正相关</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#f5a640"></span>1.0 &lt; Lift &lt; 2.0  P2-弱正相关</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#ef6f7d"></span>Lift ≤ 1.0  P3-无关或负相关</span>`;
     }
 
     function formatOrders(value) {
@@ -3932,6 +4108,7 @@
 
       document.querySelectorAll("[data-asin-view]").forEach(button => {
         button.addEventListener("click", () => {
+          if (button.getAttribute("aria-disabled") === "true") return;
           filters.asinView = button.dataset.asinView;
           filters.mainAsin = [];
           filters.linkedAsin = [];
@@ -3965,6 +4142,63 @@
         state.selectedProduct = null;
         renderAll();
       });
+    }
+
+    function setupCreateReportForm() {
+      const dataSelect = document.getElementById("createDataSelect");
+      const aggregationSelect = document.getElementById("createAggregationSelect");
+      const aggregationTrigger = document.getElementById("createAggregationTrigger");
+      const aggregationValue = document.getElementById("createAggregationValue");
+      const parentAsinOption = document.getElementById("createParentAsinOption");
+      const aggregationOptions = Array.from(document.querySelectorAll("[data-aggregation-value]"));
+      if (!dataSelect || !aggregationSelect || !aggregationTrigger || !aggregationValue || !parentAsinOption || !aggregationOptions.length) return;
+
+      const selectAggregation = value => {
+        aggregationSelect.dataset.value = value;
+        aggregationValue.textContent = value;
+        aggregationOptions.forEach(option => {
+          const active = option.dataset.aggregationValue === value;
+          option.classList.toggle("active", active);
+          option.setAttribute("aria-selected", String(active));
+        });
+      };
+
+      const closeAggregationMenu = () => {
+        aggregationSelect.classList.remove("open");
+        aggregationTrigger.setAttribute("aria-expanded", "false");
+      };
+
+      const syncAggregationState = () => {
+        const shouldDisableParent = dataSelect.value === "广告触达28天内数据" || dataSelect.value === "全量购买数据（FSI）";
+        parentAsinOption.classList.toggle("is-disabled", shouldDisableParent);
+        parentAsinOption.setAttribute("aria-disabled", String(shouldDisableParent));
+        if (shouldDisableParent && aggregationSelect.dataset.value === "父ASIN") {
+          selectAggregation("子ASIN");
+        }
+      };
+
+      aggregationTrigger.addEventListener("click", event => {
+        event.stopPropagation();
+        const nextOpen = !aggregationSelect.classList.contains("open");
+        aggregationSelect.classList.toggle("open", nextOpen);
+        aggregationTrigger.setAttribute("aria-expanded", String(nextOpen));
+      });
+
+      aggregationOptions.forEach(option => {
+        option.addEventListener("click", event => {
+          event.stopPropagation();
+          if (option.getAttribute("aria-disabled") === "true") return;
+          selectAggregation(option.dataset.aggregationValue);
+          closeAggregationMenu();
+        });
+      });
+
+      document.addEventListener("click", event => {
+        if (!aggregationSelect.contains(event.target)) closeAggregationMenu();
+      });
+
+      dataSelect.addEventListener("change", syncAggregationState);
+      syncAggregationState();
     }
 
     function refreshAsinFilterOptions(rules) {
@@ -4775,6 +5009,7 @@
 
     setupPageNavigation();
     setupInteractions();
+    setupCreateReportForm();
     showAppPage("reports");
   </script>
 </body>
