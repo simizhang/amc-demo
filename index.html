@@ -4499,6 +4499,7 @@
       const activeSegment = ordersSegmentInfo(state.ordersSegment);
       const activeSegmentBuckets = selectedOrdersSegmentBuckets(baseRules);
       const segmentCount = activeSegmentBuckets.reduce((sum, bucket) => sum + bucket.count, 0);
+      const segmentOrders = activeSegmentBuckets.reduce((sum, bucket) => sum + bucket.ordersTotal, 0);
       const activeBucketCount = activeBuckets.reduce((sum, bucket) => sum + bucket.count, 0);
       const activeBucketOrders = activeBuckets.reduce((sum, bucket) => sum + bucket.ordersTotal, 0);
       const activeBucketLabels = activeBuckets
@@ -4509,7 +4510,7 @@
       label.textContent = activeBuckets.length
         ? `已选择 ${activeBucketLabels}：${activeBucketCount} 个组合，组合订单数合计 ${formatOrders(activeBucketOrders)}`
         : activeSegment
-          ? `已选择 ${activeSegment.label}：${segmentCount} 个组合`
+          ? `已选择 ${activeSegment.label}：${segmentCount} 个组合，组合订单数合计 ${formatOrders(segmentOrders)}`
           : "";
       const maxOrders = Math.max(...buckets.map(bucket => bucket.ordersTotal), 1);
       const axisTicks = [1, 0.75, 0.5, 0.25].map(ratio => formatOrders(maxOrders * ratio));
