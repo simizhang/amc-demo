@@ -1,0 +1,5052 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>购物篮分析模型 Demo V3-1</title>
+  <style>
+    :root {
+      --nav: #4d66ee;
+      --nav-dark: #3852df;
+      --bg: #eef4ff;
+      --panel: #ffffff;
+      --line: #dbe5f6;
+      --line-strong: #c8d5ef;
+      --text: #102346;
+      --muted: #667795;
+      --blue: #5b73f2;
+      --teal: #28c4b2;
+      --green: #0eb67f;
+      --orange: #f5a640;
+      --red: #ef6f7d;
+      --purple: #8475f2;
+      --shadow: 0 10px 24px rgba(29, 51, 102, 0.09);
+      --radius: 8px;
+      --control-height: 34px;
+      --action-width: 104px;
+      --control-radius: 5px;
+      --top-nav-height: 38px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 172px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: var(--nav);
+      color: #fff;
+      box-shadow: 6px 0 20px rgba(48, 70, 168, 0.18);
+      z-index: 3;
+    }
+
+    .logo {
+      height: var(--top-nav-height);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      background: #fff;
+      color: #13265b;
+      font-weight: 900;
+      font-size: 17px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .logo-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 4px solid #51c7ff;
+      border-right-color: transparent;
+      flex: 0 0 auto;
+    }
+
+    .nav-item {
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px 8px 13px;
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 400;
+      line-height: 1.15;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .nav-item.active {
+      background: var(--nav-dark);
+    }
+
+    .nav-item.active::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #fff;
+    }
+
+    .nav-icon {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.98);
+      flex: 0 0 auto;
+    }
+
+    .nav-icon svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .workspace {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-tabs {
+      height: var(--top-nav-height);
+      position: sticky;
+      top: 0;
+      z-index: 28;
+      display: flex;
+      align-items: stretch;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .product-tab {
+      min-width: 150px;
+      padding: 0 18px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      background: #fff;
+      color: #4c5f82;
+      font-weight: 700;
+    }
+
+    .product-tab.active {
+      color: #1640d3;
+      border-bottom: 2px solid var(--blue);
+    }
+
+    .top-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-right: 0;
+      color: #526685;
+      font-size: 12px;
+    }
+
+    .top-download-btn {
+      width: var(--control-height);
+      height: var(--control-height);
+      border: 1px solid #c8d6f1;
+      border-radius: var(--control-radius);
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 var(--control-height);
+      background: #fff;
+      color: #61718b;
+      box-shadow: 0 1px 2px rgba(16, 35, 86, 0.05);
+    }
+
+    .top-download-btn:hover,
+    .top-download-btn:focus-visible {
+      border-color: var(--blue);
+      color: #233ed8;
+      background: #f7f9ff;
+      outline: none;
+    }
+
+    .top-download-btn svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 2.1;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .select-like {
+      height: 26px;
+      min-width: 86px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      background: #f7faff;
+      color: #445678;
+    }
+
+    .utility {
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 24px;
+      background: #fff;
+      box-shadow: 0 3px 12px rgba(16, 35, 86, 0.04);
+    }
+
+    .breadcrumb {
+      font-weight: 800;
+      color: #13264c;
+    }
+
+    .status {
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #dff8ee;
+      color: #087c56;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    body[data-page="reports"] .status,
+    body[data-page="reports"] .select-like,
+    body[data-page="reports"] .top-download-btn,
+    body[data-page="create"] .status,
+    body[data-page="create"] .select-like,
+    body[data-page="create"] .top-download-btn {
+      display: none;
+    }
+
+    .page {
+      padding: 14px 28px 28px;
+      min-width: 0;
+    }
+
+    .app-page {
+      display: none;
+    }
+
+    .app-page:not(.active) {
+      display: none !important;
+    }
+
+    .app-page.active {
+      display: block;
+    }
+
+    .create-page.active {
+      display: flex;
+    }
+
+    .amc-page {
+      padding: 18px 24px 22px;
+    }
+
+    .reports-hero,
+    .reports-list,
+    .create-info-card,
+    .create-models-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .reports-hero {
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .reports-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .reports-section-head h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #0b2147;
+    }
+
+    .reports-hero .reports-section-head {
+      justify-content: flex-start;
+    }
+
+    .template-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      color: #536684;
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+
+    .template-tab {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #536684;
+      font-weight: 700;
+    }
+
+    .template-tab.active {
+      color: #2846df;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(282px, 300px));
+      gap: 16px;
+      align-items: stretch;
+      justify-content: start;
+    }
+
+    .template-card {
+      position: relative;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #d9e3f4;
+      border-radius: 8px;
+      background: #fff;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+
+    .template-card.featured,
+    .template-card:hover {
+      border-color: #5b73f2;
+      box-shadow: 0 10px 24px rgba(54, 83, 220, 0.14);
+    }
+
+    .template-visual {
+      height: 150px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 72% 26%, rgba(91, 115, 242, 0.24), transparent 25%),
+        linear-gradient(135deg, #e7f3ff 0%, #f7fbff 48%, #e9f0ff 100%);
+    }
+
+    .template-visual::before,
+    .template-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 16px;
+      border: 1px solid rgba(91, 115, 242, 0.18);
+      background: rgba(255, 255, 255, 0.55);
+      box-shadow: 0 12px 26px rgba(69, 94, 178, 0.12);
+    }
+
+    .template-visual::before {
+      width: 120px;
+      height: 78px;
+      left: 28px;
+      top: 38px;
+      transform: rotate(-7deg);
+    }
+
+    .template-visual::after {
+      width: 96px;
+      height: 58px;
+      right: 26px;
+      top: 54px;
+      transform: rotate(6deg);
+    }
+
+    .template-visual.green {
+      background:
+        radial-gradient(circle at 74% 28%, rgba(40, 196, 178, 0.22), transparent 25%),
+        linear-gradient(135deg, #e6fbf7 0%, #f7fbff 52%, #e8f1ff 100%);
+    }
+
+    .template-visual.purple {
+      background:
+        radial-gradient(circle at 74% 28%, rgba(132, 117, 242, 0.24), transparent 25%),
+        linear-gradient(135deg, #f0ecff 0%, #f8fbff 54%, #e8f2ff 100%);
+    }
+
+    .template-visual.more {
+      background:
+        radial-gradient(circle at 72% 25%, rgba(91, 115, 242, 0.20), transparent 25%),
+        linear-gradient(135deg, #edf6ff 0%, #f8fbff 48%, #f1edff 100%);
+    }
+
+    .template-body {
+      padding: 16px 16px 14px;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .template-body h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      color: #102346;
+    }
+
+    .template-desc {
+      min-height: 44px;
+      margin: 0 0 14px;
+      color: #667795;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .template-models {
+      margin: 0;
+      padding: 12px 0 0;
+      border-top: 1px solid #edf2fb;
+      list-style: none;
+      color: #31476b;
+      line-height: 2.1;
+    }
+
+    .template-models li::before {
+      content: "·";
+      margin-right: 9px;
+      color: #9aabc5;
+    }
+
+    .quick-create-btn {
+      height: 34px;
+      margin-top: auto;
+      border: 0;
+      border-radius: 5px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 800;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .template-card:hover .quick-create-btn,
+    .template-card.featured .quick-create-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reports-list {
+      overflow: hidden;
+    }
+
+    .reports-list-head {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .reports-list-head h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .reports-tools {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .reports-tools input,
+    .reports-tools select {
+      height: 32px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      padding: 0 12px;
+      background: #fff;
+      color: #536684;
+      min-width: 180px;
+    }
+
+    .reports-table {
+      min-width: 1100px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: #e3f8ee;
+      color: #087c56;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .row-action {
+      border: 0;
+      background: transparent;
+      color: #536684;
+      padding: 2px 6px;
+      font-weight: 900;
+    }
+
+    .create-page {
+      padding: 18px 24px 16px;
+      min-height: calc(100vh - 84px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .create-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 420px minmax(0, 1fr);
+      gap: 16px;
+      min-height: 0;
+    }
+
+    .create-info-card,
+    .create-models-card {
+      padding: 18px 16px;
+    }
+
+    .create-info-card h2,
+    .create-models-card h2 {
+      margin: 0 0 18px;
+      font-size: 18px;
+      color: #0b2147;
+    }
+
+    .report-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+      color: #31476b;
+    }
+
+    .form-field label {
+      font-weight: 700;
+    }
+
+    .required {
+      color: #ef6f7d;
+      margin-right: 4px;
+    }
+
+    .form-field input,
+    .form-field select {
+      height: 34px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      padding: 0 12px;
+      background: #fff;
+      color: #334764;
+    }
+
+    .form-field input:disabled {
+      background: #f5f7fb;
+      color: #9aa8bd;
+    }
+
+    .form-field option:disabled {
+      color: #9aa8bd;
+    }
+
+    .aggregation-select {
+      display: grid;
+      gap: 4px;
+      position: relative;
+    }
+
+    .aggregation-trigger {
+      width: 100%;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      padding: 0 10px 0 12px;
+      background: #fff;
+      color: #334764;
+      font: inherit;
+      text-align: left;
+    }
+
+    .aggregation-trigger svg {
+      width: 14px;
+      height: 14px;
+      flex: 0 0 auto;
+      stroke: currentColor;
+      stroke-width: 2.3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.15s;
+    }
+
+    .aggregation-select.open .aggregation-trigger {
+      border-color: #8fa3ff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+    }
+
+    .aggregation-select.open .aggregation-trigger svg {
+      transform: rotate(180deg);
+    }
+
+    .aggregation-menu {
+      display: none;
+      width: 100%;
+      min-width: 0;
+      padding: 4px;
+      border: 1px solid #d8e2f2;
+      border-radius: 5px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(31, 47, 82, 0.12);
+      overflow: visible;
+    }
+
+    .aggregation-select.open .aggregation-menu {
+      display: grid;
+      gap: 2px;
+    }
+
+    .aggregation-option {
+      width: 100%;
+      min-width: 0;
+      min-height: 30px;
+      display: block;
+      position: relative;
+      border: 0;
+      border-radius: 4px;
+      padding: 7px 8px;
+      background: #fff;
+      color: #334764;
+      font: inherit;
+      font-size: 12px;
+      line-height: 1.35;
+      text-align: left;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .aggregation-option:hover,
+    .aggregation-option.active {
+      background: #f3f6ff;
+      color: #233ed8;
+    }
+
+    .aggregation-option.is-disabled {
+      background: #f6f8fc;
+      color: #9aa8bd;
+      cursor: not-allowed;
+    }
+
+    .aggregation-option-hint {
+      display: none;
+      position: absolute;
+      left: calc(100% + 8px);
+      top: 50%;
+      width: 260px;
+      max-width: min(260px, calc(100vw - 48px));
+      padding: 8px 10px;
+      border: 1px solid #cbd7ee;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 10px 24px rgba(23, 39, 82, 0.15);
+      color: #102346;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      transform: translateY(-50%);
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    .aggregation-option-hint::before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-left: 1px solid #cbd7ee;
+      border-bottom: 1px solid #cbd7ee;
+      background: rgba(255, 255, 255, 0.98);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .aggregation-option.is-disabled:hover .aggregation-option-hint,
+    .aggregation-option.is-disabled:focus-visible .aggregation-option-hint {
+      display: block;
+    }
+
+    .date-range {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+    }
+
+    .date-range span {
+      text-align: center;
+      color: #536684;
+    }
+
+    .selected-template-title {
+      display: inline-flex;
+      align-items: center;
+      height: 34px;
+      border-bottom: 2px solid var(--blue);
+      color: #2846df;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .selected-model-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
+      gap: 16px;
+      justify-content: start;
+    }
+
+    .selected-model-card {
+      position: relative;
+      display: flex;
+      min-height: 440px;
+      flex-direction: column;
+      border: 1px solid #dfe7f4;
+      border-radius: 6px;
+      overflow: visible;
+      background: #fff;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+
+    .selected-model-card:hover {
+      border-color: #4d6cff;
+      box-shadow: 0 10px 26px rgba(54, 83, 220, 0.16);
+    }
+
+    .selected-model-visual {
+      height: 230px;
+      position: relative;
+      flex: 0 0 auto;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(135, 104, 244, 0.28), transparent 28%),
+        radial-gradient(circle at 18% 20%, rgba(87, 167, 255, 0.30), transparent 28%),
+        linear-gradient(135deg, #ecf5ff 0%, #f8fbff 46%, #f3e9ff 100%);
+    }
+
+    .selected-model-visual::before,
+    .selected-model-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: 0 14px 30px rgba(79, 105, 190, 0.16);
+    }
+
+    .selected-model-visual::before {
+      width: 232px;
+      height: 66px;
+      left: 24px;
+      top: 24px;
+    }
+
+    .selected-model-visual::after {
+      width: 210px;
+      height: 74px;
+      left: 36px;
+      top: 114px;
+      opacity: 0.66;
+    }
+
+    .model-preview-btn,
+    .model-remove-btn {
+      position: absolute;
+      z-index: 2;
+      top: 10px;
+      height: 30px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 2px 8px rgba(49, 70, 130, 0.08);
+      cursor: default;
+    }
+
+    .model-preview-btn {
+      left: 10px;
+      min-width: 58px;
+      border: 1px solid #e3e9f5;
+      color: #253b60;
+    }
+
+    .model-remove-btn {
+      right: 10px;
+      width: 30px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ffb9bc;
+      color: #ef4f58;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+    }
+
+    .selected-model-card:hover .model-remove-btn {
+      opacity: 1;
+    }
+
+    .model-remove-btn svg {
+      width: 15px;
+      height: 15px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .model-visual-row,
+    .model-visual-flow,
+    .model-visual-base {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .model-visual-row {
+      left: 44px;
+      top: 48px;
+      width: 188px;
+      height: 40px;
+      display: grid;
+      grid-template-columns: 42px 42px 38px 38px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .model-visual-row span {
+      display: block;
+    }
+
+    .model-orbit {
+      width: 40px;
+      height: 40px;
+      border: 8px solid #85a0ff;
+      border-right-color: #4fd5c5;
+      border-radius: 50%;
+    }
+
+    .model-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #8da2ff, #745ff0);
+      color: #fff;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .model-bars {
+      height: 40px;
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: end;
+      gap: 4px;
+    }
+
+    .model-bars i {
+      display: block;
+      width: 6px;
+      border-radius: 3px 3px 0 0;
+      background: #87a2ff;
+    }
+
+    .model-bars i:nth-child(1) {
+      height: 18px;
+    }
+
+    .model-bars i:nth-child(2) {
+      height: 30px;
+      background: #5fd9c8;
+    }
+
+    .model-bars i:nth-child(3) {
+      height: 22px;
+      background: #b6c4ff;
+    }
+
+    .model-bars i:nth-child(4) {
+      height: 34px;
+      background: #9bdef0;
+    }
+
+    .model-visual-flow {
+      left: 38px;
+      top: 122px;
+      width: 204px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .model-flow-node {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8aa2ff, #5c78f5);
+      box-shadow: 0 8px 16px rgba(82, 112, 230, 0.28);
+      position: relative;
+    }
+
+    .model-flow-node::after {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.86);
+    }
+
+    .model-flow-arrow {
+      flex: 1;
+      height: 2px;
+      margin: 0 6px;
+      background: repeating-linear-gradient(90deg, #8ea2ef 0 5px, transparent 5px 9px);
+    }
+
+    .model-visual-base {
+      left: 36px;
+      right: 36px;
+      bottom: 18px;
+      height: 18px;
+      border-radius: 5px;
+      background: linear-gradient(90deg, rgba(126, 112, 244, 0.12), rgba(76, 142, 246, 0.18), rgba(87, 208, 195, 0.12));
+    }
+
+    .selected-model-body {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      align-content: start;
+      background: #fff;
+    }
+
+    .selected-model-body h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #102346;
+    }
+
+    .selected-model-body .form-field {
+      gap: 6px;
+    }
+
+    .selected-model-body .form-field label {
+      font-weight: 400;
+      color: #536684;
+    }
+
+    .create-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      padding-top: 14px;
+    }
+
+    .intro-panel,
+    .chart-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .intro-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+    }
+
+    .intro-copy {
+      min-width: 0;
+      max-width: none;
+    }
+
+    .intro-panel h1 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      line-height: 1.35;
+      color: #071b42;
+    }
+
+    .intro-panel p {
+      margin: 0;
+      max-width: none;
+      color: #536684;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .filter-panel {
+      position: sticky;
+      top: var(--top-nav-height);
+      z-index: 22;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 10px 14px;
+      margin: 0 0 14px;
+    }
+
+    .filter-title {
+      display: none;
+    }
+
+    .filter-title h2 {
+      margin: 0;
+      font-size: 16px;
+      color: #0c2249;
+    }
+
+    .filter-title-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    #filterCount {
+      color: #7584a1;
+      font-size: 12px;
+      white-space: nowrap;
+      justify-self: end;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: auto minmax(230px, 280px) minmax(230px, 280px) auto minmax(150px, 1fr);
+      gap: 12px;
+      align-items: center;
+      justify-content: stretch;
+    }
+
+    .filter-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .filter-field.compact {
+      width: 280px;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .filter-field label {
+      color: #526684;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .filter-field.compact label {
+      min-width: 82px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      border: 1px solid var(--line-strong);
+      border-right: 0;
+      border-radius: 5px 0 0 5px;
+      background: #f7faff;
+      color: #526684;
+      white-space: nowrap;
+    }
+
+    .filter-field label.sr-only-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .filter-field select,
+    .filter-field input {
+      width: 100%;
+      height: 34px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      background: #fff;
+      color: #243956;
+      padding: 0 10px;
+      outline: none;
+    }
+
+    .multi-select {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .multi-select-button {
+      width: 100%;
+      min-height: 34px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 7px;
+      padding: 0 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      background: #fff;
+      color: #243956;
+      text-align: left;
+      font-weight: 800;
+    }
+
+    .filter-field.compact .multi-select-button {
+      border-radius: 0 5px 5px 0;
+    }
+
+    .multi-select-button:hover,
+    .multi-select.open .multi-select-button {
+      border-color: #b9c7ee;
+      box-shadow: 0 0 0 2px rgba(91, 115, 242, 0.08);
+    }
+
+    .multi-select-trigger-icon {
+      width: 14px;
+      height: 14px;
+      color: #93a0b7;
+      flex: 0 0 auto;
+    }
+
+    .multi-select-summary,
+    .multi-select-chips {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 400;
+    }
+
+    .multi-select-chips {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .multi-select-chip {
+      max-width: 92px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 6px;
+      border: 1px solid #e4e9f3;
+      border-radius: 4px;
+      background: #f8fafc;
+      color: #273d61;
+      font-size: 12px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .multi-select-chip-text {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .multi-select-chip-remove {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #6a7890;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .multi-select-caret {
+      width: 14px;
+      height: 14px;
+      color: #6b7c98;
+      transition: transform 0.15s;
+    }
+
+    .multi-select.open .multi-select-caret {
+      transform: rotate(180deg);
+    }
+
+    .multi-select-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 6px);
+      z-index: 20;
+      padding: 8px 0;
+      border: 0;
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 0 8px 20px rgba(17, 24, 39, 0.1);
+      display: none;
+      overflow: hidden;
+    }
+
+    .multi-select.open .multi-select-menu {
+      display: block;
+    }
+
+    .multi-select-menu-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid transparent;
+      border-bottom-color: transparent;
+      margin: 0;
+      background: transparent;
+      box-shadow: none;
+      color: #374151;
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .multi-select-menu-head span {
+      color: #6b7280;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .multi-select-menu-head > span {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .multi-select-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      box-shadow: none;
+      color: #374151;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .multi-select-all input {
+      appearance: none;
+      width: 16px;
+      min-width: 16px;
+      max-width: 16px;
+      height: 16px;
+      min-height: 16px;
+      max-height: 16px;
+      aspect-ratio: 1 / 1;
+      flex: 0 0 16px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      margin: 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #ffffff;
+      display: inline-grid;
+      place-content: center;
+    }
+
+    .multi-select-all input::before {
+      content: "";
+      width: 8px;
+      height: 5px;
+      border-left: 2px solid #ffffff;
+      border-bottom: 2px solid #ffffff;
+      transform: rotate(-45deg) scale(0);
+      transition: transform 0.08s;
+    }
+
+    .multi-select-all input:checked,
+    .multi-select-all input:indeterminate {
+      border-color: #3b82f6;
+      background: #3b82f6;
+    }
+
+    .multi-select-all input:checked::before {
+      transform: rotate(-45deg) scale(1);
+    }
+
+    .multi-select-all input:indeterminate::before {
+      width: 8px;
+      height: 0;
+      border-left: 0;
+      border-bottom: 2px solid #ffffff;
+      transform: scale(1);
+    }
+
+    .multi-select-search-wrap {
+      position: relative;
+      padding: 0 8px 8px;
+      border-bottom: 0;
+    }
+
+    .multi-select-search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      color: #9ca3af;
+      transform: translateY(calc(-50% - 4px));
+      pointer-events: none;
+    }
+
+    .multi-select-search {
+      width: 100%;
+      height: 32px;
+      margin: 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 0 10px 0 32px;
+      background: #ffffff;
+      color: #374151;
+      font-size: 12px;
+      font-weight: 500;
+      outline: none;
+    }
+
+    .multi-select-search:focus {
+      border-color: #3b82f6;
+    }
+
+    .multi-select-clear {
+      display: none;
+    }
+
+    .multi-select-options {
+      max-height: 220px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      scrollbar-color: #d1d5db transparent;
+      scrollbar-width: thin;
+    }
+
+    .multi-select-options::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .multi-select-options::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .multi-select-options::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: #d1d5db;
+    }
+
+    .multi-select-options::-webkit-scrollbar-thumb:hover {
+      background: #9ca3af;
+    }
+
+    .multi-select-option,
+    .multi-select-empty {
+      width: 100%;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      box-sizing: border-box;
+      border: 1px solid transparent;
+      border-radius: 0;
+      background: transparent !important;
+      box-shadow: none;
+      color: #374151;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .multi-select-option {
+      flex: 0 0 36px;
+      cursor: pointer;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .multi-select-option:hover {
+      background: transparent !important;
+    }
+
+    .multi-select-option:has(input:checked),
+    .multi-select-option.active {
+      background: transparent !important;
+      color: #2563eb;
+    }
+
+    .multi-select-option input {
+      appearance: none;
+      width: 16px;
+      min-width: 16px;
+      max-width: 16px;
+      height: 16px;
+      min-height: 16px;
+      max-height: 16px;
+      aspect-ratio: 1 / 1;
+      flex: 0 0 16px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      margin: 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #ffffff;
+      display: inline-grid;
+      place-content: center;
+    }
+
+    .multi-select-option input::before {
+      content: "";
+      width: 8px;
+      height: 5px;
+      border-left: 2px solid #ffffff;
+      border-bottom: 2px solid #ffffff;
+      transform: rotate(-45deg) scale(0);
+      transition: transform 0.08s;
+    }
+
+    .multi-select-option input:checked {
+      border-color: #3b82f6;
+      background: #3b82f6;
+    }
+
+    .multi-select-option input:checked::before {
+      transform: rotate(-45deg) scale(1);
+    }
+
+    .multi-select-option input:focus-visible,
+    .multi-select-all input:focus-visible {
+      outline: 2px solid rgba(59, 130, 246, 0.22);
+      outline-offset: 2px;
+    }
+
+    .multi-select-option span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .multi-select-empty {
+      display: block;
+      color: #7584a1;
+      text-align: center;
+      padding: 12px 10px;
+    }
+
+    .asin-tabs {
+      height: 34px;
+      display: inline-flex;
+      align-items: stretch;
+      padding: 2px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .asin-tab {
+      min-width: 50px;
+      height: 28px;
+      border: 0;
+      border-radius: 3px;
+      padding: 0 10px;
+      background: #fff;
+      color: #334764;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .asin-tab.active {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .asin-tab.is-disabled {
+      background: #f4f6fb;
+      color: #9aa8bd;
+      cursor: not-allowed;
+    }
+
+    .asin-tab.is-disabled.active {
+      background: #f4f6fb;
+      color: #9aa8bd;
+    }
+
+    .download-btn,
+    .ghost-btn {
+      width: var(--action-width);
+      min-width: var(--action-width);
+      height: var(--control-height);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--control-radius);
+      padding: 0 12px;
+      border: 1px solid #c8d6f1;
+      background: #fff;
+      color: #314970;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .download-btn {
+      border-color: var(--blue);
+      color: #233ed8;
+      background: #f7f9ff;
+    }
+
+    .icon-btn {
+      width: var(--control-height);
+      min-width: var(--control-height);
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 var(--control-height);
+    }
+
+    .icon-btn svg {
+      width: 17px;
+      height: 17px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .insight-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 4px 0 10px;
+    }
+
+    .insight-header h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #0b2147;
+    }
+
+    .insight-header .meta {
+      color: #7584a1;
+      font-size: 12px;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .insight-tile {
+      min-height: 96px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 12px 14px 11px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insight-tile::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: var(--blue);
+    }
+
+    .insight-tile.teal::before { background: var(--teal); }
+    .insight-tile.orange::before { background: var(--orange); }
+    .insight-tile.red::before { background: var(--red); }
+
+    .insight-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-weight: 900;
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: #11264c;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: #eef3ff;
+      color: #2846df;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .insight-text {
+      margin: 0;
+      color: #516582;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .insight-combos {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .insight-combo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      min-height: 24px;
+      padding: 4px 6px;
+      border: 1px solid #dbe5f6;
+      border-radius: 5px;
+      background: #f8fbff;
+      color: #263d61;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .insight-combo.combo-only {
+      justify-content: flex-start;
+    }
+
+    .combo-name {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow-wrap: anywhere;
+      font-weight: 400;
+    }
+
+    .combo-metrics {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 5px;
+      flex: 0 0 auto;
+      color: #2846df;
+      text-align: right;
+    }
+
+    .insight-more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 24px;
+      padding: 4px 6px;
+      border: 1px dashed #c8d6f1;
+      border-radius: 5px;
+      background: #fbfdff;
+      color: #7584a1;
+      font-size: 10px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .insight-empty {
+      margin-top: 8px;
+      padding: 6px 8px;
+      border: 1px dashed #c8d6f1;
+      border-radius: 5px;
+      background: #fbfdff;
+      color: #7584a1;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .viz-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .full-card {
+      grid-column: 1 / -1;
+    }
+
+    .histogram-card {
+      margin-bottom: 14px;
+      padding-left: 14px;
+      padding-right: 14px;
+      overflow: visible;
+    }
+
+    .detail-card {
+      overflow: visible;
+    }
+
+    .detail-card table {
+      min-width: 920px;
+    }
+
+    .histogram-card .card-head {
+      align-items: center;
+      margin-bottom: 0;
+    }
+
+    .histogram-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: #647590;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .histogram-range {
+      min-height: 24px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 9px;
+      border: 1px solid #dbe5f6;
+      border-radius: 999px;
+      background: #f7faff;
+      color: #31486b;
+      max-width: 100%;
+      line-height: 1.4;
+      white-space: normal;
+    }
+
+    .histogram-range:empty {
+      display: none;
+    }
+
+    .histogram-legend-row {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr);
+      gap: 8px;
+      margin-top: 0;
+      padding: 0;
+    }
+
+    .histogram-legend-axis {
+      min-width: 0;
+    }
+
+    .histogram-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      min-width: 0;
+      padding: 2px 0;
+    }
+
+    .histogram-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 28px;
+      padding: 0 10px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: transparent;
+      color: #314970;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+
+    .histogram-legend-item:hover {
+      transform: translateY(-1px);
+      background: #f7faff;
+      border-color: #dbe5f6;
+    }
+
+    .histogram-legend-item.active {
+      background: #eef3ff;
+      border-color: #bfcaf7;
+      color: #243ed2;
+      box-shadow: 0 4px 10px rgba(91, 115, 242, 0.12);
+    }
+
+    .histogram-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 3px rgba(91, 115, 242, 0.14);
+      flex: 0 0 auto;
+    }
+
+    .histogram-legend-dot.middle {
+      background: var(--orange);
+      box-shadow: 0 0 0 3px rgba(245, 166, 64, 0.16);
+    }
+
+    .histogram-legend-dot.head {
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(14, 182, 127, 0.14);
+    }
+
+    .histogram-wrap {
+      height: 300px;
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr);
+      gap: 8px;
+      align-items: stretch;
+      padding: 24px 0 0;
+    }
+
+    .histogram-axis {
+      display: grid;
+      grid-template-rows: repeat(4, 1fr) 34px;
+      color: #71809b;
+      font-size: 11px;
+      text-align: right;
+      padding-right: 2px;
+    }
+
+    .histogram-axis span {
+      transform: translateY(-7px);
+      white-space: nowrap;
+    }
+
+    .histogram-plot {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 10px;
+      align-items: end;
+      min-width: 0;
+      position: relative;
+    }
+
+    .histogram-plot::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 42px;
+      pointer-events: none;
+      background:
+        linear-gradient(to right,
+          rgba(14, 182, 127, 0.12) 0 30%,
+          rgba(245, 166, 64, 0.16) 30% 70%,
+          rgba(91, 115, 242, 0.12) 70% 100%),
+        linear-gradient(to bottom, #e8eef9 1px, transparent 1px) 0 0 / 100% 25%;
+    }
+
+    .histogram-plot::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 42px;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(to bottom,
+          rgba(37, 59, 223, 0.9) 0 5px,
+          transparent 5px 10px) 30% 0 / 2px 100% no-repeat,
+        repeating-linear-gradient(to bottom,
+          rgba(37, 59, 223, 0.9) 0 5px,
+          transparent 5px 10px) 70% 0 / 2px 100% no-repeat,
+        linear-gradient(to right,
+          transparent 0 100%);
+    }
+
+    .histogram-segment-zones {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 42px;
+      display: grid;
+      grid-template-columns: 30% 40% 30%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .histogram-segment-zone {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      pointer-events: auto;
+      position: relative;
+    }
+
+    .histogram-segment-zone::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      transform: translateX(-50%);
+      min-height: 22px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(203, 214, 236, 0.9);
+      color: #314970;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .histogram-segment-zone:hover::after,
+    .histogram-segment-zone.active::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-1px);
+    }
+
+    .histogram-segment-zone.active {
+      box-shadow: inset 0 0 0 2px rgba(49, 73, 112, 0.22);
+    }
+
+    .histogram-bar {
+      height: 100%;
+      min-width: 0;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) 42px;
+      gap: 8px;
+      color: #526684;
+      cursor: pointer;
+      position: relative;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .histogram-value {
+      position: absolute;
+      left: 50%;
+      top: -20px;
+      transform: translateX(-50%);
+      display: block;
+      min-width: 48px;
+      padding: 0;
+      font-size: 11px;
+      font-weight: 900;
+      color: #243956;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: none;
+      line-height: 1;
+    }
+
+    .histogram-track {
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      min-height: 0;
+    }
+
+    .histogram-fill {
+      width: min(24px, 52%);
+      min-height: 8px;
+      border-radius: 6px 6px 2px 2px;
+      background: #5b73f2;
+      box-shadow: inset 0 -8px 16px rgba(17, 38, 92, 0.12), 0 3px 8px rgba(25, 45, 98, 0.08);
+      transition: height 0.15s, background 0.15s, transform 0.15s;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: visible;
+      pointer-events: auto;
+    }
+
+    .histogram-bar:hover .histogram-fill {
+      background: #28c4b2;
+      transform: translateY(-2px);
+    }
+
+    .histogram-bar.active .histogram-fill {
+      background: #f5a640;
+      outline: 3px solid rgba(245, 166, 64, 0.22);
+    }
+
+    .histogram-label {
+      display: block;
+      color: #627391;
+      font-size: 11px;
+      line-height: 1.25;
+      text-align: center;
+      white-space: nowrap;
+      pointer-events: auto;
+    }
+
+    .histogram-count {
+      color: #243956;
+      font-weight: 900;
+      font-size: 11px;
+    }
+
+    .chart-card {
+      min-width: 0;
+      padding: 16px 18px 18px;
+      overflow: hidden;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card-head h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.3;
+      color: #0c2249;
+    }
+
+    .title-with-help {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+
+    .info-help {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #c8d6f1;
+      border-radius: 50%;
+      background: #f7faff;
+      color: #3f58df;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      cursor: help;
+      flex: 0 0 auto;
+      position: relative;
+    }
+
+    .title-with-help::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 0;
+      top: calc(100% + 8px);
+      width: 480px;
+      max-width: min(480px, calc(100vw - 48px));
+      padding: 9px 11px;
+      border: 1px solid #cbd7ee;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 12px 28px rgba(23, 39, 82, 0.16);
+      color: #102346;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.55;
+      text-align: left;
+      white-space: normal;
+      overflow: visible;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.12s, transform 0.12s;
+      z-index: 20;
+    }
+
+    .title-with-help::before {
+      content: "";
+      position: absolute;
+      right: 3px;
+      top: calc(100% + 3px);
+      width: 9px;
+      height: 9px;
+      border-left: 1px solid #cbd7ee;
+      border-top: 1px solid #cbd7ee;
+      background: rgba(255, 255, 255, 0.98);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px) rotate(45deg);
+      transition: opacity 0.12s, transform 0.12s;
+      z-index: 21;
+    }
+
+    .title-with-help:has(.info-help:hover)::after,
+    .title-with-help:has(.info-help:focus-visible)::after,
+    .title-with-help:has(.info-help:hover)::before,
+    .title-with-help:has(.info-help:focus-visible)::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .title-with-help:has(.info-help:hover)::before,
+    .title-with-help:has(.info-help:focus-visible)::before {
+      transform: translateY(0) rotate(45deg);
+    }
+
+    .card-head p {
+      margin: 6px 0 0;
+      color: #7584a1;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .top-sort-control {
+      color: #536684;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .top-combo-card {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .top-combo-card .card-head {
+      flex: 0 0 auto;
+    }
+
+    .top-combo-card .table-wrap {
+      flex: 0 0 auto;
+      height: 456px;
+      max-height: 456px;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .top-combo-card table {
+      min-width: 100%;
+      table-layout: fixed;
+    }
+
+    .top-combo-card th,
+    .top-combo-card td {
+      padding-left: 5px;
+      padding-right: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .top-combo-card col:nth-child(1) { width: 5.5%; }
+    .top-combo-card col:nth-child(2) { width: 18%; }
+    .top-combo-card col:nth-child(3) { width: 18%; }
+    .top-combo-card col:nth-child(4) { width: 14%; }
+    .top-combo-card col:nth-child(5) { width: 10%; }
+    .top-combo-card col:nth-child(6) { width: 10%; }
+    .top-combo-card col:nth-child(7) { width: 10%; }
+    .top-combo-card col:nth-child(8) { width: 14.5%; }
+
+    .top-combo-card th:nth-child(n+4),
+    .top-combo-card td:nth-child(n+4) {
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+
+    .top-combo-card th:nth-child(7),
+    .top-combo-card td:nth-child(7) {
+      padding-right: 14px;
+    }
+
+    .top-combo-card th:nth-child(8),
+    .top-combo-card td:nth-child(8) {
+      padding-left: 20px;
+    }
+
+    .top-combo-card th:first-child,
+    .top-combo-card td:first-child {
+      text-align: center;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+
+    .top-combo-card .rank-cell {
+      overflow: visible;
+    }
+
+    .top-combo-card .rank-badge {
+      position: relative;
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px 5px 7px 7px;
+      background: #eef3f9;
+      color: #7c8798;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .top-combo-card .rank-badge::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -4px;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 5px solid #eef3f9;
+    }
+
+    .top-combo-card .rank-top-1 {
+      background: linear-gradient(180deg, #ff8c82 0%, #e65756 100%);
+      color: #fff;
+      box-shadow: 0 2px 5px rgba(230, 87, 86, 0.28);
+    }
+
+    .top-combo-card .rank-top-1::after {
+      border-top-color: #e65756;
+    }
+
+    .top-combo-card .rank-top-2 {
+      background: linear-gradient(180deg, #ffbd68 0%, #f18a30 100%);
+      color: #fff;
+      box-shadow: 0 2px 5px rgba(241, 138, 48, 0.26);
+    }
+
+    .top-combo-card .rank-top-2::after {
+      border-top-color: #f18a30;
+    }
+
+    .top-combo-card .rank-top-3 {
+      background: linear-gradient(180deg, #ffd960 0%, #f3b936 100%);
+      color: #fff;
+      box-shadow: 0 2px 5px rgba(243, 185, 54, 0.26);
+    }
+
+    .top-combo-card .rank-top-3::after {
+      border-top-color: #f3b936;
+    }
+
+    .top-combo-card td:nth-child(7) .bar {
+      margin-right: 6px;
+    }
+
+    .top-combo-card .metric-cell,
+    .top-combo-card .bar-cell {
+      min-width: 0;
+    }
+
+    .top-combo-card .value-tag {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .asin-product {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .asin-product-img {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #e1e8f5;
+      border-radius: 4px;
+      background: #f8fafc;
+      object-fit: cover;
+    }
+
+    .asin-product-copy {
+      min-width: 0;
+      display: grid;
+      gap: 2px;
+      line-height: 1.15;
+    }
+
+    .asin-product-title {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #4b5f80;
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    .asin-product-link {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #2846df;
+      font-size: 12px;
+      font-weight: 400;
+      text-decoration: none;
+    }
+
+    .asin-product-link:hover,
+    .asin-product-link:focus-visible {
+      text-decoration: underline;
+    }
+
+    .tooltip-product {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .tooltip-product .asin-product-img {
+      width: 42px;
+      height: 42px;
+    }
+
+    .tooltip-product .asin-product-title {
+      font-size: 11px;
+    }
+
+    .tooltip-product .asin-product-link {
+      color: #111827;
+      cursor: default;
+      text-decoration: none;
+    }
+
+    .tooltip-rule-products {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .tooltip-rule-product-row {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tooltip-rule-product-label {
+      color: #536684;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .tooltip-rule-products .tooltip-product {
+      margin-bottom: 0;
+    }
+
+    .tooltip-rule-metric {
+      display: inline;
+    }
+
+    .top-metric-head {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      min-width: 0;
+      max-width: 100%;
+      white-space: nowrap;
+    }
+
+    .top-combo-card .metric-info {
+      width: 12px;
+      height: 12px;
+      font-size: 8px;
+    }
+
+    .top-combo-card .action-tag {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .top-combo-card thead th {
+      height: 38px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .top-combo-card tbody tr {
+      height: 50px;
+    }
+
+    .small-select,
+    .search-box {
+      height: var(--control-height);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--control-radius);
+      background: #fff;
+      color: #334764;
+      padding: 0 10px;
+      outline: none;
+    }
+
+    .small-select {
+      width: var(--action-width);
+      min-width: var(--action-width);
+      font-weight: 800;
+    }
+
+    .search-box {
+      width: 170px;
+    }
+
+    .chart-surface {
+      position: relative;
+      height: 430px;
+      border: 1px solid #e5ecfa;
+      border-radius: 6px;
+      background:
+        linear-gradient(#f9fbff, #ffffff);
+      overflow: hidden;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .axis text,
+    .axis-label,
+    .legend-note {
+      fill: #73829f;
+      font-size: 12px;
+    }
+
+    .axis-line {
+      stroke: #cdd8ee;
+      stroke-width: 1;
+    }
+
+    .grid-line {
+      stroke: #e2e9f6;
+      stroke-width: 1;
+      stroke-dasharray: 5 6;
+    }
+
+    .link {
+      stroke-linecap: round;
+      cursor: pointer;
+      transition: opacity 0.15s, stroke-width 0.15s;
+    }
+
+    .node {
+      cursor: grab;
+      transition: opacity 0.15s;
+    }
+
+    .node:active {
+      cursor: grabbing;
+    }
+
+    .node-label {
+      pointer-events: none;
+      fill: #102346;
+      font-size: 12px;
+      font-weight: 400;
+      paint-order: stroke;
+      stroke: #fff;
+      stroke-width: 4px;
+      stroke-linejoin: round;
+    }
+
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      color: #6b7a96;
+      font-size: 12px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      background: var(--blue);
+    }
+
+    .table-wrap {
+      height: 430px;
+      overflow: auto;
+      border: 1px solid #e5ecfa;
+      border-radius: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 790px;
+      background: #fff;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      padding: 10px 10px;
+      background: #f0f4ff;
+      color: #2e4266;
+      font-size: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    thead button {
+      border: 0;
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      font-weight: 900;
+    }
+
+    .sortable-head,
+    .metric-sort {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .metric-info {
+      width: 13px;
+      height: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #a9b6cc;
+      border-radius: 50%;
+      color: #7a89a5;
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .sort-icon {
+      width: 9px;
+      height: 13px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      flex: 0 0 auto;
+    }
+
+    .sort-icon::before,
+    .sort-icon::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+    }
+
+    .sort-icon::before {
+      border-bottom: 5px solid #9aaccc;
+    }
+
+    .sort-icon::after {
+      border-top: 5px solid #9aaccc;
+    }
+
+    thead button.active.asc .sort-icon::before,
+    thead button.active.desc .sort-icon::after {
+      border-bottom-color: #4d66ee;
+      border-top-color: #4d66ee;
+    }
+
+    thead button.active.asc .sort-icon::after {
+      border-top-color: #c3cce0;
+    }
+
+    thead button.active.desc .sort-icon::before {
+      border-bottom-color: #c3cce0;
+    }
+
+    tbody td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #edf2fb;
+      color: #203657;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    tbody tr {
+      transition: background 0.12s;
+    }
+
+    tbody tr.selected {
+      background: #f5f8ff;
+    }
+
+    .rank {
+      width: 34px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: #eef3ff;
+      color: #2a46df;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .metric-cell,
+    .bar-cell {
+      min-width: 126px;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: #eef2fb;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--blue);
+    }
+
+    .bar.conf > span,
+    .bar.lift > span {
+      background: var(--blue);
+    }
+
+    .lift-strong {
+      --lift-color: #0eb67f;
+      --lift-bg: rgba(14, 182, 127, 0.14);
+      --lift-border: rgba(14, 182, 127, 0.34);
+      --lift-ink: #087e58;
+    }
+
+    .lift-positive {
+      --lift-color: #f5a640;
+      --lift-bg: rgba(245, 166, 64, 0.18);
+      --lift-border: rgba(245, 166, 64, 0.38);
+      --lift-ink: #9a5e00;
+    }
+
+    .lift-risk {
+      --lift-color: #ef6f7d;
+      --lift-bg: rgba(239, 111, 125, 0.15);
+      --lift-border: rgba(239, 111, 125, 0.34);
+      --lift-ink: #b3303d;
+    }
+
+    .value-tag {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 8px;
+      border: 1px solid var(--lift-border, transparent);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      background: var(--lift-bg, #eef3ff);
+      color: var(--lift-ink, #2947dc);
+    }
+
+    .action-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      height: 26px;
+      padding: 0 9px 0 7px;
+      border: 1px solid var(--action-border, #e5e7eb);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--action-ink, #374151);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(16, 35, 86, 0.04);
+    }
+
+    .action-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      background: var(--action-icon-bg, #f3f4f6);
+      color: var(--action-ink, #374151);
+      flex: 0 0 16px;
+    }
+
+    .action-icon svg {
+      width: 12px;
+      height: 12px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .action-bundle {
+      --action-ink: #047857;
+      --action-border: #bdebdc;
+      --action-icon-bg: #e8f8f2;
+    }
+
+    .action-test {
+      --action-ink: #b45309;
+      --action-border: #f6d7a6;
+      --action-icon-bg: #fff3df;
+    }
+
+    .action-review {
+      --action-ink: #b4232f;
+      --action-border: #f4b9c0;
+      --action-icon-bg: #fff0f2;
+    }
+
+    .tooltip {
+      position: fixed;
+      z-index: 20;
+      min-width: 190px;
+      max-width: 360px;
+      padding: 10px 12px;
+      border: 1px solid #cbd7ee;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 12px 30px rgba(23, 39, 82, 0.16);
+      color: #102346;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(10px, 10px);
+      transition: opacity 0.08s;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .tooltip strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+      color: #0b2147;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1280px) {
+      .template-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+      }
+
+      .create-layout {
+        grid-template-columns: 360px minmax(0, 1fr);
+      }
+
+      .selected-model-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
+      }
+
+      .insight-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .insight-combos {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .viz-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .top-combo-card {
+        align-self: auto;
+        display: block;
+        height: auto;
+      }
+
+      .top-combo-card .table-wrap {
+        height: 456px;
+        max-height: 456px;
+      }
+
+      .filter-grid {
+        grid-template-columns: auto minmax(180px, 1fr) minmax(180px, 1fr) auto;
+      }
+
+      #filterCount {
+        grid-column: 1 / -1;
+      }
+
+      .full-card {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: flex;
+        overflow-x: auto;
+      }
+
+      .logo {
+        min-width: 116px;
+      }
+
+      .nav-item {
+        min-width: 104px;
+      }
+
+      .top-actions,
+      .utility-note {
+        display: none;
+      }
+
+      .page {
+        padding: 12px;
+      }
+
+      .amc-page,
+      .create-page {
+        padding: 12px;
+      }
+
+      .template-grid,
+      .create-layout,
+      .selected-model-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .selected-model-card {
+        grid-template-columns: 1fr;
+      }
+
+      .selected-model-visual {
+        height: 210px;
+        min-height: 210px;
+      }
+
+      .selected-model-body {
+        grid-template-columns: 1fr;
+      }
+
+      .reports-section-head,
+      .reports-list-head,
+      .reports-tools {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .reports-tools input,
+      .reports-tools select {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .intro-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #filterCount {
+        grid-column: auto;
+      }
+
+      .filter-field.compact {
+        width: 100%;
+      }
+
+      .insight-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .insight-combos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .histogram-wrap {
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 8px;
+      }
+
+      .histogram-legend-row {
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 8px;
+      }
+
+      .histogram-legend {
+        justify-content: center;
+        flex-wrap: wrap;
+        row-gap: 6px;
+      }
+
+      .histogram-plot {
+        grid-template-columns: repeat(10, 54px);
+        overflow-x: auto;
+      }
+
+      .histogram-fill {
+        width: 24px;
+      }
+
+      .chart-surface,
+      .table-wrap {
+        height: 390px;
+      }
+    }
+  </style>
+</head>
+<body data-page="reports">
+  <div class="app">
+    <aside class="sidebar" aria-label="系统导航">
+      <div class="logo"><span class="logo-dot"></span>4KMILES</div>
+      <div class="nav-item">
+        <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 12h1v5h1"></path></svg></span>
+        About AMC
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13h4l3 7V4l-3 7H4z"></path><path d="M16 8a5 5 0 0 1 0 8"></path><path d="M19 5a9 9 0 0 1 0 14"></path></svg></span>
+        Ads Overview
+      </div>
+      <div class="nav-item active">
+        <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V5"></path><path d="M4 19h16"></path><path d="M8 16v-5"></path><path d="M12 16V8"></path><path d="M16 16v-3"></path></svg></span>
+        AMC Reports
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-8 0v2"></path><circle cx="12" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+        AMC Audience
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12"></path><path d="M7 8l5-5 5 5"></path><path d="M5 21h14"></path><path d="M5 17h14"></path></svg></span>
+        Mapping Upload
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z"></path><path d="M14 3v4h4"></path><path d="M9 13h6"></path><path d="M9 17h6"></path><path d="M9 9h2"></path></svg></span>
+        MA
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></span>
+        More
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <div class="top-tabs" role="navigation" aria-label="产品页签">
+        <button class="product-tab active" type="button" data-page-target="reports">AMC Reports ×</button>
+        <button class="product-tab" type="button" data-page-target="basket">购物篮分析 ×</button>
+      </div>
+
+      <div class="utility">
+        <div class="breadcrumb" id="pageBreadcrumb">AMC Reports</div>
+        <span class="status">Demo V3-1</span>
+        <div class="top-actions" aria-label="报告筛选与下载">
+          <span class="select-like">US 4kmiles...</span>
+          <span class="select-like">GMT-04</span>
+          <span class="select-like" id="topPeriodLabel">2024年Q2</span>
+          <button class="download-btn" id="createReportEntry" type="button">创建报告</button>
+          <button class="top-download-btn" id="globalDownloadBtn" type="button" aria-label="下载数据" title="下载数据">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 3v12"></path>
+              <path d="m7 10 5 5 5-5"></path>
+              <path d="M5 21h14"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <section class="app-page amc-page active" id="reportsPage">
+        <section class="reports-hero">
+          <div class="reports-section-head">
+            <h2>使用模板快速创建</h2>
+            <div class="template-tabs" aria-label="模板分类">
+              <button class="template-tab active" type="button">全部（4）</button>
+              <button class="template-tab" type="button">专题分析（3）</button>
+              <button class="template-tab" type="button">综合分析（1）</button>
+            </div>
+          </div>
+          <div class="template-grid">
+            <article class="template-card">
+              <div class="template-visual"></div>
+              <div class="template-body">
+                <h3>广告触达路径分析</h3>
+                <p class="template-desc">集成多个广告路径数据模型，通过多维度洞察广告路径与用户行为关系。</p>
+                <ul class="template-models">
+                  <li>广告回溯路径模型</li>
+                  <li>首次触点转化归因模型</li>
+                  <li>广告曝光重叠分析模型</li>
+                </ul>
+              </div>
+            </article>
+            <article class="template-card">
+              <div class="template-visual purple"></div>
+              <div class="template-body">
+                <h3>人群分析</h3>
+                <p class="template-desc">基于 Amazon Audience Segments，对触达用户进行画像分析。</p>
+                <ul class="template-models">
+                  <li>人群画像模型</li>
+                  <li>人群标签洞察模型</li>
+                </ul>
+              </div>
+            </article>
+            <article class="template-card">
+              <div class="template-visual green"></div>
+              <div class="template-body">
+                <h3>精选推荐</h3>
+                <p class="template-desc">分析引流 ASIN 的新客率和大促活动不同阶段的关键指标。</p>
+                <ul class="template-models">
+                  <li>新客引流ASIN分析模型</li>
+                  <li>Campaign效能分析模型</li>
+                </ul>
+              </div>
+            </article>
+            <article class="template-card featured" id="basketTemplateCard">
+              <div class="template-visual more"></div>
+              <div class="template-body">
+                <h3>更多模型</h3>
+                <p class="template-desc">扩展更多高频业务分析模型，支持快速创建并进入配置流程。</p>
+                <ul class="template-models">
+                  <li>购物篮分析模型</li>
+                </ul>
+                <button class="quick-create-btn" type="button" id="quickCreateBasket">快速创建</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="reports-list">
+          <div class="reports-list-head">
+            <h2>报告列表</h2>
+            <div class="reports-tools">
+              <input type="search" placeholder="查找报告" aria-label="查找报告">
+              <select aria-label="创建人"><option>创建人</option></select>
+              <select aria-label="Instance"><option>Instance</option></select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="reports-table">
+              <thead>
+                <tr>
+                  <th>报告名称</th>
+                  <th>Instance</th>
+                  <th>报告时间</th>
+                  <th>状态</th>
+                  <th>创建人</th>
+                  <th>创建时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-row" data-open-basket="true">
+                  <td>购物篮分析 0701-0714</td>
+                  <td>4kmilesyaheetechus</td>
+                  <td>2025-07-01 至 2025-07-14</td>
+                  <td><span class="status-pill">已完成</span></td>
+                  <td>Demo.CrossBorder@outlo...</td>
+                  <td>2026-06-30 19:20:16</td>
+                  <td><button class="row-action" type="button" data-open-basket="true">进入</button></td>
+                </tr>
+                <tr>
+                  <td>25年PD 频次分析 0701-0714</td>
+                  <td>4kmilesggradualus</td>
+                  <td>2025-07-01 至 2025-07-14</td>
+                  <td><span class="status-pill">已完成</span></td>
+                  <td>13178272928</td>
+                  <td>2026-06-12 17:12:29</td>
+                  <td><button class="row-action" type="button">...</button></td>
+                </tr>
+                <tr>
+                  <td>KW-人群分析</td>
+                  <td>4kmilesjewelrybrandsus</td>
+                  <td>2026-03-02 至 2026-05-30</td>
+                  <td><span class="status-pill">已完成</span></td>
+                  <td>femi.fang@maxleadgroup...</td>
+                  <td>2026-06-01 20:40:12</td>
+                  <td><button class="row-action" type="button">...</button></td>
+                </tr>
+                <tr>
+                  <td>KW-广告触达路径分析-测试</td>
+                  <td>4kmilesjewelrybrandsus</td>
+                  <td>2026-03-02 至 2026-05-30</td>
+                  <td><span class="status-pill">已完成</span></td>
+                  <td>femi.fang@maxleadgroup...</td>
+                  <td>2026-06-01 20:33:24</td>
+                  <td><button class="row-action" type="button">...</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section class="app-page create-page" id="createReportPage">
+        <div class="create-layout">
+          <section class="create-info-card">
+            <h2>报告信息</h2>
+            <div class="report-form">
+              <div class="form-field">
+                <label><span class="required">*</span>报告名称</label>
+                <input id="newReportName" maxlength="100" aria-label="报告名称">
+              </div>
+              <div class="form-field">
+                <label><span class="required">*</span>Instance</label>
+                <select aria-label="Instance"><option>US 4kmilesyaheetechus</option></select>
+              </div>
+              <div class="form-field">
+                <label>时区</label>
+                <input value="GMT-04" disabled aria-label="时区">
+              </div>
+              <div class="form-field">
+                <label><span class="required">*</span>报告时间</label>
+                <div class="date-range">
+                  <input type="text" placeholder="开始时间" aria-label="开始时间">
+                  <span>至</span>
+                  <input type="text" placeholder="结束时间" aria-label="结束时间">
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="create-models-card">
+            <div class="reports-section-head">
+              <h2>已选模型</h2>
+              <button class="download-btn" type="button">+ 选择模型</button>
+            </div>
+            <div class="selected-template-title">更多模型</div>
+            <div class="selected-model-grid">
+              <article class="selected-model-card">
+                <div class="selected-model-visual">
+                  <button class="model-preview-btn" type="button">预览</button>
+                  <button class="model-remove-btn" type="button" aria-label="删除模型" title="删除模型">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M3 6h18"></path>
+                      <path d="M8 6V4h8v2"></path>
+                      <path d="M6 6l1 14h10l1-14"></path>
+                      <path d="M10 11v5"></path>
+                      <path d="M14 11v5"></path>
+                    </svg>
+                  </button>
+                  <div class="model-visual-row" aria-hidden="true">
+                    <span class="model-orbit"></span>
+                    <span class="model-badge">ASIN</span>
+                    <span class="model-bars"><i></i><i></i><i></i><i></i></span>
+                  </div>
+                  <div class="model-visual-flow" aria-hidden="true">
+                    <span class="model-flow-node"></span>
+                    <span class="model-flow-arrow"></span>
+                    <span class="model-flow-node"></span>
+                    <span class="model-flow-arrow"></span>
+                    <span class="model-flow-node"></span>
+                  </div>
+                  <span class="model-visual-base" aria-hidden="true"></span>
+                </div>
+                <div class="selected-model-body">
+                  <h3>购物篮分析模型</h3>
+                  <div class="form-field">
+                    <label><span class="required">*</span>数据选择</label>
+                    <select id="createDataSelect" aria-label="数据选择">
+                      <option selected>广告触达28天内数据</option>
+                      <option>全量购买数据（FSI）</option>
+                      <option>5年购买数据（ARP)</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label><span class="required">*</span>数据聚合方式</label>
+                    <div class="aggregation-select" id="createAggregationSelect" data-value="子ASIN">
+                      <button class="aggregation-trigger" id="createAggregationTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="数据聚合方式">
+                        <span id="createAggregationValue">子ASIN</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                          <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                      </button>
+                      <div class="aggregation-menu" role="listbox" aria-label="数据聚合方式">
+                        <button class="aggregation-option active" type="button" role="option" aria-selected="true" data-aggregation-value="子ASIN">子ASIN</button>
+                        <button class="aggregation-option" id="createParentAsinOption" type="button" role="option" aria-selected="false" data-aggregation-value="父ASIN">
+                          <span>父ASIN</span>
+                          <span class="aggregation-option-hint">若需按父ASIN聚合，请先在Mapping upload上传ASIN映射。</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+        <div class="create-footer">
+          <button class="ghost-btn" id="cancelCreateReport" type="button">取消</button>
+          <button class="download-btn" id="submitCreateReport" type="button">创建报告</button>
+        </div>
+      </section>
+
+      <section class="page app-page" id="basketPage">
+        <section class="intro-panel" aria-labelledby="pageTitle">
+          <div class="intro-copy">
+            <h1 id="pageTitle">购物篮分析模型 Demo V3</h1>
+            <p>
+              购物篮分析模型，分析商品 A 与 B 共同出现时的支持度、提升度与置信度。<br>
+              支持度表示组合出现的概率，用于筛选冷热门商品；提升度表示在 A 人群中推 B的成功率是随机推送给全员的倍数，用于判断组合是否为有价值的强关联组合；置信度表示购买 A 后会购买 B 的概率，用于营销活动的预期效果参考。
+            </p>
+          </div>
+          <button class="download-btn" id="downloadBtn">下载数据</button>
+        </section>
+
+        <section class="filter-panel" aria-label="全局筛选">
+          <div class="filter-grid">
+            <div class="filter-field">
+              <div class="asin-tabs" role="tablist" aria-label="商品维度">
+                <button class="asin-tab active" type="button" data-asin-view="asin" role="tab" aria-selected="true">ASIN</button>
+                <button class="asin-tab is-disabled" type="button" data-asin-view="parent" role="tab" aria-selected="false" aria-disabled="true" title="若需按父ASIN聚合，请先在Mapping upload上传ASIN映射。">父ASIN</button>
+              </div>
+            </div>
+            <div class="filter-field compact">
+              <label id="mainAsinLabel" for="mainAsinFilterSearch">主ASIN</label>
+              <div class="multi-select" id="mainAsinFilter" data-filter-key="mainAsin"></div>
+            </div>
+            <div class="filter-field compact">
+              <label id="linkedAsinLabel" for="linkedAsinFilterSearch">关联ASIN</label>
+              <div class="multi-select" id="linkedAsinFilter" data-filter-key="linkedAsin"></div>
+            </div>
+            <button class="ghost-btn icon-btn" id="resetFilters" type="button" aria-label="重置筛选" title="重置筛选">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+              <span class="sr-only">重置筛选</span>
+            </button>
+            <span id="filterCount">当前展示 40 条规则</span>
+          </div>
+        </section>
+
+        <div class="insight-header">
+          <div>
+            <h2>Insight 洞察输出</h2>
+          </div>
+          <button class="ghost-btn" id="toggleInsights">收起洞察</button>
+        </div>
+        <section class="insight-grid" id="insightGrid" aria-label="Insight 洞察区"></section>
+
+        <section class="chart-card full-card histogram-card" aria-labelledby="histogramTitle">
+          <div class="card-head">
+            <div>
+              <h3 class="title-with-help" id="histogramTitle" data-tooltip="将ASIN组合按订单量排序，均分为10个等数量区间，自动区分头、中、尾部ASIN组合；点击柱状图可联动筛选网络图、TOP组合及明细表，快速定位头部、中腰部高频购买组合。">订单量分布直方图<span class="info-help" tabindex="0" aria-label="将ASIN组合按订单量排序，均分为10个等数量区间，自动区分头、中、尾部ASIN组合；点击柱状图可联动筛选网络图、TOP组合及明细表，快速定位头部、中腰部高频购买组合。">?</span></h3>
+            </div>
+            <div class="card-actions histogram-meta">
+              <span class="histogram-range" id="ordersRangeLabel"></span>
+              <button class="ghost-btn" id="clearOrdersBucket">清除区间</button>
+            </div>
+          </div>
+          <div class="histogram-legend-row">
+            <span class="histogram-legend-axis" aria-hidden="true"></span>
+            <div class="histogram-legend" role="group" aria-label="组合订单数分层筛选">
+              <button class="histogram-legend-item" type="button" data-orders-segment="head" aria-pressed="false"><span class="histogram-legend-dot head"></span>头部 D8-D10</button>
+              <button class="histogram-legend-item" type="button" data-orders-segment="middle" aria-pressed="false"><span class="histogram-legend-dot middle"></span>中腰部 D4-D7</button>
+              <button class="histogram-legend-item" type="button" data-orders-segment="tail" aria-pressed="false"><span class="histogram-legend-dot"></span>尾部 D1-D3</button>
+            </div>
+          </div>
+          <div class="histogram-wrap" id="ordersHistogram" aria-label="组合订单数分位数直方图"></div>
+        </section>
+
+        <section class="viz-grid">
+          <article class="chart-card">
+            <div class="card-head">
+              <div>
+                <h3>关联商品网络图</h3>
+                <p>节点大小=商品出现频率，连线粗细=置信度，连线颜色=提升度。点击节点筛选 TOP 组合与明细表。</p>
+              </div>
+              <div class="card-actions">
+                <button class="ghost-btn" id="resetNetwork">重置视图</button>
+              </div>
+            </div>
+            <div class="chart-surface">
+              <svg id="networkSvg" viewBox="0 0 760 430" role="img" aria-label="关联商品网络图"></svg>
+            </div>
+            <div class="legend">
+              <span class="legend-item"><span class="legend-dot" style="background:#0eb67f"></span>Lift ≥ 2.0  P1-强正相关</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#f5a640"></span>1.0 &lt; Lift &lt; 2.0  P2-弱正相关</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#ef6f7d"></span>Lift ≤ 1.0  P3-无关或负相关</span>
+            </div>
+          </article>
+
+          <article class="chart-card top-combo-card">
+            <div class="card-head">
+              <div>
+                <h3 class="title-with-help" data-tooltip="展示 TOP20 商品组合，可切换指标排序；Lift≥2 的组合具备强正向关联，适合捆绑销售；Lift≤1 的组合无关联或呈负相关，建议人工复核。">TOP20 关联商品组合<span class="info-help" tabindex="0" aria-label="展示 TOP20 商品组合，可切换指标排序；Lift≥2 的组合具备强正向关联，适合捆绑销售；Lift≤1 的组合无关联或呈负相关，建议人工复核。">?</span></h3>
+              </div>
+              <div class="card-actions top-sort-control">
+                <select class="small-select" id="topSortMetric" aria-label="TOP20 排序">
+                  <option value="support">支持度</option>
+                  <option value="confidence">置信度</option>
+                  <option value="lift" selected>提升度</option>
+                  <option value="orderCount">组合订单数</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <colgroup>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>排名</th>
+                    <th>前项商品(A)</th>
+                    <th>后项商品(B)</th>
+                    <th><span class="top-metric-head" title="组合订单数：前项商品(A) 与后项商品(B) 同时出现的订单数量">组合订单数<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th><span class="top-metric-head" title="支持度：前项商品(A) 与后项商品(B) 同时出现订单数占总订单数的比例">支持度<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th><span class="top-metric-head" title="置信度：购买前项商品(A) 后同时购买后项商品(B) 的概率">置信度<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th><span class="top-metric-head" title="提升度：前项商品(A) 对后项商品(B) 购买概率的提升倍数，越高代表关联越强">提升度<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th>推荐动作</th>
+                  </tr>
+                </thead>
+                <tbody id="rulesTable"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="chart-card full-card detail-card" style="margin-top:14px;">
+          <div class="card-head">
+            <div>
+                <h3 class="title-with-help" data-tooltip="展示所有商品组合，输出前项商品(A)、后项商品(B)、组合订单数、置信度、提升度、业务价值评级和推荐动作，用于下载、复核和落地执行。">商品组合明细<span class="info-help" tabindex="0" aria-label="展示所有商品组合，输出前项商品(A)、后项商品(B)、组合订单数、置信度、提升度、业务价值评级和推荐动作，用于下载、复核和落地执行。">?</span></h3>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>前项商品(A)</th>
+                  <th>后项商品(B)</th>
+                  <th><button class="metric-sort" data-sort="orderCount" title="组合订单数：前项商品(A) 与后项商品(B) 同时出现的订单数量"><span>组合订单数</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="aOrders" title="商品A订单数：包含前项商品(A) 的订单数量"><span>商品A订单数</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="bOrders" title="商品B订单数：包含后项商品(B) 的订单数量"><span>商品B订单数</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="support" title="支持度：前项商品(A) 与后项商品(B) 同时出现订单数占总订单数的比例"><span>支持度</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="confidence" title="置信度：购买前项商品(A) 后同时购买后项商品(B) 的概率"><span>置信度</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="lift" title="提升度：前项商品(A) 对后项商品(B) 购买概率的提升倍数，越高代表关联越强"><span>提升度</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="valueScore" title="业务价值评级：Lift ≥ 2.0 为 P1 强正相关，1.0 &lt; Lift &lt; 2.0 为 P2 弱正相关，Lift ≤ 1.0 为 P3 无关或负相关"><span>业务价值评级</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th>推荐动作</th>
+                </tr>
+              </thead>
+              <tbody id="detailTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <script>
+    const baseRules = [
+      { a: "牛奶", b: "面包", support: 0.152, confidence: 0.853, lift: 2.41, category: "早餐补给" },
+      { a: "啤酒", b: "尿布", support: 0.087, confidence: 0.721, lift: 3.15, category: "家庭补给" },
+      { a: "薯片", b: "可乐", support: 0.123, confidence: 0.685, lift: 1.89, category: "休闲零食" },
+      { a: "鸡蛋", b: "牛奶", support: 0.101, confidence: 0.552, lift: 1.56, category: "早餐补给" },
+      { a: "牙膏", b: "牙刷", support: 0.068, confidence: 0.924, lift: 4.23, category: "个人护理" },
+      { a: "牛奶", b: "咖啡", support: 0.094, confidence: 0.606, lift: 1.72, category: "早餐补给" },
+      { a: "面包", b: "黄油", support: 0.113, confidence: 0.744, lift: 2.08, category: "早餐补给" },
+      { a: "燕麦片", b: "牛奶", support: 0.081, confidence: 0.698, lift: 2.34, category: "早餐补给" },
+      { a: "酸奶", b: "香蕉", support: 0.073, confidence: 0.642, lift: 1.93, category: "早餐补给" },
+      { a: "咖啡", b: "饼干", support: 0.057, confidence: 0.481, lift: 1.28, category: "休闲零食" },
+      { a: "啤酒", b: "薯片", support: 0.066, confidence: 0.587, lift: 1.77, category: "休闲零食" },
+      { a: "可乐", b: "薯片", support: 0.111, confidence: 0.632, lift: 1.74, category: "休闲零食" },
+      { a: "坚果", b: "啤酒", support: 0.049, confidence: 0.518, lift: 1.62, category: "休闲零食" },
+      { a: "饼干", b: "牛奶", support: 0.062, confidence: 0.507, lift: 1.39, category: "早餐补给" },
+      { a: "尿布", b: "湿巾", support: 0.091, confidence: 0.812, lift: 3.52, category: "家庭补给" },
+      { a: "尿布", b: "婴儿奶粉", support: 0.052, confidence: 0.459, lift: 1.88, category: "家庭补给" },
+      { a: "湿巾", b: "尿布", support: 0.077, confidence: 0.746, lift: 2.96, category: "家庭补给" },
+      { a: "婴儿奶粉", b: "尿布", support: 0.044, confidence: 0.621, lift: 2.23, category: "家庭补给" },
+      { a: "洗发水", b: "沐浴露", support: 0.084, confidence: 0.771, lift: 2.67, category: "个人护理" },
+      { a: "沐浴露", b: "洗发水", support: 0.071, confidence: 0.698, lift: 2.25, category: "个人护理" },
+      { a: "洗衣液", b: "柔顺剂", support: 0.075, confidence: 0.713, lift: 2.49, category: "家庭清洁" },
+      { a: "厨房纸巾", b: "垃圾袋", support: 0.061, confidence: 0.529, lift: 1.58, category: "家庭清洁" },
+      { a: "洗洁精", b: "厨房纸巾", support: 0.058, confidence: 0.544, lift: 1.64, category: "家庭清洁" },
+      { a: "牙刷", b: "漱口水", support: 0.041, confidence: 0.462, lift: 2.02, category: "个人护理" },
+      { a: "牙膏", b: "漱口水", support: 0.037, confidence: 0.431, lift: 1.95, category: "个人护理" },
+      { a: "猫粮", b: "猫砂", support: 0.064, confidence: 0.704, lift: 3.31, category: "宠物用品" },
+      { a: "猫砂", b: "垃圾袋", support: 0.047, confidence: 0.512, lift: 1.44, category: "宠物用品" },
+      { a: "猫粮", b: "宠物零食", support: 0.055, confidence: 0.586, lift: 2.12, category: "宠物用品" },
+      { a: "洗衣液", b: "垃圾袋", support: 0.034, confidence: 0.294, lift: 0.94, category: "家庭清洁" },
+      { a: "可乐", b: "牙刷", support: 0.022, confidence: 0.188, lift: 0.72, category: "无关或负相关" },
+      { a: "啤酒", b: "酸奶", support: 0.025, confidence: 0.216, lift: 0.81, category: "无关或负相关" },
+      { a: "面包", b: "猫砂", support: 0.018, confidence: 0.121, lift: 0.64, category: "无关或负相关" },
+      { a: "香皂", b: "沐浴露", support: 0.046, confidence: 0.472, lift: 1.37, category: "个人护理" },
+      { a: "毛巾", b: "沐浴露", support: 0.039, confidence: 0.438, lift: 1.42, category: "个人护理" },
+      { a: "牙刷", b: "牙膏", support: 0.059, confidence: 0.881, lift: 3.98, category: "个人护理" },
+      { a: "黄油", b: "果酱", support: 0.067, confidence: 0.622, lift: 2.18, category: "早餐补给" },
+      { a: "面包", b: "果酱", support: 0.089, confidence: 0.674, lift: 2.03, category: "早餐补给" },
+      { a: "鸡蛋", b: "面包", support: 0.072, confidence: 0.537, lift: 1.45, category: "早餐补给" },
+      { a: "咖啡", b: "牛奶", support: 0.083, confidence: 0.592, lift: 1.66, category: "早餐补给" },
+      { a: "坚果", b: "可乐", support: 0.039, confidence: 0.421, lift: 1.21, category: "休闲零食" }
+    ];
+
+    const periodProfiles = {
+      "2024年Q1": { support: 0.92, confidence: 0.97, lift: 0.96 },
+      "2024年Q2": { support: 1.00, confidence: 1.00, lift: 1.00 },
+      "2024年Q3": { support: 1.08, confidence: 1.03, lift: 1.04 },
+      "2024年Q4": { support: 1.16, confidence: 1.05, lift: 1.08 }
+    };
+
+    const categoryColors = {
+      "早餐补给": "#5b73f2",
+      "家庭补给": "#28c4b2",
+      "休闲零食": "#f5a640",
+      "个人护理": "#0eb67f",
+      "家庭清洁": "#8475f2",
+      "宠物用品": "#39a6dd",
+      "无关或负相关": "#ef6f7d"
+    };
+
+    const parentAsinMap = {
+      "牛奶": "PA-早餐补给-01",
+      "面包": "PA-早餐补给-02",
+      "鸡蛋": "PA-早餐补给-01",
+      "咖啡": "PA-早餐补给-03",
+      "燕麦片": "PA-早餐补给-01",
+      "酸奶": "PA-早餐补给-04",
+      "香蕉": "PA-早餐补给-04",
+      "黄油": "PA-早餐补给-02",
+      "果酱": "PA-早餐补给-02",
+      "啤酒": "PA-休闲补给-01",
+      "薯片": "PA-休闲补给-02",
+      "可乐": "PA-休闲补给-02",
+      "坚果": "PA-休闲补给-03",
+      "饼干": "PA-休闲补给-03",
+      "尿布": "PA-家庭补给-01",
+      "湿巾": "PA-家庭补给-01",
+      "婴儿奶粉": "PA-家庭补给-02",
+      "牙膏": "PA-个人护理-01",
+      "牙刷": "PA-个人护理-01",
+      "漱口水": "PA-个人护理-01",
+      "洗发水": "PA-个人护理-02",
+      "沐浴露": "PA-个人护理-02",
+      "香皂": "PA-个人护理-02",
+      "毛巾": "PA-个人护理-03",
+      "洗衣液": "PA-家庭清洁-01",
+      "柔顺剂": "PA-家庭清洁-01",
+      "厨房纸巾": "PA-家庭清洁-02",
+      "垃圾袋": "PA-家庭清洁-02",
+      "洗洁精": "PA-家庭清洁-02",
+      "猫粮": "PA-宠物用品-01",
+      "猫砂": "PA-宠物用品-01",
+      "宠物零食": "PA-宠物用品-02"
+    };
+
+    const productAsinMap = {
+      "牛奶": "B08MILK001",
+      "面包": "B08BREAD02",
+      "鸡蛋": "B08EGGS003",
+      "咖啡": "B08COFFEE4",
+      "燕麦片": "B08OATME05",
+      "酸奶": "B08YOGURT6",
+      "香蕉": "B08BANANA7",
+      "黄油": "B08BUTTER8",
+      "果酱": "B08JAM0009",
+      "啤酒": "B08BEER010",
+      "薯片": "B08CHIPS11",
+      "可乐": "B08COLA012",
+      "坚果": "B08NUTS013",
+      "饼干": "B08COOKIE4",
+      "尿布": "B08DIAPER5",
+      "湿巾": "B08WIPES16",
+      "婴儿奶粉": "B08FORMULA",
+      "牙膏": "B08PASTE18",
+      "牙刷": "B08BRUSH19",
+      "漱口水": "B08MOUTH20",
+      "洗发水": "B08SHAMPOO",
+      "沐浴露": "B08BODY022",
+      "香皂": "B08SOAP023",
+      "毛巾": "B08TOWEL24",
+      "洗衣液": "B08LAUNDRY",
+      "柔顺剂": "B08SOFT026",
+      "厨房纸巾": "B08TOWEL27",
+      "垃圾袋": "B08TRASH28",
+      "洗洁精": "B08DISH029",
+      "猫粮": "B08CATFOOD",
+      "猫砂": "B08LITTER1",
+      "宠物零食": "B08PETSNCK"
+    };
+
+    const state = {
+      period: "2024年Q2",
+      selectedRuleId: null,
+      selectedRuleIds: [],
+      selectedProduct: null,
+      sortKey: "lift",
+      sortDir: "desc",
+      topSortKey: "lift",
+      ordersBuckets: [],
+      ordersSegment: null,
+      insightsOpen: true
+    };
+
+    const filters = {
+      asinView: "asin",
+      mainAsin: [],
+      linkedAsin: []
+    };
+
+    const networkState = {
+      scale: 1,
+      tx: 0,
+      ty: 0,
+      positions: {},
+      dragging: null
+    };
+
+    const tooltip = document.getElementById("tooltip");
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function pct(value, digits = 2) {
+      return `${(value * 100).toFixed(digits)}%`;
+    }
+
+    function num(value, digits = 2) {
+      return Number(value).toFixed(digits);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function productAsin(product) {
+      if (productAsinMap[product]) return productAsinMap[product];
+      let hash = 0;
+      Array.from(String(product)).forEach(char => {
+        hash = ((hash << 5) - hash) + char.charCodeAt(0);
+        hash |= 0;
+      });
+      return `B08${Math.abs(hash).toString(36).toUpperCase().padStart(7, "0").slice(0, 7)}`;
+    }
+
+    function productTitle(product) {
+      return `Amazon Demo Product ${productAsin(product)}`;
+    }
+
+    function productAmazonUrl(product) {
+      return `https://www.amazon.com/dp/${encodeURIComponent(productAsin(product))}`;
+    }
+
+    function productAsinPair(rule) {
+      return `${productAsin(rule.a)} → ${productAsin(rule.b)}`;
+    }
+
+    function productImage(product) {
+      const asin = productAsin(product);
+      const label = asin.slice(-4);
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+        <rect width="80" height="80" rx="10" fill="#f8fafc"/>
+        <rect x="11" y="12" width="58" height="54" rx="8" fill="#eef3f9" stroke="#d7e0ec"/>
+        <rect x="22" y="22" width="36" height="30" rx="5" fill="#ffffff" stroke="#cdd8e6"/>
+        <path d="M28 43h24M28 35h24M28 27h16" fill="none" stroke="#8fa0b6" stroke-width="3" stroke-linecap="round"/>
+        <text x="40" y="73" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" font-weight="400" fill="#526684">${escapeHtml(label)}</text>
+      </svg>`;
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    function renderAsinProduct(product, options = {}) {
+      const title = productTitle(product);
+      const asin = productAsin(product);
+      const url = productAmazonUrl(product);
+      const tooltipClass = options.tooltip ? " tooltip-product" : "";
+      const asinMarkup = options.tooltip
+        ? `<span class="asin-product-link" title="${escapeHtml(asin)}">${escapeHtml(asin)}</span>`
+        : `<a class="asin-product-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(url)}">${escapeHtml(asin)}</a>`;
+      return `<div class="asin-product${tooltipClass}">
+        <img class="asin-product-img" src="${productImage(product)}" alt="${escapeHtml(title)}">
+        <span class="asin-product-copy">
+          ${asinMarkup}
+          <span class="asin-product-title" title="${escapeHtml(title)}">${escapeHtml(title)}</span>
+        </span>
+      </div>`;
+    }
+
+    function getRules() {
+      const profile = periodProfiles[state.period];
+      return baseRules.map((rule, index) => {
+        const supportShift = 1 + ((index % 5) - 2) * 0.015;
+        const confShift = 1 + ((index % 4) - 1.5) * 0.012;
+        const liftShift = 1 + ((index % 6) - 2.5) * 0.01;
+        const support = clamp(rule.support * profile.support * supportShift, 0.01, 0.19);
+        const confidence = clamp(rule.confidence * profile.confidence * confShift, 0.08, 0.98);
+        const lift = clamp(rule.lift * profile.lift * liftShift, 0.45, 4.8);
+        const totalOrders = 12000;
+        const orderCount = Math.max(1, Math.round(support * totalOrders));
+        const aOrders = Math.max(orderCount, Math.round(orderCount / confidence));
+        const bSupport = clamp(confidence / Math.max(lift, 0.01), 0.01, 0.98);
+        const bOrders = Math.max(orderCount, Math.round(bSupport * totalOrders));
+        return {
+          ...rule,
+          id: `${rule.a}->${rule.b}`,
+          support,
+          confidence,
+          lift,
+          orderCount,
+          aOrders,
+          bOrders
+        };
+      });
+    }
+
+    function getProducts(rules) {
+      return Array.from(new Set(rules.flatMap(rule => [rule.a, rule.b])));
+    }
+
+    function productStats(rules) {
+      const stats = {};
+      rules.forEach(rule => {
+        if (!stats[rule.a]) stats[rule.a] = { product: rule.a, weight: 0, count: 0 };
+        if (!stats[rule.b]) stats[rule.b] = { product: rule.b, weight: 0, count: 0 };
+        stats[rule.a].weight += rule.support;
+        stats[rule.b].weight += rule.support * 0.72;
+        stats[rule.a].count += 1;
+        stats[rule.b].count += 1;
+      });
+      return stats;
+    }
+
+    function valueInfo(rule) {
+      if (rule.lift >= 2) return { label: "P1 强正相关", cls: "lift-strong", score: 3 };
+      if (rule.lift > 1) return { label: "P2 弱正相关", cls: "lift-positive", score: 2 };
+      return { label: "P3 无关或负相关", cls: "lift-risk", score: 1 };
+    }
+
+    function actionInfo(rule) {
+      if (rule.lift >= 2) return "捆绑销售";
+      if (rule.lift > 1) return "小流量测试";
+      return "复核";
+    }
+
+    function actionTagInfo(action) {
+      if (action === "捆绑销售") {
+        return {
+          cls: "action-bundle",
+          icon: `<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M3 7h10v6H3z"></path>
+            <path d="M2.5 5h11v2h-11z"></path>
+            <path d="M8 5v8"></path>
+            <path d="M6.2 5C4.7 4.7 4 4.1 4.1 3.3c.1-.7.8-1 1.4-.7.7.3 1.2 1 2.5 2.4"></path>
+            <path d="M9.8 5c1.5-.3 2.2-.9 2.1-1.7-.1-.7-.8-1-1.4-.7-.7.3-1.2 1-2.5 2.4"></path>
+          </svg>`
+        };
+      }
+      if (action === "小流量测试") {
+        return {
+          cls: "action-test",
+          icon: `<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M2.5 11.5h11"></path>
+            <path d="M3.5 10 6.2 7.5l2.4 1.8 3.9-5"></path>
+            <path d="M11 4.3h1.5v1.5"></path>
+          </svg>`
+        };
+      }
+      return {
+        cls: "action-review",
+        icon: `<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path d="M8 2.4 14 13H2z"></path>
+          <path d="M8 6v3.2"></path>
+          <path d="M8 11.7h.01"></path>
+        </svg>`
+      };
+    }
+
+    function renderActionTag(rule) {
+      const action = actionInfo(rule);
+      const info = actionTagInfo(action);
+      return `<span class="action-tag ${info.cls}"><span class="action-icon" aria-hidden="true">${info.icon}</span><span>${escapeHtml(action)}</span></span>`;
+    }
+
+    function ruleLevel(rule) {
+      if (rule.lift >= 2) return { label: "P1 强正相关", cls: "lift-strong" };
+      if (rule.lift > 1) return { label: "P2 弱正相关", cls: "lift-positive" };
+      return { label: "P3 无关或负相关", cls: "lift-risk" };
+    }
+
+    function liftLevelInfo(lift) {
+      if (lift >= 2) return { cls: "lift-strong", color: "#0eb67f" };
+      if (lift > 1) return { cls: "lift-positive", color: "#f5a640" };
+      return { cls: "lift-risk", color: "#ef6f7d" };
+    }
+
+    function liftClass(lift) {
+      return liftLevelInfo(lift).cls;
+    }
+
+    function liftColor(lift) {
+      return liftLevelInfo(lift).color;
+    }
+
+    function liftLegendHtml() {
+      return `
+        <span class="legend-item"><span class="legend-dot" style="background:#0eb67f"></span>Lift ≥ 2.0  P1-强正相关</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#f5a640"></span>1.0 &lt; Lift &lt; 2.0  P2-弱正相关</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#ef6f7d"></span>Lift ≤ 1.0  P3-无关或负相关</span>`;
+    }
+
+    function formatOrders(value) {
+      return Math.round(value).toLocaleString();
+    }
+
+    function baseFilteredRules(rules) {
+      return rules
+        .map(rule => ({ ...rule, valueScore: valueInfo(rule).score }))
+        .filter(rule => matchesSelectedValues(filters.mainAsin, asinFilterValue(rule.a)))
+        .filter(rule => matchesSelectedValues(filters.linkedAsin, asinFilterValue(rule.b)));
+    }
+
+    function matchesSelectedValues(selectedValues, value) {
+      return !selectedValues.length || selectedValues.includes(value);
+    }
+
+    function normalizeSearchText(value) {
+      return String(value).toLocaleLowerCase("zh-CN").replace(/[\s_-]+/g, "");
+    }
+
+    function fuzzyMatch(value, keyword) {
+      const rawKeyword = keyword.trim();
+      if (!rawKeyword) return true;
+      const normalizedValue = normalizeSearchText(value);
+      const normalizedKeyword = normalizeSearchText(rawKeyword);
+      if (normalizedValue.includes(normalizedKeyword)) return true;
+      const tokens = rawKeyword.toLocaleLowerCase("zh-CN").split(/[\s,_-]+/).filter(Boolean);
+      return tokens.length ? tokens.every(token => normalizedValue.includes(normalizeSearchText(token))) : false;
+    }
+
+    function buildOrdersBuckets(rules) {
+      if (!rules.length) return [];
+      const orderCounts = rules.map(rule => rule.orderCount);
+      const minValue = Math.min(...orderCounts);
+      const maxValue = Math.max(...orderCounts);
+      const range = Math.max(maxValue - minValue, 1);
+      const step = range / 10;
+      return Array.from({ length: 10 }, (_, index) => {
+        const startValue = minValue + step * index;
+        const endValue = index === 9 ? maxValue : minValue + step * (index + 1);
+        const items = rules.filter(rule => {
+          if (index === 9) return rule.orderCount >= startValue && rule.orderCount <= endValue;
+          return rule.orderCount >= startValue && rule.orderCount < endValue;
+        }).sort((a, b) => a.orderCount - b.orderCount);
+        const ordersTotal = items.reduce((sum, rule) => sum + rule.orderCount, 0);
+        return {
+          index,
+          label: `${index * 10}-${(index + 1) * 10}%`,
+          items,
+          ordersTotal,
+          minOrders: Math.round(startValue),
+          maxOrders: Math.round(endValue),
+          count: items.length
+        };
+      });
+    }
+
+    function selectedOrdersBuckets(baseRules) {
+      if (!state.ordersBuckets.length) return [];
+      const selected = new Set(state.ordersBuckets);
+      return buildOrdersBuckets(baseRules).filter(bucket => selected.has(bucket.index));
+    }
+
+    function ordersSegmentInfo(segment) {
+      const map = {
+        tail: { label: "尾部 D1-D3", min: 0, max: 2, cls: "tail" },
+        middle: { label: "中腰部 D4-D7", min: 3, max: 6, cls: "middle" },
+        head: { label: "头部 D8-D10", min: 7, max: 9, cls: "head" }
+      };
+      return map[segment] || null;
+    }
+
+    function selectedOrdersSegmentBuckets(baseRules) {
+      const segment = ordersSegmentInfo(state.ordersSegment);
+      if (!segment) return [];
+      return buildOrdersBuckets(baseRules).filter(bucket => bucket.index >= segment.min && bucket.index <= segment.max);
+    }
+
+    function applyOrdersBucketFilter(rules, buckets) {
+      if (!buckets.length) return rules;
+      const ids = new Set(buckets.flatMap(bucket => bucket.items.map(rule => rule.id)));
+      return rules.filter(rule => ids.has(rule.id));
+    }
+
+    function applyOrdersSegmentFilter(rules, buckets) {
+      if (!buckets.length) return rules;
+      const ids = new Set(buckets.flatMap(bucket => bucket.items.map(rule => rule.id)));
+      return rules.filter(rule => ids.has(rule.id));
+    }
+
+    function applyProductFilter(rules, product) {
+      if (!product) return rules;
+      return rules.filter(rule => ruleMatchesProduct(rule, product));
+    }
+
+    function toggleOrdersSegment(segment) {
+      state.ordersSegment = state.ordersSegment === segment ? null : segment;
+      state.ordersBuckets = [];
+      clearRuleSelection();
+      state.selectedProduct = null;
+      renderAll();
+    }
+
+    function syncOrdersSegmentControls(root = document) {
+      root.querySelectorAll("[data-orders-segment]").forEach(button => {
+        const active = button.dataset.ordersSegment === state.ordersSegment;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+    }
+
+    function filteredRules(rules) {
+      const baseRules = baseFilteredRules(rules);
+      const segmentRules = applyOrdersSegmentFilter(baseRules, selectedOrdersSegmentBuckets(baseRules));
+      const bucketRules = applyOrdersBucketFilter(segmentRules, selectedOrdersBuckets(baseRules));
+      return applyProductFilter(bucketRules, state.selectedProduct);
+    }
+
+    function networkFilteredRules(rules) {
+      const baseRules = baseFilteredRules(rules);
+      const segmentRules = applyOrdersSegmentFilter(baseRules, selectedOrdersSegmentBuckets(baseRules));
+      return applyOrdersBucketFilter(segmentRules, selectedOrdersBuckets(baseRules));
+    }
+
+    function parentAsinOf(product) {
+      return parentAsinMap[product] || `PA-${product}`;
+    }
+
+    function asinFilterValue(product) {
+      return filters.asinView === "parent" ? parentAsinOf(product) : productAsin(product);
+    }
+
+    function sortedRules(rules) {
+      const direction = state.sortDir === "asc" ? 1 : -1;
+      return [...rules].sort((left, right) => {
+        const a = left[state.sortKey];
+        const b = right[state.sortKey];
+        if (typeof a === "number" && typeof b === "number") return (a - b) * direction;
+        return String(a).localeCompare(String(b), "zh-CN") * direction;
+      });
+    }
+
+    function sortedTopRules(rules) {
+      const key = state.topSortKey;
+      return [...rules].sort((left, right) => {
+        const primary = (Number(right[key]) || 0) - (Number(left[key]) || 0);
+        if (primary !== 0) return primary;
+        if (right.lift !== left.lift) return right.lift - left.lift;
+        if (right.confidence !== left.confidence) return right.confidence - left.confidence;
+        return right.orderCount - left.orderCount;
+      });
+    }
+
+    function ruleMatchesProduct(rule, product) {
+      return product && (rule.a === product || rule.b === product);
+    }
+
+    function ruleMatchesPair(rule, selectedRule) {
+      return (rule.a === selectedRule.a && rule.b === selectedRule.b) ||
+        (rule.a === selectedRule.b && rule.b === selectedRule.a);
+    }
+
+    function selectedRuleIdSet() {
+      const ids = state.selectedRuleIds.length
+        ? state.selectedRuleIds
+        : state.selectedRuleId
+          ? [state.selectedRuleId]
+          : [];
+      return new Set(ids);
+    }
+
+    function hasSelectedRules() {
+      return selectedRuleIdSet().size > 0;
+    }
+
+    function isRuleSelected(rule) {
+      return selectedRuleIdSet().has(rule.id);
+    }
+
+    function clearRuleSelection() {
+      state.selectedRuleId = null;
+      state.selectedRuleIds = [];
+    }
+
+    function selectRule(ruleId) {
+      state.selectedRuleId = ruleId || null;
+      state.selectedRuleIds = ruleId ? [ruleId] : [];
+      state.selectedProduct = null;
+    }
+
+    function selectRulePair(rule, rules) {
+      const ids = [
+        rule,
+        ...rules.filter(candidate => candidate.id !== rule.id && ruleMatchesPair(candidate, rule))
+      ]
+        .map(candidate => candidate.id);
+      state.selectedRuleIds = ids.length ? ids : [rule.id];
+      state.selectedRuleId = state.selectedRuleIds[0] || null;
+      state.selectedProduct = null;
+    }
+
+    function rulesByLift(rules) {
+      return [...rules].sort((left, right) => {
+        if (right.lift !== left.lift) return right.lift - left.lift;
+        if (right.confidence !== left.confidence) return right.confidence - left.confidence;
+        return right.orderCount - left.orderCount;
+      });
+    }
+
+    function renderInsightCombos(rules, options = {}) {
+      const showMetrics = options.metrics !== false;
+      const showConfidence = options.showConfidence !== false;
+      const showOrders = options.showOrders === true;
+      const showAction = options.showAction === true;
+      const limit = options.limit || 3;
+      const visibleRules = rules.slice(0, limit);
+      const remainingCount = Math.max(rules.length - visibleRules.length, 0);
+      if (!rules.length) {
+        return `<div class="insight-empty">${escapeHtml(options.emptyText || "暂无符合阈值组合")}</div>`;
+      }
+      return `<div class="insight-combos">${visibleRules.map(rule => `
+        <div class="insight-combo ${showMetrics ? "" : "combo-only"}">
+          <span class="combo-name">${escapeHtml(productAsinPair(rule))}</span>
+          ${showMetrics ? `<span class="combo-metrics">
+              <span>提升度 ${num(rule.lift)}x</span>
+              ${showConfidence ? `<span>置信度 ${pct(rule.confidence, 0)}</span>` : ""}
+              ${showOrders ? `<span>组合订单数 ${formatOrders(rule.orderCount)}</span>` : ""}
+              ${showAction ? `<span>${escapeHtml(actionInfo(rule))}</span>` : ""}
+            </span>` : ""}
+        </div>
+      `).join("")}${remainingCount ? `<div class="insight-more">+${remainingCount} 组见下方明细</div>` : ""}</div>`;
+    }
+
+    function showTooltip(event, html) {
+      tooltip.innerHTML = html;
+      tooltip.style.left = `${event.clientX}px`;
+      tooltip.style.top = `${event.clientY}px`;
+      tooltip.style.opacity = 1;
+    }
+
+    function moveTooltip(event) {
+      tooltip.style.left = `${event.clientX}px`;
+      tooltip.style.top = `${event.clientY}px`;
+    }
+
+    function hideTooltip() {
+      tooltip.style.opacity = 0;
+    }
+
+    function createSvg(tag, attrs = {}) {
+      const element = document.createElementNS("http://www.w3.org/2000/svg", tag);
+      Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
+      return element;
+    }
+
+    function reverseRuleMetrics(rule) {
+      const reverseRule = getRules().find(item => item.a === rule.b && item.b === rule.a);
+      const reverseConfidence = reverseRule
+        ? reverseRule.confidence
+        : clamp(rule.orderCount / Math.max(rule.bOrders, 1), 0, 1);
+      return {
+        confidenceAB: rule.confidence,
+        confidenceBA: reverseConfidence,
+        liftAB: rule.lift,
+        liftBA: reverseRule ? reverseRule.lift : rule.lift
+      };
+    }
+
+    function ruleTooltip(rule) {
+      const metrics = reverseRuleMetrics(rule);
+      return `<div class="tooltip-rule-products">
+          <div class="tooltip-rule-product-row">
+            <span class="tooltip-rule-product-label">商品A</span>
+            ${renderAsinProduct(rule.a, { tooltip: true })}
+          </div>
+          <div class="tooltip-rule-product-row">
+            <span class="tooltip-rule-product-label">商品B</span>
+            ${renderAsinProduct(rule.b, { tooltip: true })}
+          </div>
+        </div>
+        <span class="tooltip-rule-metric">组合订单数：${rule.orderCount.toLocaleString()}</span><br>
+        支持度：${pct(rule.support)}<br>
+        置信度A→B：${pct(metrics.confidenceAB)}<br>
+        置信度B→A：${pct(metrics.confidenceBA)}<br>
+        提升度A→B：${num(metrics.liftAB)}x<br>
+        提升度B→A：${num(metrics.liftBA)}x`;
+    }
+
+    function setupGlobalFilters() {
+      const rules = getRules();
+      refreshAsinFilterOptions(rules);
+
+      document.addEventListener("click", event => {
+        document.querySelectorAll(".multi-select.open").forEach(select => {
+          if (!select.contains(event.target)) closeMultiSelect(select);
+        });
+      });
+
+      document.querySelectorAll("[data-asin-view]").forEach(button => {
+        button.addEventListener("click", () => {
+          if (button.getAttribute("aria-disabled") === "true") return;
+          filters.asinView = button.dataset.asinView;
+          filters.mainAsin = [];
+          filters.linkedAsin = [];
+          document.querySelectorAll("[data-asin-view]").forEach(tab => {
+            const active = tab.dataset.asinView === filters.asinView;
+            tab.classList.toggle("active", active);
+            tab.setAttribute("aria-selected", String(active));
+          });
+          refreshAsinFilterOptions(getRules());
+          state.ordersBuckets = [];
+          state.ordersSegment = null;
+          clearRuleSelection();
+          state.selectedProduct = null;
+          renderAll();
+        });
+      });
+
+      document.getElementById("resetFilters").addEventListener("click", () => {
+        filters.mainAsin = [];
+        filters.linkedAsin = [];
+        filters.asinView = "asin";
+        document.querySelectorAll("[data-asin-view]").forEach(tab => {
+          const active = tab.dataset.asinView === "asin";
+          tab.classList.toggle("active", active);
+          tab.setAttribute("aria-selected", String(active));
+        });
+        refreshAsinFilterOptions(getRules());
+        state.ordersBuckets = [];
+        state.ordersSegment = null;
+        clearRuleSelection();
+        state.selectedProduct = null;
+        renderAll();
+      });
+    }
+
+    function setupCreateReportForm() {
+      const dataSelect = document.getElementById("createDataSelect");
+      const aggregationSelect = document.getElementById("createAggregationSelect");
+      const aggregationTrigger = document.getElementById("createAggregationTrigger");
+      const aggregationValue = document.getElementById("createAggregationValue");
+      const parentAsinOption = document.getElementById("createParentAsinOption");
+      const aggregationOptions = Array.from(document.querySelectorAll("[data-aggregation-value]"));
+      if (!dataSelect || !aggregationSelect || !aggregationTrigger || !aggregationValue || !parentAsinOption || !aggregationOptions.length) return;
+
+      const selectAggregation = value => {
+        aggregationSelect.dataset.value = value;
+        aggregationValue.textContent = value;
+        aggregationOptions.forEach(option => {
+          const active = option.dataset.aggregationValue === value;
+          option.classList.toggle("active", active);
+          option.setAttribute("aria-selected", String(active));
+        });
+      };
+
+      const closeAggregationMenu = () => {
+        aggregationSelect.classList.remove("open");
+        aggregationTrigger.setAttribute("aria-expanded", "false");
+      };
+
+      const syncAggregationState = () => {
+        const shouldDisableParent = dataSelect.value === "广告触达28天内数据" || dataSelect.value === "全量购买数据（FSI）";
+        parentAsinOption.classList.toggle("is-disabled", shouldDisableParent);
+        parentAsinOption.setAttribute("aria-disabled", String(shouldDisableParent));
+        if (shouldDisableParent && aggregationSelect.dataset.value === "父ASIN") {
+          selectAggregation("子ASIN");
+        }
+      };
+
+      aggregationTrigger.addEventListener("click", event => {
+        event.stopPropagation();
+        const nextOpen = !aggregationSelect.classList.contains("open");
+        aggregationSelect.classList.toggle("open", nextOpen);
+        aggregationTrigger.setAttribute("aria-expanded", String(nextOpen));
+      });
+
+      aggregationOptions.forEach(option => {
+        option.addEventListener("click", event => {
+          event.stopPropagation();
+          if (option.getAttribute("aria-disabled") === "true") return;
+          selectAggregation(option.dataset.aggregationValue);
+          closeAggregationMenu();
+        });
+      });
+
+      document.addEventListener("click", event => {
+        if (!aggregationSelect.contains(event.target)) closeAggregationMenu();
+      });
+
+      dataSelect.addEventListener("change", syncAggregationState);
+      syncAggregationState();
+    }
+
+    function refreshAsinFilterOptions(rules) {
+      const mainValues = Array.from(new Set(rules.map(rule => asinFilterValue(rule.a)))).sort((a, b) => a.localeCompare(b, "zh-CN"));
+      const linkedValues = Array.from(new Set(rules.map(rule => asinFilterValue(rule.b)))).sort((a, b) => a.localeCompare(b, "zh-CN"));
+      const isParent = filters.asinView === "parent";
+      const mainLabel = isParent ? "主父ASIN" : "主ASIN";
+      const linkedLabel = isParent ? "关联父ASIN" : "关联ASIN";
+      document.getElementById("mainAsinLabel").textContent = mainLabel;
+      document.getElementById("linkedAsinLabel").textContent = linkedLabel;
+      renderMultiSelect("mainAsinFilter", "mainAsin", mainValues, mainLabel, isParent ? "全部主父ASIN" : "全部主ASIN");
+      renderMultiSelect("linkedAsinFilter", "linkedAsin", linkedValues, linkedLabel, isParent ? "全部关联父ASIN" : "全部关联ASIN");
+    }
+
+    function renderMultiSelect(id, key, values, label, allLabel) {
+      const select = document.getElementById(id);
+      select.dataset.totalCount = String(values.length);
+      select.dataset.label = label;
+      select.dataset.allLabel = allLabel;
+      select._allValues = values;
+      select._visibleValues = values;
+      const selected = filters[key].filter(value => values.includes(value));
+      filters[key] = selected;
+      const selectedSet = new Set(selected);
+      const searchId = `${id}Search`;
+      const summary = selected.length ? `${label}：已选 ${selected.length} 项` : allLabel;
+      select.innerHTML = `
+        <button class="multi-select-button" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="${key === "mainAsin" ? "mainAsinLabel" : "linkedAsinLabel"}">
+          <svg class="multi-select-trigger-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <path d="m16.5 16.5 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+          </svg>
+          <span class="${selected.length ? "multi-select-chips" : "multi-select-summary"}" title="${escapeHtml(summary)}">${renderMultiSelectSummaryContent(selected, summary)}</span>
+          <svg class="multi-select-caret" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <div class="multi-select-menu">
+          <div class="multi-select-search-wrap">
+            <svg class="multi-select-search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+              <path d="m16.5 16.5 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+            <input class="multi-select-search" id="${searchId}" type="search" autocomplete="off" placeholder="查找" aria-label="搜索${escapeHtml(label)}">
+          </div>
+          <div class="multi-select-menu-head">
+            <label class="multi-select-all">
+              <input class="multi-select-select-all" type="checkbox" aria-label="全选${escapeHtml(label)}">
+              <span>全选</span>
+            </label>
+            <span>已选 (${selected.length})</span>
+          </div>
+          <button class="multi-select-clear" type="button">${escapeHtml(allLabel)}</button>
+          <div class="multi-select-options" role="listbox" aria-label="${escapeHtml(label)}多选">
+            ${renderMultiSelectOptions(values, selectedSet, key)}
+          </div>
+        </div>
+      `;
+
+      const button = select.querySelector(".multi-select-button");
+      const search = select.querySelector(".multi-select-search");
+      const options = select.querySelector(".multi-select-options");
+      bindMultiSelectTrigger(select, key, label, allLabel);
+      syncMultiSelectAllState(select, values);
+      bindMultiSelectAll(select, key, label, allLabel);
+
+      button.addEventListener("click", event => {
+        event.stopPropagation();
+        const nextOpen = !select.classList.contains("open");
+        document.querySelectorAll(".multi-select.open").forEach(item => {
+          if (item !== select) closeMultiSelect(item);
+        });
+        select.classList.toggle("open", nextOpen);
+        button.setAttribute("aria-expanded", nextOpen ? "true" : "false");
+        if (nextOpen) search.focus();
+      });
+
+      search.addEventListener("click", event => event.stopPropagation());
+      search.addEventListener("input", event => {
+        const filteredValues = values.filter(value => fuzzyMatch(value, event.target.value));
+        select._visibleValues = filteredValues;
+        options.innerHTML = filteredValues.length
+          ? renderMultiSelectOptions(filteredValues, new Set(filters[key]), key)
+          : `<div class="multi-select-empty">无匹配结果</div>`;
+        updateMultiSelectMenuHead(select, values.length);
+        syncMultiSelectAllState(select, filteredValues);
+        bindMultiSelectOptions(select, key, label, allLabel);
+      });
+
+      select.querySelector(".multi-select-clear").addEventListener("click", event => {
+        event.stopPropagation();
+        filters[key] = [];
+        clearLinkedSelections();
+        search.value = "";
+        select._visibleValues = values;
+        options.innerHTML = renderMultiSelectOptions(values, new Set(), key);
+        updateMultiSelectSummary(select, key, label, allLabel);
+        updateMultiSelectMenuHead(select, values.length);
+        syncMultiSelectAllState(select, values);
+        bindMultiSelectOptions(select, key, label, allLabel);
+        renderAll();
+      });
+
+      bindMultiSelectOptions(select, key, label, allLabel);
+    }
+
+    function renderMultiSelectSummaryContent(selected, summary) {
+      if (!selected.length) return escapeHtml(summary);
+      const visible = selected.slice(0, 2);
+      const chips = visible.map(value => `<span class="multi-select-chip" title="${escapeHtml(value)}"><span class="multi-select-chip-text">${escapeHtml(value)}</span><span class="multi-select-chip-remove" role="button" tabindex="-1" data-value="${escapeHtml(value)}" aria-label="移除 ${escapeHtml(value)}">×</span></span>`).join("");
+      const more = selected.length > visible.length ? `<span class="multi-select-chip">+${selected.length - visible.length}</span>` : "";
+      return `${chips}${more}`;
+    }
+
+    function renderMultiSelectOptions(values, selectedSet, key) {
+      return values.map(value => {
+        const optionId = `${key}-${value}`.replace(/[^\w-]/g, "-");
+        const checked = selectedSet.has(value) ? "checked" : "";
+        const active = checked ? " active" : "";
+        return `<label class="multi-select-option${active}" for="${escapeHtml(optionId)}" title="${escapeHtml(value)}">
+          <input id="${escapeHtml(optionId)}" type="checkbox" value="${escapeHtml(value)}" ${checked}>
+          <span>${escapeHtml(value)}</span>
+        </label>`;
+      }).join("");
+    }
+
+    function bindMultiSelectTrigger(select, key, label, allLabel) {
+      select.querySelectorAll(".multi-select-chip-remove").forEach(remove => {
+        remove.addEventListener("click", event => {
+          event.stopPropagation();
+          filters[key] = filters[key].filter(value => value !== remove.dataset.value);
+          clearLinkedSelections();
+          updateMultiSelectSummary(select, key, label, allLabel);
+          updateMultiSelectMenuHead(select, select.dataset.totalCount);
+          const options = select.querySelector(".multi-select-options");
+          const search = select.querySelector(".multi-select-search");
+          const allValues = select._allValues || [];
+          select._visibleValues = allValues;
+          if (search) search.value = "";
+          if (options) options.innerHTML = renderMultiSelectOptions(allValues, new Set(filters[key]), key);
+          bindMultiSelectOptions(select, key, label, allLabel);
+          syncMultiSelectAllState(select, allValues);
+          renderAll();
+        });
+      });
+    }
+
+    function bindMultiSelectOptions(select, key, label, allLabel) {
+      select.querySelectorAll(".multi-select-option input").forEach(input => {
+        input.addEventListener("click", event => event.stopPropagation());
+        input.addEventListener("change", event => {
+          const selected = new Set(filters[key]);
+          if (event.target.checked) {
+            selected.add(event.target.value);
+          } else {
+            selected.delete(event.target.value);
+          }
+          input.closest(".multi-select-option")?.classList.toggle("active", event.target.checked);
+          filters[key] = Array.from(selected).sort((a, b) => a.localeCompare(b, "zh-CN"));
+          clearLinkedSelections();
+          updateMultiSelectSummary(select, key, label, allLabel);
+          updateMultiSelectMenuHead(select, select.dataset.totalCount);
+          syncMultiSelectAllState(select, select._visibleValues || []);
+          renderAll();
+        });
+      });
+    }
+
+    function updateMultiSelectSummary(select, key, label, allLabel) {
+      const summary = filters[key].length ? `${label}：已选 ${filters[key].length} 项` : allLabel;
+      const summaryElement = select.querySelector(".multi-select-summary, .multi-select-chips");
+      summaryElement.className = filters[key].length ? "multi-select-chips" : "multi-select-summary";
+      summaryElement.innerHTML = renderMultiSelectSummaryContent(filters[key], summary);
+      summaryElement.title = summary;
+      bindMultiSelectTrigger(select, key, label, allLabel);
+    }
+
+    function updateMultiSelectMenuHead(select, totalCount) {
+      const head = select.querySelector(".multi-select-menu-head");
+      if (!head) return;
+      const selectedCount = filters[select.dataset.filterKey].length;
+      head.innerHTML = `
+        <label class="multi-select-all">
+          <input class="multi-select-select-all" type="checkbox" aria-label="全选">
+          <span>全选</span>
+        </label>
+        <span>已选 (${selectedCount})</span>
+      `;
+      bindMultiSelectAll(select, select.dataset.filterKey, select.dataset.label, select.dataset.allLabel);
+      syncMultiSelectAllState(select, select._visibleValues || []);
+    }
+
+    function syncMultiSelectAllState(select, values) {
+      const checkbox = select.querySelector(".multi-select-select-all");
+      if (!checkbox) return;
+      const key = select.dataset.filterKey;
+      const selectedCount = values.filter(value => filters[key].includes(value)).length;
+      checkbox.checked = Boolean(values.length && selectedCount === values.length);
+      checkbox.indeterminate = Boolean(selectedCount && selectedCount < values.length);
+    }
+
+    function bindMultiSelectAll(select, key, label, allLabel) {
+      const checkbox = select.querySelector(".multi-select-select-all");
+      if (!checkbox) return;
+      checkbox.addEventListener("change", event => {
+        event.stopPropagation();
+        const values = select._visibleValues || select._allValues || [];
+        const selected = new Set(filters[key]);
+        const allVisibleSelected = values.length && values.every(value => selected.has(value));
+        if (allVisibleSelected) {
+          values.forEach(value => selected.delete(value));
+        } else {
+          values.forEach(value => selected.add(value));
+        }
+        filters[key] = Array.from(selected).sort((a, b) => a.localeCompare(b, "zh-CN"));
+        clearLinkedSelections();
+        const options = select.querySelector(".multi-select-options");
+        if (options) options.innerHTML = values.length ? renderMultiSelectOptions(values, new Set(filters[key]), key) : `<div class="multi-select-empty">无匹配结果</div>`;
+        updateMultiSelectSummary(select, key, label, allLabel);
+        updateMultiSelectMenuHead(select, select.dataset.totalCount);
+        bindMultiSelectOptions(select, key, label, allLabel);
+        renderAll();
+      });
+    }
+
+    function closeMultiSelect(select) {
+      select.classList.remove("open");
+      const button = select.querySelector(".multi-select-button");
+      if (button) button.setAttribute("aria-expanded", "false");
+    }
+
+    function clearLinkedSelections() {
+      state.ordersBuckets = [];
+      state.ordersSegment = null;
+      clearRuleSelection();
+      state.selectedProduct = null;
+    }
+
+    function initNodePositions(rules, forceReset = false) {
+      const products = getProducts(rules);
+      if (!forceReset && products.every(product => networkState.positions[product])) return;
+
+      networkState.positions = {};
+      const grouped = {};
+      rules.forEach(rule => {
+        [rule.a, rule.b].forEach(product => {
+          if (!grouped[rule.category]) grouped[rule.category] = new Set();
+          grouped[rule.category].add(product);
+        });
+      });
+      const centers = {
+        "早餐补给": { x: 170, y: 130 },
+        "家庭补给": { x: 390, y: 108 },
+        "休闲零食": { x: 604, y: 150 },
+        "个人护理": { x: 210, y: 315 },
+        "家庭清洁": { x: 426, y: 322 },
+        "宠物用品": { x: 612, y: 315 },
+        "无关或负相关": { x: 520, y: 222 }
+      };
+      const used = new Set();
+      Object.entries(grouped).forEach(([category, set]) => {
+        const center = centers[category] || { x: 380, y: 220 };
+        Array.from(set).forEach((product, index, array) => {
+          if (used.has(product)) return;
+          used.add(product);
+          const angle = (Math.PI * 2 * index) / Math.max(array.length, 1) - Math.PI / 2;
+          const radius = 46 + Math.min(array.length, 8) * 5;
+          networkState.positions[product] = {
+            x: center.x + Math.cos(angle) * radius + ((index % 2) * 12),
+            y: center.y + Math.sin(angle) * radius + (((index + 1) % 2) * 10)
+          };
+        });
+      });
+      products.forEach((product, index) => {
+        if (!networkState.positions[product]) {
+          networkState.positions[product] = {
+            x: 120 + (index % 8) * 74,
+            y: 100 + Math.floor(index / 8) * 72
+          };
+        }
+      });
+    }
+
+    function renderOrdersHistogram(baseRules) {
+      const container = document.getElementById("ordersHistogram");
+      const label = document.getElementById("ordersRangeLabel");
+      const buckets = buildOrdersBuckets(baseRules);
+      if (!buckets.length) {
+        state.ordersBuckets = [];
+        label.textContent = "当前筛选下暂无组合订单数区间";
+        container.innerHTML = `<div style="grid-column:1 / -1;text-align:center;color:#7584a1;padding:80px 0;">暂无组合订单数分布数据</div>`;
+        return;
+      }
+
+      state.ordersBuckets = state.ordersBuckets.filter(index => buckets.some(bucket => bucket.index === index && bucket.count));
+
+      const activeBuckets = selectedOrdersBuckets(baseRules);
+      const activeSegment = ordersSegmentInfo(state.ordersSegment);
+      const activeSegmentBuckets = selectedOrdersSegmentBuckets(baseRules);
+      const segmentCount = activeSegmentBuckets.reduce((sum, bucket) => sum + bucket.count, 0);
+      const segmentOrders = activeSegmentBuckets.reduce((sum, bucket) => sum + bucket.ordersTotal, 0);
+      const activeBucketCount = activeBuckets.reduce((sum, bucket) => sum + bucket.count, 0);
+      const activeBucketOrders = activeBuckets.reduce((sum, bucket) => sum + bucket.ordersTotal, 0);
+      const activeBucketLabels = activeBuckets
+        .slice()
+        .sort((a, b) => b.index - a.index)
+        .map(bucket => bucket.label)
+        .join("、");
+      label.textContent = activeBuckets.length
+        ? `已选择 ${activeBucketLabels}：${activeBucketCount} 个组合，组合订单数合计 ${formatOrders(activeBucketOrders)}`
+        : activeSegment
+          ? `已选择 ${activeSegment.label}：${segmentCount} 个组合，组合订单数合计 ${formatOrders(segmentOrders)}`
+          : "";
+      const maxOrders = Math.max(...buckets.map(bucket => bucket.ordersTotal), 1);
+      const axisTicks = [1, 0.75, 0.5, 0.25].map(ratio => formatOrders(maxOrders * ratio));
+      const displayBuckets = buckets.slice().reverse();
+      const barsHtml = displayBuckets.map(bucket => {
+        const height = Math.max(8, (bucket.ordersTotal / maxOrders) * 100);
+        const bucketInSegment = activeSegment && bucket.index >= activeSegment.min && bucket.index <= activeSegment.max;
+        const active = state.ordersBuckets.includes(bucket.index) || bucketInSegment ? "active" : "";
+        const segmentClass = bucket.index <= 2 ? "tail" : bucket.index >= 7 ? "head" : "middle";
+        const disabled = bucket.count ? "" : "disabled";
+        const title = `${bucket.label}：${bucket.count}个组合，Orders ${formatOrders(bucket.minOrders)}-${formatOrders(bucket.maxOrders)}，总Orders ${formatOrders(bucket.ordersTotal)}`;
+        return `<button class="histogram-bar ${segmentClass} ${active}" type="button" data-bucket="${bucket.index}" aria-pressed="${active ? "true" : "false"}" ${disabled} title="${escapeHtml(title)}">
+          <span class="histogram-track"><span class="histogram-fill" style="height:${height}%"><span class="histogram-value">${formatOrders(bucket.ordersTotal)}</span></span></span>
+          <span class="histogram-label">${bucket.label}<br><span class="histogram-count">${bucket.count}个组合</span></span>
+        </button>`;
+      }).join("");
+      container.innerHTML = `
+        <div class="histogram-axis" aria-label="组合订单数合计纵轴">
+          ${axisTicks.map(tick => `<span>${tick}</span>`).join("")}
+          <span>0</span>
+        </div>
+        <div class="histogram-plot">
+          <div class="histogram-segment-zones" aria-label="组合订单数分层背景筛选">
+            <button class="histogram-segment-zone" type="button" data-orders-segment="head" data-label="头部 D8-D10" aria-pressed="false" title="筛选头部 D8-D10"></button>
+            <button class="histogram-segment-zone" type="button" data-orders-segment="middle" data-label="中腰部 D4-D7" aria-pressed="false" title="筛选中腰部 D4-D7"></button>
+            <button class="histogram-segment-zone" type="button" data-orders-segment="tail" data-label="尾部 D1-D3" aria-pressed="false" title="筛选尾部 D1-D3"></button>
+          </div>
+          ${barsHtml}
+        </div>
+      `;
+
+      container.querySelectorAll(".histogram-segment-zone").forEach(button => {
+        button.addEventListener("click", () => {
+          toggleOrdersSegment(button.dataset.ordersSegment);
+        });
+      });
+      syncOrdersSegmentControls();
+
+      container.querySelectorAll("[data-bucket]").forEach(button => {
+        button.addEventListener("click", () => {
+          const index = Number(button.dataset.bucket);
+          const nextBuckets = new Set(state.ordersBuckets);
+          if (nextBuckets.has(index)) {
+            nextBuckets.delete(index);
+          } else {
+            nextBuckets.add(index);
+          }
+          state.ordersBuckets = Array.from(nextBuckets).sort((a, b) => a - b);
+          state.ordersSegment = null;
+          clearRuleSelection();
+          state.selectedProduct = null;
+          renderAll();
+        });
+      });
+    }
+
+    function renderNetwork(rules) {
+      initNodePositions(rules);
+      const svg = document.getElementById("networkSvg");
+      svg.innerHTML = "";
+      if (!rules.length) {
+        const text = createSvg("text", { x: 380, y: 215, "text-anchor": "middle", class: "axis-label" });
+        text.textContent = "暂无匹配的关联规则，请调整 ASIN 筛选或清除组合订单数区间";
+        svg.appendChild(text);
+        return;
+      }
+      const stats = productStats(rules);
+      const maxWeight = Math.max(...Object.values(stats).map(item => item.weight));
+      const topLinks = [...rules].sort((a, b) => b.lift - a.lift).slice(0, 34);
+      const selectedRules = rules.filter(rule => isRuleSelected(rule));
+      const hasRuleSelection = hasSelectedRules();
+
+      const gridGroup = createSvg("g");
+      for (let x = 80; x <= 700; x += 80) {
+        gridGroup.appendChild(createSvg("line", { x1: x, y1: 36, x2: x, y2: 392, class: "grid-line" }));
+      }
+      for (let y = 70; y <= 370; y += 60) {
+        gridGroup.appendChild(createSvg("line", { x1: 44, y1: y, x2: 720, y2: y, class: "grid-line" }));
+      }
+      svg.appendChild(gridGroup);
+
+      const viewport = createSvg("g", { transform: `translate(${networkState.tx} ${networkState.ty}) scale(${networkState.scale})` });
+      const linksGroup = createSvg("g");
+      const nodesGroup = createSvg("g");
+
+      topLinks.forEach(rule => {
+        const source = networkState.positions[rule.a];
+        const target = networkState.positions[rule.b];
+        const isSelectedRule = isRuleSelected(rule);
+        const isSelectedProduct = ruleMatchesProduct(rule, state.selectedProduct);
+        const faded = (hasRuleSelection || state.selectedProduct) && !isSelectedRule && !isSelectedProduct;
+        const line = createSvg("line", {
+          x1: source.x,
+          y1: source.y,
+          x2: target.x,
+          y2: target.y,
+          stroke: liftColor(rule.lift),
+          "stroke-width": Math.max(1.5, rule.confidence * 7),
+          opacity: faded ? 0.16 : isSelectedRule || isSelectedProduct ? 0.96 : 0.54,
+          class: "link"
+        });
+        line.addEventListener("mouseenter", event => showTooltip(event, ruleTooltip(rule)));
+        line.addEventListener("mousemove", moveTooltip);
+        line.addEventListener("mouseleave", hideTooltip);
+        line.addEventListener("click", () => {
+          selectRulePair(rule, rules);
+          renderAll();
+        });
+        linksGroup.appendChild(line);
+
+        if (isSelectedRule || isSelectedProduct) {
+          const midX = (source.x + target.x) / 2;
+          const midY = (source.y + target.y) / 2;
+          const label = createSvg("text", {
+            x: midX,
+            y: midY - 8,
+            "text-anchor": "middle",
+            class: "node-label"
+          });
+          label.textContent = pct(rule.support);
+          linksGroup.appendChild(label);
+        }
+      });
+
+      Object.values(stats).forEach(item => {
+        const pos = networkState.positions[item.product];
+        const involved = topLinks.filter(rule => rule.a === item.product || rule.b === item.product);
+        const avgLift = involved.length ? involved.reduce((sum, rule) => sum + rule.lift, 0) / involved.length : 1;
+        const radius = 9 + (item.weight / maxWeight) * 18;
+        const isSelected = state.selectedProduct === item.product;
+        const isInRule = selectedRules.some(rule => rule.a === item.product || rule.b === item.product);
+        const faded = (hasRuleSelection || state.selectedProduct) && !isSelected && !isInRule && !involved.some(rule => rule.a === state.selectedProduct || rule.b === state.selectedProduct);
+
+        const group = createSvg("g", { class: "node", opacity: faded ? 0.25 : 1 });
+        const circle = createSvg("circle", {
+          cx: pos.x,
+          cy: pos.y,
+          r: radius,
+          fill: liftColor(avgLift),
+          stroke: isSelected || isInRule ? "#2035d8" : "#ffffff",
+          "stroke-width": isSelected || isInRule ? 4 : 2
+        });
+        const label = createSvg("text", {
+          x: pos.x,
+          y: pos.y + radius + 15,
+          "text-anchor": "middle",
+          class: "node-label"
+        });
+        label.textContent = productAsin(item.product);
+        group.appendChild(circle);
+        group.appendChild(label);
+        group.addEventListener("mouseenter", event => {
+          showTooltip(event, `${renderAsinProduct(item.product, { tooltip: true })}
+            商品组合数：${item.count}<br>
+            点击筛选 TOP 组合与明细表`);
+        });
+        group.addEventListener("mousemove", moveTooltip);
+        group.addEventListener("mouseleave", hideTooltip);
+        group.addEventListener("click", () => {
+          state.selectedProduct = item.product;
+          clearRuleSelection();
+          renderAll();
+        });
+        group.addEventListener("pointerdown", event => {
+          networkState.dragging = item.product;
+          event.preventDefault();
+        });
+        nodesGroup.appendChild(group);
+      });
+
+      viewport.appendChild(linksGroup);
+      viewport.appendChild(nodesGroup);
+      svg.appendChild(viewport);
+
+      const hint = createSvg("text", { x: 18, y: 24, class: "legend-note" });
+      hint.textContent = "滚轮缩放 · 拖拽节点 · 点击联动";
+      svg.appendChild(hint);
+    }
+
+    function svgPoint(svg, event) {
+      const point = svg.createSVGPoint();
+      point.x = event.clientX;
+      point.y = event.clientY;
+      return point.matrixTransform(svg.getScreenCTM().inverse());
+    }
+
+    function renderTable(rules) {
+      const table = document.getElementById("rulesTable");
+      if (!rules.length) {
+        table.innerHTML = `<tr><td colspan="8" style="text-align:center;color:#7584a1;padding:28px;">暂无匹配数据，请调整 ASIN 筛选、清除组合订单数区间或重置网络节点筛选</td></tr>`;
+        return;
+      }
+      const maxSupport = Math.max(...rules.map(rule => rule.support));
+      const maxLift = Math.max(...rules.map(rule => rule.lift));
+      const maxOrderCount = Math.max(...rules.map(rule => rule.orderCount));
+      const renderMetricCell = (rule, key, value, width) => {
+        const showBar = state.topSortKey === key;
+        const barClass = key === "confidence" ? " conf" : key === "lift" ? " lift" : "";
+        return `<td class="metric-cell${showBar ? " bar-cell" : ""}">${value}${showBar ? `<div class="bar${barClass}"><span style="width:${width}%"></span></div>` : ""}</td>`;
+      };
+      const rows = sortedTopRules(rules.map(rule => ({ ...rule, valueScore: valueInfo(rule).score }))).slice(0, 20);
+      table.innerHTML = rows.map((rule, index) => {
+        const rowClass = isRuleSelected(rule) ? "selected" : "";
+        return `<tr class="${rowClass}" data-id="${escapeHtml(rule.id)}">
+          <td class="rank-cell"><span class="rank-badge ${index < 3 ? `rank-top-${index + 1}` : ""}">${index + 1}</span></td>
+          <td>${renderAsinProduct(rule.a)}</td>
+          <td>${renderAsinProduct(rule.b)}</td>
+          ${renderMetricCell(rule, "orderCount", rule.orderCount.toLocaleString(), (rule.orderCount / maxOrderCount) * 100)}
+          ${renderMetricCell(rule, "support", pct(rule.support), (rule.support / maxSupport) * 100)}
+          ${renderMetricCell(rule, "confidence", pct(rule.confidence), rule.confidence * 100)}
+          ${renderMetricCell(rule, "lift", `${num(rule.lift)}x`, (rule.lift / maxLift) * 100)}
+          <td>${renderActionTag(rule)}</td>
+        </tr>`;
+      }).join("");
+      table.querySelectorAll(".asin-product-link").forEach(link => {
+        link.addEventListener("click", event => event.stopPropagation());
+      });
+    }
+
+    function renderInsights(rules, baseRules = rules) {
+      const grid = document.getElementById("insightGrid");
+      const meta = document.getElementById("insightMeta");
+      if (meta) {
+        const baseCount = baseRules.length || rules.length;
+        meta.textContent = `当前周期：${state.period}；基于 ${rules.length} 条当前联动规则、${baseCount} 条筛选基线自动提炼`;
+      }
+      if (!rules.length) {
+        grid.style.display = "";
+        grid.innerHTML = `<article class="insight-tile"><div class="insight-title">暂无匹配洞察 <span class="badge">0条</span></div><p class="insight-text">当前筛选条件下没有符合条件的规则，请放宽主ASIN、关联ASIN或清除组合订单数区间。</p></article>`;
+        return;
+      }
+      if (!state.insightsOpen) {
+        grid.style.display = "none";
+        return;
+      }
+      grid.style.display = "";
+      const topRules = rulesByLift(rules).slice(0, 20);
+      const strongest = rulesByLift(topRules)[0] || rulesByLift(rules)[0];
+      const topLiftAvg = topRules.length ? topRules.reduce((sum, rule) => sum + rule.lift, 0) / topRules.length : strongest.lift;
+      const buckets = buildOrdersBuckets(baseRules);
+      const middleBuckets = buckets.slice(3, 7);
+      const middleRules = middleBuckets.flatMap(bucket => bucket.items);
+      const middleRecommendedRules = rulesByLift(middleRules.filter(rule => rule.lift > 1))
+        .slice(0, 3)
+        .sort((left, right) => {
+          if (right.confidence !== left.confidence) return right.confidence - left.confidence;
+          return right.lift - left.lift;
+        });
+      const middleRecommendationText = middleRecommendedRules.length
+        ? `推荐组合：${middleRecommendedRules.map(rule => `${escapeHtml(productAsinPair(rule))}（置信度 ${pct(rule.confidence, 0)}，提升度 ${num(rule.lift)}x）`).join("；")}。`
+        : "当前中腰部区间暂无提升度大于 1 的推荐组合。";
+      const middleOrders = middleBuckets.reduce((sum, bucket) => sum + bucket.ordersTotal, 0);
+      const totalOrders = buckets.reduce((sum, bucket) => sum + bucket.ordersTotal, 0) || 1;
+      grid.innerHTML = `
+        <article class="insight-tile">
+          <div class="insight-title">TOP购买提升结论 <span class="badge">Top ${topRules.length}</span></div>
+          <p class="insight-text">
+            当前 TOP 组合中，${escapeHtml(productAsinPair(strongest))} 的提升度最高；Top ${topRules.length} 组合平均提升度为 ${num(topLiftAvg)}x。
+          </p>
+        </article>
+        <article class="insight-tile teal">
+          <div class="insight-title">中腰部区间推荐 <span class="badge">${middleRecommendedRules.length}组</span></div>
+          <p class="insight-text">
+            直方图中腰部组合承接约 ${pct(middleOrders / totalOrders, 0)} 组合订单数。${middleRecommendationText}
+          </p>
+        </article>`;
+    }
+
+    function renderDetailTable(rules) {
+      const table = document.getElementById("detailTable");
+      if (!rules.length) {
+        table.innerHTML = `<tr><td colspan="10" style="text-align:center;color:#7584a1;padding:28px;">暂无匹配明细，请调整 ASIN 筛选、清除组合订单数区间或重置网络节点筛选</td></tr>`;
+        return;
+      }
+      const rows = sortedRules(rules.map(rule => ({ ...rule, valueScore: valueInfo(rule).score })));
+      table.innerHTML = rows.map(rule => {
+        const selected = isRuleSelected(rule) ? "selected" : "";
+        const value = valueInfo(rule);
+        const liftCls = liftClass(rule.lift);
+        return `<tr class="${selected}" data-id="${escapeHtml(rule.id)}">
+          <td>${renderAsinProduct(rule.a)}</td>
+          <td>${renderAsinProduct(rule.b)}</td>
+          <td>${rule.orderCount.toLocaleString()}</td>
+          <td>${rule.aOrders.toLocaleString()}</td>
+          <td>${rule.bOrders.toLocaleString()}</td>
+          <td>${pct(rule.support, 2)}</td>
+          <td>${pct(rule.confidence, 2)}</td>
+          <td>${num(rule.lift)}x</td>
+          <td><span class="value-tag ${liftCls}">${escapeHtml(value.label)}</span></td>
+          <td>${renderActionTag(rule)}</td>
+        </tr>`;
+      }).join("");
+      table.querySelectorAll(".asin-product-link").forEach(link => {
+        link.addEventListener("click", event => event.stopPropagation());
+      });
+    }
+
+    function renderPeriodLabels() {
+      document.getElementById("topPeriodLabel").textContent = state.period;
+    }
+
+    function renderFilterCount(filteredCount, totalCount) {
+      const productLabel = state.selectedProduct ? `；网络节点：${productAsin(state.selectedProduct)}` : "";
+      document.getElementById("filterCount").textContent = `当前展示 ${filteredCount} 条规则 / 共 ${totalCount} 条${productLabel}`;
+    }
+
+    function renderSortHeaders() {
+      document.querySelectorAll("[data-sort]").forEach(button => {
+        const active = button.dataset.sort === state.sortKey;
+        button.classList.toggle("active", active);
+        button.classList.toggle("asc", active && state.sortDir === "asc");
+        button.classList.toggle("desc", active && state.sortDir === "desc");
+        button.setAttribute("aria-sort", active ? (state.sortDir === "asc" ? "ascending" : "descending") : "none");
+      });
+    }
+
+    function renderAll() {
+      const allRules = getRules();
+      const baseRules = baseFilteredRules(allRules);
+      const segmentRules = applyOrdersSegmentFilter(baseRules, selectedOrdersSegmentBuckets(baseRules));
+      const networkRules = applyOrdersBucketFilter(segmentRules, selectedOrdersBuckets(baseRules));
+      const rules = applyProductFilter(networkRules, state.selectedProduct);
+      const selectedIds = selectedRuleIdSet();
+      const tableRules = selectedIds.size
+        ? rules.filter(rule => selectedIds.has(rule.id))
+        : rules;
+      renderPeriodLabels();
+      renderFilterCount(rules.length, baseRules.length);
+      renderSortHeaders();
+      renderOrdersHistogram(baseRules);
+      renderInsights(allRules, allRules);
+      renderNetwork(networkRules);
+      renderTable(tableRules);
+      renderDetailTable(tableRules);
+    }
+
+    function setupInteractions() {
+      setupGlobalFilters();
+
+      document.querySelectorAll("[data-sort]").forEach(button => {
+        button.addEventListener("click", () => {
+          const key = button.dataset.sort;
+          if (state.sortKey === key) {
+            state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+          } else {
+            state.sortKey = key;
+            state.sortDir = ["support", "confidence", "lift", "valueScore", "orderCount", "aOrders", "bOrders"].includes(key) ? "desc" : "asc";
+          }
+          renderAll();
+        });
+      });
+
+      const topSortMetric = document.getElementById("topSortMetric");
+      if (topSortMetric) {
+        topSortMetric.value = state.topSortKey;
+        topSortMetric.addEventListener("change", () => {
+          state.topSortKey = topSortMetric.value;
+          clearRuleSelection();
+          renderAll();
+        });
+      }
+
+      document.getElementById("toggleInsights").addEventListener("click", event => {
+        state.insightsOpen = !state.insightsOpen;
+        event.target.textContent = state.insightsOpen ? "收起洞察" : "展开洞察";
+        renderAll();
+      });
+
+      document.getElementById("clearOrdersBucket").addEventListener("click", () => {
+        state.ordersBuckets = [];
+        state.ordersSegment = null;
+        clearRuleSelection();
+        state.selectedProduct = null;
+        renderAll();
+      });
+
+      document.querySelectorAll(".histogram-legend [data-orders-segment]").forEach(button => {
+        button.addEventListener("click", () => {
+          toggleOrdersSegment(button.dataset.ordersSegment);
+        });
+      });
+
+      document.getElementById("resetNetwork").addEventListener("click", () => {
+        networkState.scale = 1;
+        networkState.tx = 0;
+        networkState.ty = 0;
+        initNodePositions(networkFilteredRules(getRules()), true);
+        state.selectedProduct = null;
+        clearRuleSelection();
+        renderAll();
+      });
+
+      const networkSvg = document.getElementById("networkSvg");
+      networkSvg.addEventListener("wheel", event => {
+        event.preventDefault();
+        const nextScale = clamp(networkState.scale * (event.deltaY < 0 ? 1.08 : 0.92), 0.72, 2.3);
+        networkState.scale = nextScale;
+        renderNetwork(networkFilteredRules(getRules()));
+      }, { passive: false });
+
+      window.addEventListener("pointermove", event => {
+        if (!networkState.dragging) return;
+        const point = svgPoint(networkSvg, event);
+        networkState.positions[networkState.dragging] = {
+          x: clamp((point.x - networkState.tx) / networkState.scale, 28, 732),
+          y: clamp((point.y - networkState.ty) / networkState.scale, 28, 402)
+        };
+        renderNetwork(networkFilteredRules(getRules()));
+      });
+
+      window.addEventListener("pointerup", () => {
+        networkState.dragging = null;
+      });
+
+      document.getElementById("downloadBtn").addEventListener("click", downloadCsv);
+      document.getElementById("globalDownloadBtn").addEventListener("click", downloadCsv);
+    }
+
+    function downloadCsv() {
+      const rules = filteredRules(getRules());
+      const header = ["分析周期", "前项商品(A)", "后项商品(B)", "组合订单数", "商品A订单数", "商品B订单数", "支持度", "置信度", "提升度", "商品组合类别", "业务价值评级", "推荐动作"];
+      const rows = rules.map(rule => [
+        state.period,
+        productAsin(rule.a),
+        productAsin(rule.b),
+        rule.orderCount,
+        rule.aOrders,
+        rule.bOrders,
+        pct(rule.support),
+        pct(rule.confidence),
+        num(rule.lift),
+        rule.category,
+        valueInfo(rule).label,
+        actionInfo(rule)
+      ]);
+      const csv = [header, ...rows]
+        .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(","))
+        .join("\n");
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `购物篮分析模型_关联规则_${state.period}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function showAppPage(page) {
+      const pageMap = {
+        reports: "reportsPage",
+        create: "createReportPage",
+        basket: "basketPage"
+      };
+      document.body.dataset.page = page;
+      Object.entries(pageMap).forEach(([key, id]) => {
+        document.getElementById(id)?.classList.toggle("active", key === page);
+      });
+      document.querySelectorAll("[data-page-target]").forEach(tab => {
+        tab.classList.toggle("active", tab.dataset.pageTarget === (page === "create" ? "reports" : page));
+      });
+      const breadcrumb = document.getElementById("pageBreadcrumb");
+      if (breadcrumb) {
+        const text = page === "basket" ? "AMC Reports > 购物篮分析" : page === "create" ? "AMC Reports > 创建报告" : "AMC Reports";
+        breadcrumb.textContent = text;
+      }
+      const createEntry = document.getElementById("createReportEntry");
+      if (createEntry) createEntry.style.display = page === "reports" ? "" : "none";
+      if (page === "basket") renderAll();
+    }
+
+    function setupPageNavigation() {
+      document.querySelectorAll("[data-page-target]").forEach(tab => {
+        tab.addEventListener("click", () => showAppPage(tab.dataset.pageTarget));
+      });
+      document.getElementById("createReportEntry")?.addEventListener("click", () => showAppPage("create"));
+      document.getElementById("quickCreateBasket")?.addEventListener("click", () => showAppPage("create"));
+      document.getElementById("cancelCreateReport")?.addEventListener("click", () => showAppPage("reports"));
+      document.getElementById("submitCreateReport")?.addEventListener("click", () => showAppPage("reports"));
+      document.querySelectorAll("[data-open-basket]").forEach(item => {
+        item.addEventListener("click", () => showAppPage("basket"));
+      });
+    }
+
+    setupPageNavigation();
+    setupInteractions();
+    setupCreateReportForm();
+    showAppPage("reports");
+  </script>
+</body>
+</html>
+
+
+
+
