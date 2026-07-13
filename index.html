@@ -607,18 +607,71 @@
 
     .aggregation-trigger {
       width: 100%;
-      height: 34px;
-      display: inline-flex;
+      min-height: 34px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
       border: 1px solid var(--line-strong);
       border-radius: 5px;
-      padding: 0 10px 0 12px;
+      padding: 5px 10px 5px 12px;
       background: #fff;
       color: #334764;
       font: inherit;
       text-align: left;
+    }
+
+    .aggregation-values {
+      min-width: 0;
+      min-height: 22px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow: hidden;
+    }
+
+    .aggregation-tags {
+      flex-wrap: wrap;
+    }
+
+    .aggregation-placeholder {
+      color: #7a8aa5;
+      font-size: 12px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .aggregation-tag {
+      max-width: 92px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 6px;
+      border: 1px solid #e4e9f3;
+      border-radius: 4px;
+      background: #f8fafc;
+      color: #273d61;
+      font-size: 12px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .aggregation-tag-text {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .aggregation-tag-remove {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #6a7890;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
     }
 
     .aggregation-trigger svg {
@@ -663,8 +716,11 @@
       width: 100%;
       min-width: 0;
       min-height: 30px;
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       position: relative;
+      box-sizing: border-box;
       border: 0;
       border-radius: 4px;
       padding: 7px 8px;
@@ -678,6 +734,56 @@
       cursor: pointer;
     }
 
+    .aggregation-option input {
+      appearance: none;
+      width: 16px;
+      min-width: 16px;
+      max-width: 16px;
+      height: 16px;
+      min-height: 16px;
+      max-height: 16px;
+      aspect-ratio: 1 / 1;
+      flex: 0 0 16px;
+      box-sizing: border-box;
+      margin: 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #fff;
+      display: inline-grid;
+      place-content: center;
+    }
+
+    .aggregation-option input::before {
+      content: "";
+      width: 8px;
+      height: 5px;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(-45deg) scale(0);
+      transition: transform 0.08s;
+    }
+
+    .aggregation-option input:checked {
+      border-color: #3b82f6;
+      background: #3b82f6;
+    }
+
+    .aggregation-option input:checked::before {
+      transform: rotate(-45deg) scale(1);
+    }
+
+    .aggregation-option input:focus-visible {
+      outline: 2px solid rgba(59, 130, 246, 0.22);
+      outline-offset: 2px;
+    }
+
+    .aggregation-option-label {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .aggregation-option:hover,
     .aggregation-option.active {
       background: #f3f6ff;
@@ -688,6 +794,11 @@
       background: #f6f8fc;
       color: #9aa8bd;
       cursor: not-allowed;
+    }
+
+    .aggregation-option.is-disabled input {
+      border-color: #d8e0ee;
+      background: #eef2f8;
     }
 
     .aggregation-option-hint {
@@ -2707,11 +2818,9 @@
     }
 
     tbody tr {
-      cursor: pointer;
       transition: background 0.12s;
     }
 
-    tbody tr:hover,
     tbody tr.selected {
       background: #f5f8ff;
     }
@@ -3308,19 +3417,28 @@
                   </div>
                   <div class="form-field">
                     <label><span class="required">*</span>数据聚合方式</label>
-                    <div class="aggregation-select" id="createAggregationSelect" data-value="子ASIN">
+                    <div class="aggregation-select" id="createAggregationSelect" data-value="子ASIN" data-values="子ASIN">
                       <button class="aggregation-trigger" id="createAggregationTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="数据聚合方式">
-                        <span id="createAggregationValue">子ASIN</span>
+                        <span class="aggregation-values aggregation-tags" id="createAggregationValue" title="已选 1 项：子ASIN">
+                          <span class="aggregation-tag" title="子ASIN">
+                            <span class="aggregation-tag-text">子ASIN</span>
+                            <span class="aggregation-tag-remove" role="button" tabindex="-1" data-value="子ASIN" aria-label="移除 子ASIN">×</span>
+                          </span>
+                        </span>
                         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                           <path d="M6 9l6 6 6-6"></path>
                         </svg>
                       </button>
-                      <div class="aggregation-menu" role="listbox" aria-label="数据聚合方式">
-                        <button class="aggregation-option active" type="button" role="option" aria-selected="true" data-aggregation-value="子ASIN">子ASIN</button>
-                        <button class="aggregation-option" id="createParentAsinOption" type="button" role="option" aria-selected="false" data-aggregation-value="父ASIN">
-                          <span>父ASIN</span>
+                      <div class="aggregation-menu" role="listbox" aria-label="数据聚合方式" aria-multiselectable="true">
+                        <label class="aggregation-option active" role="option" aria-selected="true" data-aggregation-value="子ASIN" for="createAggregationChildAsin">
+                          <input id="createAggregationChildAsin" type="checkbox" value="子ASIN" checked>
+                          <span class="aggregation-option-label">子ASIN</span>
+                        </label>
+                        <label class="aggregation-option" id="createParentAsinOption" role="option" aria-selected="false" data-aggregation-value="父ASIN" for="createAggregationParentAsin">
+                          <input id="createAggregationParentAsin" type="checkbox" value="父ASIN">
+                          <span class="aggregation-option-label">父ASIN</span>
                           <span class="aggregation-option-hint">若需按父ASIN聚合，请先在Mapping upload上传ASIN映射。</span>
-                        </button>
+                        </label>
                       </div>
                     </div>
                   </div>
@@ -3634,6 +3752,7 @@
     const state = {
       period: "2024年Q2",
       selectedRuleId: null,
+      selectedRuleIds: [],
       selectedProduct: null,
       sortKey: "lift",
       sortDir: "desc",
@@ -3950,7 +4069,7 @@
     function toggleOrdersSegment(segment) {
       state.ordersSegment = state.ordersSegment === segment ? null : segment;
       state.ordersBuckets = [];
-      state.selectedRuleId = null;
+      clearRuleSelection();
       state.selectedProduct = null;
       renderAll();
     }
@@ -4007,6 +4126,50 @@
 
     function ruleMatchesProduct(rule, product) {
       return product && (rule.a === product || rule.b === product);
+    }
+
+    function ruleMatchesPair(rule, selectedRule) {
+      return (rule.a === selectedRule.a && rule.b === selectedRule.b) ||
+        (rule.a === selectedRule.b && rule.b === selectedRule.a);
+    }
+
+    function selectedRuleIdSet() {
+      const ids = state.selectedRuleIds.length
+        ? state.selectedRuleIds
+        : state.selectedRuleId
+          ? [state.selectedRuleId]
+          : [];
+      return new Set(ids);
+    }
+
+    function hasSelectedRules() {
+      return selectedRuleIdSet().size > 0;
+    }
+
+    function isRuleSelected(rule) {
+      return selectedRuleIdSet().has(rule.id);
+    }
+
+    function clearRuleSelection() {
+      state.selectedRuleId = null;
+      state.selectedRuleIds = [];
+    }
+
+    function selectRule(ruleId) {
+      state.selectedRuleId = ruleId || null;
+      state.selectedRuleIds = ruleId ? [ruleId] : [];
+      state.selectedProduct = null;
+    }
+
+    function selectRulePair(rule, rules) {
+      const ids = [
+        rule,
+        ...rules.filter(candidate => candidate.id !== rule.id && ruleMatchesPair(candidate, rule))
+      ]
+        .map(candidate => candidate.id);
+      state.selectedRuleIds = ids.length ? ids : [rule.id];
+      state.selectedRuleId = state.selectedRuleIds[0] || null;
+      state.selectedProduct = null;
     }
 
     function rulesByLift(rules) {
@@ -4120,7 +4283,7 @@
           refreshAsinFilterOptions(getRules());
           state.ordersBuckets = [];
           state.ordersSegment = null;
-          state.selectedRuleId = null;
+          clearRuleSelection();
           state.selectedProduct = null;
           renderAll();
         });
@@ -4138,7 +4301,7 @@
         refreshAsinFilterOptions(getRules());
         state.ordersBuckets = [];
         state.ordersSegment = null;
-        state.selectedRuleId = null;
+        clearRuleSelection();
         state.selectedProduct = null;
         renderAll();
       });
@@ -4151,16 +4314,54 @@
       const aggregationValue = document.getElementById("createAggregationValue");
       const parentAsinOption = document.getElementById("createParentAsinOption");
       const aggregationOptions = Array.from(document.querySelectorAll("[data-aggregation-value]"));
-      if (!dataSelect || !aggregationSelect || !aggregationTrigger || !aggregationValue || !parentAsinOption || !aggregationOptions.length) return;
+      const aggregationInputs = aggregationOptions.map(option => option.querySelector("input[type='checkbox']")).filter(Boolean);
+      if (!dataSelect || !aggregationSelect || !aggregationTrigger || !aggregationValue || !parentAsinOption || !aggregationOptions.length || aggregationInputs.length !== aggregationOptions.length) return;
 
-      const selectAggregation = value => {
-        aggregationSelect.dataset.value = value;
-        aggregationValue.textContent = value;
+      const getSelectedAggregations = () => aggregationInputs
+        .filter(input => input.checked)
+        .map(input => input.value);
+
+      const renderAggregationTags = selectedValues => {
+        const summary = selectedValues.length ? `已选 ${selectedValues.length} 项：${selectedValues.join("、")}` : "请选择数据聚合方式";
+        aggregationValue.className = selectedValues.length ? "aggregation-values aggregation-tags" : "aggregation-values aggregation-placeholder";
+        aggregationValue.title = summary;
+        aggregationValue.innerHTML = selectedValues.length
+          ? selectedValues.map(value => `
+            <span class="aggregation-tag" title="${escapeHtml(value)}">
+              <span class="aggregation-tag-text">${escapeHtml(value)}</span>
+              <span class="aggregation-tag-remove" role="button" tabindex="-1" data-value="${escapeHtml(value)}" aria-label="移除 ${escapeHtml(value)}">×</span>
+            </span>
+          `).join("")
+          : "请选择数据聚合方式";
+        aggregationValue.querySelectorAll(".aggregation-tag-remove").forEach(remove => {
+          remove.addEventListener("click", event => {
+            event.stopPropagation();
+            const nextValues = getSelectedAggregations().filter(value => value !== remove.dataset.value);
+            setSelectedAggregations(nextValues);
+          });
+        });
+      };
+
+      const setSelectedAggregations = values => {
+        const availableValues = aggregationInputs
+          .filter(input => !input.disabled)
+          .map(input => input.value);
+        let nextValues = values.filter(value => availableValues.includes(value));
+        if (!nextValues.length && availableValues.includes("子ASIN")) {
+          nextValues = ["子ASIN"];
+        }
+        const selectedSet = new Set(nextValues);
         aggregationOptions.forEach(option => {
-          const active = option.dataset.aggregationValue === value;
+          const input = option.querySelector("input[type='checkbox']");
+          const active = Boolean(input && selectedSet.has(input.value));
+          if (input) input.checked = active;
           option.classList.toggle("active", active);
           option.setAttribute("aria-selected", String(active));
         });
+        const selectedValues = getSelectedAggregations();
+        aggregationSelect.dataset.value = selectedValues.join(",");
+        aggregationSelect.dataset.values = selectedValues.join(",");
+        renderAggregationTags(selectedValues);
       };
 
       const closeAggregationMenu = () => {
@@ -4170,16 +4371,17 @@
 
       const syncAggregationState = () => {
         const shouldDisableParent = dataSelect.value === "广告触达28天内数据" || dataSelect.value === "全量购买数据（FSI）";
+        const parentInput = parentAsinOption.querySelector("input[type='checkbox']");
         parentAsinOption.classList.toggle("is-disabled", shouldDisableParent);
         parentAsinOption.setAttribute("aria-disabled", String(shouldDisableParent));
-        if (shouldDisableParent && aggregationSelect.dataset.value === "父ASIN") {
-          selectAggregation("子ASIN");
-        }
+        if (parentInput) parentInput.disabled = shouldDisableParent;
+        setSelectedAggregations(getSelectedAggregations());
       };
 
       aggregationTrigger.addEventListener("click", event => {
         event.stopPropagation();
         const nextOpen = !aggregationSelect.classList.contains("open");
+        document.querySelectorAll(".multi-select.open").forEach(closeMultiSelect);
         aggregationSelect.classList.toggle("open", nextOpen);
         aggregationTrigger.setAttribute("aria-expanded", String(nextOpen));
       });
@@ -4187,9 +4389,12 @@
       aggregationOptions.forEach(option => {
         option.addEventListener("click", event => {
           event.stopPropagation();
-          if (option.getAttribute("aria-disabled") === "true") return;
-          selectAggregation(option.dataset.aggregationValue);
-          closeAggregationMenu();
+        });
+      });
+
+      aggregationInputs.forEach(input => {
+        input.addEventListener("change", () => {
+          setSelectedAggregations(getSelectedAggregations());
         });
       });
 
@@ -4433,7 +4638,7 @@
     function clearLinkedSelections() {
       state.ordersBuckets = [];
       state.ordersSegment = null;
-      state.selectedRuleId = null;
+      clearRuleSelection();
       state.selectedProduct = null;
     }
 
@@ -4560,7 +4765,7 @@
           }
           state.ordersBuckets = Array.from(nextBuckets).sort((a, b) => a - b);
           state.ordersSegment = null;
-          state.selectedRuleId = null;
+          clearRuleSelection();
           state.selectedProduct = null;
           renderAll();
         });
@@ -4580,6 +4785,8 @@
       const stats = productStats(rules);
       const maxWeight = Math.max(...Object.values(stats).map(item => item.weight));
       const topLinks = [...rules].sort((a, b) => b.lift - a.lift).slice(0, 34);
+      const selectedRules = rules.filter(rule => isRuleSelected(rule));
+      const hasRuleSelection = hasSelectedRules();
 
       const gridGroup = createSvg("g");
       for (let x = 80; x <= 700; x += 80) {
@@ -4597,9 +4804,9 @@
       topLinks.forEach(rule => {
         const source = networkState.positions[rule.a];
         const target = networkState.positions[rule.b];
-        const isSelectedRule = state.selectedRuleId === rule.id;
+        const isSelectedRule = isRuleSelected(rule);
         const isSelectedProduct = ruleMatchesProduct(rule, state.selectedProduct);
-        const faded = (state.selectedRuleId || state.selectedProduct) && !isSelectedRule && !isSelectedProduct;
+        const faded = (hasRuleSelection || state.selectedProduct) && !isSelectedRule && !isSelectedProduct;
         const line = createSvg("line", {
           x1: source.x,
           y1: source.y,
@@ -4614,8 +4821,7 @@
         line.addEventListener("mousemove", moveTooltip);
         line.addEventListener("mouseleave", hideTooltip);
         line.addEventListener("click", () => {
-          state.selectedRuleId = rule.id;
-          state.selectedProduct = null;
+          selectRulePair(rule, rules);
           renderAll();
         });
         linksGroup.appendChild(line);
@@ -4640,8 +4846,8 @@
         const avgLift = involved.length ? involved.reduce((sum, rule) => sum + rule.lift, 0) / involved.length : 1;
         const radius = 9 + (item.weight / maxWeight) * 18;
         const isSelected = state.selectedProduct === item.product;
-        const isInRule = state.selectedRuleId && topLinks.some(rule => rule.id === state.selectedRuleId && (rule.a === item.product || rule.b === item.product));
-        const faded = (state.selectedRuleId || state.selectedProduct) && !isSelected && !isInRule && !involved.some(rule => rule.a === state.selectedProduct || rule.b === state.selectedProduct);
+        const isInRule = selectedRules.some(rule => rule.a === item.product || rule.b === item.product);
+        const faded = (hasRuleSelection || state.selectedProduct) && !isSelected && !isInRule && !involved.some(rule => rule.a === state.selectedProduct || rule.b === state.selectedProduct);
 
         const group = createSvg("g", { class: "node", opacity: faded ? 0.25 : 1 });
         const circle = createSvg("circle", {
@@ -4670,7 +4876,7 @@
         group.addEventListener("mouseleave", hideTooltip);
         group.addEventListener("click", () => {
           state.selectedProduct = item.product;
-          state.selectedRuleId = null;
+          clearRuleSelection();
           renderAll();
         });
         group.addEventListener("pointerdown", event => {
@@ -4712,7 +4918,7 @@
       };
       const rows = sortedTopRules(rules.map(rule => ({ ...rule, valueScore: valueInfo(rule).score }))).slice(0, 20);
       table.innerHTML = rows.map((rule, index) => {
-        const rowClass = state.selectedRuleId === rule.id ? "selected" : "";
+        const rowClass = isRuleSelected(rule) ? "selected" : "";
         return `<tr class="${rowClass}" data-id="${escapeHtml(rule.id)}">
           <td class="rank-cell"><span class="rank-badge ${index < 3 ? `rank-top-${index + 1}` : ""}">${index + 1}</span></td>
           <td>${renderAsinProduct(rule.a)}</td>
@@ -4726,13 +4932,6 @@
       }).join("");
       table.querySelectorAll(".asin-product-link").forEach(link => {
         link.addEventListener("click", event => event.stopPropagation());
-      });
-      table.querySelectorAll("tr").forEach(row => {
-        row.addEventListener("click", () => {
-          state.selectedRuleId = row.dataset.id;
-          state.selectedProduct = null;
-          renderAll();
-        });
       });
     }
 
@@ -4793,7 +4992,7 @@
       }
       const rows = sortedRules(rules.map(rule => ({ ...rule, valueScore: valueInfo(rule).score })));
       table.innerHTML = rows.map(rule => {
-        const selected = state.selectedRuleId === rule.id ? "selected" : "";
+        const selected = isRuleSelected(rule) ? "selected" : "";
         const value = valueInfo(rule);
         const liftCls = liftClass(rule.lift);
         return `<tr class="${selected}" data-id="${escapeHtml(rule.id)}">
@@ -4811,13 +5010,6 @@
       }).join("");
       table.querySelectorAll(".asin-product-link").forEach(link => {
         link.addEventListener("click", event => event.stopPropagation());
-      });
-      table.querySelectorAll("tr").forEach(row => {
-        row.addEventListener("click", () => {
-          state.selectedRuleId = row.dataset.id;
-          state.selectedProduct = null;
-          renderAll();
-        });
       });
     }
 
@@ -4846,8 +5038,9 @@
       const segmentRules = applyOrdersSegmentFilter(baseRules, selectedOrdersSegmentBuckets(baseRules));
       const networkRules = applyOrdersBucketFilter(segmentRules, selectedOrdersBuckets(baseRules));
       const rules = applyProductFilter(networkRules, state.selectedProduct);
-      const tableRules = state.selectedRuleId
-        ? rules.filter(rule => rule.id === state.selectedRuleId)
+      const selectedIds = selectedRuleIdSet();
+      const tableRules = selectedIds.size
+        ? rules.filter(rule => selectedIds.has(rule.id))
         : rules;
       renderPeriodLabels();
       renderFilterCount(rules.length, baseRules.length);
@@ -4880,7 +5073,7 @@
         topSortMetric.value = state.topSortKey;
         topSortMetric.addEventListener("change", () => {
           state.topSortKey = topSortMetric.value;
-          state.selectedRuleId = null;
+          clearRuleSelection();
           renderAll();
         });
       }
@@ -4894,7 +5087,7 @@
       document.getElementById("clearOrdersBucket").addEventListener("click", () => {
         state.ordersBuckets = [];
         state.ordersSegment = null;
-        state.selectedRuleId = null;
+        clearRuleSelection();
         state.selectedProduct = null;
         renderAll();
       });
@@ -4911,7 +5104,7 @@
         networkState.ty = 0;
         initNodePositions(networkFilteredRules(getRules()), true);
         state.selectedProduct = null;
-        state.selectedRuleId = null;
+        clearRuleSelection();
         renderAll();
       });
 
