@@ -230,24 +230,64 @@
       min-height: 46px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       padding: 0 24px;
       background: #fff;
       box-shadow: 0 3px 12px rgba(16, 35, 86, 0.04);
     }
 
     .breadcrumb {
-      font-weight: 800;
-      color: #13264c;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      color: #61708a;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .breadcrumb-home {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+      color: #8a99af;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .breadcrumb-item {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .breadcrumb-current {
+      color: #263653;
+      font-weight: 600;
+    }
+
+    .breadcrumb-separator {
+      color: #96a2b5;
+      font-size: 17px;
+      line-height: 1;
     }
 
     .status {
-      padding: 3px 10px;
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 0 10px;
       border-radius: 999px;
-      background: #dff8ee;
-      color: #087c56;
+      background: #dcefe7;
+      color: #168060;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 600;
+      line-height: 1;
     }
 
     body[data-page="reports"] .status,
@@ -572,7 +612,24 @@
     }
 
     .form-field label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       font-weight: 700;
+    }
+
+    .field-help {
+      width: 14px;
+      height: 14px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid #b7c4da;
+      border-radius: 50%;
+      color: #74839d;
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1;
+      transform: translateY(-1px);
     }
 
     .required {
@@ -2343,11 +2400,11 @@
       max-height: 456px;
       min-height: 0;
       overflow-y: auto;
-      overflow-x: hidden;
+      overflow-x: auto;
     }
 
     .top-combo-card table {
-      min-width: 100%;
+      min-width: 880px;
       table-layout: fixed;
     }
 
@@ -2359,29 +2416,30 @@
       text-overflow: ellipsis;
     }
 
-    .top-combo-card col:nth-child(1) { width: 5.5%; }
-    .top-combo-card col:nth-child(2) { width: 18%; }
-    .top-combo-card col:nth-child(3) { width: 18%; }
-    .top-combo-card col:nth-child(4) { width: 14%; }
-    .top-combo-card col:nth-child(5) { width: 10%; }
-    .top-combo-card col:nth-child(6) { width: 10%; }
-    .top-combo-card col:nth-child(7) { width: 10%; }
-    .top-combo-card col:nth-child(8) { width: 14.5%; }
+    .top-combo-card col:nth-child(1) { width: 54px; }
+    .top-combo-card col:nth-child(2) { width: 150px; }
+    .top-combo-card col:nth-child(3) { width: 150px; }
+    .top-combo-card col:nth-child(4) { width: 104px; }
+    .top-combo-card col:nth-child(5) { width: 108px; }
+    .top-combo-card col:nth-child(6) { width: 84px; }
+    .top-combo-card col:nth-child(7) { width: 84px; }
+    .top-combo-card col:nth-child(8) { width: 146px; }
 
     .top-combo-card th:nth-child(n+4),
     .top-combo-card td:nth-child(n+4) {
-      padding-left: 4px;
-      padding-right: 4px;
+      padding-left: 5px;
+      padding-right: 5px;
     }
 
     .top-combo-card th:nth-child(7),
     .top-combo-card td:nth-child(7) {
-      padding-right: 14px;
+      padding-right: 5px;
     }
 
     .top-combo-card th:nth-child(8),
     .top-combo-card td:nth-child(8) {
-      padding-left: 20px;
+      padding-left: 8px;
+      padding-right: 8px;
     }
 
     .top-combo-card th:first-child,
@@ -2573,15 +2631,22 @@
     .top-metric-head {
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       min-width: 0;
       max-width: 100%;
       white-space: nowrap;
     }
 
+    .top-metric-head.active {
+      color: inherit;
+      font-weight: inherit;
+    }
+
     .top-combo-card .metric-info {
       width: 12px;
+      min-width: 12px;
       height: 12px;
+      flex: 0 0 12px;
       font-size: 8px;
     }
 
@@ -2595,10 +2660,22 @@
       height: 38px;
       padding-top: 8px;
       padding-bottom: 8px;
+      overflow: visible;
+      text-overflow: clip;
     }
 
     .top-combo-card tbody tr {
       height: 50px;
+      cursor: pointer;
+    }
+
+    .top-combo-card tbody tr:hover {
+      background: #f8fbff;
+    }
+
+    .top-combo-card tbody tr:focus-visible {
+      outline: 2px solid rgba(42, 70, 223, 0.22);
+      outline-offset: -2px;
     }
 
     .small-select,
@@ -3203,8 +3280,15 @@
       </div>
 
       <div class="utility">
-        <div class="breadcrumb" id="pageBreadcrumb">AMC Reports</div>
-        <span class="status">Demo V3-1</span>
+        <div class="breadcrumb" id="pageBreadcrumb" aria-label="面包屑导航">
+          <svg class="breadcrumb-home" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 11.5 12 4l9 7.5"></path>
+            <path d="M5.5 10.5V20h13v-9.5"></path>
+            <path d="M9.5 20v-5h5v5"></path>
+          </svg>
+          <span class="breadcrumb-item">AMC报告</span>
+        </div>
+        <span class="status" id="pageStatus">已完成</span>
         <div class="top-actions" aria-label="报告筛选与下载">
           <span class="select-like">US 4kmiles...</span>
           <span class="select-like">GMT-04</span>
@@ -3408,7 +3492,7 @@
                 <div class="selected-model-body">
                   <h3>购物篮分析模型</h3>
                   <div class="form-field">
-                    <label><span class="required">*</span>数据选择</label>
+                    <label><span class="required">*</span>数据选择<span class="field-help" aria-hidden="true">?</span></label>
                     <select id="createDataSelect" aria-label="数据选择">
                       <option selected>广告触达28天内数据</option>
                       <option>全量购买数据（FSI）</option>
@@ -3416,7 +3500,7 @@
                     </select>
                   </div>
                   <div class="form-field">
-                    <label><span class="required">*</span>数据聚合方式</label>
+                    <label><span class="required">*</span>数据聚合方式<span class="field-help" aria-hidden="true">?</span></label>
                     <div class="aggregation-select" id="createAggregationSelect" data-value="子ASIN" data-values="子ASIN">
                       <button class="aggregation-trigger" id="createAggregationTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="数据聚合方式">
                         <span class="aggregation-values aggregation-tags" id="createAggregationValue" title="已选 1 项：子ASIN">
@@ -3568,15 +3652,15 @@
                   <col>
                   <col>
                 </colgroup>
-                <thead>
+                <thead id="rulesTableHead">
                   <tr>
                     <th>排名</th>
                     <th>前项商品(A)</th>
                     <th>后项商品(B)</th>
+                    <th><span class="top-metric-head active" title="提升度：前项商品(A) 对后项商品(B) 购买概率的提升倍数，越高代表关联越强">提升度<span class="metric-info" aria-hidden="true">?</span></span></th>
                     <th><span class="top-metric-head" title="组合订单数：前项商品(A) 与后项商品(B) 同时出现的订单数量">组合订单数<span class="metric-info" aria-hidden="true">?</span></span></th>
                     <th><span class="top-metric-head" title="支持度：前项商品(A) 与后项商品(B) 同时出现订单数占总订单数的比例">支持度<span class="metric-info" aria-hidden="true">?</span></span></th>
                     <th><span class="top-metric-head" title="置信度：购买前项商品(A) 后同时购买后项商品(B) 的概率">置信度<span class="metric-info" aria-hidden="true">?</span></span></th>
-                    <th><span class="top-metric-head" title="提升度：前项商品(A) 对后项商品(B) 购买概率的提升倍数，越高代表关联越强">提升度<span class="metric-info" aria-hidden="true">?</span></span></th>
                     <th>推荐动作</th>
                   </tr>
                 </thead>
@@ -3761,6 +3845,29 @@
       ordersSegment: null,
       insightsOpen: true
     };
+
+    const topMetricColumns = [
+      {
+        key: "orderCount",
+        label: "组合订单数",
+        title: "组合订单数：前项商品(A) 与后项商品(B) 同时出现的订单数量"
+      },
+      {
+        key: "support",
+        label: "支持度",
+        title: "支持度：前项商品(A) 与后项商品(B) 同时出现订单数占总订单数的比例"
+      },
+      {
+        key: "confidence",
+        label: "置信度",
+        title: "置信度：购买前项商品(A) 后同时购买后项商品(B) 的概率"
+      },
+      {
+        key: "lift",
+        label: "提升度",
+        title: "提升度：前项商品(A) 对后项商品(B) 购买概率的提升倍数，越高代表关联越强"
+      }
+    ];
 
     const filters = {
       asinView: "asin",
@@ -4122,6 +4229,24 @@
         if (right.confidence !== left.confidence) return right.confidence - left.confidence;
         return right.orderCount - left.orderCount;
       });
+    }
+
+    function orderedTopMetricColumns() {
+      const activeColumn = topMetricColumns.find(column => column.key === state.topSortKey);
+      if (!activeColumn) return topMetricColumns;
+      return [activeColumn, ...topMetricColumns.filter(column => column.key !== state.topSortKey)];
+    }
+
+    function renderTopTableHead(metricColumns = orderedTopMetricColumns()) {
+      const head = document.getElementById("rulesTableHead");
+      if (!head) return;
+      head.innerHTML = `<tr>
+        <th>排名</th>
+        <th>前项商品(A)</th>
+        <th>后项商品(B)</th>
+        ${metricColumns.map(column => `<th><span class="top-metric-head${column.key === state.topSortKey ? " active" : ""}" title="${escapeHtml(column.title)}">${escapeHtml(column.label)}<span class="metric-info" aria-hidden="true">?</span></span></th>`).join("")}
+        <th>推荐动作</th>
+      </tr>`;
     }
 
     function ruleMatchesProduct(rule, product) {
@@ -4784,8 +4909,14 @@
       }
       const stats = productStats(rules);
       const maxWeight = Math.max(...Object.values(stats).map(item => item.weight));
-      const topLinks = [...rules].sort((a, b) => b.lift - a.lift).slice(0, 34);
       const selectedRules = rules.filter(rule => isRuleSelected(rule));
+      const topLinks = [
+        ...selectedRules,
+        ...[...rules]
+          .sort((a, b) => b.lift - a.lift)
+          .filter(rule => !selectedRules.some(selected => selected.id === rule.id))
+          .slice(0, Math.max(34 - selectedRules.length, 0))
+      ];
       const hasRuleSelection = hasSelectedRules();
 
       const gridGroup = createSvg("g");
@@ -4904,14 +5035,28 @@
 
     function renderTable(rules) {
       const table = document.getElementById("rulesTable");
+      const metricColumns = orderedTopMetricColumns();
+      renderTopTableHead(metricColumns);
       if (!rules.length) {
-        table.innerHTML = `<tr><td colspan="8" style="text-align:center;color:#7584a1;padding:28px;">暂无匹配数据，请调整 ASIN 筛选、清除组合订单数区间或重置网络节点筛选</td></tr>`;
+        table.innerHTML = `<tr><td colspan="${metricColumns.length + 4}" style="text-align:center;color:#7584a1;padding:28px;">暂无匹配数据，请调整 ASIN 筛选、清除组合订单数区间或重置网络节点筛选</td></tr>`;
         return;
       }
-      const maxSupport = Math.max(...rules.map(rule => rule.support));
-      const maxLift = Math.max(...rules.map(rule => rule.lift));
-      const maxOrderCount = Math.max(...rules.map(rule => rule.orderCount));
-      const renderMetricCell = (rule, key, value, width) => {
+      const maxMetricValues = {
+        orderCount: Math.max(...rules.map(rule => rule.orderCount), 1),
+        support: Math.max(...rules.map(rule => rule.support), 1),
+        confidence: 1,
+        lift: Math.max(...rules.map(rule => rule.lift), 1)
+      };
+      const renderMetricCell = (rule, column) => {
+        const key = column.key;
+        const value = key === "orderCount"
+          ? rule.orderCount.toLocaleString()
+          : key === "lift"
+            ? `${num(rule.lift)}x`
+            : pct(rule[key]);
+        const width = key === "confidence"
+          ? rule.confidence * 100
+          : (rule[key] / maxMetricValues[key]) * 100;
         const showBar = state.topSortKey === key;
         const barClass = key === "confidence" ? " conf" : key === "lift" ? " lift" : "";
         return `<td class="metric-cell${showBar ? " bar-cell" : ""}">${value}${showBar ? `<div class="bar${barClass}"><span style="width:${width}%"></span></div>` : ""}</td>`;
@@ -4919,17 +5064,28 @@
       const rows = sortedTopRules(rules.map(rule => ({ ...rule, valueScore: valueInfo(rule).score }))).slice(0, 20);
       table.innerHTML = rows.map((rule, index) => {
         const rowClass = isRuleSelected(rule) ? "selected" : "";
-        return `<tr class="${rowClass}" data-id="${escapeHtml(rule.id)}">
+        return `<tr class="${rowClass}" data-id="${escapeHtml(rule.id)}" tabindex="0" aria-selected="${isRuleSelected(rule) ? "true" : "false"}" title="点击联动网络图与明细表">
           <td class="rank-cell"><span class="rank-badge ${index < 3 ? `rank-top-${index + 1}` : ""}">${index + 1}</span></td>
           <td>${renderAsinProduct(rule.a)}</td>
           <td>${renderAsinProduct(rule.b)}</td>
-          ${renderMetricCell(rule, "orderCount", rule.orderCount.toLocaleString(), (rule.orderCount / maxOrderCount) * 100)}
-          ${renderMetricCell(rule, "support", pct(rule.support), (rule.support / maxSupport) * 100)}
-          ${renderMetricCell(rule, "confidence", pct(rule.confidence), rule.confidence * 100)}
-          ${renderMetricCell(rule, "lift", `${num(rule.lift)}x`, (rule.lift / maxLift) * 100)}
+          ${metricColumns.map(column => renderMetricCell(rule, column)).join("")}
           <td>${renderActionTag(rule)}</td>
         </tr>`;
       }).join("");
+      const topRuleById = new Map(rows.map(rule => [rule.id, rule]));
+      table.querySelectorAll("tr[data-id]").forEach(row => {
+        row.addEventListener("click", () => {
+          const rule = topRuleById.get(row.dataset.id);
+          if (!rule) return;
+          selectRulePair(rule, rules);
+          renderAll();
+        });
+        row.addEventListener("keydown", event => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          row.click();
+        });
+      });
       table.querySelectorAll(".asin-product-link").forEach(link => {
         link.addEventListener("click", event => event.stopPropagation());
       });
@@ -5180,9 +5336,19 @@
       });
       const breadcrumb = document.getElementById("pageBreadcrumb");
       if (breadcrumb) {
-        const text = page === "basket" ? "AMC Reports > 购物篮分析" : page === "create" ? "AMC Reports > 创建报告" : "AMC Reports";
-        breadcrumb.textContent = text;
+        const current = page === "basket" ? "1112" : page === "create" ? "创建报告" : "";
+        breadcrumb.innerHTML = `
+          <svg class="breadcrumb-home" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 11.5 12 4l9 7.5"></path>
+            <path d="M5.5 10.5V20h13v-9.5"></path>
+            <path d="M9.5 20v-5h5v5"></path>
+          </svg>
+          <span class="breadcrumb-item">AMC报告</span>
+          ${current ? `<span class="breadcrumb-separator" aria-hidden="true">›</span><span class="breadcrumb-item breadcrumb-current">${current}</span>` : ""}
+        `;
       }
+      const pageStatus = document.getElementById("pageStatus");
+      if (pageStatus) pageStatus.textContent = page === "basket" ? "已完成" : "";
       const createEntry = document.getElementById("createReportEntry");
       if (createEntry) createEntry.style.display = page === "reports" ? "" : "none";
       if (page === "basket") renderAll();
