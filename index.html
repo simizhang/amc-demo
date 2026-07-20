@@ -1951,7 +1951,7 @@
     }
 
     .detail-card table {
-      min-width: 920px;
+      min-width: 1180px;
     }
 
     .histogram-card .card-head {
@@ -2404,7 +2404,7 @@
     }
 
     .top-combo-card table {
-      min-width: 880px;
+      min-width: 940px;
       table-layout: fixed;
     }
 
@@ -2416,14 +2416,13 @@
       text-overflow: ellipsis;
     }
 
-    .top-combo-card col:nth-child(1) { width: 54px; }
-    .top-combo-card col:nth-child(2) { width: 150px; }
-    .top-combo-card col:nth-child(3) { width: 150px; }
-    .top-combo-card col:nth-child(4) { width: 104px; }
-    .top-combo-card col:nth-child(5) { width: 108px; }
-    .top-combo-card col:nth-child(6) { width: 84px; }
-    .top-combo-card col:nth-child(7) { width: 84px; }
-    .top-combo-card col:nth-child(8) { width: 146px; }
+    .top-combo-card col.top-rank-col { width: 54px; }
+    .top-combo-card col.top-product-col { width: 156px; }
+    .top-combo-card col.top-metric-col-confidence { width: 124px; }
+    .top-combo-card col.top-metric-col-orderCount { width: 108px; }
+    .top-combo-card col.top-metric-col-support { width: 90px; }
+    .top-combo-card col.top-metric-col-lift { width: 94px; }
+    .top-combo-card col.top-action-col { width: 118px; }
 
     .top-combo-card th:nth-child(n+4),
     .top-combo-card td:nth-child(n+4) {
@@ -2431,22 +2430,41 @@
       padding-right: 5px;
     }
 
-    .top-combo-card th:nth-child(7),
-    .top-combo-card td:nth-child(7) {
+    .top-combo-card .top-metric-header-confidence,
+    .top-combo-card .top-confidence-cell {
+      text-align: left;
       padding-right: 5px;
     }
 
-    .top-combo-card th:nth-child(8),
-    .top-combo-card td:nth-child(8) {
-      padding-left: 8px;
-      padding-right: 8px;
+    .top-combo-card .top-action-header,
+    .top-combo-card .top-action-cell {
+      padding-left: 4px;
+      padding-right: 4px;
     }
 
     .top-combo-card th:first-child,
     .top-combo-card td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
       text-align: center;
       padding-left: 2px;
       padding-right: 2px;
+      background: inherit;
+      box-shadow: 1px 0 0 #e7edf7;
+    }
+
+    .top-combo-card thead th:first-child {
+      z-index: 4;
+      background: #f0f4ff;
+    }
+
+    .top-combo-card tbody td:first-child {
+      background: #fff;
+    }
+
+    .top-combo-card tbody tr:hover td:first-child {
+      background: #f8fbff;
     }
 
     .top-combo-card .rank-cell {
@@ -2511,13 +2529,65 @@
       border-top-color: #f3b936;
     }
 
-    .top-combo-card td:nth-child(7) .bar {
+    .top-combo-card .top-confidence-cell .bar {
       margin-right: 6px;
     }
 
     .top-combo-card .metric-cell,
     .top-combo-card .bar-cell {
       min-width: 0;
+    }
+
+    .top-confidence-cell {
+      min-width: 0;
+    }
+
+    .confidence-stack {
+      display: grid;
+      gap: 2px;
+      width: 100%;
+      max-width: 128px;
+      line-height: 1.15;
+      justify-items: start;
+    }
+
+    .confidence-line {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr);
+      align-items: baseline;
+      gap: 4px;
+      color: #3d4f6e;
+      font-size: 12px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .confidence-line-label {
+      color: #687894;
+      font-weight: 400;
+      text-align: left;
+    }
+
+    .confidence-line-value {
+      color: #102346;
+      font-variant-numeric: tabular-nums;
+      text-align: left;
+    }
+
+    .confidence-best {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 0;
+      max-width: 100%;
+      font-weight: 400;
+      color: #102346;
+      white-space: nowrap;
+    }
+
+    .confidence-best-value {
+      min-width: 0;
+      font-variant-numeric: tabular-nums;
     }
 
     .top-combo-card .value-tag {
@@ -2657,9 +2727,11 @@
     }
 
     .top-combo-card thead th {
-      height: 38px;
+      height: 42px;
       padding-top: 8px;
       padding-bottom: 8px;
+      font-size: 13px;
+      line-height: 1.2;
       overflow: visible;
       text-overflow: clip;
     }
@@ -2811,6 +2883,11 @@
       white-space: nowrap;
     }
 
+    .detail-card thead th {
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
     thead button {
       border: 0;
       padding: 0;
@@ -2824,7 +2901,7 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      line-height: 1;
+      line-height: 1.15;
       white-space: nowrap;
     }
 
@@ -3540,10 +3617,10 @@
       <section class="page app-page" id="basketPage">
         <section class="intro-panel" aria-labelledby="pageTitle">
           <div class="intro-copy">
-            <h1 id="pageTitle">购物篮分析模型 Demo V3</h1>
+            <h1 id="pageTitle">购物篮分析模型 Demo V3-2</h1>
             <p>
               购物篮分析模型，分析商品 A 与 B 共同出现时的支持度、提升度与置信度。<br>
-              支持度表示组合出现的概率，用于筛选冷热门商品；提升度表示在 A 人群中推 B的成功率是随机推送给全员的倍数，用于判断组合是否为有价值的强关联组合；置信度表示购买 A 后会购买 B 的概率，用于营销活动的预期效果参考。
+              支持度表示组合出现的概率，用于筛选冷热门商品；提升度表示组合购买概率相对随机购买概率的倍数，用于判断组合是否为有价值的强关联组合；置信度表示购买 A 后会购买 B 的概率，用于营销活动的预期效果参考。
             </p>
           </div>
           <button class="download-btn" id="downloadBtn">下载数据</button>
@@ -3572,7 +3649,7 @@
               </svg>
               <span class="sr-only">重置筛选</span>
             </button>
-            <span id="filterCount">当前展示 40 条规则</span>
+            <span id="filterCount">当前展示 34 个组合</span>
           </div>
         </section>
 
@@ -3610,7 +3687,7 @@
             <div class="card-head">
               <div>
                 <h3>关联商品网络图</h3>
-                <p>节点大小=商品出现频率，连线粗细=置信度，连线颜色=提升度。点击节点筛选 TOP 组合与明细表。</p>
+                <p>节点大小=商品出现频率，连线粗细=支持度，连线颜色=提升度。点击节点筛选 TOP 组合与明细表。</p>
               </div>
               <div class="card-actions">
                 <button class="ghost-btn" id="resetNetwork">重置视图</button>
@@ -3634,8 +3711,8 @@
               <div class="card-actions top-sort-control">
                 <select class="small-select" id="topSortMetric" aria-label="TOP20 排序">
                   <option value="support">支持度</option>
-                  <option value="confidence">置信度</option>
-                  <option value="lift" selected>提升度</option>
+                  <option value="confidence" selected>置信度</option>
+                  <option value="lift">提升度</option>
                   <option value="orderCount">组合订单数</option>
                 </select>
               </div>
@@ -3643,25 +3720,25 @@
             <div class="table-wrap">
               <table>
                 <colgroup>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
+                  <col class="top-rank-col">
+                  <col class="top-product-col">
+                  <col class="top-product-col">
+                  <col class="top-metric-col-confidence">
+                  <col class="top-metric-col-orderCount">
+                  <col class="top-metric-col-support">
+                  <col class="top-metric-col-lift">
+                  <col class="top-action-col">
                 </colgroup>
                 <thead id="rulesTableHead">
                   <tr>
                     <th>排名</th>
-                    <th>前项商品(A)</th>
-                    <th>后项商品(B)</th>
-                    <th><span class="top-metric-head active" title="提升度：前项商品(A) 对后项商品(B) 购买概率的提升倍数，越高代表关联越强">提升度<span class="metric-info" aria-hidden="true">?</span></span></th>
-                    <th><span class="top-metric-head" title="组合订单数：前项商品(A) 与后项商品(B) 同时出现的订单数量">组合订单数<span class="metric-info" aria-hidden="true">?</span></span></th>
-                    <th><span class="top-metric-head" title="支持度：前项商品(A) 与后项商品(B) 同时出现订单数占总订单数的比例">支持度<span class="metric-info" aria-hidden="true">?</span></span></th>
-                    <th><span class="top-metric-head" title="置信度：购买前项商品(A) 后同时购买后项商品(B) 的概率">置信度<span class="metric-info" aria-hidden="true">?</span></span></th>
-                    <th>推荐动作</th>
+                    <th>商品A</th>
+                    <th>商品B</th>
+                    <th class="top-metric-header-confidence"><span class="top-metric-head active" title="置信度：按置信度排序时展示 A→B / B→A 中较大值；按其他指标排序时展示双向置信度">置信度<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th class="top-metric-header-orderCount"><span class="top-metric-head" title="组合订单数：商品 A 与商品 B 同时出现的订单数量">组合订单数<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th class="top-metric-header-support"><span class="top-metric-head" title="支持度：商品 A 与商品 B 同时出现订单数占总订单数的比例">支持度<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th class="top-metric-header-lift"><span class="top-metric-head" title="提升度：商品 A 与商品 B 组合购买概率相对随机购买概率的倍数，越高代表关联越强">提升度<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th class="top-action-header">推荐动作</th>
                   </tr>
                 </thead>
                 <tbody id="rulesTable"></tbody>
@@ -3673,21 +3750,22 @@
         <section class="chart-card full-card detail-card" style="margin-top:14px;">
           <div class="card-head">
             <div>
-                <h3 class="title-with-help" data-tooltip="展示所有商品组合，输出前项商品(A)、后项商品(B)、组合订单数、置信度、提升度、业务价值评级和推荐动作，用于下载、复核和落地执行。">商品组合明细<span class="info-help" tabindex="0" aria-label="展示所有商品组合，输出前项商品(A)、后项商品(B)、组合订单数、置信度、提升度、业务价值评级和推荐动作，用于下载、复核和落地执行。">?</span></h3>
+                <h3 class="title-with-help" data-tooltip="展示所有商品组合，A-B 与 B-A 合并为一个组合，仅置信度保留双向指标，用于下载、复核和落地执行。">商品组合明细<span class="info-help" tabindex="0" aria-label="展示所有商品组合，A-B 与 B-A 合并为一个组合，仅置信度保留双向指标，用于下载、复核和落地执行。">?</span></h3>
             </div>
           </div>
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>前项商品(A)</th>
-                  <th>后项商品(B)</th>
-                  <th><button class="metric-sort" data-sort="orderCount" title="组合订单数：前项商品(A) 与后项商品(B) 同时出现的订单数量"><span>组合订单数</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
-                  <th><button class="metric-sort" data-sort="aOrders" title="商品A订单数：包含前项商品(A) 的订单数量"><span>商品A订单数</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
-                  <th><button class="metric-sort" data-sort="bOrders" title="商品B订单数：包含后项商品(B) 的订单数量"><span>商品B订单数</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
-                  <th><button class="metric-sort" data-sort="support" title="支持度：前项商品(A) 与后项商品(B) 同时出现订单数占总订单数的比例"><span>支持度</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
-                  <th><button class="metric-sort" data-sort="confidence" title="置信度：购买前项商品(A) 后同时购买后项商品(B) 的概率"><span>置信度</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
-                  <th><button class="metric-sort" data-sort="lift" title="提升度：前项商品(A) 对后项商品(B) 购买概率的提升倍数，越高代表关联越强"><span>提升度</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th>商品A</th>
+                  <th>商品B</th>
+                  <th><button class="metric-sort" data-sort="orderCount" title="组合订单数：商品 A 与商品 B 同时出现的订单数量"><span>组合订单数</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="aOrders" title="商品A订单数：包含商品 A 的订单数量"><span>商品A订单数</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="bOrders" title="商品B订单数：包含商品 B 的订单数量"><span>商品B订单数</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="support" title="支持度：商品 A 与商品 B 同时出现订单数占总订单数的比例"><span>支持度</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="confidenceAB" title="置信度A→B：购买商品 A 后同时购买商品 B 的概率"><span>置信度A→B</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="confidenceBA" title="置信度B→A：购买商品 B 后同时购买商品 A 的概率"><span>置信度B→A</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
+                  <th><button class="metric-sort" data-sort="lift" title="提升度：商品 A 与商品 B 组合购买概率相对随机购买概率的倍数，越高代表关联越强"><span>提升度</span><span class="metric-info" aria-hidden="true">?</span><span class="sort-icon" aria-hidden="true"></span></button></th>
                   <th><button class="metric-sort" data-sort="valueScore" title="业务价值评级：Lift ≥ 2.0 为 P1 强正相关，1.0 &lt; Lift &lt; 2.0 为 P2 弱正相关，Lift ≤ 1.0 为 P3 无关或负相关"><span>业务价值评级</span><span class="sort-icon" aria-hidden="true"></span></button></th>
                   <th>推荐动作</th>
                 </tr>
@@ -3840,7 +3918,7 @@
       selectedProduct: null,
       sortKey: "lift",
       sortDir: "desc",
-      topSortKey: "lift",
+      topSortKey: "confidence",
       ordersBuckets: [],
       ordersSegment: null,
       insightsOpen: true
@@ -3850,22 +3928,22 @@
       {
         key: "orderCount",
         label: "组合订单数",
-        title: "组合订单数：前项商品(A) 与后项商品(B) 同时出现的订单数量"
+        title: "组合订单数：商品 A 与商品 B 同时出现的订单数量"
       },
       {
         key: "support",
         label: "支持度",
-        title: "支持度：前项商品(A) 与后项商品(B) 同时出现订单数占总订单数的比例"
+        title: "支持度：商品 A 与商品 B 同时出现订单数占总订单数的比例"
       },
       {
         key: "confidence",
         label: "置信度",
-        title: "置信度：购买前项商品(A) 后同时购买后项商品(B) 的概率"
+        title: "置信度：按置信度排序时展示 A→B / B→A 中较大值；按其他指标排序时展示双向置信度"
       },
       {
         key: "lift",
         label: "提升度",
-        title: "提升度：前项商品(A) 对后项商品(B) 购买概率的提升倍数，越高代表关联越强"
+        title: "提升度：商品 A 与商品 B 组合购买概率相对随机购买概率的倍数，越高代表关联越强"
       }
     ];
 
@@ -3923,8 +4001,16 @@
       return `https://www.amazon.com/dp/${encodeURIComponent(productAsin(product))}`;
     }
 
-    function productAsinPair(rule) {
-      return `${productAsin(rule.a)} → ${productAsin(rule.b)}`;
+    function productAsinCombo(rule) {
+      return `${productAsin(rule.a)} - ${productAsin(rule.b)}`;
+    }
+
+    function pairKey(a, b) {
+      return [a, b].sort((left, right) => left.localeCompare(right, "zh-CN")).join("||");
+    }
+
+    function orderedPairProducts(a, b) {
+      return [a, b].sort((left, right) => productAsin(left).localeCompare(productAsin(right), "zh-CN"));
     }
 
     function productImage(product) {
@@ -3984,6 +4070,59 @@
       });
     }
 
+    function getCombinationRules(rules = getRules()) {
+      const groups = new Map();
+      rules.forEach(rule => {
+        const key = pairKey(rule.a, rule.b);
+        if (!groups.has(key)) {
+          const [a, b] = orderedPairProducts(rule.a, rule.b);
+          groups.set(key, {
+            ...rule,
+            id: `${a}<->${b}`,
+            a,
+            b,
+            orderCount: 0,
+            support: 0,
+            lift: 0,
+            aOrders: null,
+            bOrders: null,
+            sourceRules: [],
+            confidenceAB: null,
+            confidenceBA: null
+          });
+        }
+        const combo = groups.get(key);
+        combo.sourceRules.push(rule);
+        if (combo.a === rule.a && combo.b === rule.b) {
+          combo.confidenceAB = rule.confidence;
+          combo.aOrders = rule.aOrders;
+          combo.bOrders = rule.bOrders;
+        } else if (combo.a === rule.b && combo.b === rule.a) {
+          combo.confidenceBA = rule.confidence;
+          combo.aOrders = combo.aOrders || rule.bOrders;
+          combo.bOrders = combo.bOrders || rule.aOrders;
+        }
+        if (rule.orderCount > combo.orderCount) combo.orderCount = rule.orderCount;
+        if (rule.support > combo.support) combo.support = rule.support;
+        if (rule.lift > combo.lift) combo.lift = rule.lift;
+      });
+
+      return Array.from(groups.values()).map(combo => {
+        const confidenceAB = combo.confidenceAB ?? clamp(combo.orderCount / Math.max(combo.aOrders, 1), 0, 1);
+        const confidenceBA = combo.confidenceBA ?? clamp(combo.orderCount / Math.max(combo.bOrders, 1), 0, 1);
+        return {
+          ...combo,
+          confidenceAB,
+          confidenceBA,
+          confidence: Math.max(confidenceAB, confidenceBA),
+          aOrders: Math.max(combo.aOrders || combo.orderCount, combo.orderCount),
+          bOrders: Math.max(combo.bOrders || combo.orderCount, combo.orderCount),
+          sourceRuleIds: combo.sourceRules.map(rule => rule.id),
+          valueScore: valueInfo(combo).score
+        };
+      });
+    }
+
     function getProducts(rules) {
       return Array.from(new Set(rules.flatMap(rule => [rule.a, rule.b])));
     }
@@ -3994,7 +4133,7 @@
         if (!stats[rule.a]) stats[rule.a] = { product: rule.a, weight: 0, count: 0 };
         if (!stats[rule.b]) stats[rule.b] = { product: rule.b, weight: 0, count: 0 };
         stats[rule.a].weight += rule.support;
-        stats[rule.b].weight += rule.support * 0.72;
+        stats[rule.b].weight += rule.support;
         stats[rule.a].count += 1;
         stats[rule.b].count += 1;
       });
@@ -4088,6 +4227,21 @@
         .map(rule => ({ ...rule, valueScore: valueInfo(rule).score }))
         .filter(rule => matchesSelectedValues(filters.mainAsin, asinFilterValue(rule.a)))
         .filter(rule => matchesSelectedValues(filters.linkedAsin, asinFilterValue(rule.b)));
+    }
+
+    function combinationMatchesDirectionalFilters(combo) {
+      const orientations = [
+        { a: combo.a, b: combo.b },
+        { a: combo.b, b: combo.a }
+      ];
+      return orientations.some(pair =>
+        matchesSelectedValues(filters.mainAsin, asinFilterValue(pair.a)) &&
+        matchesSelectedValues(filters.linkedAsin, asinFilterValue(pair.b))
+      );
+    }
+
+    function baseFilteredCombinations(rules) {
+      return getCombinationRules(rules).filter(combinationMatchesDirectionalFilters);
     }
 
     function matchesSelectedValues(selectedValues, value) {
@@ -4190,14 +4344,14 @@
     }
 
     function filteredRules(rules) {
-      const baseRules = baseFilteredRules(rules);
+      const baseRules = baseFilteredCombinations(rules);
       const segmentRules = applyOrdersSegmentFilter(baseRules, selectedOrdersSegmentBuckets(baseRules));
       const bucketRules = applyOrdersBucketFilter(segmentRules, selectedOrdersBuckets(baseRules));
       return applyProductFilter(bucketRules, state.selectedProduct);
     }
 
     function networkFilteredRules(rules) {
-      const baseRules = baseFilteredRules(rules);
+      const baseRules = baseFilteredCombinations(rules);
       const segmentRules = applyOrdersSegmentFilter(baseRules, selectedOrdersSegmentBuckets(baseRules));
       return applyOrdersBucketFilter(segmentRules, selectedOrdersBuckets(baseRules));
     }
@@ -4226,7 +4380,8 @@
         const primary = (Number(right[key]) || 0) - (Number(left[key]) || 0);
         if (primary !== 0) return primary;
         if (right.lift !== left.lift) return right.lift - left.lift;
-        if (right.confidence !== left.confidence) return right.confidence - left.confidence;
+        if (right.confidenceAB !== left.confidenceAB) return right.confidenceAB - left.confidenceAB;
+        if (right.confidenceBA !== left.confidenceBA) return right.confidenceBA - left.confidenceBA;
         return right.orderCount - left.orderCount;
       });
     }
@@ -4242,11 +4397,24 @@
       if (!head) return;
       head.innerHTML = `<tr>
         <th>排名</th>
-        <th>前项商品(A)</th>
-        <th>后项商品(B)</th>
-        ${metricColumns.map(column => `<th><span class="top-metric-head${column.key === state.topSortKey ? " active" : ""}" title="${escapeHtml(column.title)}">${escapeHtml(column.label)}<span class="metric-info" aria-hidden="true">?</span></span></th>`).join("")}
-        <th>推荐动作</th>
+        <th>商品A</th>
+        <th>商品B</th>
+        ${metricColumns.map(column => `<th class="top-metric-header-${column.key}"><span class="top-metric-head${column.key === state.topSortKey ? " active" : ""}" title="${escapeHtml(column.title)}">${escapeHtml(column.label)}<span class="metric-info" aria-hidden="true">?</span></span></th>`).join("")}
+        <th class="top-action-header">推荐动作</th>
       </tr>`;
+    }
+
+    function renderTopColGroup(metricColumns = orderedTopMetricColumns()) {
+      const body = document.getElementById("rulesTable");
+      const colgroup = body?.closest("table")?.querySelector("colgroup");
+      if (!colgroup) return;
+      colgroup.innerHTML = [
+        `<col class="top-rank-col">`,
+        `<col class="top-product-col">`,
+        `<col class="top-product-col">`,
+        ...metricColumns.map(column => `<col class="top-metric-col-${column.key}">`),
+        `<col class="top-action-col">`
+      ].join("");
     }
 
     function ruleMatchesProduct(rule, product) {
@@ -4300,7 +4468,8 @@
     function rulesByLift(rules) {
       return [...rules].sort((left, right) => {
         if (right.lift !== left.lift) return right.lift - left.lift;
-        if (right.confidence !== left.confidence) return right.confidence - left.confidence;
+        if (right.confidenceAB !== left.confidenceAB) return right.confidenceAB - left.confidenceAB;
+        if (right.confidenceBA !== left.confidenceBA) return right.confidenceBA - left.confidenceBA;
         return right.orderCount - left.orderCount;
       });
     }
@@ -4318,10 +4487,10 @@
       }
       return `<div class="insight-combos">${visibleRules.map(rule => `
         <div class="insight-combo ${showMetrics ? "" : "combo-only"}">
-          <span class="combo-name">${escapeHtml(productAsinPair(rule))}</span>
+          <span class="combo-name">${escapeHtml(productAsinCombo(rule))}</span>
           ${showMetrics ? `<span class="combo-metrics">
               <span>提升度 ${num(rule.lift)}x</span>
-              ${showConfidence ? `<span>置信度 ${pct(rule.confidence, 0)}</span>` : ""}
+              ${showConfidence ? `<span>置信度A→B ${pct(rule.confidenceAB, 0)}</span>` : ""}
               ${showOrders ? `<span>组合订单数 ${formatOrders(rule.orderCount)}</span>` : ""}
               ${showAction ? `<span>${escapeHtml(actionInfo(rule))}</span>` : ""}
             </span>` : ""}
@@ -4351,21 +4520,7 @@
       return element;
     }
 
-    function reverseRuleMetrics(rule) {
-      const reverseRule = getRules().find(item => item.a === rule.b && item.b === rule.a);
-      const reverseConfidence = reverseRule
-        ? reverseRule.confidence
-        : clamp(rule.orderCount / Math.max(rule.bOrders, 1), 0, 1);
-      return {
-        confidenceAB: rule.confidence,
-        confidenceBA: reverseConfidence,
-        liftAB: rule.lift,
-        liftBA: reverseRule ? reverseRule.lift : rule.lift
-      };
-    }
-
     function ruleTooltip(rule) {
-      const metrics = reverseRuleMetrics(rule);
       return `<div class="tooltip-rule-products">
           <div class="tooltip-rule-product-row">
             <span class="tooltip-rule-product-label">商品A</span>
@@ -4378,10 +4533,9 @@
         </div>
         <span class="tooltip-rule-metric">组合订单数：${rule.orderCount.toLocaleString()}</span><br>
         支持度：${pct(rule.support)}<br>
-        置信度A→B：${pct(metrics.confidenceAB)}<br>
-        置信度B→A：${pct(metrics.confidenceBA)}<br>
-        提升度A→B：${num(metrics.liftAB)}x<br>
-        提升度B→A：${num(metrics.liftBA)}x`;
+        置信度A→B：${pct(rule.confidenceAB)}<br>
+        置信度B→A：${pct(rule.confidenceBA)}<br>
+        提升度：${num(rule.lift)}x`;
     }
 
     function setupGlobalFilters() {
@@ -4909,6 +5063,7 @@
       }
       const stats = productStats(rules);
       const maxWeight = Math.max(...Object.values(stats).map(item => item.weight));
+      const maxLinkSupport = Math.max(...rules.map(rule => rule.support), 0.01);
       const selectedRules = rules.filter(rule => isRuleSelected(rule));
       const topLinks = [
         ...selectedRules,
@@ -4944,7 +5099,7 @@
           x2: target.x,
           y2: target.y,
           stroke: liftColor(rule.lift),
-          "stroke-width": Math.max(1.5, rule.confidence * 7),
+          "stroke-width": 1.5 + (rule.support / maxLinkSupport) * 5.5,
           opacity: faded ? 0.16 : isSelectedRule || isSelectedProduct ? 0.96 : 0.54,
           class: "link"
         });
@@ -5036,6 +5191,7 @@
     function renderTable(rules) {
       const table = document.getElementById("rulesTable");
       const metricColumns = orderedTopMetricColumns();
+      renderTopColGroup(metricColumns);
       renderTopTableHead(metricColumns);
       if (!rules.length) {
         table.innerHTML = `<tr><td colspan="${metricColumns.length + 4}" style="text-align:center;color:#7584a1;padding:28px;">暂无匹配数据，请调整 ASIN 筛选、清除组合订单数区间或重置网络节点筛选</td></tr>`;
@@ -5047,29 +5203,50 @@
         confidence: 1,
         lift: Math.max(...rules.map(rule => rule.lift), 1)
       };
+      const renderConfidenceCell = rule => {
+        const abLabel = "A→B";
+        const baLabel = "B→A";
+        const bestValue = Math.max(rule.confidenceAB, rule.confidenceBA);
+        if (state.topSortKey === "confidence") {
+          return `<td class="metric-cell bar-cell top-confidence-cell">
+            <span class="confidence-best">
+              <span class="confidence-best-value">${pct(bestValue)}</span>
+            </span>
+            <div class="bar conf"><span style="width:${bestValue * 100}%"></span></div>
+          </td>`;
+        }
+        return `<td class="metric-cell top-confidence-cell">
+          <div class="confidence-stack" aria-label="双向置信度">
+            <span class="confidence-line"><span class="confidence-line-label">${abLabel}</span><span class="confidence-line-value">${pct(rule.confidenceAB)}</span></span>
+            <span class="confidence-line"><span class="confidence-line-label">${baLabel}</span><span class="confidence-line-value">${pct(rule.confidenceBA)}</span></span>
+          </div>
+        </td>`;
+      };
       const renderMetricCell = (rule, column) => {
         const key = column.key;
+        if (key === "confidence") return renderConfidenceCell(rule);
         const value = key === "orderCount"
           ? rule.orderCount.toLocaleString()
           : key === "lift"
             ? `${num(rule.lift)}x`
             : pct(rule[key]);
-        const width = key === "confidence"
-          ? rule.confidence * 100
-          : (rule[key] / maxMetricValues[key]) * 100;
+        const width = (rule[key] / maxMetricValues[key]) * 100;
         const showBar = state.topSortKey === key;
-        const barClass = key === "confidence" ? " conf" : key === "lift" ? " lift" : "";
+        const barClass = key === "lift" ? " lift" : "";
         return `<td class="metric-cell${showBar ? " bar-cell" : ""}">${value}${showBar ? `<div class="bar${barClass}"><span style="width:${width}%"></span></div>` : ""}</td>`;
       };
       const rows = sortedTopRules(rules.map(rule => ({ ...rule, valueScore: valueInfo(rule).score }))).slice(0, 20);
       table.innerHTML = rows.map((rule, index) => {
         const rowClass = isRuleSelected(rule) ? "selected" : "";
+        const displayRule = state.topSortKey === "confidence" && rule.confidenceBA > rule.confidenceAB
+          ? { ...rule, a: rule.b, b: rule.a }
+          : rule;
         return `<tr class="${rowClass}" data-id="${escapeHtml(rule.id)}" tabindex="0" aria-selected="${isRuleSelected(rule) ? "true" : "false"}" title="点击联动网络图与明细表">
           <td class="rank-cell"><span class="rank-badge ${index < 3 ? `rank-top-${index + 1}` : ""}">${index + 1}</span></td>
-          <td>${renderAsinProduct(rule.a)}</td>
-          <td>${renderAsinProduct(rule.b)}</td>
+          <td>${renderAsinProduct(displayRule.a)}</td>
+          <td>${renderAsinProduct(displayRule.b)}</td>
           ${metricColumns.map(column => renderMetricCell(rule, column)).join("")}
-          <td>${renderActionTag(rule)}</td>
+          <td class="top-action-cell">${renderActionTag(rule)}</td>
         </tr>`;
       }).join("");
       const topRuleById = new Map(rows.map(rule => [rule.id, rule]));
@@ -5096,11 +5273,11 @@
       const meta = document.getElementById("insightMeta");
       if (meta) {
         const baseCount = baseRules.length || rules.length;
-        meta.textContent = `当前周期：${state.period}；基于 ${rules.length} 条当前联动规则、${baseCount} 条筛选基线自动提炼`;
+        meta.textContent = `当前周期：${state.period}；基于 ${rules.length} 个当前联动组合、${baseCount} 个筛选基线自动提炼`;
       }
       if (!rules.length) {
         grid.style.display = "";
-        grid.innerHTML = `<article class="insight-tile"><div class="insight-title">暂无匹配洞察 <span class="badge">0条</span></div><p class="insight-text">当前筛选条件下没有符合条件的规则，请放宽主ASIN、关联ASIN或清除组合订单数区间。</p></article>`;
+        grid.innerHTML = `<article class="insight-tile"><div class="insight-title">暂无匹配洞察 <span class="badge">0条</span></div><p class="insight-text">当前筛选条件下没有符合条件的组合，请放宽主ASIN、关联ASIN或清除组合订单数区间。</p></article>`;
         return;
       }
       if (!state.insightsOpen) {
@@ -5117,11 +5294,12 @@
       const middleRecommendedRules = rulesByLift(middleRules.filter(rule => rule.lift > 1))
         .slice(0, 3)
         .sort((left, right) => {
-          if (right.confidence !== left.confidence) return right.confidence - left.confidence;
+          if (right.confidenceAB !== left.confidenceAB) return right.confidenceAB - left.confidenceAB;
+          if (right.confidenceBA !== left.confidenceBA) return right.confidenceBA - left.confidenceBA;
           return right.lift - left.lift;
         });
       const middleRecommendationText = middleRecommendedRules.length
-        ? `推荐组合：${middleRecommendedRules.map(rule => `${escapeHtml(productAsinPair(rule))}（置信度 ${pct(rule.confidence, 0)}，提升度 ${num(rule.lift)}x）`).join("；")}。`
+        ? `推荐组合：${middleRecommendedRules.map(rule => `${escapeHtml(productAsinCombo(rule))}（置信度A→B ${pct(rule.confidenceAB, 0)}，提升度 ${num(rule.lift)}x）`).join("；")}。`
         : "当前中腰部区间暂无提升度大于 1 的推荐组合。";
       const middleOrders = middleBuckets.reduce((sum, bucket) => sum + bucket.ordersTotal, 0);
       const totalOrders = buckets.reduce((sum, bucket) => sum + bucket.ordersTotal, 0) || 1;
@@ -5129,7 +5307,7 @@
         <article class="insight-tile">
           <div class="insight-title">TOP购买提升结论 <span class="badge">Top ${topRules.length}</span></div>
           <p class="insight-text">
-            当前 TOP 组合中，${escapeHtml(productAsinPair(strongest))} 的提升度最高；Top ${topRules.length} 组合平均提升度为 ${num(topLiftAvg)}x。
+            当前 TOP 组合中，${escapeHtml(productAsinCombo(strongest))} 的提升度最高；Top ${topRules.length} 组合平均提升度为 ${num(topLiftAvg)}x。
           </p>
         </article>
         <article class="insight-tile teal">
@@ -5143,7 +5321,7 @@
     function renderDetailTable(rules) {
       const table = document.getElementById("detailTable");
       if (!rules.length) {
-        table.innerHTML = `<tr><td colspan="10" style="text-align:center;color:#7584a1;padding:28px;">暂无匹配明细，请调整 ASIN 筛选、清除组合订单数区间或重置网络节点筛选</td></tr>`;
+        table.innerHTML = `<tr><td colspan="11" style="text-align:center;color:#7584a1;padding:28px;">暂无匹配明细，请调整 ASIN 筛选、清除组合订单数区间或重置网络节点筛选</td></tr>`;
         return;
       }
       const rows = sortedRules(rules.map(rule => ({ ...rule, valueScore: valueInfo(rule).score })));
@@ -5158,7 +5336,8 @@
           <td>${rule.aOrders.toLocaleString()}</td>
           <td>${rule.bOrders.toLocaleString()}</td>
           <td>${pct(rule.support, 2)}</td>
-          <td>${pct(rule.confidence, 2)}</td>
+          <td>${pct(rule.confidenceAB, 2)}</td>
+          <td>${pct(rule.confidenceBA, 2)}</td>
           <td>${num(rule.lift)}x</td>
           <td><span class="value-tag ${liftCls}">${escapeHtml(value.label)}</span></td>
           <td>${renderActionTag(rule)}</td>
@@ -5175,7 +5354,7 @@
 
     function renderFilterCount(filteredCount, totalCount) {
       const productLabel = state.selectedProduct ? `；网络节点：${productAsin(state.selectedProduct)}` : "";
-      document.getElementById("filterCount").textContent = `当前展示 ${filteredCount} 条规则 / 共 ${totalCount} 条${productLabel}`;
+      document.getElementById("filterCount").textContent = `当前展示 ${filteredCount} 个组合 / 共 ${totalCount} 个${productLabel}`;
     }
 
     function renderSortHeaders() {
@@ -5190,7 +5369,7 @@
 
     function renderAll() {
       const allRules = getRules();
-      const baseRules = baseFilteredRules(allRules);
+      const baseRules = baseFilteredCombinations(allRules);
       const segmentRules = applyOrdersSegmentFilter(baseRules, selectedOrdersSegmentBuckets(baseRules));
       const networkRules = applyOrdersBucketFilter(segmentRules, selectedOrdersBuckets(baseRules));
       const rules = applyProductFilter(networkRules, state.selectedProduct);
@@ -5202,7 +5381,7 @@
       renderFilterCount(rules.length, baseRules.length);
       renderSortHeaders();
       renderOrdersHistogram(baseRules);
-      renderInsights(allRules, allRules);
+      renderInsights(rules, baseRules);
       renderNetwork(networkRules);
       renderTable(tableRules);
       renderDetailTable(tableRules);
@@ -5218,7 +5397,7 @@
             state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
           } else {
             state.sortKey = key;
-            state.sortDir = ["support", "confidence", "lift", "valueScore", "orderCount", "aOrders", "bOrders"].includes(key) ? "desc" : "asc";
+            state.sortDir = ["support", "confidence", "confidenceAB", "confidenceBA", "lift", "valueScore", "orderCount", "aOrders", "bOrders"].includes(key) ? "desc" : "asc";
           }
           renderAll();
         });
@@ -5292,7 +5471,7 @@
 
     function downloadCsv() {
       const rules = filteredRules(getRules());
-      const header = ["分析周期", "前项商品(A)", "后项商品(B)", "组合订单数", "商品A订单数", "商品B订单数", "支持度", "置信度", "提升度", "商品组合类别", "业务价值评级", "推荐动作"];
+      const header = ["分析周期", "商品A", "商品B", "组合订单数", "商品A订单数", "商品B订单数", "支持度", "置信度A→B", "置信度B→A", "提升度", "商品组合类别", "业务价值评级", "推荐动作"];
       const rows = rules.map(rule => [
         state.period,
         productAsin(rule.a),
@@ -5301,7 +5480,8 @@
         rule.aOrders,
         rule.bOrders,
         pct(rule.support),
-        pct(rule.confidence),
+        pct(rule.confidenceAB),
+        pct(rule.confidenceBA),
         num(rule.lift),
         rule.category,
         valueInfo(rule).label,
