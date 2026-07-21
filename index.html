@@ -1266,11 +1266,19 @@
       justify-content: stretch;
     }
 
+    .filter-grid.linked-filter-hidden {
+      grid-template-columns: auto minmax(230px, 280px) auto minmax(150px, 1fr);
+    }
+
     .filter-field {
       display: flex;
       flex-direction: column;
       gap: 6px;
       min-width: 0;
+    }
+
+    .filter-field.is-hidden {
+      display: none;
     }
 
     .filter-field.compact {
@@ -1379,13 +1387,50 @@
       gap: 4px;
     }
 
+    .multi-select-button-tools {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      justify-content: flex-end;
+      width: 42px;
+      min-width: 42px;
+    }
+
+    .multi-select-inline-clear {
+      width: 18px;
+      height: 18px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      color: #7b89a0;
+      cursor: pointer;
+    }
+
+    .multi-select.has-selection .multi-select-inline-clear {
+      display: inline-flex;
+    }
+
+    .multi-select-inline-clear:hover {
+      background: #edf3ff;
+      color: #314970;
+    }
+
+    .multi-select-inline-clear svg {
+      width: 13px;
+      height: 13px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+    }
+
     .multi-select-chip {
-      max-width: 92px;
+      max-width: 76px;
       height: 22px;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      padding: 0 6px;
+      gap: 3px;
+      padding: 0 5px;
       border: 1px solid #e4e9f3;
       border-radius: 4px;
       background: #f8fafc;
@@ -1402,13 +1447,7 @@
     }
 
     .multi-select-chip-remove {
-      border: 0;
-      padding: 0;
-      background: transparent;
-      color: #6a7890;
-      font-size: 14px;
-      line-height: 1;
-      cursor: pointer;
+      display: none;
     }
 
     .multi-select-caret {
@@ -1416,6 +1455,7 @@
       height: 14px;
       color: #6b7c98;
       transition: transform 0.15s;
+      flex: 0 0 14px;
     }
 
     .multi-select.open .multi-select-caret {
@@ -2241,6 +2281,15 @@
     .histogram-bar.active .histogram-fill {
       background: #f5a640;
       outline: 3px solid rgba(245, 166, 64, 0.22);
+    }
+
+    .histogram-bar.is-empty {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .histogram-bar.is-empty .histogram-track {
+      visibility: hidden;
     }
 
     .histogram-label {
@@ -3187,6 +3236,10 @@
         grid-template-columns: auto minmax(180px, 1fr) minmax(180px, 1fr) auto;
       }
 
+      .filter-grid.linked-filter-hidden {
+        grid-template-columns: auto minmax(180px, 1fr) auto;
+      }
+
       #filterCount {
         grid-column: 1 / -1;
       }
@@ -3569,11 +3622,11 @@
                 <div class="selected-model-body">
                   <h3>购物篮分析模型</h3>
                   <div class="form-field">
-                    <label><span class="required">*</span>数据选择<span class="field-help" aria-hidden="true">?</span></label>
-                    <select id="createDataSelect" aria-label="数据选择">
+                    <label><span class="required">*</span>数据源<span class="field-help" aria-hidden="true">?</span></label>
+                    <select id="createDataSelect" aria-label="数据源">
                       <option selected>广告触达28天内数据</option>
                       <option>全量购买数据（FSI）</option>
-                      <option>5年购买数据（ARP)</option>
+                      <option>5年购买数据（ARP）</option>
                     </select>
                   </div>
                   <div class="form-field">
@@ -3598,7 +3651,7 @@
                         <label class="aggregation-option" id="createParentAsinOption" role="option" aria-selected="false" data-aggregation-value="父ASIN" for="createAggregationParentAsin">
                           <input id="createAggregationParentAsin" type="checkbox" value="父ASIN">
                           <span class="aggregation-option-label">父ASIN</span>
-                          <span class="aggregation-option-hint">若需按父ASIN聚合，请先在Mapping upload上传ASIN映射。</span>
+                          <span class="aggregation-option-hint">若需按父ASIN聚合，请先在Mapping upload上传ASIN映射；或使用ARP数据源。</span>
                         </label>
                       </div>
                     </div>
@@ -3634,11 +3687,11 @@
                 <button class="asin-tab is-disabled" type="button" data-asin-view="parent" role="tab" aria-selected="false" aria-disabled="true" title="若需按父ASIN聚合，请先在Mapping upload上传ASIN映射。">父ASIN</button>
               </div>
             </div>
-            <div class="filter-field compact">
-              <label id="mainAsinLabel" for="mainAsinFilterSearch">主ASIN</label>
+            <div class="filter-field compact" id="mainAsinField">
+              <label id="mainAsinLabel" for="mainAsinFilterSearch">目标ASIN</label>
               <div class="multi-select" id="mainAsinFilter" data-filter-key="mainAsin"></div>
             </div>
-            <div class="filter-field compact">
+            <div class="filter-field compact is-hidden" id="linkedAsinField" hidden>
               <label id="linkedAsinLabel" for="linkedAsinFilterSearch">关联ASIN</label>
               <div class="multi-select" id="linkedAsinFilter" data-filter-key="linkedAsin"></div>
             </div>
@@ -3706,7 +3759,7 @@
           <article class="chart-card top-combo-card">
             <div class="card-head">
               <div>
-                <h3 class="title-with-help" data-tooltip="展示 TOP20 商品组合，可切换指标排序；Lift≥2 的组合具备强正向关联，适合捆绑销售；Lift≤1 的组合无关联或呈负相关，建议人工复核。">TOP20 关联商品组合<span class="info-help" tabindex="0" aria-label="展示 TOP20 商品组合，可切换指标排序；Lift≥2 的组合具备强正向关联，适合捆绑销售；Lift≤1 的组合无关联或呈负相关，建议人工复核。">?</span></h3>
+                <h3 class="title-with-help" data-tooltip="展示 TOP20 商品组合，可切换指标排序；Lift2 的组合具备强正向关联，适合捆绑销售；Lift1 的组合无关联或呈负相关，建议人工复核。注意：置信度具有方向性，按置信度排序时，默认取组合双向置信度中的较大值排序，可点击查看明细表数据。">TOP20 关联商品组合<span class="info-help" tabindex="0" aria-label="展示 TOP20 商品组合，可切换指标排序；Lift2 的组合具备强正向关联，适合捆绑销售；Lift1 的组合无关联或呈负相关，建议人工复核。注意：置信度具有方向性，按置信度排序时，默认取组合双向置信度中的较大值排序，可点击查看明细表数据。">?</span></h3>
               </div>
               <div class="card-actions top-sort-control">
                 <select class="small-select" id="topSortMetric" aria-label="TOP20 排序">
@@ -4225,19 +4278,22 @@
     function baseFilteredRules(rules) {
       return rules
         .map(rule => ({ ...rule, valueScore: valueInfo(rule).score }))
-        .filter(rule => matchesSelectedValues(filters.mainAsin, asinFilterValue(rule.a)))
-        .filter(rule => matchesSelectedValues(filters.linkedAsin, asinFilterValue(rule.b)));
+        .filter(rule => matchesTargetLinkedFilters(rule.a, rule.b));
+    }
+
+    function matchesTargetLinkedFilters(productA, productB) {
+      const orientations = [
+        { target: productA, linked: productB },
+        { target: productB, linked: productA }
+      ];
+      return orientations.some(pair =>
+        matchesSelectedValues(filters.mainAsin, asinFilterValue(pair.target)) &&
+        matchesSelectedValues(filters.linkedAsin, asinFilterValue(pair.linked))
+      );
     }
 
     function combinationMatchesDirectionalFilters(combo) {
-      const orientations = [
-        { a: combo.a, b: combo.b },
-        { a: combo.b, b: combo.a }
-      ];
-      return orientations.some(pair =>
-        matchesSelectedValues(filters.mainAsin, asinFilterValue(pair.a)) &&
-        matchesSelectedValues(filters.linkedAsin, asinFilterValue(pair.b))
-      );
+      return matchesTargetLinkedFilters(combo.a, combo.b);
     }
 
     function baseFilteredCombinations(rules) {
@@ -4685,15 +4741,45 @@
       syncAggregationState();
     }
 
+    function sortedUniqueValues(values) {
+      return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b, "zh-CN"));
+    }
+
+    function linkedAsinOptionsForTargets(rules, targets) {
+      if (!targets.length) return [];
+      const targetSet = new Set(targets);
+      const linkedValues = [];
+      getCombinationRules(rules).forEach(rule => {
+        const leftValue = asinFilterValue(rule.a);
+        const rightValue = asinFilterValue(rule.b);
+        if (targetSet.has(leftValue)) linkedValues.push(rightValue);
+        if (targetSet.has(rightValue)) linkedValues.push(leftValue);
+      });
+      return sortedUniqueValues(linkedValues);
+    }
+
     function refreshAsinFilterOptions(rules) {
-      const mainValues = Array.from(new Set(rules.map(rule => asinFilterValue(rule.a)))).sort((a, b) => a.localeCompare(b, "zh-CN"));
-      const linkedValues = Array.from(new Set(rules.map(rule => asinFilterValue(rule.b)))).sort((a, b) => a.localeCompare(b, "zh-CN"));
+      const combinationRules = getCombinationRules(rules);
+      const mainValues = sortedUniqueValues(combinationRules.flatMap(rule => [asinFilterValue(rule.a), asinFilterValue(rule.b)]));
       const isParent = filters.asinView === "parent";
-      const mainLabel = isParent ? "主父ASIN" : "主ASIN";
+      const mainLabel = isParent ? "目标父ASIN" : "目标ASIN";
       const linkedLabel = isParent ? "关联父ASIN" : "关联ASIN";
+      filters.mainAsin = filters.mainAsin.filter(value => mainValues.includes(value));
+      const showLinkedFilter = filters.mainAsin.length > 0;
+      const linkedValues = showLinkedFilter ? linkedAsinOptionsForTargets(rules, filters.mainAsin) : [];
+      filters.linkedAsin = showLinkedFilter
+        ? filters.linkedAsin.filter(value => linkedValues.includes(value))
+        : [];
+      const linkedField = document.getElementById("linkedAsinField");
+      const filterGrid = document.querySelector(".filter-grid");
       document.getElementById("mainAsinLabel").textContent = mainLabel;
       document.getElementById("linkedAsinLabel").textContent = linkedLabel;
-      renderMultiSelect("mainAsinFilter", "mainAsin", mainValues, mainLabel, isParent ? "全部主父ASIN" : "全部主ASIN");
+      if (linkedField) {
+        linkedField.hidden = !showLinkedFilter;
+        linkedField.classList.toggle("is-hidden", !showLinkedFilter);
+      }
+      if (filterGrid) filterGrid.classList.toggle("linked-filter-hidden", !showLinkedFilter);
+      renderMultiSelect("mainAsinFilter", "mainAsin", mainValues, mainLabel, isParent ? "全部目标父ASIN" : "全部目标ASIN");
       renderMultiSelect("linkedAsinFilter", "linkedAsin", linkedValues, linkedLabel, isParent ? "全部关联父ASIN" : "全部关联ASIN");
     }
 
@@ -4706,6 +4792,7 @@
       select._visibleValues = values;
       const selected = filters[key].filter(value => values.includes(value));
       filters[key] = selected;
+      select.classList.toggle("has-selection", Boolean(selected.length));
       const selectedSet = new Set(selected);
       const searchId = `${id}Search`;
       const summary = selected.length ? `${label}：已选 ${selected.length} 项` : allLabel;
@@ -4716,9 +4803,17 @@
             <path d="m16.5 16.5 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
           </svg>
           <span class="${selected.length ? "multi-select-chips" : "multi-select-summary"}" title="${escapeHtml(summary)}">${renderMultiSelectSummaryContent(selected, summary)}</span>
-          <svg class="multi-select-caret" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
+          <span class="multi-select-button-tools">
+            <span class="multi-select-inline-clear" role="button" tabindex="-1" title="清空${escapeHtml(label)}" aria-label="清空${escapeHtml(label)}">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M6 6l12 12"></path>
+                <path d="M18 6L6 18"></path>
+              </svg>
+            </span>
+            <svg class="multi-select-caret" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
         </button>
         <div class="multi-select-menu">
           <div class="multi-select-search-wrap">
@@ -4745,9 +4840,11 @@
       const button = select.querySelector(".multi-select-button");
       const search = select.querySelector(".multi-select-search");
       const options = select.querySelector(".multi-select-options");
+      const inlineClear = select.querySelector(".multi-select-inline-clear");
       bindMultiSelectTrigger(select, key, label, allLabel);
       syncMultiSelectAllState(select, values);
       bindMultiSelectAll(select, key, label, allLabel);
+      fitMultiSelectSummarySoon(select);
 
       button.addEventListener("click", event => {
         event.stopPropagation();
@@ -4772,29 +4869,64 @@
         bindMultiSelectOptions(select, key, label, allLabel);
       });
 
-      select.querySelector(".multi-select-clear").addEventListener("click", event => {
+      const clearSelection = event => {
         event.stopPropagation();
-        filters[key] = [];
-        clearLinkedSelections();
-        search.value = "";
-        select._visibleValues = values;
-        options.innerHTML = renderMultiSelectOptions(values, new Set(), key);
-        updateMultiSelectSummary(select, key, label, allLabel);
-        updateMultiSelectMenuHead(select, values.length);
-        syncMultiSelectAllState(select, values);
-        bindMultiSelectOptions(select, key, label, allLabel);
-        renderAll();
-      });
+        clearMultiSelectSelection(select, key, label, allLabel);
+      };
+      select.querySelector(".multi-select-clear").addEventListener("click", clearSelection);
+      inlineClear.addEventListener("click", clearSelection);
 
       bindMultiSelectOptions(select, key, label, allLabel);
     }
 
+    function clearMultiSelectSelection(select, key, label, allLabel) {
+      if (!filters[key].length) return;
+      filters[key] = [];
+      if (key === "mainAsin") filters.linkedAsin = [];
+      clearLinkedSelections();
+      if (key === "mainAsin") {
+        refreshAsinFilterOptions(getRules());
+        renderAll();
+        return;
+      }
+      const values = select._allValues || [];
+      const options = select.querySelector(".multi-select-options");
+      const search = select.querySelector(".multi-select-search");
+      select._visibleValues = values;
+      if (search) search.value = "";
+      if (options) options.innerHTML = renderMultiSelectOptions(values, new Set(), key);
+      updateMultiSelectSummary(select, key, label, allLabel);
+      updateMultiSelectMenuHead(select, values.length);
+      syncMultiSelectAllState(select, values);
+      bindMultiSelectOptions(select, key, label, allLabel);
+      renderAll();
+    }
+
     function renderMultiSelectSummaryContent(selected, summary) {
       if (!selected.length) return escapeHtml(summary);
-      const visible = selected.slice(0, 2);
-      const chips = visible.map(value => `<span class="multi-select-chip" title="${escapeHtml(value)}"><span class="multi-select-chip-text">${escapeHtml(value)}</span><span class="multi-select-chip-remove" role="button" tabindex="-1" data-value="${escapeHtml(value)}" aria-label="移除 ${escapeHtml(value)}">×</span></span>`).join("");
-      const more = selected.length > visible.length ? `<span class="multi-select-chip">+${selected.length - visible.length}</span>` : "";
-      return `${chips}${more}`;
+      const firstValue = selected[0];
+      const chip = `<span class="multi-select-chip" data-value="${escapeHtml(firstValue)}" title="${escapeHtml(firstValue)}"><span class="multi-select-chip-text">${escapeHtml(firstValue)}</span><span class="multi-select-chip-remove" role="button" tabindex="-1" data-value="${escapeHtml(firstValue)}" aria-label="移除 ${escapeHtml(firstValue)}">×</span></span>`;
+      const more = selected.length > 1 ? `<span class="multi-select-chip multi-select-more" aria-label="隐藏的已选项数量">+${selected.length - 1}</span>` : "";
+      return `${chip}${more}`;
+    }
+
+    function fitMultiSelectSummarySoon(select) {
+      if (!select) return;
+      requestAnimationFrame(() => fitMultiSelectSummary(select));
+    }
+
+    function fitAllMultiSelectSummaries() {
+      document.querySelectorAll(".multi-select").forEach(fitMultiSelectSummary);
+    }
+
+    function fitMultiSelectSummary(select) {
+      if (!select) return;
+      const summary = select.querySelector(".multi-select-chips");
+      if (!summary || !summary.clientWidth) return;
+      const chip = summary.querySelector(".multi-select-chip[data-value]");
+      const more = summary.querySelector(".multi-select-more");
+      if (!chip || !more || summary.scrollWidth <= summary.clientWidth + 1) return;
+      chip.style.maxWidth = `${Math.max(48, summary.clientWidth - more.offsetWidth - 4)}px`;
     }
 
     function renderMultiSelectOptions(values, selectedSet, key) {
@@ -4815,6 +4947,11 @@
           event.stopPropagation();
           filters[key] = filters[key].filter(value => value !== remove.dataset.value);
           clearLinkedSelections();
+          if (key === "mainAsin") {
+            refreshAsinFilterOptions(getRules());
+            renderAll();
+            return;
+          }
           updateMultiSelectSummary(select, key, label, allLabel);
           updateMultiSelectMenuHead(select, select.dataset.totalCount);
           const options = select.querySelector(".multi-select-options");
@@ -4843,6 +4980,11 @@
           input.closest(".multi-select-option")?.classList.toggle("active", event.target.checked);
           filters[key] = Array.from(selected).sort((a, b) => a.localeCompare(b, "zh-CN"));
           clearLinkedSelections();
+          if (key === "mainAsin") {
+            refreshAsinFilterOptions(getRules());
+            renderAll();
+            return;
+          }
           updateMultiSelectSummary(select, key, label, allLabel);
           updateMultiSelectMenuHead(select, select.dataset.totalCount);
           syncMultiSelectAllState(select, select._visibleValues || []);
@@ -4854,10 +4996,12 @@
     function updateMultiSelectSummary(select, key, label, allLabel) {
       const summary = filters[key].length ? `${label}：已选 ${filters[key].length} 项` : allLabel;
       const summaryElement = select.querySelector(".multi-select-summary, .multi-select-chips");
+      select.classList.toggle("has-selection", Boolean(filters[key].length));
       summaryElement.className = filters[key].length ? "multi-select-chips" : "multi-select-summary";
       summaryElement.innerHTML = renderMultiSelectSummaryContent(filters[key], summary);
       summaryElement.title = summary;
       bindMultiSelectTrigger(select, key, label, allLabel);
+      fitMultiSelectSummarySoon(select);
     }
 
     function updateMultiSelectMenuHead(select, totalCount) {
@@ -4899,6 +5043,11 @@
         }
         filters[key] = Array.from(selected).sort((a, b) => a.localeCompare(b, "zh-CN"));
         clearLinkedSelections();
+        if (key === "mainAsin") {
+          refreshAsinFilterOptions(getRules());
+          renderAll();
+          return;
+        }
         const options = select.querySelector(".multi-select-options");
         if (options) options.innerHTML = values.length ? renderMultiSelectOptions(values, new Set(filters[key]), key) : `<div class="multi-select-empty">无匹配结果</div>`;
         updateMultiSelectSummary(select, key, label, allLabel);
@@ -5000,12 +5149,18 @@
       const axisTicks = [1, 0.75, 0.5, 0.25].map(ratio => formatOrders(maxOrders * ratio));
       const displayBuckets = buckets.slice().reverse();
       const barsHtml = displayBuckets.map(bucket => {
-        const height = Math.max(8, (bucket.ordersTotal / maxOrders) * 100);
         const bucketInSegment = activeSegment && bucket.index >= activeSegment.min && bucket.index <= activeSegment.max;
         const active = state.ordersBuckets.includes(bucket.index) || bucketInSegment ? "active" : "";
         const segmentClass = bucket.index <= 2 ? "tail" : bucket.index >= 7 ? "head" : "middle";
         const disabled = bucket.count ? "" : "disabled";
         const title = `${bucket.label}：${bucket.count}个组合，Orders ${formatOrders(bucket.minOrders)}-${formatOrders(bucket.maxOrders)}，总Orders ${formatOrders(bucket.ordersTotal)}`;
+        if (!bucket.count || !bucket.ordersTotal) {
+          return `<button class="histogram-bar ${segmentClass} is-empty" type="button" data-bucket="${bucket.index}" aria-pressed="false" disabled title="${escapeHtml(title)}">
+            <span class="histogram-track"></span>
+            <span class="histogram-label">${bucket.label}<br><span class="histogram-count">${bucket.count}个组合</span></span>
+          </button>`;
+        }
+        const height = Math.max(8, (bucket.ordersTotal / maxOrders) * 100);
         return `<button class="histogram-bar ${segmentClass} ${active}" type="button" data-bucket="${bucket.index}" aria-pressed="${active ? "true" : "false"}" ${disabled} title="${escapeHtml(title)}">
           <span class="histogram-track"><span class="histogram-fill" style="height:${height}%"><span class="histogram-value">${formatOrders(bucket.ordersTotal)}</span></span></span>
           <span class="histogram-label">${bucket.label}<br><span class="histogram-count">${bucket.count}个组合</span></span>
@@ -5277,7 +5432,7 @@
       }
       if (!rules.length) {
         grid.style.display = "";
-        grid.innerHTML = `<article class="insight-tile"><div class="insight-title">暂无匹配洞察 <span class="badge">0条</span></div><p class="insight-text">当前筛选条件下没有符合条件的组合，请放宽主ASIN、关联ASIN或清除组合订单数区间。</p></article>`;
+        grid.innerHTML = `<article class="insight-tile"><div class="insight-title">暂无匹配洞察 <span class="badge">0条</span></div><p class="insight-text">当前筛选条件下没有符合条件的组合，请放宽目标ASIN、关联ASIN或清除组合订单数区间。</p></article>`;
         return;
       }
       if (!state.insightsOpen) {
@@ -5467,6 +5622,7 @@
 
       document.getElementById("downloadBtn").addEventListener("click", downloadCsv);
       document.getElementById("globalDownloadBtn").addEventListener("click", downloadCsv);
+      window.addEventListener("resize", fitAllMultiSelectSummaries);
     }
 
     function downloadCsv() {
@@ -5531,7 +5687,11 @@
       if (pageStatus) pageStatus.textContent = page === "basket" ? "已完成" : "";
       const createEntry = document.getElementById("createReportEntry");
       if (createEntry) createEntry.style.display = page === "reports" ? "" : "none";
-      if (page === "basket") renderAll();
+      if (page === "basket") {
+        renderAll();
+        fitMultiSelectSummarySoon(document.getElementById("mainAsinFilter"));
+        fitMultiSelectSummarySoon(document.getElementById("linkedAsinFilter"));
+      }
     }
 
     function setupPageNavigation() {
