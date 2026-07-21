@@ -2371,7 +2371,7 @@
       font-weight: 400;
       line-height: 1.55;
       text-align: left;
-      white-space: normal;
+      white-space: pre-line;
       overflow: visible;
       opacity: 0;
       pointer-events: none;
@@ -3759,13 +3759,13 @@
           <article class="chart-card top-combo-card">
             <div class="card-head">
               <div>
-                <h3 class="title-with-help" data-tooltip="展示 TOP20 商品组合，可切换指标排序；Lift2 的组合具备强正向关联，适合捆绑销售；Lift1 的组合无关联或呈负相关，建议人工复核。注意：置信度具有方向性，按置信度排序时，默认取组合双向置信度中的较大值排序，可点击查看明细表数据。">TOP20 关联商品组合<span class="info-help" tabindex="0" aria-label="展示 TOP20 商品组合，可切换指标排序；Lift2 的组合具备强正向关联，适合捆绑销售；Lift1 的组合无关联或呈负相关，建议人工复核。注意：置信度具有方向性，按置信度排序时，默认取组合双向置信度中的较大值排序，可点击查看明细表数据。">?</span></h3>
+                <h3 class="title-with-help" data-tooltip="展示 TOP20 商品组合，可切换指标排序；Lift2 的组合具备强正向关联，适合捆绑销售；Lift1 的组合无关联或呈负相关，建议人工复核。&#10;注意：置信度具有方向性，按置信度排序时，默认取组合双向置信度中的较大值排序，可点击查看明细表数据。">TOP20 关联商品组合<span class="info-help" tabindex="0" aria-label="展示 TOP20 商品组合，可切换指标排序；Lift2 的组合具备强正向关联，适合捆绑销售；Lift1 的组合无关联或呈负相关，建议人工复核。&#10;注意：置信度具有方向性，按置信度排序时，默认取组合双向置信度中的较大值排序，可点击查看明细表数据。">?</span></h3>
               </div>
               <div class="card-actions top-sort-control">
                 <select class="small-select" id="topSortMetric" aria-label="TOP20 排序">
                   <option value="support">支持度</option>
-                  <option value="confidence" selected>置信度</option>
-                  <option value="lift">提升度</option>
+                  <option value="confidence">置信度</option>
+                  <option value="lift" selected>提升度</option>
                   <option value="orderCount">组合订单数</option>
                 </select>
               </div>
@@ -3776,10 +3776,10 @@
                   <col class="top-rank-col">
                   <col class="top-product-col">
                   <col class="top-product-col">
-                  <col class="top-metric-col-confidence">
+                  <col class="top-metric-col-lift">
                   <col class="top-metric-col-orderCount">
                   <col class="top-metric-col-support">
-                  <col class="top-metric-col-lift">
+                  <col class="top-metric-col-confidence">
                   <col class="top-action-col">
                 </colgroup>
                 <thead id="rulesTableHead">
@@ -3787,10 +3787,10 @@
                     <th>排名</th>
                     <th>商品A</th>
                     <th>商品B</th>
-                    <th class="top-metric-header-confidence"><span class="top-metric-head active" title="置信度：按置信度排序时展示 A→B / B→A 中较大值；按其他指标排序时展示双向置信度">置信度<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th class="top-metric-header-lift"><span class="top-metric-head active" title="提升度：商品 A 与商品 B 组合购买概率相对随机购买概率的倍数，越高代表关联越强">提升度<span class="metric-info" aria-hidden="true">?</span></span></th>
                     <th class="top-metric-header-orderCount"><span class="top-metric-head" title="组合订单数：商品 A 与商品 B 同时出现的订单数量">组合订单数<span class="metric-info" aria-hidden="true">?</span></span></th>
                     <th class="top-metric-header-support"><span class="top-metric-head" title="支持度：商品 A 与商品 B 同时出现订单数占总订单数的比例">支持度<span class="metric-info" aria-hidden="true">?</span></span></th>
-                    <th class="top-metric-header-lift"><span class="top-metric-head" title="提升度：商品 A 与商品 B 组合购买概率相对随机购买概率的倍数，越高代表关联越强">提升度<span class="metric-info" aria-hidden="true">?</span></span></th>
+                    <th class="top-metric-header-confidence"><span class="top-metric-head" title="置信度：按置信度排序时展示 A→B / B→A 中较大值；按其他指标排序时展示双向置信度">置信度<span class="metric-info" aria-hidden="true">?</span></span></th>
                     <th class="top-action-header">推荐动作</th>
                   </tr>
                 </thead>
@@ -3971,7 +3971,7 @@
       selectedProduct: null,
       sortKey: "lift",
       sortDir: "desc",
-      topSortKey: "confidence",
+      topSortKey: "lift",
       ordersBuckets: [],
       ordersSegment: null,
       insightsOpen: true
