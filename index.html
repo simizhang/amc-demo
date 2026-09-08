@@ -63,6 +63,16 @@
       z-index: 3;
     }
 
+    @media (min-width: 861px) {
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        align-self: start;
+        overflow: hidden;
+      }
+    }
+
     .logo {
       height: var(--top-nav-height);
       position: sticky;
@@ -2778,8 +2788,9 @@
     .amc-role-detail-panel {
       grid-column: 1 / -1;
       min-height: 430px;
-      padding: 14px;
+      padding: 14px 0 0;
       margin: 0 14px 14px;
+      overflow: hidden;
     }
 
     .amc-role-panel-head {
@@ -2792,7 +2803,96 @@
     }
 
     .amc-role-detail-panel-head {
+      margin-right: 14px;
+      margin-left: 14px;
       margin-bottom: 10px;
+    }
+
+    .amc-role-detail-toolbar {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px 10px;
+      border-bottom: 1px solid #e9edf2;
+    }
+
+    .amc-role-detail-filter {
+      position: relative;
+      width: 190px;
+    }
+
+    .amc-role-detail-filter select {
+      width: 100%;
+      height: 32px;
+      padding: 0 56px 0 12px;
+      border: 1px solid #dce3ed;
+      border-radius: 5px;
+      background: #fff;
+      color: #596980;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 30px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    .amc-role-detail-filter select:hover {
+      border-color: #bdc9dc;
+    }
+
+    .amc-role-detail-filter select:focus,
+    .amc-role-detail-filter select:focus-visible {
+      border-color: #dce3ed;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .amc-role-detail-filter::after {
+      position: absolute;
+      top: 11px;
+      right: 11px;
+      width: 7px;
+      height: 7px;
+      border-right: 1.5px solid #6c7b91;
+      border-bottom: 1.5px solid #6c7b91;
+      content: "";
+      pointer-events: none;
+      transform: rotate(45deg);
+    }
+
+    .amc-role-detail-filter-clear {
+      position: absolute;
+      top: 50%;
+      right: 28px;
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: #8a97aa;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .amc-role-detail-filter-clear[hidden] {
+      display: none;
+    }
+
+    .amc-role-detail-filter-clear:hover {
+      background: #eef2f7;
+      color: #53647c;
+    }
+
+    .amc-role-detail-filter-clear:focus-visible {
+      outline: 2px solid rgba(91, 115, 242, 0.24);
+      outline-offset: 1px;
     }
 
     .amc-role-ranking-panel-head,
@@ -3427,13 +3527,13 @@
 
     .amc-role-bar {
       cursor: pointer;
-      fill: #4ecdbd;
+      fill: #4aa7ea;
       opacity: 0.95;
       transition: opacity 0.12s ease, filter 0.12s ease, stroke 0.12s ease;
     }
 
     .amc-role-bar.follow {
-      fill: #4aa7ea;
+      fill: #57dac5;
     }
 
     .amc-role-bar:hover,
@@ -3443,9 +3543,14 @@
     }
 
     .amc-role-bar.is-selected {
-      stroke: #8fd2c8;
+      stroke: #2e7fc7;
       stroke-width: 1.5;
-      filter: drop-shadow(0 3px 6px rgba(39, 150, 132, 0.16));
+      filter: drop-shadow(0 3px 6px rgba(46, 127, 199, 0.18));
+    }
+
+    .amc-role-bar.follow.is-selected {
+      stroke: #34b8a6;
+      filter: drop-shadow(0 3px 6px rgba(87, 218, 197, 0.2));
     }
 
     .amc-role-bar-label {
@@ -3501,11 +3606,11 @@
     }
 
     .amc-role-flow-node.lead {
-      fill: #4ecdbd;
+      fill: #4aa7ea;
     }
 
     .amc-role-flow-node.follow {
-      fill: #4aa7ea;
+      fill: #57dac5;
     }
 
     .amc-role-flow-node.selected {
@@ -3519,11 +3624,11 @@
     }
 
     .amc-role-flow-node.lead.selected {
-      fill: #37b7a7;
+      fill: #2e7fc7;
     }
 
     .amc-role-flow-node.follow.selected {
-      fill: #398fd0;
+      fill: #34b8a6;
     }
 
     .amc-role-flow-node-label {
@@ -3715,6 +3820,7 @@
 
     .amc-module3-grid {
       display: grid;
+      gap: 14px;
       padding: 14px 14px 14px;
       min-width: 0;
     }
@@ -3742,7 +3848,7 @@
     }
 
     .amc-module3-quality-layout {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .amc-module3-panel {
@@ -3755,16 +3861,275 @@
     }
 
     .amc-module3-quality-layout .amc-module3-panel {
-      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
-      box-shadow: 0 10px 24px rgba(48, 70, 112, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+      background: #ffffff;
+      box-shadow: 0 8px 18px rgba(48, 70, 112, 0.05);
     }
 
     .amc-module3-panel[hidden] {
       display: none;
     }
 
+    .amc-module3-quality-controls {
+      display: flex;
+      grid-column: 1 / -1;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-width: 0;
+      padding: 0 2px 2px;
+    }
+
+    .amc-module3-quality-controls[hidden] {
+      display: none;
+    }
+
+    .amc-module3-quality-tabs .amc-segment-btn {
+      min-width: 76px;
+      font-size: 12px;
+    }
+
+    .amc-module3-sample-filter,
+    .amc-module3-sample-options {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .amc-module3-sample-filter {
+      justify-content: flex-end;
+      gap: 10px;
+      color: #718096;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .amc-module3-sample-options {
+      gap: 8px;
+    }
+
+    .amc-module3-sample-btn {
+      min-width: 56px;
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid #d9e1ec;
+      border-radius: 6px;
+      background: #ffffff;
+      color: #5f6f86;
+      font: inherit;
+      line-height: 26px;
+      cursor: pointer;
+      transition: border-color 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+    }
+
+    .amc-module3-sample-btn:hover {
+      border-color: #8fc7ed;
+      color: #317fc2;
+    }
+
+    .amc-module3-sample-btn.is-active {
+      border-color: #58aee9;
+      background: #58aee9;
+      color: #ffffff;
+    }
+
     .amc-module3-panel-wide {
       grid-column: 1 / -1;
+    }
+
+    .amc-module3-detail-panel {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .amc-module3-detail-panel .amc-module3-panel-head {
+      min-height: 0;
+      margin: 0;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid #e7edf5;
+    }
+
+    .amc-module3-detail-table-wrap {
+      min-height: 0;
+      max-height: 430px;
+      overflow: auto;
+      background: #ffffff;
+      scrollbar-color: #cbd7ea transparent;
+      scrollbar-width: thin;
+    }
+
+    .amc-module3-detail-table-wrap::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .amc-module3-detail-table-wrap::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .amc-module3-detail-table-wrap::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background: #cbd7ea;
+    }
+
+    .amc-module3-detail-table {
+      width: 100%;
+      min-width: 1500px;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+      color: #344258;
+      font-size: 13px;
+    }
+
+    .amc-module3-detail-table th,
+    .amc-module3-detail-table td {
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .amc-module3-detail-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      height: 40px;
+      padding: 9px 12px;
+      border-bottom: 1px solid #e4e9f0;
+      background: #f6f8fc;
+      color: #3b485c;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .amc-module3-detail-table td {
+      height: 46px;
+      padding: 7px 12px;
+      border-bottom: 1px solid #edf1f6;
+      background: transparent;
+      color: #344258;
+      font-weight: 400;
+      line-height: 1.4;
+      vertical-align: middle;
+    }
+
+    .amc-module3-detail-table tbody tr {
+      cursor: default;
+      transition: background-color 0.14s ease;
+    }
+
+    .amc-module3-detail-table tbody tr:hover td {
+      background: #fafcff;
+    }
+
+    .amc-module3-detail-table tbody tr.is-selected td {
+      background: #fff2f6;
+      border-bottom-color: #f4d2df;
+    }
+
+    .amc-module3-detail-table tbody tr.is-selected td:first-child {
+      box-shadow: inset 3px 0 0 #ed5e94;
+    }
+
+    .amc-module3-detail-table tbody tr:focus-visible {
+      outline: 2px solid rgba(237, 94, 148, 0.34);
+      outline-offset: -2px;
+    }
+
+    .amc-module3-detail-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .amc-module3-detail-rank {
+      display: inline-flex;
+      width: 22px;
+      height: 22px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      background: #f0f3f7;
+      color: #718096;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .amc-module3-detail-table tbody tr:nth-child(1) .amc-module3-detail-rank {
+      background: #fff0cf;
+      color: #a96900;
+    }
+
+    .amc-module3-detail-table tbody tr:nth-child(2) .amc-module3-detail-rank {
+      background: #e7edf4;
+      color: #61728a;
+    }
+
+    .amc-module3-detail-table tbody tr:nth-child(3) .amc-module3-detail-rank {
+      background: #fae5d6;
+      color: #9c5f31;
+    }
+
+    .amc-module3-detail-pair {
+      color: #263b5b;
+      font-weight: 400;
+    }
+
+    .amc-module3-detail-number,
+    .amc-module3-detail-money,
+    .amc-module3-detail-percent {
+      display: block;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .amc-module3-detail-path {
+      display: inline-flex;
+      min-width: 54px;
+      height: 22px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 7px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    .amc-module3-detail-path.upgrade {
+      border-color: #f2c9d4;
+      background: #fff2f5;
+      color: #c15878;
+    }
+
+    .amc-module3-detail-path.flat {
+      border-color: #c7ebe4;
+      background: #effaf7;
+      color: #248d7f;
+    }
+
+    .amc-module3-detail-path.downgrade {
+      border-color: #f6dfb3;
+      background: #fff8e9;
+      color: #bf811b;
+    }
+
+    .amc-module3-detail-table .is-center {
+      text-align: center;
+    }
+
+    .amc-module3-detail-table .is-right {
+      text-align: right;
+    }
+
+    .amc-module3-detail-table .is-path-col {
+      padding-right: 6px;
+    }
+
+    .amc-module3-detail-table .is-score-col {
+      padding-left: 6px;
+      text-align: left;
+    }
+
+    .amc-module3-detail-table .is-score-col .amc-module3-detail-percent {
+      text-align: left;
     }
 
     .amc-module3-scale-updown-panel {
@@ -3802,6 +4167,188 @@
       flex-wrap: wrap;
     }
 
+    .amc-module3-heatmap-tools .amc-compact-select:first-child {
+      min-width: 148px;
+    }
+
+    .amc-module3-heatmap-tools .amc-compact-select:nth-child(2) {
+      min-width: 86px;
+    }
+
+    .amc-module3-heatmap-tools .amc-compact-select select {
+      font-size: 12px;
+    }
+
+    .amc-module3-asin-picker {
+      position: relative;
+      width: 156px;
+      min-width: 156px;
+    }
+
+    .amc-module3-asin-search-field {
+      position: relative;
+      height: 32px;
+    }
+
+    .amc-module3-asin-search-field input {
+      width: 100%;
+      height: 32px;
+      padding: 0 31px 0 9px;
+      border: 1px solid #d8e2f0;
+      border-radius: 5px;
+      background: #fff;
+      color: #425777;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .amc-module3-asin-picker.has-selection .amc-module3-asin-search-field input {
+      padding-right: 52px;
+    }
+
+    .amc-module3-asin-search-field input::placeholder {
+      color: #8a98aa;
+    }
+
+    .amc-module3-asin-search-field input:hover,
+    .amc-module3-asin-picker.is-open .amc-module3-asin-search-field input,
+    .amc-module3-asin-search-field input:focus {
+      border-color: #91a5e9;
+      box-shadow: 0 0 0 2px rgba(78, 103, 214, 0.08);
+    }
+
+    .amc-module3-asin-picker-toggle,
+    .amc-module3-asin-picker-clear {
+      position: absolute;
+      top: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: transparent;
+      color: #7b8aa1;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .amc-module3-asin-picker-toggle {
+      right: 4px;
+    }
+
+    .amc-module3-asin-picker-clear {
+      right: 26px;
+      display: none;
+    }
+
+    .amc-module3-asin-picker.has-selection .amc-module3-asin-picker-clear {
+      display: inline-flex;
+    }
+
+    .amc-module3-asin-picker-toggle:hover,
+    .amc-module3-asin-picker-toggle:focus-visible,
+    .amc-module3-asin-picker-clear:hover,
+    .amc-module3-asin-picker-clear:focus-visible {
+      background: #eef3ff;
+      color: #3153c4;
+      outline: none;
+    }
+
+    .amc-module3-asin-picker-toggle svg,
+    .amc-module3-asin-picker-clear svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2;
+    }
+
+    .amc-module3-asin-picker.is-open .amc-module3-asin-picker-toggle svg {
+      transform: rotate(180deg);
+    }
+
+    .amc-module3-asin-picker-popover {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      z-index: 38;
+      display: none;
+      width: max(212px, 100%);
+      overflow: hidden;
+      border: 0;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(32, 51, 86, 0.16);
+    }
+
+    .amc-module3-asin-picker.is-open .amc-module3-asin-picker-popover {
+      display: block;
+    }
+
+    .amc-module3-asin-picker-options {
+      max-height: 238px;
+      overflow: auto;
+      padding: 5px 0;
+    }
+
+    .amc-module3-asin-picker-option {
+      width: 100%;
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 12px;
+      border: 0;
+      background: transparent;
+      color: #3d4f6c;
+      font-size: 12px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .amc-module3-asin-picker-option:hover,
+    .amc-module3-asin-picker-option:focus-visible {
+      background: #f4f7ff;
+      color: #2848bf;
+      outline: none;
+    }
+
+    .amc-module3-asin-picker-option.is-selected {
+      color: #2848bf;
+      font-weight: 600;
+    }
+
+    .amc-module3-asin-picker-option span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-module3-asin-picker-option svg {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 auto;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2.2;
+    }
+
+    .amc-module3-asin-picker-empty {
+      padding: 16px 12px;
+      color: #8997ad;
+      font-size: 12px;
+      text-align: center;
+    }
+
     .amc-module3-chart {
       width: 100%;
       height: 332px;
@@ -3812,20 +4359,21 @@
       height: 276px;
     }
 
-    .amc-module3-chart-compact,
-    .amc-module3-chart-ranking {
+    .amc-module3-chart-compact {
       height: 300px;
     }
 
+    .amc-module3-chart-ranking {
+      height: 560px;
+    }
+
     .amc-heatmap-legend {
-      width: 132px;
-      min-height: 0;
-      height: 100%;
-      margin: 0;
+      width: 100%;
+      min-height: 20px;
+      margin: -4px 0 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      align-self: start;
       color: #4f5f73;
       font-size: 11px;
       line-height: 1.2;
@@ -3834,9 +4382,9 @@
 
     .amc-module3-heatmap-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 132px;
-      align-items: stretch;
-      gap: 16px;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      gap: 4px;
       min-width: 0;
     }
 
@@ -3845,113 +4393,45 @@
     }
 
     .amc-heatmap-legend-title {
-      width: 18px;
       color: #5e6f86;
       font-size: 11px;
-      line-height: 1.35;
-      direction: ltr;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      text-align: left;
       white-space: nowrap;
     }
 
     .amc-heatmap-legend-body {
-      width: 100%;
-      height: 100%;
-      min-height: 100%;
-      display: grid;
-      grid-template-columns: 18px minmax(24px, 1fr) 44px;
-      align-items: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 8px;
-    }
-
-    .amc-heatmap-legend-body .amc-heatmap-legend-title {
-      align-self: center;
-      justify-self: center;
-    }
-
-    .amc-heatmap-legend-scale {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      margin: 0;
+      max-width: 100%;
     }
 
     .amc-heatmap-legend-value {
       color: #63748d;
       font-size: 11px;
       font-weight: 500;
-      line-height: 12px;
+      line-height: 16px;
       white-space: nowrap;
-    }
-
-    .amc-heatmap-legend-value.mid {
-      align-self: flex-start;
-    }
-
-    .amc-heatmap-legend-values {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 0;
     }
 
     .amc-heatmap-legend-level {
-      position: absolute;
-      left: 50%;
       color: #5e6f86;
       font-size: 11px;
       font-weight: 500;
-      line-height: 12px;
+      line-height: 16px;
       white-space: nowrap;
-      transform: translateX(-50%);
-    }
-
-    .amc-heatmap-legend-level.high {
-      top: 0;
-    }
-
-    .amc-heatmap-legend-level.low {
-      bottom: 0;
     }
 
     .amc-heatmap-legend-bar {
-      position: absolute;
-      top: 18px;
-      bottom: 18px;
-      left: 50%;
-      width: 12px;
-      height: auto;
-      border-radius: 6px;
-      transform: translateX(-50%);
-      background: linear-gradient(0deg, #eef2ff 0%, #c3cbf5 36%, #7d84df 68%, #4d469e 100%);
-    }
-
-    .amc-heatmap-legend-handle {
-      position: absolute;
-      top: 50%;
-      left: calc(50% + 8px);
-      width: 18px;
-      height: 6px;
-      border: 1px solid #fff;
-      border-radius: 3px;
-      background: #4d469e;
-      transform: translateY(-50%);
-    }
-
-    .amc-heatmap-legend-labels {
-      display: none;
-    }
-
-    .amc-heatmap-legend-metric {
-      display: none;
+      width: clamp(112px, 20vw, 220px);
+      height: 10px;
+      border: 1px solid rgba(111, 126, 143, 0.18);
+      border-radius: 2px;
+      background: linear-gradient(90deg, #ffd5e4 0%, #ffb3d0 45%, #ff9ec2 72%, #ed5e94 100%);
     }
 
     .amc-module3-chart-heatmap {
-      height: 460px;
+      height: 500px;
     }
 
     .amc-module3-chart-updown {
@@ -3986,32 +4466,31 @@
         flex-wrap: wrap;
       }
 
+      .amc-module3-quality-controls {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .amc-module3-sample-filter {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
       .amc-module3-tools {
         width: 100%;
         justify-content: flex-start;
       }
 
       .amc-module3-chart-heatmap {
-        height: 420px;
+        height: 440px;
       }
 
       .amc-module3-heatmap-layout {
-        grid-template-columns: minmax(0, 1fr) 108px;
-        gap: 8px;
+        gap: 4px;
       }
 
       .amc-heatmap-legend {
-        width: 108px;
-      }
-
-      .amc-heatmap-legend-title {
-        width: 16px;
-        font-size: 10px;
-      }
-
-      .amc-heatmap-legend-body {
-        grid-template-columns: 16px minmax(22px, 1fr) 38px;
-        gap: 6px;
+        justify-content: flex-start;
       }
 
       .amc-module3-chart-scatter {
@@ -4497,6 +4976,141 @@
       min-width: 0;
     }
 
+    .amc-module4-detail-table-panel {
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+
+    .amc-module4-detail-table-wrap {
+      max-height: 430px;
+      margin: 0 -14px;
+      overflow: auto;
+      background: #ffffff;
+      scrollbar-color: #cbd7ea transparent;
+      scrollbar-width: thin;
+    }
+
+    .amc-module4-detail-table-wrap::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .amc-module4-detail-table-wrap::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .amc-module4-detail-table-wrap::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background: #cbd7ea;
+    }
+
+    .amc-module4-detail-table {
+      width: 100%;
+      min-width: 1080px;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+      color: #344258;
+      font-size: 13px;
+    }
+
+    .amc-module4-detail-table th,
+    .amc-module4-detail-table td {
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .amc-module4-detail-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      height: 40px;
+      padding: 9px 12px;
+      border-bottom: 1px solid #e4e9f0;
+      background: #f6f8fc;
+      color: #3b485c;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .amc-module4-detail-table td {
+      height: 44px;
+      padding: 7px 12px;
+      border-bottom: 1px solid #edf1f6;
+      background: transparent;
+      color: #344258;
+      font-weight: 400;
+      line-height: 1.4;
+      vertical-align: middle;
+    }
+
+    .amc-module4-detail-table tbody tr {
+      cursor: default;
+      transition: background-color 0.14s ease;
+    }
+
+    .amc-module4-detail-table tbody tr:hover td {
+      background: #fafcff;
+    }
+
+    .amc-module4-detail-table tbody tr.is-selected td {
+      background: #f5f8ff;
+      border-bottom-color: #dbe5f8;
+    }
+
+    .amc-module4-detail-table tbody tr.is-selected td:first-child {
+      box-shadow: inset 3px 0 0 #6d86e9;
+    }
+
+    .amc-module4-detail-table tbody tr:focus-visible {
+      outline: 2px solid rgba(91, 115, 242, 0.3);
+      outline-offset: -2px;
+    }
+
+    .amc-module4-detail-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .amc-module4-detail-pair,
+    .amc-module4-detail-value {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-module4-detail-pair {
+      color: #263b5b;
+      font-weight: 400;
+    }
+
+    .amc-module4-detail-value {
+      color: #344258;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .amc-module4-detail-rhythm {
+      font-weight: 500;
+    }
+
+    .amc-module4-detail-rhythm.quick {
+      color: #159d8f;
+    }
+
+    .amc-module4-detail-rhythm.stable {
+      color: #5068e8;
+    }
+
+    .amc-module4-detail-rhythm.long {
+      color: #d78318;
+    }
+
+    .amc-module4-detail-table .amc-module4-path-tag {
+      font-size: 11px;
+      font-weight: 500;
+    }
+
     .amc-module4-detail-title {
       display: grid;
       gap: 8px;
@@ -4890,6 +5504,11 @@
       min-width: 0;
     }
 
+    .amc-module5-view-tabs .amc-segment-btn {
+      min-width: 62px;
+      font-size: 11px;
+    }
+
     .amc-module5-tool-select {
       display: block;
       width: 124px;
@@ -4922,6 +5541,126 @@
       display: grid;
       min-width: 0;
       border-top: 1px solid #e8eef7;
+    }
+
+    .amc-module5-list[hidden],
+    .amc-module5-detail-table-wrap[hidden] {
+      display: none !important;
+    }
+
+    .amc-module5-detail-table-wrap {
+      max-height: min(520px, 62vh);
+      margin: 0 -14px -12px;
+      overflow: auto;
+      border-top: 1px solid #e8eef7;
+      background: #ffffff;
+      scrollbar-color: #cbd7ea transparent;
+      scrollbar-width: thin;
+    }
+
+    .amc-module5-detail-table-wrap::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .amc-module5-detail-table-wrap::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .amc-module5-detail-table-wrap::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background: #cbd7ea;
+    }
+
+    .amc-module5-detail-table {
+      width: 100%;
+      min-width: 960px;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+      color: #344258;
+      font-size: 13px;
+    }
+
+    .amc-module5-detail-table th,
+    .amc-module5-detail-table td {
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .amc-module5-detail-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      height: 42px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e4e9f0;
+      background: #f7f9fd;
+      color: #3b485c;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .amc-module5-detail-table td {
+      height: 46px;
+      padding: 8px 12px;
+      border-bottom: 1px solid #edf1f6;
+      background: transparent;
+      color: #344258;
+      font-weight: 400;
+      line-height: 1.4;
+      vertical-align: middle;
+    }
+
+    .amc-module5-detail-table tbody tr {
+      cursor: pointer;
+      transition: background-color 0.14s ease;
+    }
+
+    .amc-module5-detail-table tbody tr:hover td {
+      background: #fafcff;
+    }
+
+    .amc-module5-detail-table tbody tr.is-selected td {
+      background: #f5f8ff;
+      border-bottom-color: #dbe5f8;
+    }
+
+    .amc-module5-detail-table tbody tr.is-selected td:first-child {
+      box-shadow: inset 3px 0 0 #6d86e9;
+    }
+
+    .amc-module5-detail-table tbody tr:focus-visible {
+      outline: 2px solid rgba(91, 115, 242, 0.3);
+      outline-offset: -2px;
+    }
+
+    .amc-module5-detail-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .amc-module5-detail-pair,
+    .amc-module5-detail-value {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-module5-detail-pair {
+      color: #263b5b;
+      font-weight: 400;
+    }
+
+    .amc-module5-detail-value {
+      color: #344258;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .amc-module5-detail-table .amc-module4-path-tag {
+      font-size: 11px;
+      font-weight: 500;
     }
 
     .amc-module5-row-wrap {
@@ -5181,9 +5920,9 @@
       min-height: 0;
       max-height: 374px;
       overflow: auto;
-      border: 1px solid #e0e7f2;
-      border-radius: 7px;
-      background: #fff;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
       scrollbar-color: #cbd7ea transparent;
       scrollbar-width: thin;
     }
@@ -5208,22 +5947,13 @@
       border-collapse: separate;
       border-spacing: 0;
       table-layout: fixed;
-      color: #2d405d;
-      font-size: 12px;
+      color: #344258;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: 14px;
     }
 
-    .amc-role-detail-table th.is-center,
-    .amc-role-detail-table td.is-center {
-      text-align: center;
-    }
-
-    .amc-role-detail-table th.is-right,
-    .amc-role-detail-table td.is-right {
-      text-align: right;
-    }
-
-    .amc-role-detail-table th.is-left,
-    .amc-role-detail-table td.is-left {
+    .amc-role-detail-table th,
+    .amc-role-detail-table td {
       text-align: left;
     }
 
@@ -5231,89 +5961,101 @@
       position: sticky;
       top: 0;
       z-index: 2;
-      height: 38px;
-      padding: 10px 12px;
-      border-bottom: 1px solid #e0e7f2;
-      background: #f6f9fe;
-      color: #53647c;
+      height: 40px;
+      padding: 9px 12px;
+      border-bottom: 1px solid #e4e9f0;
+      background: #f5f7fa;
+      color: #3b485c;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
+      line-height: 1.4;
       white-space: nowrap;
     }
 
+    .amc-role-detail-sort {
+      max-width: 100%;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-weight: 600;
+      line-height: 1.4;
+      white-space: nowrap;
+      cursor: pointer;
+      justify-content: flex-start;
+    }
+
+    .amc-role-detail-sort:hover,
+    .amc-role-detail-sort.active {
+      color: #3e5fbb;
+    }
+
+    .amc-role-detail-sort:focus-visible {
+      outline: 2px solid rgba(91, 115, 242, 0.28);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
     .amc-role-detail-table td {
-      height: 38px;
-      padding: 9px 12px;
-      border-bottom: 1px solid #edf2f8;
-      background: #fff;
-      color: #263954;
-      font-size: 12px;
-      line-height: 1.35;
+      height: 48px;
+      padding: 6px 12px;
+      border-bottom: 1px solid #e9edf2;
+      background: transparent;
+      color: #344258;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.4;
       vertical-align: middle;
       white-space: nowrap;
     }
 
-    .amc-role-detail-table tbody tr {
-      cursor: pointer;
-      transition: background 0.14s ease, box-shadow 0.14s ease;
-    }
-
-    .amc-role-detail-table tbody tr:hover td {
-      background: #f8fbff;
-    }
-
-    .amc-role-detail-table tbody tr.is-active td {
-      background: #f4f8ff;
-    }
-
-    .amc-role-detail-table tbody tr.is-active td:first-child {
-      box-shadow: inset 3px 0 0 #6d86e9;
-    }
-
-    .amc-role-detail-table tbody tr:focus-visible {
-      outline: 2px solid rgba(91, 115, 242, 0.22);
-      outline-offset: -2px;
+    .amc-role-detail-table tbody tr:last-child td {
+      border-bottom: 0;
     }
 
     .amc-role-detail-rank {
       display: inline-flex;
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
-      background: #eef2f7;
-      color: #718198;
-      font-size: 11px;
-      font-weight: 800;
+      border-radius: 4px;
+      background: #f0f3f7;
+      color: #718096;
+      font-size: 10px;
+      font-weight: 700;
       line-height: 1;
     }
 
     .amc-role-detail-table tbody tr:nth-child(1) .amc-role-detail-rank {
-      background: #ffd15c;
-      color: #805c00;
+      background: #fff0cf;
+      color: #a96900;
     }
 
     .amc-role-detail-table tbody tr:nth-child(2) .amc-role-detail-rank {
-      background: #dfe6ef;
-      color: #596b81;
+      background: #e7edf4;
+      color: #61728a;
     }
 
     .amc-role-detail-table tbody tr:nth-child(3) .amc-role-detail-rank {
-      background: #f0c39b;
-      color: #87552e;
+      background: #fae5d6;
+      color: #9c5f31;
     }
 
     .amc-role-detail-asin-link {
-      color: #2f6fcb;
-      font-size: 13px;
-      font-weight: 600;
+      color: #344258;
+      font-size: 14px;
+      font-weight: 400;
       text-decoration: none;
     }
 
     .amc-role-detail-asin-link:hover,
     .amc-role-detail-asin-link:focus-visible {
-      color: #1d56aa;
+      color: #3266c8;
       text-decoration: underline;
     }
 
@@ -5321,19 +6063,43 @@
     .amc-role-detail-percent,
     .amc-role-detail-price {
       display: block;
-      text-align: right;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 400;
       font-variant-numeric: tabular-nums;
+    }
+
+    .amc-role-detail-rate {
+      width: 88px;
+      display: grid;
+      justify-items: start;
+      gap: 4px;
+    }
+
+    .amc-role-detail-rate-track {
+      width: 88px;
+      height: 5px;
+      overflow: hidden;
+      border-radius: 2px;
+      background: #eaf0fb;
+    }
+
+    .amc-role-detail-rate-fill {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: #6b83f3;
     }
 
     .amc-role-detail-role-pill {
       justify-content: center;
       display: inline-flex;
       align-items: center;
-      min-height: 22px;
-      padding: 0 8px;
-      border-radius: 5px;
-      font-size: 11px;
-      font-weight: 700;
+      min-height: 21px;
+      padding: 0 7px;
+      border-radius: 11px;
+      font-size: 12px;
+      font-weight: 500;
       line-height: 1;
       white-space: nowrap;
     }
@@ -7991,7 +8757,7 @@
     }
 
     body[data-page="amcFrame"] .amc-frame-page {
-      padding: 12px 14px 24px;
+      padding: 12px 14px;
     }
 
     /* Keep the active top-level module visually anchored to one viewport. */
@@ -8180,6 +8946,45 @@
 
     body[data-page="amcFrame"] .amc-frame-chart-card {
       scroll-margin-top: calc(var(--top-nav-height) + 132px);
+    }
+
+    body[data-page="amcFrame"] {
+      --amc-module6-sticky-top: calc(var(--top-nav-height) + 12px);
+      --amc-module6-sticky-bottom: 14px;
+    }
+
+    @media (min-width: 1181px) {
+      body[data-page="amcFrame"] .amc-module6-selector-card {
+        position: sticky;
+        top: var(--amc-module6-sticky-top);
+        z-index: 12;
+        align-self: start;
+        height: calc(100vh - var(--amc-module6-sticky-top) - var(--amc-module6-sticky-bottom));
+        max-height: calc(100vh - var(--amc-module6-sticky-top) - var(--amc-module6-sticky-bottom));
+      }
+
+      body[data-page="amcFrame"] .amc-module6-selector-list {
+        min-height: 0;
+        height: 100%;
+        max-height: none;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      body[data-page="amcFrame"] .amc-module6-selector-card {
+        position: static;
+        height: auto !important;
+        max-height: none;
+      }
+
+      body[data-page="amcFrame"] .amc-module6-selector-list {
+        height: auto;
+        max-height: 420px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
     }
 
     body[data-page="amcFrame"] .amc-frame-chart-card[hidden] {
@@ -8656,7 +9461,7 @@
     body[data-page="amcFrame"] .amc-interval-axis-title {
       fill: #526684;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 400;
     }
 
     body[data-page="amcFrame"] .amc-interval-axis-label,
@@ -9773,9 +10578,16 @@
                 <article class="amc-frame-block">
                   <div>
                     <h3>关联组合深度分析</h3>
-                    <p>二级模块 3.5：双向关联机制散点图（当前隐藏）</p>
+                    <p>二级模块 3.5：双向关联机制气泡矩阵</p>
                   </div>
-                  <span class="amc-frame-state">已隐藏</span>
+                  <span class="amc-frame-state">已生成</span>
+                </article>
+                <article class="amc-frame-block">
+                  <div>
+                    <h3>关联组合深度分析</h3>
+                    <p>二级模块 3.6：规模修正关联指数 TOP 15</p>
+                  </div>
+                  <span class="amc-frame-state">已生成</span>
                 </article>
                 <article class="amc-frame-block">
                   <div>
@@ -10061,6 +10873,13 @@
                 </div>
                 <span class="status-pill">明细</span>
               </div>
+              <div class="amc-role-detail-toolbar">
+                <div class="amc-role-detail-filter">
+                  <label class="sr-only" for="frameRoleDetailRoleFilter">产品角色筛选</label>
+                  <select id="frameRoleDetailRoleFilter" aria-label="产品角色筛选"></select>
+                  <button class="amc-role-detail-filter-clear" id="frameRoleDetailRoleFilterClear" type="button" aria-label="清空产品角色筛选" title="清空筛选" hidden>&times;</button>
+                </div>
+              </div>
               <div class="amc-role-detail-table-wrap" id="frameRoleDetailTableWrap"></div>
             </section>
           </section>
@@ -10120,56 +10939,78 @@
                       <span class="amc-overview-index">3.3</span>
                       <div>
                         <h4 id="frameModule33Title">升级与降级路径规模对比</h4>
-                        <p>对比 TOP 10 升级购买组合与 TOP 10 降级配件购买组合。</p>
+                        <p>对比升级购买组合与降级配件购买组合。</p>
                       </div>
                     </div>
-                    <span class="status-pill">TOP 10</span>
                   </div>
                   <div class="amc-module3-chart amc-module3-chart-updown" id="frameModule33Chart" role="img" aria-label="升级与降级路径规模对比图"></div>
                 </section>
               </div>
 
               <div class="amc-module3-view-layout amc-module3-quality-layout" data-frame-module3-view-layout="quality">
+                <div class="amc-module3-quality-controls" id="frameModule3QualityControls" aria-label="质量视角筛选" hidden>
+                  <div class="amc-segmented-control amc-module3-quality-tabs" role="tablist" aria-label="关联质量图表">
+                    <button class="amc-segment-btn is-active" type="button" data-frame-module3-quality-tab="heatmap" role="tab" aria-selected="true">关联热力图</button>
+                    <button class="amc-segment-btn" type="button" data-frame-module3-quality-tab="mechanism" role="tab" aria-selected="false">关联机制</button>
+                  </div>
+                  <div class="amc-module3-sample-filter" role="group" aria-label="最低样本量">
+                    <span>最低样本量:</span>
+                    <div class="amc-module3-sample-options">
+                      <button class="amc-module3-sample-btn is-active" type="button" data-frame-module3-min-sample="10" aria-pressed="true">≥10人</button>
+                      <button class="amc-module3-sample-btn" type="button" data-frame-module3-min-sample="20" aria-pressed="false">≥20人</button>
+                      <button class="amc-module3-sample-btn" type="button" data-frame-module3-min-sample="0" aria-pressed="false">不限</button>
+                    </div>
+                  </div>
+                </div>
+
                 <section class="amc-module3-panel amc-module3-panel-wide" data-frame-module3-chart-id="3.4" aria-labelledby="frameModule34Title">
                   <div class="amc-module3-panel-head">
                     <div class="amc-overview-module-title">
                       <span class="amc-overview-index">3.4</span>
                       <div>
                         <h4 id="frameModule34Title">ASIN x ASIN 关联热力矩阵</h4>
-                        <p>通过指标切换和 TOP N 降低矩阵密度，定位高质量关联组合。</p>
+                        <p id="frameModule34Subtitle">行=Lead ASIN，列=Follow ASIN；颜色表示规模修正关联指数。</p>
                       </div>
                     </div>
-                    <div class="amc-module3-tools">
+                    <div class="amc-module3-tools amc-module3-heatmap-tools" aria-label="热力矩阵筛选">
                       <label class="amc-compact-select">
                         <span class="sr-only">热力矩阵指标</span>
                         <select id="frameModule34Metric" aria-label="热力矩阵指标">
-                          <option value="scaleScore">规模修正关联指数</option>
-                          <option value="associationScore">原始双向关联指数</option>
-                          <option value="conversionRate">组合转化率</option>
-                          <option value="attractionRate">组合吸引率</option>
-                          <option value="crossUsers">交叉购买人次</option>
+                          <option value="scaleAdjustedScore">修正关联指数</option>
+                          <option value="associationScore">原始关联指数</option>
+                          <option value="conversionRate">转化率</option>
+                          <option value="attractionRate">吸引率</option>
+                          <option value="crossUsers">组合人数</option>
                         </select>
-                        <button class="amc-inline-clear" type="button" id="frameModule34MetricClear" aria-label="清空热力矩阵指标" title="清空热力矩阵指标">
-                          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                            <path d="M6 6l12 12"></path>
-                            <path d="M18 6L6 18"></path>
-                          </svg>
-                        </button>
                       </label>
                       <label class="amc-compact-select">
-                        <span class="sr-only">热力矩阵 TOP 数</span>
-                        <select id="frameModule34TopN" aria-label="热力矩阵 TOP 数">
-                          <option value="15">TOP 15</option>
-                          <option value="20">TOP 20</option>
-                          <option value="30" selected>TOP 30</option>
+                        <span class="sr-only">热力矩阵展示数量</span>
+                        <select id="frameModule34TopN" aria-label="热力矩阵展示数量">
+                          <option value="10">TOP 10</option>
+                          <option value="20" selected>TOP 20</option>
+                          <option value="30">TOP 30</option>
                         </select>
-                        <button class="amc-inline-clear" type="button" id="frameModule34TopNClear" aria-label="清空热力矩阵 TOP 数" title="清空热力矩阵 TOP 数">
-                          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                            <path d="M6 6l12 12"></path>
-                            <path d="M18 6L6 18"></path>
-                          </svg>
-                        </button>
                       </label>
+                      <div class="amc-module3-asin-picker" id="frameModule34AsinPicker">
+                        <label class="sr-only" for="frameModule34AsinSearch">搜索 ASIN</label>
+                        <div class="amc-module3-asin-search-field">
+                          <input id="frameModule34AsinSearch" type="search" autocomplete="off" placeholder="搜索 ASIN" aria-autocomplete="list" aria-controls="frameModule34AsinOptions" aria-expanded="false">
+                          <button class="amc-module3-asin-picker-clear" id="frameModule34AsinClear" type="button" aria-label="清空 ASIN 筛选" title="清空筛选">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                              <path d="M18 6 6 18"></path>
+                              <path d="m6 6 12 12"></path>
+                            </svg>
+                          </button>
+                          <button class="amc-module3-asin-picker-toggle" id="frameModule34AsinToggle" type="button" aria-label="展开 ASIN 选项" aria-haspopup="listbox" aria-expanded="false" aria-controls="frameModule34AsinOptions">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                              <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="amc-module3-asin-picker-popover">
+                          <div class="amc-module3-asin-picker-options" id="frameModule34AsinOptions" role="listbox" aria-label="ASIN 单选"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="amc-module3-heatmap-layout">
@@ -10177,37 +11018,58 @@
                     <div class="amc-heatmap-legend" id="frameModule34Legend" aria-label="热力矩阵色阶图例">
                       <div class="amc-heatmap-legend-body">
                         <span class="amc-heatmap-legend-title" data-heatmap-metric>规模修正关联指数</span>
-                        <div class="amc-heatmap-legend-scale">
-                          <span class="amc-heatmap-legend-level high">高</span>
-                          <span class="amc-heatmap-legend-bar" aria-hidden="true">
-                            <span class="amc-heatmap-legend-handle"></span>
-                          </span>
-                          <span class="amc-heatmap-legend-level low">低</span>
-                        </div>
-                        <div class="amc-heatmap-legend-values">
-                          <span class="amc-heatmap-legend-value max" data-heatmap-max>0</span>
-                          <span class="amc-heatmap-legend-value mid" data-heatmap-mid>0</span>
-                          <span class="amc-heatmap-legend-value min" data-heatmap-min>0</span>
-                        </div>
+                        <span class="amc-heatmap-legend-level low">低</span>
+                        <span class="amc-heatmap-legend-value min" data-heatmap-min>0</span>
+                        <span class="amc-heatmap-legend-bar" aria-hidden="true"></span>
+                        <span class="amc-heatmap-legend-value max" data-heatmap-max>0</span>
+                        <span class="amc-heatmap-legend-level high">高</span>
                       </div>
                     </div>
                   </div>
                 </section>
 
-                  <section class="amc-module3-panel" data-frame-module3-chart-id="3.5" aria-labelledby="frameModule35Title" hidden>
+                <section class="amc-module3-panel amc-module3-panel-wide" data-frame-module3-chart-id="3.5" aria-labelledby="frameModule35Title">
                   <div class="amc-module3-panel-head">
                     <div class="amc-overview-module-title">
                       <span class="amc-overview-index">3.5</span>
                       <div>
-                        <h4 id="frameModule35Title">双向关联机制散点图</h4>
-                        <p>右上且气泡较大的组合，代表双向效率和规模都更优。</p>
+                        <h4 id="frameModule35Title">双向关联机制气泡矩阵</h4>
+                        <p>X=转化率，Y=吸引率，气泡大小=组合人数，颜色=规模修正关联指数。</p>
                       </div>
                     </div>
-                    <span class="status-pill">质量</span>
+                    <span class="status-pill">关联机制</span>
                   </div>
                   <div class="amc-module3-chart amc-module3-chart-scatter" id="frameModule35Chart" role="img" aria-label="双向关联机制气泡散点图"></div>
                 </section>
+
+                <section class="amc-module3-panel amc-module3-panel-wide" data-frame-module3-chart-id="3.6" aria-labelledby="frameModule36Title">
+                  <div class="amc-module3-panel-head">
+                    <div class="amc-overview-module-title">
+                      <span class="amc-overview-index">3.6</span>
+                      <div>
+                        <h4 id="frameModule36Title">规模修正关联指数 TOP 15</h4>
+                        <p>修正指数 = 原始双向关联指数 x sqrt(组合人数 / (组合人数 + 20))。</p>
+                      </div>
+                    </div>
+                    <span class="status-pill">TOP 15</span>
+                  </div>
+                  <div class="amc-module3-chart amc-module3-chart-ranking" id="frameModule36Chart" role="img" aria-label="规模修正关联指数 TOP 15 横向柱状图"></div>
+                </section>
               </div>
+
+              <section class="amc-module3-panel amc-module3-panel-wide amc-module3-detail-panel" aria-labelledby="frameModule37Title">
+                <div class="amc-module3-panel-head">
+                  <div class="amc-overview-module-title">
+                    <span class="amc-overview-index">3.7</span>
+                    <div>
+                      <h4 id="frameModule37Title">关联组合明细表</h4>
+                      <p id="frameModule37Subtitle">继承当前模块视角与筛选条件，按当前视角排序展示。</p>
+                    </div>
+                  </div>
+                  <span class="status-pill" id="frameModule37Count">当前 0 条</span>
+                </div>
+                <div class="amc-module3-detail-table-wrap" id="frameModule37TableWrap" aria-live="polite"></div>
+              </section>
             </div>
             <div class="amc-module3-empty" id="frameModule3Empty" hidden>当前视角暂无关联图表</div>
           </section>
@@ -10348,6 +11210,20 @@
                   <div class="amc-module4-detail" id="frameModule44Detail" aria-live="polite"></div>
                 </section>
               </div>
+
+              <section class="amc-module4-panel amc-module4-panel-wide amc-module4-detail-table-panel" aria-labelledby="frameModule45Title">
+                <div class="amc-module4-panel-head">
+                  <div class="amc-overview-module-title">
+                    <span class="amc-overview-index">4.5</span>
+                    <div>
+                      <h4 id="frameModule45Title">高价值组合明细表</h4>
+                      <p>逐行复核组合规模、购买节奏、修正关联指数与价格路径，支持 Virtual Bundle 评估。</p>
+                    </div>
+                  </div>
+                  <span class="status-pill" id="frameModule45Count">0 条</span>
+                </div>
+                <div class="amc-module4-detail-table-wrap" id="frameModule45TableWrap" aria-live="polite"></div>
+              </section>
             </div>
           </section>
 
@@ -10427,6 +11303,10 @@
                     </div>
                   </div>
                   <div class="amc-module5-tools">
+                    <div class="amc-segmented-control amc-module5-view-tabs" role="tablist" aria-label="核心组合表格视图">
+                      <button class="amc-segment-btn is-active" type="button" data-frame-module5-view="top" role="tab" aria-selected="true">TOP表</button>
+                      <button class="amc-segment-btn" type="button" data-frame-module5-view="detail" role="tab" aria-selected="false">明细表</button>
+                    </div>
                     <label class="amc-module5-tool-select">
                       <span class="sr-only">明细策略筛选</span>
                       <select id="frameModule53Strategy" aria-label="核心组合策略筛选">
@@ -10444,6 +11324,7 @@
                 </div>
                 <div class="amc-module5-advice" id="frameModule53Advice" aria-live="polite"></div>
                 <div class="amc-module5-list" id="frameModule53List" aria-label="核心组合 TOP 10 明细"></div>
+                <div class="amc-module5-detail-table-wrap" id="frameModule53TableWrap" aria-label="核心组合明细表" hidden></div>
               </section>
             </div>
           </section>
@@ -12902,13 +13783,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       unassignedChartHandling: "hide",
       views: {
         scale: { label: "规模视角", charts: ["3.1", "3.2", "3.3"] },
-        quality: { label: "质量视角", charts: ["3.4"] }
+        quality: { label: "质量视角", charts: ["3.4", "3.5", "3.6"] }
       }
     };
 
     const frameModule3MetricConfig = {
-      scaleScore: { label: "规模修正关联指数", type: "score" },
-      associationScore: { label: "原始双向关联指数", type: "score" },
+      scaleAdjustedScore: { label: "规模修正关联指数", type: "percent" },
+      associationScore: { label: "原始双向关联指数", type: "percent" },
       conversionRate: { label: "组合转化率", type: "percent" },
       attractionRate: { label: "组合吸引率", type: "percent" },
       crossUsers: { label: "交叉购买人次", type: "number" }
@@ -12916,9 +13797,18 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     const frameModule3State = {
       view: frameModule3ViewConfig.defaultView,
-      matrixMetric: "scaleScore",
-      matrixTopN: 30,
+      qualityTab: "heatmap",
+      qualityMinSample: 10,
+      matrixMetric: "scaleAdjustedScore",
+      matrixTopN: 20,
+      matrixSearchAsin: "",
       selectedPairKey: null
+    };
+
+    const frameModule3HeatmapPickerState = {
+      choices: [],
+      query: "",
+      open: false
     };
 
     function frameModule3PricePath(priceMultiple) {
@@ -12956,16 +13846,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           const priceMultiple = Number(follow.price || 0) / Math.max(0.01, Number(lead.price || 0));
           const associationScore = Math.sqrt(Math.max(0, conversionRate * attractionRate));
           const scaleScore = associationScore * Math.log1p(crossUsers) * 100;
+          const scaleAdjustedScore = associationScore * Math.sqrt(crossUsers / Math.max(1, crossUsers + 20));
           records.push({
             pairKey: `${leadAsin}||${link.asin}`,
             leadAsin,
             followAsin: link.asin,
             pairLabel: `${leadAsin} → ${link.asin}`,
             crossUsers,
+            leadUsers: Number(lead.totalUsers || 0),
+            followUsers: Number(follow.totalUsers || 0),
             conversionRate,
             attractionRate,
             associationScore,
             scaleScore,
+            scaleAdjustedScore,
             priceMultiple,
             pricePath: frameModule3PricePath(priceMultiple),
             leadPrice: Number(lead.price || 0),
@@ -12991,6 +13885,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       return frameModule2FormatNumber(value);
     }
 
+    function frameModule3FormatMoney(value) {
+      return `$${Number(value || 0).toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })}`;
+    }
+
     function frameModule3FilteredRecords() {
       const selectedLead = new Set(frameFilterState.lead || []);
       const selectedFollow = new Set(frameFilterState.follow || []);
@@ -13001,8 +13902,88 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
     }
 
+    function frameModule3QualityRecords(records) {
+      const minSample = Number(frameModule3State.qualityMinSample || 0);
+      return minSample ? records.filter(record => Number(record.crossUsers || 0) >= minSample) : records;
+    }
+
+    function frameModule3HeatmapRecords(records) {
+      const selectedAsin = frameModule3State.matrixSearchAsin;
+      if (!selectedAsin) return records;
+      return records.filter(record => record.leadAsin === selectedAsin || record.followAsin === selectedAsin);
+    }
+
+    function frameModule3HeatmapAsinChoices(records) {
+      return [...new Set(records.flatMap(record => [record.leadAsin, record.followAsin]).filter(Boolean))]
+        .sort((a, b) => String(a).localeCompare(String(b)));
+    }
+
+    function frameModule3CloseHeatmapAsinPicker() {
+      const picker = document.getElementById("frameModule34AsinPicker");
+      const input = document.getElementById("frameModule34AsinSearch");
+      const toggle = document.getElementById("frameModule34AsinToggle");
+      frameModule3HeatmapPickerState.open = false;
+      frameModule3HeatmapPickerState.query = "";
+      picker?.classList.remove("is-open");
+      input?.setAttribute("aria-expanded", "false");
+      toggle?.setAttribute("aria-expanded", "false");
+      if (input) input.value = frameModule3State.matrixSearchAsin;
+    }
+
+    function frameModule3RenderHeatmapAsinOptions() {
+      const options = document.getElementById("frameModule34AsinOptions");
+      if (!options) return;
+      const selectedAsin = frameModule3State.matrixSearchAsin;
+      const visibleChoices = frameModule3HeatmapPickerState.choices.filter(asin =>
+        fuzzyMatch(asin, frameModule3HeatmapPickerState.query)
+      );
+      options.innerHTML = visibleChoices.length
+        ? visibleChoices.map(asin => {
+          const selected = asin === selectedAsin;
+          return `
+            <button class="amc-module3-asin-picker-option${selected ? " is-selected" : ""}" type="button" role="option" aria-selected="${selected}" data-frame-module3-heatmap-asin="${escapeHtml(asin)}">
+              <span title="${escapeHtml(asin)}">${escapeHtml(asin)}</span>
+              ${selected ? `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 4.2 4.2L19 6.5"></path></svg>` : ""}
+            </button>`;
+        }).join("")
+        : `<div class="amc-module3-asin-picker-empty">暂无匹配 ASIN</div>`;
+    }
+
+    function frameModule3RenderHeatmapControls(records) {
+      const metricSelect = document.getElementById("frameModule34Metric");
+      const topNSelect = document.getElementById("frameModule34TopN");
+      const subtitle = document.getElementById("frameModule34Subtitle");
+      const picker = document.getElementById("frameModule34AsinPicker");
+      const input = document.getElementById("frameModule34AsinSearch");
+      const toggle = document.getElementById("frameModule34AsinToggle");
+      const choices = frameModule3HeatmapAsinChoices(records);
+
+      if (frameModule3State.matrixSearchAsin && !choices.includes(frameModule3State.matrixSearchAsin)) {
+        frameModule3State.matrixSearchAsin = "";
+        frameModule3State.selectedPairKey = null;
+        frameModule3HeatmapPickerState.query = "";
+      }
+
+      frameModule3HeatmapPickerState.choices = choices;
+      if (metricSelect) metricSelect.value = frameModule3State.matrixMetric;
+      if (topNSelect) topNSelect.value = String(frameModule3State.matrixTopN);
+      const metric = frameModule3MetricConfig[frameModule3State.matrixMetric] || frameModule3MetricConfig.scaleAdjustedScore;
+      if (subtitle) subtitle.textContent = `行=Lead ASIN，列=Follow ASIN；颜色表示${metric.label}。`;
+      picker?.classList.toggle("has-selection", Boolean(frameModule3State.matrixSearchAsin));
+      picker?.classList.toggle("is-open", frameModule3HeatmapPickerState.open);
+      input?.setAttribute("aria-expanded", String(frameModule3HeatmapPickerState.open));
+      toggle?.setAttribute("aria-expanded", String(frameModule3HeatmapPickerState.open));
+      if (input) input.value = frameModule3HeatmapPickerState.open
+        ? frameModule3HeatmapPickerState.query
+        : frameModule3State.matrixSearchAsin;
+      frameModule3RenderHeatmapAsinOptions();
+    }
+
     function frameModule3VisibleChartIds() {
       const viewConfig = frameModule3ViewConfig.views[frameModule3State.view];
+      if (frameModule3State.view === "quality") {
+        return new Set([frameModule3State.qualityTab === "mechanism" ? "3.5" : "3.4", "3.6"]);
+      }
       return new Set(viewConfig?.charts || []);
     }
 
@@ -13034,6 +14015,132 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       return window.echarts.getInstanceByDom(element) || window.echarts.init(element, null, { renderer: "canvas" });
     }
 
+    const frameModule3ChartDomIds = {
+      "3.1": "frameModule31Chart",
+      "3.2": "frameModule32Chart",
+      "3.3": "frameModule33Chart",
+      "3.4": "frameModule34Chart",
+      "3.5": "frameModule35Chart",
+      "3.6": "frameModule36Chart"
+    };
+
+    function frameModule3ScheduleVisibleChartResize() {
+      // Wait for the active CSS grid to receive its final dimensions before ECharts measures it.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const section = document.getElementById("frameModule3Section");
+          if (section?.hidden) return;
+          frameModule3VisibleChartIds().forEach(chartId => {
+            const element = document.getElementById(frameModule3ChartDomIds[chartId]);
+            if (element?.clientWidth > 0 && element.clientHeight > 0) {
+              window.echarts?.getInstanceByDom(element)?.resize();
+              if (chartId === "3.3") {
+                frameModule3RenderChart33(frameModule3FilteredRecords());
+              }
+            }
+          });
+        });
+      });
+    }
+
+    function frameModule3DetailRecords(records, qualityRecords) {
+      const source = frameModule3State.view === "quality" ? qualityRecords : records;
+      const sortByQuality = frameModule3State.view === "quality";
+      return source.slice().sort((a, b) => {
+        const primary = sortByQuality
+          ? Number(b.scaleAdjustedScore || 0) - Number(a.scaleAdjustedScore || 0)
+          : Number(b.crossUsers || 0) - Number(a.crossUsers || 0);
+        return primary ||
+          Number(b.crossUsers || 0) - Number(a.crossUsers || 0) ||
+          a.pairLabel.localeCompare(b.pairLabel, "zh-CN");
+      });
+    }
+
+    function frameModule3SelectPair(pairKey) {
+      if (!pairKey) return;
+      frameModule3State.selectedPairKey = pairKey;
+      frameModule3RenderAll();
+      renderFrameModule4();
+    }
+
+    function frameModule3RenderDetailTable(records) {
+      const wrap = document.getElementById("frameModule37TableWrap");
+      const subtitle = document.getElementById("frameModule37Subtitle");
+      const count = document.getElementById("frameModule37Count");
+      if (!wrap) return;
+      const isQuality = frameModule3State.view === "quality";
+      if (subtitle) {
+        const sampleLabel = frameModule3State.qualityMinSample
+          ? `≥${frameModule3State.qualityMinSample}人`
+          : "不限";
+        subtitle.textContent = isQuality
+          ? `质量视角：继承最低样本量 ${sampleLabel}，按修正关联指数排序。`
+          : "规模视角：继承全局筛选，按组合人数排序。";
+      }
+      if (count) count.textContent = `当前 ${frameModule2FormatNumber(records.length)} 条`;
+
+      const bodyHtml = records.length
+        ? records.map((record, index) => `
+            <tr>
+              <td class="is-center"><span class="amc-module3-detail-rank">${index + 1}</span></td>
+              <td title="${escapeHtml(record.pairLabel)}"><span class="amc-module3-detail-pair">${escapeHtml(record.pairLabel)}</span></td>
+              <td class="is-right"><span class="amc-module3-detail-number">${frameModule2FormatNumber(record.crossUsers)}</span></td>
+              <td class="is-right"><span class="amc-module3-detail-number">${frameModule2FormatNumber(record.leadUsers)}</span></td>
+              <td class="is-right"><span class="amc-module3-detail-number">${frameModule2FormatNumber(record.followUsers)}</span></td>
+              <td class="is-right"><span class="amc-module3-detail-number">${Number(record.avgInterval || 0).toFixed(1)} 天</span></td>
+              <td class="is-right"><span class="amc-module3-detail-money">${frameModule3FormatMoney(record.leadPrice)}</span></td>
+              <td class="is-right"><span class="amc-module3-detail-money">${frameModule3FormatMoney(record.followPrice)}</span></td>
+              <td class="is-path-col">
+                <span class="amc-module4-path-tag ${escapeHtml(record.pricePath)}" title="${escapeHtml(frameModule3PricePathLabel(record.pricePath))}" aria-label="${escapeHtml(frameModule3PricePathLabel(record.pricePath))}">
+                  <span class="amc-module4-path-icon" aria-hidden="true">${frameModule4PricePathIcon(record.pricePath)}</span>
+                  <span>${escapeHtml(frameModule3PricePathLabel(record.pricePath))}</span>
+                </span>
+              </td>
+              <td class="is-score-col"><span class="amc-module3-detail-percent">${frameModule3FormatMetric(record.scaleAdjustedScore, "percent")}</span></td>
+              <td class="is-right"><span class="amc-module3-detail-percent">${frameModule3FormatMetric(record.associationScore, "percent")}</span></td>
+              <td class="is-right"><span class="amc-module3-detail-percent">${frameModule3FormatMetric(record.conversionRate, "percent")}</span></td>
+              <td class="is-right"><span class="amc-module3-detail-percent">${frameModule3FormatMetric(record.attractionRate, "percent")}</span></td>
+            </tr>`).join("")
+        : `<tr><td colspan="13" class="is-center" style="padding:26px 12px;color:#7b8799;">暂无满足当前筛选条件的关联组合</td></tr>`;
+
+      wrap.innerHTML = `
+        <table class="amc-module3-detail-table">
+          <colgroup>
+            <col style="width:64px">
+            <col style="width:220px">
+            <col style="width:112px">
+            <col style="width:112px">
+            <col style="width:112px">
+            <col style="width:112px">
+            <col style="width:112px">
+            <col style="width:112px">
+            <col style="width:112px">
+            <col style="width:112px">
+            <col style="width:112px">
+            <col style="width:112px">
+            <col style="width:112px">
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="is-center">排名</th>
+              <th>Lead → Follow</th>
+              <th class="is-right">组合人数</th>
+              <th class="is-right">Lead购买人数</th>
+              <th class="is-right">Follow购买人数</th>
+              <th class="is-right">平均间隔</th>
+              <th class="is-right">Lead单价</th>
+              <th class="is-right">Follow单价</th>
+              <th class="is-path-col">价格路径</th>
+              <th class="is-score-col">修正关联指数</th>
+              <th class="is-right">原始关联指数</th>
+              <th class="is-right">转化率</th>
+              <th class="is-right">吸引率</th>
+            </tr>
+          </thead>
+          <tbody>${bodyHtml}</tbody>
+        </table>`;
+    }
+
     function frameModule3RenderVisibility() {
       const visible = frameModule3VisibleChartIds();
       document.querySelectorAll("[data-frame-module3-view-layout]").forEach(layout => {
@@ -13047,6 +14154,18 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const active = button.dataset.frameModule3View === frameModule3State.view;
         button.classList.toggle("is-active", active);
         button.setAttribute("aria-selected", String(active));
+      });
+      const qualityControls = document.getElementById("frameModule3QualityControls");
+      if (qualityControls) qualityControls.hidden = frameModule3State.view !== "quality";
+      document.querySelectorAll("[data-frame-module3-quality-tab]").forEach(button => {
+        const active = button.dataset.frameModule3QualityTab === frameModule3State.qualityTab;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", String(active));
+      });
+      document.querySelectorAll("[data-frame-module3-min-sample]").forEach(button => {
+        const active = Number(button.dataset.frameModule3MinSample) === Number(frameModule3State.qualityMinSample);
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", String(active));
       });
       const empty = document.getElementById("frameModule3Empty");
       if (empty) empty.hidden = visible.size > 0;
@@ -13227,17 +14346,23 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           data: rows.map(record => ({
             value: record.crossUsers,
             pairKey: record.pairKey,
-            itemStyle: { color: frameModule3PathColors.flat, borderRadius: [0, 5, 5, 0] }
+            itemStyle: record.pairKey === frameModule3State.selectedPairKey
+              ? { color: "#35b8aa", borderColor: "#147c71", borderWidth: 2 }
+              : { color: frameModule3PathColors.flat, borderRadius: [0, 5, 5, 0] }
           })),
           label: { show: true, position: "right", color: "#354d6d", fontSize: 11, formatter: params => frameModule2FormatNumber(params.value) }
         }]
       }, true);
       chart.off("click");
+      chart.on("click", params => frameModule3SelectPair(params.data?.pairKey));
     }
 
     function frameModule3RenderChart33(records) {
       const chart = frameModule3GetChart("frameModule33Chart");
       if (!chart) return;
+      const chartElement = chart.getDom();
+      if (!chartElement || chartElement.clientWidth <= 0 || chartElement.clientHeight <= 0) return;
+      chart.resize();
       const pathLabels = { upgrade: "升级购买", downgrade: "降级/配件购买" };
       const colors = {
         upgrade: frameModule3PathColors.upgrade,
@@ -13265,10 +14390,29 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ...rows.flatMap(row => [row.upgrade?.crossUsers || 0, row.downgrade?.crossUsers || 0]),
         1
       );
+      const chartWidth = chartElement.clientWidth || chart.getWidth?.() || 1120;
+      const isNarrow = chartWidth < 760;
+      const sideLabelInset = isNarrow ? 12 : 20;
+      const sideLabelWidth = isNarrow
+        ? 124
+        : Math.max(156, Math.min(220, Math.round(chartWidth * 0.17)));
+      const gridSide = isNarrow
+        ? 172
+        : Math.max(242, Math.min(296, sideLabelWidth + 86));
+      const labelTextStyle = {
+        fill: "#53657b",
+        fontFamily: '"Microsoft YaHei", "PingFang SC", Arial, sans-serif',
+        fontSize: isNarrow ? 10 : 11,
+        fontWeight: 400,
+        lineHeight: 16,
+        width: sideLabelWidth,
+        overflow: "truncate",
+        ellipsis: "..."
+      };
       chart.setOption({
         animation: false,
         color: [colors.downgrade, colors.upgrade],
-        grid: { left: 208, right: 216, top: 54, bottom: 44 },
+        grid: { left: gridSide, right: gridSide, top: 54, bottom: 44 },
         legend: {
           top: 2,
           left: "center",
@@ -13305,7 +14449,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         yAxis: {
           type: "category",
           inverse: true,
-          data: rows.map(row => `TOP ${row.rank}`),
+          data: rows.map(row => String(row.rank)),
           axisLabel: { show: false },
           axisTick: { show: false },
           axisLine: { show: false }
@@ -13319,18 +14463,21 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             itemStyle: { color: colors.downgrade, borderRadius: [5, 0, 0, 5] },
             data: rows.map(row => ({
               value: row.downgrade ? -row.downgrade.crossUsers : 0,
-              record: row.downgrade
+              record: row.downgrade,
+              pairKey: row.downgrade?.pairKey,
+              itemStyle: row.downgrade?.pairKey === frameModule3State.selectedPairKey
+                ? { color: "#ef9c24", borderColor: "#b76b00", borderWidth: 2 }
+                : undefined
             })),
             label: {
               show: true,
               position: "left",
-              color: "#5d6675",
-              fontSize: 10,
-              width: 196,
-              overflow: "truncate",
+              align: "right",
+              color: "#354d6d",
+              fontSize: 11,
               formatter: params => {
                 const record = params.data?.record;
-                return record ? `TOP ${params.dataIndex + 1}  ${record.pairLabel}  ${frameModule2FormatNumber(record.crossUsers)}` : "";
+                return record ? frameModule2FormatNumber(record.crossUsers) : "";
               }
             },
             emphasis: { focus: "series" }
@@ -13342,24 +14489,73 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             itemStyle: { color: colors.upgrade, borderRadius: [0, 5, 5, 0] },
             data: rows.map(row => ({
               value: row.upgrade ? row.upgrade.crossUsers : 0,
-              record: row.upgrade
+              record: row.upgrade,
+              pairKey: row.upgrade?.pairKey,
+              itemStyle: row.upgrade?.pairKey === frameModule3State.selectedPairKey
+                ? { color: "#e85c90", borderColor: "#b94170", borderWidth: 2 }
+                : undefined
             })),
             label: {
               show: true,
               position: "right",
-              color: "#5d6675",
-              fontSize: 10,
-              width: 204,
-              overflow: "truncate",
+              color: "#354d6d",
+              fontSize: 11,
               formatter: params => {
                 const record = params.data?.record;
-                return record ? `${frameModule2FormatNumber(record.crossUsers)}  ${record.pairLabel}  TOP ${params.dataIndex + 1}` : "";
+                return record ? frameModule2FormatNumber(record.crossUsers) : "";
               }
             },
             emphasis: { focus: "series" }
           }
         ]
       }, true);
+      const rowLabels = rows.flatMap(row => {
+        const rawY = chart.convertToPixel({ yAxisIndex: 0 }, String(row.rank));
+        const y = Array.isArray(rawY) ? rawY[1] : rawY;
+        return [
+          row.downgrade ? {
+            id: `module33-downgrade-label-${row.rank}`,
+            type: "text",
+            x: sideLabelInset,
+            y,
+            z: 20,
+            silent: false,
+            cursor: "pointer",
+            onclick: () => frameModule3SelectPair(row.downgrade?.pairKey),
+            style: {
+              ...labelTextStyle,
+              text: row.downgrade.pairLabel,
+              align: "left",
+              verticalAlign: "middle",
+              fill: row.downgrade.pairKey === frameModule3State.selectedPairKey ? "#2f3f58" : labelTextStyle.fill,
+              fontWeight: row.downgrade.pairKey === frameModule3State.selectedPairKey ? 600 : 400
+            }
+          } : null,
+          row.upgrade ? {
+            id: `module33-upgrade-label-${row.rank}`,
+            type: "text",
+            x: chartWidth - sideLabelInset,
+            y,
+            z: 20,
+            silent: false,
+            cursor: "pointer",
+            onclick: () => frameModule3SelectPair(row.upgrade?.pairKey),
+            style: {
+              ...labelTextStyle,
+              text: row.upgrade.pairLabel,
+              align: "right",
+              verticalAlign: "middle",
+              fill: row.upgrade.pairKey === frameModule3State.selectedPairKey ? "#2f3f58" : labelTextStyle.fill,
+              fontWeight: row.upgrade.pairKey === frameModule3State.selectedPairKey ? 600 : 400
+            }
+          } : null
+        ].filter(Boolean);
+      });
+      chart.setOption({ graphic: rowLabels }, { replaceMerge: ["graphic"] });
+      chart.off("click");
+      chart.on("click", params => {
+        if (params.data?.pairKey) frameModule3SelectPair(params.data.pairKey);
+      });
     }
 
     function frameModule3RenderChart34(records) {
@@ -13371,8 +14567,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         frameModule3SetEmptyChart(chart, "暂无满足条件的关联组合");
         return;
       }
-      const metric = frameModule3MetricConfig[frameModule3State.matrixMetric] || frameModule3MetricConfig.scaleScore;
-      const topN = Number(frameModule3State.matrixTopN || 30);
+      const metric = frameModule3MetricConfig[frameModule3State.matrixMetric] || frameModule3MetricConfig.scaleAdjustedScore;
+      const topN = Number(frameModule3State.matrixTopN || 20);
       const topRecords = records
         .slice()
         .sort((a, b) => frameModule3MetricValue(b, frameModule3State.matrixMetric) - frameModule3MetricValue(a, frameModule3State.matrixMetric))
@@ -13395,36 +14591,30 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const followIndex = new Map(followAsins.map((asin, index) => [asin, index]));
       const values = topRecords.map(record => frameModule3MetricValue(record, frameModule3State.matrixMetric));
       const minValue = Math.min(...values, 0);
-      const maxValue = Math.max(...values, 1);
-      const midValue = minValue + (maxValue - minValue) / 2;
+      const maxValue = Math.max(...values, 0.0001);
       const chartElement = chart.getDom();
       const isNarrow = chartElement.clientWidth < 680;
-      const rowHeight = isNarrow ? 22 : 20;
-      const minHeight = isNarrow ? 400 : 430;
-      const maxHeight = isNarrow ? 520 : 540;
-      const chartHeight = Math.min(maxHeight, Math.max(minHeight, 120 + leadAsins.length * rowHeight));
-      const gridLeft = isNarrow ? 164 : 178;
+      const rowHeight = isNarrow ? 26 : 24;
+      const minHeight = isNarrow ? 420 : 470;
+      const maxHeight = isNarrow ? 590 : 640;
+      const chartHeight = Math.min(maxHeight, Math.max(minHeight, 122 + leadAsins.length * rowHeight));
+      const gridLeft = isNarrow ? 146 : 158;
       const gridTop = 18;
-      const gridBottom = isNarrow ? 122 : 116;
-      const matrixPlotHeight = Math.max(220, chartHeight - gridTop - gridBottom);
-      const legendHeight = matrixPlotHeight;
+      const gridBottom = isNarrow ? 74 : 68;
       chartElement.style.height = `${chartHeight}px`;
       chart.resize();
       if (legendElement) {
-        legendElement.style.height = `${legendHeight}px`;
-        legendElement.style.marginTop = `${gridTop}px`;
-      }
-      if (legendElement) {
         const minNode = legendElement.querySelector("[data-heatmap-min]");
-        const midNode = legendElement.querySelector("[data-heatmap-mid]");
         const maxNode = legendElement.querySelector("[data-heatmap-max]");
         const metricNode = legendElement.querySelector("[data-heatmap-metric]");
         if (minNode) minNode.textContent = frameModule3FormatMetric(minValue, metric.type);
-        if (midNode) midNode.textContent = frameModule3FormatMetric(midValue, metric.type);
         if (maxNode) maxNode.textContent = frameModule3FormatMetric(maxValue, metric.type);
         if (metricNode) metricNode.textContent = metric.label;
       }
-      const heatmapPalette = ["#eef2ff", "#c3cbf5", "#7d84df", "#4d469e"];
+      const heatmapPalette = ["#ffd5e4", "#ffb3d0", "#ff9ec2", "#f57eab", "#ed5e94"];
+      const baseData = leadAsins.flatMap((leadAsin, leadPosition) => (
+        followAsins.map((followAsin, followPosition) => [followPosition, leadPosition, 0])
+      ));
       const heatData = topRecords.map(record => {
         const value = frameModule3MetricValue(record, frameModule3State.matrixMetric);
         const selected = frameModule3State.selectedPairKey === record.pairKey;
@@ -13434,19 +14624,19 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           record,
           itemStyle: selected
             ? {
-                borderColor: "#ffffff",
-                borderWidth: 2
+                borderColor: "#102346",
+                borderWidth: 2.5
               }
             : {
                 borderColor: "#ffffff",
-                borderWidth: 1
+                borderWidth: 1.3
               }
         };
       });
       chart.setOption({
         animation: false,
         backgroundColor: "#ffffff",
-        grid: { left: gridLeft, right: isNarrow ? 14 : 24, top: gridTop, bottom: gridBottom },
+        grid: { left: gridLeft, right: isNarrow ? 14 : 22, top: gridTop, bottom: gridBottom },
         tooltip: {
           position: "top",
           confine: true,
@@ -13465,6 +14655,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         },
         visualMap: {
           show: false,
+          seriesIndex: 1,
           min: minValue,
           max: maxValue,
           dimension: 2,
@@ -13474,14 +14665,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           type: "category",
           name: "Follow ASIN",
           nameLocation: "middle",
-          nameGap: 46,
+          nameGap: isNarrow ? 62 : 56,
           nameTextStyle: { color: "#63748d", fontSize: 12, fontWeight: 500 },
           data: followAsins,
           splitArea: { show: false },
-          splitLine: { show: true, lineStyle: { color: "#edf1f6", width: 1, type: "dashed" } },
-          axisLabel: { color: "#8a98aa", fontSize: 12, rotate: 32, margin: 10, interval: 0 },
+          splitLine: { show: false },
+          axisLabel: { color: "#68788e", fontSize: 11, rotate: followAsins.length > 12 ? 36 : 0, margin: 10, interval: 0 },
           axisLine: { lineStyle: { color: "#b6c0ce" } },
-          axisTick: { lineStyle: { color: "#d6deea" } }
+          axisTick: { show: false }
         },
         yAxis: {
           type: "category",
@@ -13492,13 +14683,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           inverse: true,
           data: leadAsins,
           splitArea: { show: false },
-          splitLine: { show: true, lineStyle: { color: "#edf1f6", width: 1, type: "dashed" } },
+          splitLine: { show: false },
           axisLabel: {
-            color: "#8a98aa",
-            fontSize: 12,
+            color: "#68788e",
+            fontSize: 11,
             lineHeight: 16,
             margin: 10,
-            width: 108,
+            width: isNarrow ? 102 : 116,
             overflow: "truncate",
             interval: 0,
             hideOverlap: false
@@ -13506,26 +14697,35 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           axisLine: { lineStyle: { color: "#b6c0ce" } },
           axisTick: { show: false }
         },
-        series: [{
-          type: "heatmap",
-          data: heatData,
-          itemStyle: { borderWidth: 0 },
-          label: { show: false },
-          emphasis: {
-            focus: "none",
+        series: [
+          {
+            type: "heatmap",
+            silent: true,
+            data: baseData,
             itemStyle: {
+              color: "#f4f6f8",
               borderColor: "#ffffff",
-              borderWidth: 2
+              borderWidth: 1.3
+            },
+            emphasis: { disabled: true }
+          },
+          {
+            type: "heatmap",
+            data: heatData,
+            label: { show: false },
+            emphasis: {
+              focus: "none",
+              itemStyle: {
+                borderColor: "#102346",
+                borderWidth: 2.5
+              }
             }
           }
-        }]
+        ]
       }, true);
       chart.off("click");
       chart.on("click", params => {
-        if (!params.data?.pairKey) return;
-        frameModule3State.selectedPairKey = params.data.pairKey;
-        frameModule3RenderAll();
-        renderFrameModule4();
+        frameModule3SelectPair(params.data?.pairKey);
       });
     }
 
@@ -13538,93 +14738,213 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
       const xValues = records.map(record => record.conversionRate);
       const yValues = records.map(record => record.attractionRate);
-      const xMedian = frameModule2Median(xValues);
-      const yMedian = frameModule2Median(yValues);
+      const highAssociationThreshold = 0.03;
+      const axisMax = (values, minimum) => {
+        const largest = Math.max(...values, minimum);
+        const step = largest <= 0.12 ? 0.02 : largest <= 0.3 ? 0.05 : 0.1;
+        return Math.ceil(largest / step) * step;
+      };
+      const xMax = axisMax(xValues, 0.12);
+      const yMax = axisMax(yValues, 0.12);
+      const scoreValues = records.map(record => Number(record.scaleAdjustedScore || 0));
       const scatterData = records.map(record => ({
-        value: [record.conversionRate, record.attractionRate, record.crossUsers, record.scaleScore],
+        value: [record.conversionRate, record.attractionRate, record.crossUsers, record.scaleAdjustedScore],
         pairKey: record.pairKey,
         record,
         itemStyle: frameModule3State.selectedPairKey === record.pairKey
-          ? { borderColor: "#6d86e9", borderWidth: 2.5, shadowBlur: 8, shadowColor: "rgba(109, 134, 233, 0.28)" }
-          : { borderColor: "#ffffff", borderWidth: 1 }
+          ? { borderColor: "#b94170", borderWidth: 2.5, shadowBlur: 8, shadowColor: "rgba(222, 77, 132, 0.28)" }
+          : { borderColor: "#ffffff", borderWidth: 1.2 }
       }));
       chart.setOption({
         animation: false,
-        grid: { left: 62, right: 24, top: 28, bottom: 58 },
+        grid: { left: 70, right: 28, top: 26, bottom: 58 },
         tooltip: {
           confine: true,
           formatter: params => {
             const record = params.data?.record;
             return record
-              ? `<strong>${escapeHtml(record.pairLabel)}</strong><br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")}<br>吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}<br>交叉购买人次：${frameModule2FormatNumber(record.crossUsers)}<br>规模修正关联指数：${record.scaleScore.toFixed(2)}`
+              ? `<strong>${escapeHtml(record.pairLabel)}</strong><br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")}<br>吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}<br>组合人数：${frameModule2FormatNumber(record.crossUsers)}人<br>规模修正关联指数：${frameModule3FormatMetric(record.scaleAdjustedScore, "percent")}`
               : "";
           }
         },
         visualMap: {
+          show: false,
           dimension: 3,
-          min: 0,
-          max: Math.max(...records.map(record => record.scaleScore), 1),
-          calculable: false,
-          orient: "horizontal",
-          left: "center",
-          top: 0,
-          itemWidth: 12,
-          itemHeight: 110,
-          textStyle: { color: "#7b89a2", fontSize: 10 },
-          text: ["高关联", "低关联"],
-          inRange: { color: ["#cfe0fb", "#7ca4ee", "#5b73f2", "#2748a5"] }
+          min: Math.min(...scoreValues, 0),
+          max: Math.max(...scoreValues, 0.0001),
+          inRange: { color: ["#ffd5e4", "#ff9ec2", "#ed5e94"] }
         },
         xAxis: {
           type: "value",
-          name: "组合转化率",
+          name: "转化率",
           nameLocation: "middle",
           nameGap: 34,
           min: 0,
+          max: xMax,
           axisLabel: { color: "#8a98aa", fontSize: 11, formatter: value => `${(value * 100).toFixed(0)}%` },
           nameTextStyle: { color: "#63748d", fontSize: 12 },
-          splitLine: { lineStyle: { color: "#e9eef5", type: "dashed" } }
+          splitLine: { lineStyle: { color: "#e9eef5", width: 1 } }
         },
         yAxis: {
           type: "value",
-          name: "组合吸引率",
+          name: "吸引率",
           nameLocation: "middle",
-          nameGap: 42,
+          nameGap: 48,
           min: 0,
+          max: yMax,
           axisLabel: { color: "#8a98aa", fontSize: 11, formatter: value => `${(value * 100).toFixed(0)}%` },
           nameTextStyle: { color: "#63748d", fontSize: 12 },
-          splitLine: { lineStyle: { color: "#e9eef5", type: "dashed" } }
+          splitLine: { lineStyle: { color: "#e9eef5", width: 1 } }
         },
         series: [{
           type: "scatter",
           data: scatterData,
-          symbolSize: value => Math.min(42, Math.max(12, 10 + Math.sqrt(Number(value[2] || 0)) * 1.35)),
+          symbolSize: value => Math.min(48, Math.max(9, 6 + Math.sqrt(Number(value[2] || 0)) * 1.35)),
           emphasis: { focus: "self", scale: 1.15 },
+          markArea: {
+            silent: true,
+            itemStyle: { color: "rgba(255, 148, 190, 0.10)" },
+            label: {
+              show: true,
+              color: "#c85a85",
+              fontSize: 11,
+              lineHeight: 16,
+              position: "insideTopRight",
+              formatter: "最强关联\n高转化+高吸引"
+            },
+            data: [[
+              { xAxis: highAssociationThreshold, yAxis: highAssociationThreshold },
+              { xAxis: xMax, yAxis: yMax }
+            ]]
+          },
           markLine: {
             symbol: "none",
             silent: true,
-            lineStyle: { color: "#c49a46", type: "dashed", width: 1 },
-            data: [{ xAxis: xMedian }, { yAxis: yMedian }]
+            lineStyle: { color: "#f0b3c9", type: "dashed", width: 1 },
+            data: [
+              {
+                xAxis: highAssociationThreshold,
+                label: {
+                  show: true,
+                  position: "insideEndTop",
+                  color: "#c85a85",
+                  fontSize: 11,
+                  formatter: () => `${(highAssociationThreshold * 100).toFixed(0)}%`
+                }
+              },
+              {
+                yAxis: highAssociationThreshold,
+                label: {
+                  show: true,
+                  position: "insideEndTop",
+                  color: "#c85a85",
+                  fontSize: 11,
+                  formatter: () => `${(highAssociationThreshold * 100).toFixed(0)}%`
+                }
+              }
+            ]
           }
         }]
       }, true);
       chart.off("click");
       chart.on("click", params => {
-        if (!params.data?.pairKey) return;
-        frameModule3State.selectedPairKey = params.data.pairKey;
-        frameModule3RenderAll();
-        renderFrameModule4();
+        frameModule3SelectPair(params.data?.pairKey);
+      });
+    }
+
+    function frameModule3RenderChart36(records) {
+      const chart = frameModule3GetChart("frameModule36Chart");
+      if (!chart) return;
+      const rows = records
+        .slice()
+        .sort((a, b) => b.scaleAdjustedScore - a.scaleAdjustedScore || b.crossUsers - a.crossUsers)
+        .slice(0, 15);
+      if (!rows.length) {
+        frameModule3SetEmptyChart(chart, "暂无满足条件的关联组合");
+        return;
+      }
+      const maxScore = Math.max(...rows.map(record => Number(record.scaleAdjustedScore || 0)), 0.0001);
+      chart.setOption({
+        animation: false,
+        grid: { left: 222, right: 74, top: 10, bottom: 34 },
+        tooltip: {
+          trigger: "axis",
+          axisPointer: { type: "shadow" },
+          confine: true,
+          formatter: params => {
+            const record = rows[params[0]?.dataIndex];
+            return record
+              ? `<strong>${escapeHtml(record.pairLabel)}</strong><br>规模修正关联指数：${frameModule3FormatMetric(record.scaleAdjustedScore, "percent")}<br>原始双向关联指数：${frameModule3FormatMetric(record.associationScore, "percent")}<br>组合人数：${frameModule2FormatNumber(record.crossUsers)}人<br>转化率 / 吸引率：${frameModule3FormatMetric(record.conversionRate, "percent")} / ${frameModule3FormatMetric(record.attractionRate, "percent")}`
+              : "";
+          }
+        },
+        xAxis: {
+          type: "value",
+          max: maxScore * 1.12,
+          name: "修正关联指数",
+          nameLocation: "end",
+          nameGap: 14,
+          nameTextStyle: { color: "#63748d", fontSize: 12 },
+          axisLabel: { color: "#8a98aa", fontSize: 11, formatter: value => `${(value * 100).toFixed(0)}%` },
+          axisLine: { lineStyle: { color: "#cfd9e8" } },
+          axisTick: { show: false },
+          splitLine: { lineStyle: { color: "#edf1f6", width: 1 } }
+        },
+        yAxis: {
+          type: "category",
+          inverse: true,
+          data: rows.map(record => record.pairLabel),
+          axisLabel: { color: "#5c6b80", fontSize: 11, width: 204, overflow: "truncate", margin: 12 },
+          axisLine: { show: false },
+          axisTick: { show: false }
+        },
+        series: [{
+          type: "bar",
+          barMaxWidth: 18,
+          barCategoryGap: "38%",
+          data: rows.map(record => ({
+            value: record.scaleAdjustedScore,
+            pairKey: record.pairKey,
+            record,
+            itemStyle: frameModule3State.selectedPairKey === record.pairKey
+              ? { color: "#df4d84", borderColor: "#ba3267", borderWidth: 1 }
+              : { color: "#f677a8", borderRadius: [0, 4, 4, 0] }
+          })),
+          label: {
+            show: true,
+            position: "right",
+            color: "#46566d",
+            fontSize: 11,
+            formatter: params => frameModule3FormatMetric(params.value, "percent")
+          },
+          emphasis: { itemStyle: { color: "#e85c90" } }
+        }]
+      }, true);
+      chart.off("click");
+      chart.on("click", params => {
+        frameModule3SelectPair(params.data?.pairKey);
       });
     }
 
     function frameModule3RenderAll() {
       frameModule3RenderVisibility();
       const records = frameModule3FilteredRecords();
+      const qualityRecords = frameModule3QualityRecords(records);
+      const detailRecords = frameModule3DetailRecords(records, qualityRecords);
+      if (frameModule3State.selectedPairKey && !detailRecords.some(record => record.pairKey === frameModule3State.selectedPairKey)) {
+        frameModule3State.selectedPairKey = null;
+      }
+      frameModule3RenderHeatmapControls(qualityRecords);
+      const heatmapRecords = frameModule3HeatmapRecords(qualityRecords);
       const visible = frameModule3VisibleChartIds();
       if (visible.has("3.1")) frameModule3RenderChart31(records);
       if (visible.has("3.2")) frameModule3RenderChart32(records);
       if (visible.has("3.3")) frameModule3RenderChart33(records);
-      if (visible.has("3.4")) frameModule3RenderChart34(records);
-      if (visible.has("3.5")) frameModule3RenderChart35(records);
+      if (visible.has("3.4")) frameModule3RenderChart34(heatmapRecords);
+      if (visible.has("3.5")) frameModule3RenderChart35(qualityRecords);
+      if (visible.has("3.6")) frameModule3RenderChart36(qualityRecords);
+      frameModule3RenderDetailTable(detailRecords);
+      frameModule3ScheduleVisibleChartResize();
     }
 
     function frameModule3SetView(view) {
@@ -13635,49 +14955,136 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function setupFrameModule3() {
-      const syncModule3ClearState = () => {
-        const sync = (field, active) => field?.classList.toggle("has-value", Boolean(active));
-        sync(document.getElementById("frameModule34Metric")?.closest(".amc-compact-select"), frameModule3State.matrixMetric !== "scaleScore");
-        sync(document.getElementById("frameModule34TopN")?.closest(".amc-compact-select"), frameModule3State.matrixTopN !== 30);
-      };
-      const renderModule3 = () => {
-        syncModule3ClearState();
-        frameModule3RenderAll();
-      };
-
       document.querySelectorAll("[data-frame-module3-view]").forEach(button => {
         button.addEventListener("click", () => frameModule3SetView(button.dataset.frameModule3View));
       });
-      document.getElementById("frameModule34Metric")?.addEventListener("change", event => {
-        frameModule3State.matrixMetric = event.target.value;
-        renderModule3();
-      });
-      document.getElementById("frameModule34TopN")?.addEventListener("change", event => {
-        frameModule3State.matrixTopN = Number(event.target.value || 30);
-        renderModule3();
-      });
-      document.getElementById("frameModule34MetricClear")?.addEventListener("click", event => {
-        event.preventDefault();
-        event.stopPropagation();
-        frameModule3State.matrixMetric = "scaleScore";
-        document.getElementById("frameModule34Metric").value = "scaleScore";
-        renderModule3();
-      });
-      document.getElementById("frameModule34TopNClear")?.addEventListener("click", event => {
-        event.preventDefault();
-        event.stopPropagation();
-        frameModule3State.matrixTopN = 30;
+      const metricSelect = document.getElementById("frameModule34Metric");
+      const topNSelect = document.getElementById("frameModule34TopN");
+      const asinPicker = document.getElementById("frameModule34AsinPicker");
+      const asinSearch = document.getElementById("frameModule34AsinSearch");
+      const asinToggle = document.getElementById("frameModule34AsinToggle");
+      const asinClear = document.getElementById("frameModule34AsinClear");
+      const asinOptions = document.getElementById("frameModule34AsinOptions");
+
+      metricSelect?.addEventListener("change", event => {
+        const nextMetric = event.target.value;
+        if (!frameModule3MetricConfig[nextMetric] || nextMetric === frameModule3State.matrixMetric) return;
+        frameModule3State.matrixMetric = nextMetric;
         frameModule3State.selectedPairKey = null;
-        document.getElementById("frameModule34TopN").value = "30";
-        renderModule3();
+        frameModule3RenderAll();
+      });
+      topNSelect?.addEventListener("change", event => {
+        const nextTopN = Number(event.target.value);
+        if (![10, 20, 30].includes(nextTopN) || nextTopN === Number(frameModule3State.matrixTopN)) return;
+        frameModule3State.matrixTopN = nextTopN;
+        frameModule3State.selectedPairKey = null;
+        frameModule3RenderAll();
+      });
+
+      if (asinPicker && asinSearch && asinToggle && asinClear && asinOptions && asinPicker.dataset.bound !== "true") {
+        const openAsinPicker = () => {
+          frameModule3HeatmapPickerState.open = true;
+          frameModule3HeatmapPickerState.query = "";
+          asinPicker.classList.add("is-open");
+          asinSearch.value = "";
+          asinSearch.setAttribute("aria-expanded", "true");
+          asinToggle.setAttribute("aria-expanded", "true");
+          frameModule3RenderHeatmapAsinOptions();
+          asinSearch.focus();
+        };
+        const toggleAsinPicker = event => {
+          event.stopPropagation();
+          if (frameModule3HeatmapPickerState.open) {
+            frameModule3CloseHeatmapAsinPicker();
+          } else {
+            openAsinPicker();
+          }
+        };
+        const selectAsin = asin => {
+          if (!asin) return;
+          frameModule3State.matrixSearchAsin = asin;
+          frameModule3State.selectedPairKey = null;
+          frameModule3CloseHeatmapAsinPicker();
+          frameModule3RenderAll();
+        };
+
+        asinToggle.addEventListener("click", toggleAsinPicker);
+        asinSearch.addEventListener("click", event => {
+          event.stopPropagation();
+          if (!frameModule3HeatmapPickerState.open) openAsinPicker();
+        });
+        asinSearch.addEventListener("input", event => {
+          const query = event.target.value;
+          if (!frameModule3HeatmapPickerState.open) {
+            frameModule3HeatmapPickerState.open = true;
+            asinPicker.classList.add("is-open");
+            asinSearch.setAttribute("aria-expanded", "true");
+            asinToggle.setAttribute("aria-expanded", "true");
+          }
+          frameModule3HeatmapPickerState.query = query;
+          frameModule3RenderHeatmapAsinOptions();
+        });
+        asinSearch.addEventListener("focus", () => {
+          if (!frameModule3HeatmapPickerState.open && frameModule3State.matrixSearchAsin) asinSearch.select();
+        });
+        asinSearch.addEventListener("keydown", event => {
+          if (event.key === "Escape") {
+            frameModule3CloseHeatmapAsinPicker();
+            asinToggle.focus();
+            return;
+          }
+          if (event.key === "ArrowDown" && !frameModule3HeatmapPickerState.open) {
+            event.preventDefault();
+            openAsinPicker();
+            return;
+          }
+          if (event.key !== "Enter") return;
+          const firstOption = asinOptions.querySelector("[data-frame-module3-heatmap-asin]");
+          if (!firstOption) return;
+          event.preventDefault();
+          selectAsin(firstOption.dataset.frameModule3HeatmapAsin);
+        });
+        asinClear.addEventListener("click", event => {
+          event.stopPropagation();
+          if (!frameModule3State.matrixSearchAsin) return;
+          frameModule3State.matrixSearchAsin = "";
+          frameModule3State.selectedPairKey = null;
+          frameModule3HeatmapPickerState.query = "";
+          frameModule3RenderAll();
+        });
+        asinOptions.addEventListener("click", event => {
+          const option = event.target.closest("[data-frame-module3-heatmap-asin]");
+          if (!option) return;
+          selectAsin(option.dataset.frameModule3HeatmapAsin);
+        });
+        document.addEventListener("click", event => {
+          if (!asinPicker.contains(event.target)) frameModule3CloseHeatmapAsinPicker();
+        });
+        asinPicker.dataset.bound = "true";
+      }
+      document.querySelectorAll("[data-frame-module3-quality-tab]").forEach(button => {
+        button.addEventListener("click", () => {
+          const nextTab = button.dataset.frameModule3QualityTab;
+          if (nextTab === frameModule3State.qualityTab) return;
+          frameModule3State.qualityTab = nextTab;
+          frameModule3State.selectedPairKey = null;
+          frameModule3RenderAll();
+        });
+      });
+      document.querySelectorAll("[data-frame-module3-min-sample]").forEach(button => {
+        button.addEventListener("click", () => {
+          const nextMinSample = Number(button.dataset.frameModule3MinSample || 0);
+          if (nextMinSample === Number(frameModule3State.qualityMinSample)) return;
+          frameModule3State.qualityMinSample = nextMinSample;
+          frameModule3State.selectedPairKey = null;
+          frameModule3RenderAll();
+        });
       });
       window.addEventListener("resize", () => {
-        ["frameModule31Chart", "frameModule32Chart", "frameModule33Chart", "frameModule34Chart", "frameModule35Chart"]
-          .map(id => document.getElementById(id))
-          .filter(Boolean)
-          .forEach(element => window.echarts?.getInstanceByDom(element)?.resize());
+        frameModule3ScheduleVisibleChartResize();
       }, { passive: true });
-      syncModule3ClearState();
+      frameModule3RenderVisibility();
+      frameModule3RenderHeatmapControls(frameModule3QualityRecords(frameModule3FilteredRecords()));
     }
 
     const frameModule4Colors = {
@@ -14132,6 +15539,15 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       return Math.max(1, Number(record.avgInterval || 0) * 0.96);
     }
 
+    function frameModule4PathTag(record) {
+      const pathLabel = frameModule3PricePathLabel(record?.pricePath);
+      return `
+        <span class="amc-module4-path-tag ${escapeHtml(record?.pricePath || "")}" title="${escapeHtml(pathLabel)}" aria-label="${escapeHtml(pathLabel)}">
+          <span class="amc-module4-path-icon" aria-hidden="true">${frameModule4PricePathIcon(record?.pricePath)}</span>
+          <span>${escapeHtml(pathLabel)}</span>
+        </span>`;
+    }
+
     function frameModule4Advice(record) {
       const rhythmAdvice = {
         quick: "该组合通常在 0-90 天内完成关联购买，建议优先纳入短周期 DSP 触达和购买后推荐。",
@@ -14188,6 +15604,51 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       `;
     }
 
+    function frameModule4RenderDetailTable(records) {
+      const wrap = document.getElementById("frameModule45TableWrap");
+      const count = document.getElementById("frameModule45Count");
+      if (!wrap) return;
+      if (count) count.textContent = `${frameModule2FormatNumber(records.length)} 条`;
+      const rows = records
+        .slice()
+        .sort((a, b) => Number(b.crossUsers || 0) - Number(a.crossUsers || 0) || Number(b.scaleScore || 0) - Number(a.scaleScore || 0))
+        .map(record => `
+            <tr>
+              <td title="${escapeHtml(record.pairLabel)}"><span class="amc-module4-detail-pair">${escapeHtml(record.pairLabel)}</span></td>
+              <td><span class="amc-module4-detail-value">${frameModule2FormatNumber(record.crossUsers)}</span></td>
+              <td><span class="amc-module4-detail-value">${frameModule4FormatDays(record.avgInterval)}</span></td>
+              <td><span class="amc-module4-detail-value">${frameModule4FormatDays(frameModule4MinInterval(record))}</span></td>
+              <td><span class="amc-module4-detail-rhythm ${escapeHtml(record.rhythm)}">${escapeHtml(frameModule4RhythmLabels[record.rhythm] || "")}</span></td>
+              <td><span class="amc-module4-detail-value">${frameModule3FormatMetric(record.scaleAdjustedScore, "percent")}</span></td>
+              <td>${frameModule4PathTag(record)}</td>
+            </tr>`).join("");
+      const bodyHtml = rows || `<tr><td colspan="7" style="padding:26px 12px;color:#7b8799;text-align:center;">暂无满足当前筛选条件的高价值组合</td></tr>`;
+      wrap.innerHTML = `
+        <table class="amc-module4-detail-table">
+          <colgroup>
+            <col style="width:28%">
+            <col style="width:10%">
+            <col style="width:16%">
+            <col style="width:16%">
+            <col style="width:11%">
+            <col style="width:11%">
+            <col style="width:12%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Lead → Follow</th>
+              <th>组合人数</th>
+              <th>关联购买平均间隔</th>
+              <th>平均最短关联间隔</th>
+              <th>购买节奏</th>
+              <th>修正关联指数</th>
+              <th>价格路径</th>
+            </tr>
+          </thead>
+          <tbody>${bodyHtml}</tbody>
+        </table>`;
+    }
+
     function renderFrameModule4() {
       const baseRecords = frameModule4BaseRecords();
       const records = frameModule4HighValueRecords(baseRecords);
@@ -14197,6 +15658,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       frameModule4RenderPairLists(records);
       frameModule4RenderChart43(records);
       frameModule4RenderDetail(selectedRecord);
+      frameModule4RenderDetailTable(records);
       if (typeof renderFrameModule5 === "function") renderFrameModule5();
     }
 
@@ -14286,7 +15748,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       strengthTop: 30,
       selectedStrategyKey: null,
       selectedPairKey: null,
-      sortKey: "scaleScore"
+      sortKey: "scaleScore",
+      viewMode: "top"
     };
 
     function frameModule5StrategyKey(record) {
@@ -14371,6 +15834,16 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       return `${number > 0 ? "+" : ""}${number.toFixed(0)}美元`;
     }
 
+    function frameModule5PathTag(record) {
+      const pathLabel = frameModule3PricePathLabel(record?.pricePath);
+      const pathIcon = frameModule4PricePathIcon(record?.pricePath);
+      return `
+        <span class="amc-module4-path-tag ${escapeHtml(record?.pricePath || "")}" title="${escapeHtml(pathLabel)}" aria-label="${escapeHtml(pathLabel)}">
+          <span class="amc-module4-path-icon" aria-hidden="true">${pathIcon}</span>
+          <span>${escapeHtml(pathLabel)}</span>
+        </span>`;
+    }
+
     function frameModule5RenderSummary(records) {
       const users = records.reduce((sum, record) => sum + Number(record.crossUsers || 0), 0);
       frameModule5SetText("frameModule5SummaryPairs", frameModule2FormatNumber(records.length));
@@ -14407,6 +15880,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           frameModule5State.selectedPairKey = null;
           renderFrameModule5();
         });
+      });
+    }
+
+    function frameModule5RenderViewTabs() {
+      document.querySelectorAll("[data-frame-module5-view]").forEach(button => {
+        const active = button.dataset.frameModule5View === frameModule5State.viewMode;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", String(active));
       });
     }
 
@@ -14572,50 +16053,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
     }
 
-    function frameModule5RenderStrategyOptions(activeStrategyKey) {
-      const select = document.getElementById("frameModule53Strategy");
-      if (!select) return;
-      const currentValue = activeStrategyKey || "all";
-      const options = [
-        `<option value="all">全部策略</option>`,
-        ...frameModule5StrategyConfig.map(item => `<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`)
-      ];
-      select.innerHTML = options.join("");
-      select.value = currentValue;
-    }
-
-    function frameModule5RenderAdvice(activeStrategyKey, records, stats) {
-      const advice = document.getElementById("frameModule53Advice");
-      if (!advice) return;
-      const strategy = activeStrategyKey ? frameModule5StrategyMap.get(activeStrategyKey) : null;
-      if (strategy) {
-        const stat = stats.find(item => item.key === activeStrategyKey);
-        advice.innerHTML = `<strong>广告建议：</strong>${escapeHtml(strategy.advice)} 当前策略覆盖 ${frameModule2FormatNumber(stat?.count || 0)} 组高价值组合、${frameModule2FormatNumber(stat?.users || 0)} 个路径人次。`;
-        return;
-      }
-      const top = stats.find(item => item.users > 0);
-      advice.innerHTML = top
-        ? `<strong>广告建议：</strong>当前筛选范围内以「${escapeHtml(top.label)}」机会最大，可先从该策略的 TOP 组合启动投放测试，再扩展到其他高价值组合。`
-        : `<strong>广告建议：</strong>当前筛选条件下暂无足够高价值组合，请放宽组合人数或关联强度条件后再生成策略。`;
-    }
-
-    function frameModule5RenderList(records, activeStrategyKey) {
-      const list = document.getElementById("frameModule53List");
-      if (!list) return;
-      const title = document.getElementById("frameModule53Title");
-      const strategy = activeStrategyKey ? frameModule5StrategyMap.get(activeStrategyKey) : null;
-      if (title) title.textContent = strategy ? `${strategy.label} · 核心组合 TOP 10` : "核心组合 TOP 10 与策略明细";
-      const source = activeStrategyKey ? records.filter(record => record.strategyKey === activeStrategyKey) : records.slice();
-      const sortKey = frameModule5State.sortKey;
-      const sorted = source
-        .slice()
-        .sort((a, b) => Number(b[sortKey] || 0) - Number(a[sortKey] || 0) || Number(b.crossUsers || 0) - Number(a.crossUsers || 0));
-      const rows = sorted.slice(0, 10);
+    function frameModule5RenderTopList(container, rows) {
+      if (!container) return;
       if (!rows.length) {
-        list.innerHTML = `<div class="amc-module5-empty">暂无符合当前策略的核心组合</div>`;
+        container.innerHTML = `<div class="amc-module5-empty">暂无符合当前策略的核心组合</div>`;
         return;
       }
-      list.innerHTML = rows.map((record, index) => {
+      container.innerHTML = rows.map((record, index) => {
         const selected = record.pairKey === frameModule5State.selectedPairKey;
         const pathIcon = frameModule4PricePathIcon(record.pricePath);
         const pathLabel = frameModule3PricePathLabel(record.pricePath);
@@ -14652,18 +16096,133 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               </div>` : ""}
           </div>`;
       }).join("");
-      list.querySelectorAll("[data-module5-pair]").forEach(row => {
+      container.querySelectorAll("[data-module5-pair]").forEach(row => {
         row.addEventListener("click", () => {
           const nextKey = row.dataset.module5Pair;
           frameModule5State.selectedPairKey = frameModule5State.selectedPairKey === nextKey ? null : nextKey;
           renderFrameModule5();
         });
       });
-      list.querySelectorAll(".amc-module4-product-asin-link").forEach(link => {
+      container.querySelectorAll(".amc-module4-product-asin-link").forEach(link => {
         link.addEventListener("pointerdown", event => event.stopPropagation());
         link.addEventListener("click", event => event.stopPropagation());
         link.addEventListener("keydown", event => event.stopPropagation());
       });
+    }
+
+    function frameModule5RenderDetailTable(container, rows) {
+      if (!container) return;
+      if (!rows.length) {
+        container.innerHTML = `<div class="amc-module5-empty">暂无符合当前策略的核心组合</div>`;
+        return;
+      }
+      container.innerHTML = `
+        <table class="amc-module5-detail-table">
+          <colgroup>
+            <col style="width:31%">
+            <col style="width:12%">
+            <col style="width:18%">
+            <col style="width:18%">
+            <col style="width:11%">
+            <col style="width:10%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Lead → Follow</th>
+              <th>组合人数</th>
+              <th>关联购买平均间隔</th>
+              <th>平均最短关联间隔</th>
+              <th>修正关联指数</th>
+              <th>价格路径</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map(record => {
+              const selected = record.pairKey === frameModule5State.selectedPairKey;
+              return `
+                <tr class="${selected ? "is-selected" : ""}" role="button" tabindex="0" aria-pressed="${selected}" data-module5-detail-pair="${escapeHtml(record.pairKey)}">
+                  <td title="${escapeHtml(record.pairLabel)}"><span class="amc-module5-detail-pair">${escapeHtml(record.pairLabel)}</span></td>
+                  <td><span class="amc-module5-detail-value">${frameModule2FormatNumber(record.crossUsers)}</span></td>
+                  <td><span class="amc-module5-detail-value">${frameModule4FormatDays(record.avgInterval)}</span></td>
+                  <td><span class="amc-module5-detail-value">${frameModule4FormatDays(record.minInterval)}</span></td>
+                  <td><span class="amc-module5-detail-value">${frameModule3FormatMetric(record.scaleAdjustedScore, "percent")}</span></td>
+                  <td>${frameModule5PathTag(record)}</td>
+                </tr>`;
+            }).join("")}
+          </tbody>
+        </table>`;
+      container.querySelectorAll("[data-module5-detail-pair]").forEach(row => {
+        const selectPair = () => {
+          const nextKey = row.dataset.module5DetailPair;
+          frameModule5State.selectedPairKey = frameModule5State.selectedPairKey === nextKey ? null : nextKey;
+          renderFrameModule5();
+        };
+        row.addEventListener("click", selectPair);
+        row.addEventListener("keydown", event => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          selectPair();
+        });
+      });
+    }
+
+    function frameModule5RenderStrategyOptions(activeStrategyKey) {
+      const select = document.getElementById("frameModule53Strategy");
+      if (!select) return;
+      const currentValue = activeStrategyKey || "all";
+      const options = [
+        `<option value="all">全部策略</option>`,
+        ...frameModule5StrategyConfig.map(item => `<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`)
+      ];
+      select.innerHTML = options.join("");
+      select.value = currentValue;
+    }
+
+    function frameModule5RenderAdvice(activeStrategyKey, records, stats) {
+      const advice = document.getElementById("frameModule53Advice");
+      if (!advice) return;
+      const strategy = activeStrategyKey ? frameModule5StrategyMap.get(activeStrategyKey) : null;
+      if (strategy) {
+        const stat = stats.find(item => item.key === activeStrategyKey);
+        advice.innerHTML = `<strong>广告建议：</strong>${escapeHtml(strategy.advice)} 当前策略覆盖 ${frameModule2FormatNumber(stat?.count || 0)} 组高价值组合、${frameModule2FormatNumber(stat?.users || 0)} 个路径人次。`;
+        return;
+      }
+      const top = stats.find(item => item.users > 0);
+      advice.innerHTML = top
+        ? `<strong>广告建议：</strong>当前筛选范围内以「${escapeHtml(top.label)}」机会最大，可先从该策略的 TOP 组合启动投放测试，再扩展到其他高价值组合。`
+        : `<strong>广告建议：</strong>当前筛选条件下暂无足够高价值组合，请放宽组合人数或关联强度条件后再生成策略。`;
+    }
+
+    function frameModule5RenderList(records, activeStrategyKey) {
+      const list = document.getElementById("frameModule53List");
+      const tableWrap = document.getElementById("frameModule53TableWrap");
+      if (!list || !tableWrap) return;
+      const title = document.getElementById("frameModule53Title");
+      const strategy = activeStrategyKey ? frameModule5StrategyMap.get(activeStrategyKey) : null;
+      if (title) {
+        title.textContent = frameModule5State.viewMode === "detail"
+          ? "组合明细表"
+          : (strategy ? `${strategy.label} · 核心组合 TOP 10` : "核心组合 TOP 10 与策略明细");
+      }
+      const source = activeStrategyKey ? records.filter(record => record.strategyKey === activeStrategyKey) : records.slice();
+      const sortKey = frameModule5State.sortKey;
+      const sorted = source
+        .slice()
+        .sort((a, b) => Number(b[sortKey] || 0) - Number(a[sortKey] || 0) || Number(b.crossUsers || 0) - Number(a.crossUsers || 0));
+      const rows = sorted.slice(0, 10);
+      const topActive = frameModule5State.viewMode !== "detail";
+      list.hidden = !topActive;
+      tableWrap.hidden = topActive;
+      list.setAttribute("aria-hidden", String(!topActive));
+      tableWrap.setAttribute("aria-hidden", String(topActive));
+      frameModule5RenderViewTabs();
+      if (topActive) {
+        tableWrap.innerHTML = "";
+        frameModule5RenderTopList(list, rows);
+      } else {
+        list.innerHTML = "";
+        frameModule5RenderDetailTable(tableWrap, sorted);
+      }
     }
 
     function renderFrameModule5() {
@@ -14703,6 +16262,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         frameModule5State.sortKey = event.target.value;
         renderFrameModule5();
       });
+      document.querySelectorAll("[data-frame-module5-view]").forEach(button => {
+        button.addEventListener("click", () => {
+          const nextView = button.dataset.frameModule5View || "top";
+          if (frameModule5State.viewMode === nextView) return;
+          frameModule5State.viewMode = nextView;
+          renderFrameModule5();
+        });
+      });
       window.addEventListener("resize", () => {
         ["frameModule52Chart"]
           .map(id => document.getElementById(id))
@@ -14732,10 +16299,25 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       matrixBaseline: "median",
       rankingView: "lead",
       rankingMetric: "crossRate",
+      detailSortKey: "crossUsers",
+      detailSortDir: "desc",
+      detailRoleFilter: "all",
       flowDirection: "lead",
       selectedAsin: null,
       selectedAsinCleared: false,
       selectedAsinExplicit: false
+    };
+
+    const frameModule2RoleColors = {
+      lead: "#4AA7EA",
+      follow: "#E69F00",
+      leadSelected: "#2E7FC7",
+      followSelected: "#C67F00"
+    };
+
+    const frameModule2FlowColors = {
+      lead: frameModule2RoleColors.lead,
+      follow: "#57DAC5"
     };
 
     function frameModule2FormatNumber(value) {
@@ -14815,6 +16397,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       frameModule2State.rankingView = nextView;
       frameModule2State.flowDirection = nextView;
       frameModule2State.rankingMetric = nextView === "lead" ? "crossRate" : "capturedUsers";
+      frameModule2State.detailRoleFilter = "all";
       frameModule2State.selectedAsinCleared = false;
       frameModule2State.selectedAsinExplicit = false;
       frameModule2EnsureSelection(nextView);
@@ -14879,17 +16462,15 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule6SyncSelectorHeight() {
       const selectorCard = document.querySelector(".amc-module6-selector-card");
-      const sideColumn = document.querySelector(".amc-module6-side-column");
-      if (!selectorCard || !sideColumn) return;
+      if (!selectorCard) return;
       const narrowLayout = window.matchMedia("(max-width: 1180px)").matches;
       if (narrowLayout) {
         selectorCard.style.height = "auto";
+        selectorCard.style.maxHeight = "";
         return;
       }
-      const height = Math.ceil(sideColumn.getBoundingClientRect().height);
-      if (height > 0) {
-        selectorCard.style.height = `${height}px`;
-      }
+      selectorCard.style.height = "";
+      selectorCard.style.maxHeight = "";
     }
 
     function frameModule6BuildStore() {
@@ -15352,6 +16933,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           }
         ]
       }, true);
+      chart.off("click");
     }
 
     function frameModule6RenderChart66(entry) {
@@ -15520,6 +17102,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
       if (options.resize === false) return;
       requestAnimationFrame(() => {
+        if (nextTarget === "frameModule3Section") {
+          frameModule3RenderAll();
+        }
         window.dispatchEvent(new Event("resize"));
       });
     }
@@ -15550,19 +17135,27 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       renderFrameModule6();
     }
 
+    function frameOverviewMaskAsin(asin) {
+      const value = String(asin || "");
+      if (value.length <= 7) return value;
+      const maskStart = Math.floor((value.length - 4) / 2);
+      return `${value.slice(0, maskStart)}****${value.slice(maskStart + 4)}`;
+    }
+
     function renderFrameTopPairs() {
       const body = document.getElementById("frameTopPairsBody");
       if (!body) return;
       const maxUsers = Math.max(...frameOverviewTopPairs.map(pair => Number(pair.users || 0)), 1);
       const productBlock = (asin, role) => {
         const title = frameModule4VirtualProductTitle(asin);
+        const maskedAsin = frameOverviewMaskAsin(asin);
         return `
-          <span class="amc-top-pair-product" title="${escapeHtml(title)} · ${escapeHtml(asin)}">
+          <span class="amc-top-pair-product" title="${escapeHtml(title)} · ${escapeHtml(maskedAsin)}">
             <img class="amc-top-pair-product-thumb" src="${frameModule4ProductImage(asin, role)}" alt="${escapeHtml(title)}">
             <span class="amc-top-pair-product-copy">
               <span class="amc-top-pair-product-title">${escapeHtml(title)}</span>
               <span class="amc-top-pair-product-asin">
-                <a class="amc-top-pair-product-asin-link" href="${escapeHtml(frameModule4AmazonUrl(asin))}" target="_blank" rel="noopener noreferrer" title="在亚马逊前台查看 ${escapeHtml(asin)}">${escapeHtml(asin)}</a>
+                <a class="amc-top-pair-product-asin-link" href="${escapeHtml(frameModule4AmazonUrl(asin))}" target="_blank" rel="noopener noreferrer" title="在亚马逊前台查看 ${escapeHtml(maskedAsin)}">${escapeHtml(maskedAsin)}</a>
                 <span class="amc-top-pair-product-asin-meta"> · Electronics</span>
               </span>
             </span>
@@ -15572,7 +17165,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const active = index === frameOverviewState.activePairIndex;
         const share = Math.round((Number(pair.users || 0) / maxUsers) * 100);
         return `
-          <tr class="amc-top-pair-row${active ? " is-active" : ""}" data-pair-index="${index}" style="--rank-share: ${share}%" tabindex="0" role="button" aria-pressed="${active ? "true" : "false"}" title="${escapeHtml(pair.lead)} → ${escapeHtml(pair.follow)}">
+          <tr class="amc-top-pair-row${active ? " is-active" : ""}" data-pair-index="${index}" style="--rank-share: ${share}%" tabindex="0" role="button" aria-pressed="${active ? "true" : "false"}" title="${escapeHtml(frameOverviewMaskAsin(pair.lead))} → ${escapeHtml(frameOverviewMaskAsin(pair.follow))}">
             <td class="amc-top-rank-cell"><span class="amc-top-rank">${pair.rank}</span></td>
             <td class="amc-top-pair-combo-cell">
               <span class="amc-top-pair-combo">
@@ -15950,7 +17543,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       const isPercent = metric.type === "percent";
       const values = items.map(item => Number(item[metric.key] || 0));
-      const maxValue = Math.max(...values, 1);
+      const maxValue = Math.max(...values, 0.0001);
       const axisMax = isPercent ? 1 : maxValue * 1.08;
       const chartHeight = chartDom.clientHeight || 430;
       const plotHeight = Math.max(180, chartHeight - 14 - 48);
@@ -15959,7 +17552,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const adaptiveCategoryGap = `${Math.round(
         Math.max(28, Math.min(58, 100 - (targetBarHeight / categoryBand) * 100))
       )}%`;
-      const seriesColor = view === "lead" ? "#4ecdbd" : "#4AA7EA";
+      const seriesColor = view === "lead" ? frameModule2FlowColors.lead : frameModule2FlowColors.follow;
       const formatValue = value => isPercent
         ? frameModule2FormatPercent(value)
         : frameModule2FormatNumber(value);
@@ -16102,8 +17695,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       const leadRole = "Lead ASIN";
       const followRole = "Follow ASIN";
-      const leadColor = "#4ecdbd";
-      const followColor = "#4AA7EA";
+      const leadColor = frameModule2RoleColors.lead;
+      const followColor = frameModule2FlowColors.follow;
       const flowColor = window.echarts?.graphic?.LinearGradient
         ? new window.echarts.graphic.LinearGradient(0, 0, 1, 0, [
           { offset: 0, color: leadColor },
@@ -16556,25 +18149,73 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ? [
           { key: "rank", label: "排名", width: "56px", align: "center" },
           { key: "asin", label: "Lead ASIN", width: "180px", align: "left" },
-          { key: "price", label: "单价", width: "100px", align: "right" },
-          { key: "totalUsers", label: "总购买人数", width: "116px", align: "right" },
-          { key: "crossUsers", label: "交叉购买人数", width: "122px", align: "right" },
-          { key: "crossRate", label: "交叉购买率", width: "114px", align: "right" },
-          { key: "relatedCount", label: "带动 Follow 数", width: "112px", align: "right" },
-          { key: "avgInterval", label: "关联购买平均间隔（天）", width: "162px", align: "right" },
+          { key: "price", label: "单价", info: "该 ASIN 的平均成交单价", width: "100px", align: "right", sortable: true },
+          { key: "totalUsers", label: "总购买人数", info: "购买该 ASIN 的去重用户数", width: "116px", align: "right", sortable: true },
+          { key: "crossUsers", label: "交叉购买人数", info: "购买该 Lead ASIN 后，至少购买一个不同 Follow ASIN 的去重用户数", width: "122px", align: "right", sortable: true },
+          { key: "crossRate", label: "交叉购买率", info: "去重交叉购买人数占总购买人数的比例", width: "114px", align: "right", sortable: true },
+          { key: "relatedCount", label: "带动 Follow 数", info: "该 Lead ASIN 带动购买的 Follow ASIN 数量", width: "112px", align: "right", sortable: true },
+          { key: "avgInterval", label: "关联购买平均间隔（天）", info: "按交叉购买人次加权计算的平均关联购买间隔", width: "162px", align: "right", sortable: true },
           { key: "role", label: "产品角色", width: "110px", align: "center" }
         ]
         : [
           { key: "rank", label: "排名", width: "56px", align: "center" },
           { key: "asin", label: "Follow ASIN", width: "180px", align: "left" },
-          { key: "price", label: "单价", width: "100px", align: "right" },
-          { key: "totalUsers", label: "总购买人数", width: "116px", align: "right" },
-          { key: "capturedUsers", label: "收割用户数", width: "122px", align: "right" },
-          { key: "captureRate", label: "收割率", width: "114px", align: "right" },
-          { key: "sourceLeadCount", label: "来源 Lead 数", width: "112px", align: "right" },
-          { key: "avgInterval", label: "关联购买平均间隔（天）", width: "162px", align: "right" },
+          { key: "price", label: "单价", info: "该 ASIN 的平均成交单价", width: "100px", align: "right", sortable: true },
+          { key: "totalUsers", label: "总购买人数", info: "购买该 ASIN 的去重用户数", width: "116px", align: "right", sortable: true },
+          { key: "capturedUsers", label: "收割用户数", info: "购买该 Follow ASIN 且此前购买过其他 Lead ASIN 的去重用户数", width: "122px", align: "right", sortable: true },
+          { key: "captureRate", label: "收割率", info: "去重收割用户数占总购买人数的比例", width: "114px", align: "right", sortable: true },
+          { key: "relatedCount", label: "来源 Lead 数", info: "带动该 Follow ASIN 购买的 Lead ASIN 数量", width: "112px", align: "right", sortable: true },
+          { key: "avgInterval", label: "关联购买平均间隔（天）", info: "按交叉购买人次加权计算的平均关联购买间隔", width: "162px", align: "right", sortable: true },
           { key: "role", label: "产品角色", width: "110px", align: "center" }
         ];
+    }
+
+    function frameModule2DetailDefaultSortKey(view) {
+      return view === "lead" ? "crossUsers" : "capturedUsers";
+    }
+
+    function frameModule2DetailSortValue(item, key) {
+      return Number(item[key] || 0);
+    }
+
+    function frameModule2DetailRateCell(value) {
+      const rate = Math.max(0, Math.min(1, Number(value || 0)));
+      const width = (rate * 100).toFixed(1);
+      return `
+        <span class="amc-role-detail-rate">
+          <span class="amc-role-detail-percent">${frameModule2FormatPercent(rate)}</span>
+          <span class="amc-role-detail-rate-track" aria-hidden="true"><span class="amc-role-detail-rate-fill" style="width:${width}%"></span></span>
+        </span>`;
+    }
+
+    function frameModule2DetailRoleFilterOptions(view) {
+      const isLead = view === "lead";
+      return [
+        { value: "all", label: "全部产品角色" },
+        { value: "engine", label: isLead ? "连带引擎型" : "通用收割型" },
+        { value: "sleeper", label: isLead ? "沉睡流量型" : "独立爆款" },
+        { value: "efficient", label: isLead ? "小众高效型" : "集中收割型" },
+        { value: "low", label: isLead ? "低连带型" : "低承接型" }
+      ];
+    }
+
+    function frameModule2DetailHeader(column, sortKey, sortDir) {
+      const className = `is-${column.align || "left"}`;
+      if (!column.sortable) {
+        return `<th class="${className}">${escapeHtml(column.label)}</th>`;
+      }
+      const active = column.key === sortKey;
+      const direction = active ? sortDir : "";
+      const ariaSort = active ? (sortDir === "asc" ? "ascending" : "descending") : "none";
+      const nextDirection = active && sortDir === "asc" ? "降序" : "升序";
+      return `
+        <th class="${className}" aria-sort="${ariaSort}">
+          <button class="amc-role-detail-sort${active ? ` active ${direction}` : ""}" type="button" data-role-detail-sort="${escapeHtml(column.key)}" aria-label="${escapeHtml(`${column.label}：${column.info}。点击按${nextDirection}排序`) }">
+            <span>${escapeHtml(column.label)}</span>
+            <span class="metric-info" title="${escapeHtml(column.info)}" aria-hidden="true">?</span>
+            <span class="sort-icon" aria-hidden="true"></span>
+          </button>
+        </th>`;
     }
 
     function renderFrameRoleDetailTable() {
@@ -16585,48 +18226,87 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       const view = frameModule2State.analysisView;
       const isLead = view === "lead";
-      const items = frameModule2FilteredItems(view)
-        .slice()
-        .sort((a, b) => {
-          const primary = isLead
-            ? Number(b.crossUsers || 0) - Number(a.crossUsers || 0)
-            : Number(b.capturedUsers || 0) - Number(a.capturedUsers || 0);
-          return primary ||
-            Number(b.totalUsers || 0) - Number(a.totalUsers || 0) ||
-            a.asin.localeCompare(b.asin, "zh-CN");
-        });
       const columns = frameModule2DetailColumns(view);
+      const roleFilter = document.getElementById("frameRoleDetailRoleFilter");
+      const roleFilterClear = document.getElementById("frameRoleDetailRoleFilterClear");
+      const roleOptions = frameModule2DetailRoleFilterOptions(view);
+      if (!roleOptions.some(option => option.value === frameModule2State.detailRoleFilter)) {
+        frameModule2State.detailRoleFilter = "all";
+      }
+      if (roleFilter) {
+        roleFilter.innerHTML = roleOptions.map(option =>
+          `<option value="${escapeHtml(option.value)}">${escapeHtml(option.label)}</option>`
+        ).join("");
+        roleFilter.value = frameModule2State.detailRoleFilter;
+        roleFilter.parentElement?.classList.toggle("has-value", frameModule2State.detailRoleFilter !== "all");
+        if (roleFilterClear) roleFilterClear.hidden = frameModule2State.detailRoleFilter === "all";
+        if (!roleFilter.dataset.bound) {
+          roleFilter.addEventListener("change", event => {
+            frameModule2State.detailRoleFilter = event.target.value;
+            renderFrameRoleDetailTable();
+          });
+          roleFilter.dataset.bound = "true";
+        }
+      }
+      if (roleFilterClear && !roleFilterClear.dataset.bound) {
+        roleFilterClear.addEventListener("click", () => {
+          frameModule2State.detailRoleFilter = "all";
+          renderFrameRoleDetailTable();
+        });
+        roleFilterClear.dataset.bound = "true";
+      }
+      if (!columns.some(column => column.sortable && column.key === frameModule2State.detailSortKey)) {
+        frameModule2State.detailSortKey = frameModule2DetailDefaultSortKey(view);
+        frameModule2State.detailSortDir = "desc";
+      }
+      const sortKey = frameModule2State.detailSortKey;
+      const sortDir = frameModule2State.detailSortDir;
+      const detailItems = frameModule2FilteredItems(view)
+        .map(item => {
+          const linkRecords = isLead ? (frameModule2Data.leadLinks?.[item.asin] || []) : (frameModule2Data.followLinks?.[item.asin] || []);
+          return {
+            ...item,
+            avgInterval: frameModule2DetailWeightedInterval(linkRecords),
+            relatedCount: isLead ? Number(item.associatedCombos || 0) : Number(item.sourceLeadCount || 0)
+          };
+        });
       const xKey = isLead ? "totalUsers" : "sourceLeadCount";
       const yKey = isLead ? "crossRate" : "captureRate";
-      const xValues = items.map(item => Number(item[xKey] || 0)).filter(value => Number.isFinite(value));
-      const yValues = items.map(item => Number(item[yKey] || 0)).filter(value => Number.isFinite(value));
+      const xValues = detailItems.map(item => Number(item[xKey] || 0)).filter(value => Number.isFinite(value));
+      const yValues = detailItems.map(item => Number(item[yKey] || 0)).filter(value => Number.isFinite(value));
       const baselineCalculator = frameModule2State.matrixBaseline === "mean" ? frameModule2Mean : frameModule2Median;
       const xMid = baselineCalculator(xValues);
       const yMid = baselineCalculator(yValues);
+      const items = detailItems
+        .map(item => ({
+          ...item,
+          detailRole: frameModule2DetailRole(view, item, xMid, yMid)
+        }))
+        .filter(item => frameModule2State.detailRoleFilter === "all" || item.detailRole.className === frameModule2State.detailRoleFilter)
+        .sort((a, b) => {
+          const primary = frameModule2DetailSortValue(a, sortKey) - frameModule2DetailSortValue(b, sortKey);
+          const ordered = sortDir === "asc" ? primary : -primary;
+          return ordered ||
+            Number(b.totalUsers || 0) - Number(a.totalUsers || 0) ||
+            a.asin.localeCompare(b.asin, "zh-CN");
+        });
 
       if (title) title.textContent = isLead ? "Lead ASIN明细表" : "Follow ASIN明细表";
-      if (subtitle) subtitle.textContent = isLead
-        ? "Lead ASIN分析视图下的 ASIN 明细，支持点击行联动上方图表"
-        : "Follow ASIN分析视图下的 ASIN 明细，支持点击行联动上方图表";
+      if (subtitle) subtitle.textContent = "按照当前分析视图展示 ASIN 明细，可按产品角色筛选并按指标排序";
 
       const bodyHtml = items.length
         ? items.map((item, index) => {
-          const role = frameModule2DetailRole(view, item, xMid, yMid);
-          const linkRecords = isLead ? (frameModule2Data.leadLinks?.[item.asin] || []) : (frameModule2Data.followLinks?.[item.asin] || []);
-          const avgInterval = frameModule2DetailWeightedInterval(linkRecords);
-          const relatedCount = isLead ? Number(item.associatedCombos || 0) : Number(item.sourceLeadCount || 0);
-          const selected = item.asin === frameModule2State.selectedAsin;
           return `
-            <tr class="${selected ? "is-active" : ""}" data-role-detail-asin="${escapeHtml(item.asin)}" tabindex="0" role="button" aria-pressed="${selected ? "true" : "false"}" title="点击联动 ${escapeHtml(item.asin)}">
+            <tr>
               <td class="is-center"><span class="amc-role-detail-rank">${index + 1}</span></td>
               <td class="is-left"><a class="amc-role-detail-asin-link" href="${escapeHtml(frameModule4AmazonUrl(item.asin))}" target="_blank" rel="noopener noreferrer" title="在亚马逊前台查看 ${escapeHtml(item.asin)}">${escapeHtml(item.asin)}</a></td>
               <td class="is-right"><span class="amc-role-detail-price">${frameModule2DetailPrice(item.price)}</span></td>
               <td class="is-right"><span class="amc-role-detail-number">${frameModule2FormatNumber(item.totalUsers)}</span></td>
               <td class="is-right"><span class="amc-role-detail-number">${frameModule2FormatNumber(isLead ? item.crossUsers : item.capturedUsers)}</span></td>
-              <td class="is-right"><span class="amc-role-detail-percent">${frameModule2FormatPercent(isLead ? item.crossRate : item.captureRate)}</span></td>
-              <td class="is-right"><span class="amc-role-detail-number">${frameModule2FormatNumber(relatedCount)}</span></td>
-              <td class="is-right"><span class="amc-role-detail-number">${avgInterval ? avgInterval.toFixed(avgInterval >= 100 ? 0 : 1) : "0.0"}</span></td>
-              <td class="is-center"><span class="amc-role-detail-role-pill ${role.className}">${escapeHtml(role.label)}</span></td>
+              <td class="is-right">${frameModule2DetailRateCell(isLead ? item.crossRate : item.captureRate)}</td>
+              <td class="is-right"><span class="amc-role-detail-number">${frameModule2FormatNumber(item.relatedCount)}</span></td>
+              <td class="is-right"><span class="amc-role-detail-number">${item.avgInterval ? item.avgInterval.toFixed(item.avgInterval >= 100 ? 0 : 1) : "0.0"}</span></td>
+              <td class="is-center"><span class="amc-role-detail-role-pill ${item.detailRole.className}">${escapeHtml(item.detailRole.label)}</span></td>
             </tr>`;
         }).join("")
         : `<tr><td colspan="${columns.length}" style="text-align:center;color:#7b8799;padding:24px 12px;">暂无数据</td></tr>`;
@@ -16634,20 +18314,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       wrap.innerHTML = `
         <table class="amc-role-detail-table">
           <colgroup>${columns.map(column => `<col style="width:${column.width}">`).join("")}</colgroup>
-          <thead><tr>${columns.map(column => `<th class="is-${column.align || "left"}">${escapeHtml(column.label)}</th>`).join("")}</tr></thead>
+          <thead><tr>${columns.map(column => frameModule2DetailHeader(column, sortKey, sortDir)).join("")}</tr></thead>
           <tbody>${bodyHtml}</tbody>
         </table>`;
 
-      wrap.querySelectorAll("[data-role-detail-asin]").forEach(row => {
-        const asin = row.dataset.roleDetailAsin;
-        row.addEventListener("click", event => {
-          if (event.target.closest("a")) return;
-          frameModule2SetSelectedAsin(asin, view);
-        });
-        row.addEventListener("keydown", event => {
-          if (event.key !== "Enter" && event.key !== " ") return;
-          event.preventDefault();
-          frameModule2SetSelectedAsin(asin, view);
+      wrap.querySelectorAll("[data-role-detail-sort]").forEach(button => {
+        button.addEventListener("click", () => {
+          const key = button.dataset.roleDetailSort;
+          if (frameModule2State.detailSortKey === key) {
+            frameModule2State.detailSortDir = frameModule2State.detailSortDir === "asc" ? "desc" : "asc";
+          } else {
+            frameModule2State.detailSortKey = key;
+            frameModule2State.detailSortDir = "desc";
+          }
+          renderFrameRoleDetailTable();
         });
       });
     }
@@ -16776,8 +18456,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       const leadRole = "Lead ASIN";
       const followRole = "Follow ASIN";
-      const leadColor = "#4ecdbd";
-      const followColor = "#4AA7EA";
+      const leadColor = frameModule2RoleColors.lead;
+      const followColor = frameModule2FlowColors.follow;
       const legendSelected = chartDom.__frameLegendSelected || {
         [leadRole]: true,
         [followRole]: true
@@ -17246,8 +18926,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         <text class="amc-role-flow-caption" x="${rightX + nodeWidth + 12}" y="30" text-anchor="start">Follow ASIN</text>
         <defs>
           <linearGradient id="frameRoleFlowGradient" x1="${leftX}" y1="0" x2="${rightX}" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#4ecdbd" />
-            <stop offset="100%" stop-color="#4aa7ea" />
+            <stop offset="0%" stop-color="#4aa7ea" />
+            <stop offset="100%" stop-color="#57dac5" />
           </linearGradient>
         </defs>
         ${links.map(drawLink).join("")}
@@ -17357,7 +19037,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             <stop offset="100%" stop-color="#7793ee" />
           </linearGradient>
         </defs>
-        <text class="amc-interval-axis-title" x="14" y="${padding.top + plotHeight / 2}" text-anchor="middle" transform="rotate(-90 14 ${padding.top + plotHeight / 2})">人数</text>
+        <text class="amc-interval-axis-title" x="14" y="${padding.top + plotHeight / 2}" text-anchor="middle" transform="rotate(-90 14 ${padding.top + plotHeight / 2})">交叉购买人数</text>
         ${gridLines}
         ${verticalGrid}
         <line class="amc-interval-axis-line" x1="${padding.left}" y1="${plotBottom}" x2="${width - padding.right}" y2="${plotBottom}" />
