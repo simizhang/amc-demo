@@ -2261,12 +2261,21 @@
     }
 
     .frame-create-custom-mapping-picker {
-      display: grid;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       margin: 4px 0 4px 27px;
+      min-width: 0;
+    }
+
+    .frame-create-custom-mapping-picker[hidden] {
+      display: none;
     }
 
     .frame-create-custom-mapping-picker select {
       width: min(100%, 280px);
+      min-width: 0;
+      flex: 1 1 180px;
       height: 34px;
       padding: 0 10px;
       border: 1px solid #d6dfeb;
@@ -3650,15 +3659,15 @@
     }
 
     .amc-top-pair-product-asin-link {
-      color: #2f6fcb;
+      color: #7f8fa6;
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 400;
       text-decoration: none;
     }
 
     .amc-top-pair-product-asin-link:hover,
     .amc-top-pair-product-asin-link:focus-visible {
-      color: #1d56aa;
+      color: #52647d;
       text-decoration: underline;
     }
 
@@ -7707,7 +7716,7 @@
 
     .amc-module4-product-title {
       overflow: hidden;
-      color: #102346;
+      color: #1f6fd6;
       font-size: 12px;
       font-weight: 500;
       line-height: 1.25;
@@ -7728,15 +7737,15 @@
     }
 
     .amc-module4-product-asin-link {
-      color: #2f6fcb;
+      color: #7f8fa6;
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 400;
       text-decoration: none;
     }
 
     .amc-module4-product-asin-link:hover,
     .amc-module4-product-asin-link:focus-visible {
-      color: #1d56aa;
+      color: #52647d;
       text-decoration: underline;
     }
 
@@ -9573,7 +9582,7 @@
     .amc-module6-asin-picker-option-main {
       overflow: hidden;
       font-size: 12px;
-      font-weight: 650;
+      font-weight: 400;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -9643,27 +9652,54 @@
 
     .amc-module6-selector-main {
       min-width: 0;
-      display: grid;
-      gap: 2px;
+      display: flex;
+      align-items: center;
     }
 
     .amc-module6-selector-asin {
+      min-width: 0;
+    }
+
+    .amc-module6-asin-display {
+      min-width: 0;
+      display: grid;
+      gap: 3px;
+      line-height: 1.2;
+    }
+
+    .amc-module6-asin-display-value {
       overflow: hidden;
       color: #163154;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 400;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-module6-asin-display-label {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      color: #1f6fd6;
+      font-size: 13px;
       line-height: 1.2;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .amc-module6-selector-meta {
-      overflow: hidden;
       color: #79879c;
       font-size: 11px;
       line-height: 1.2;
-      text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .amc-module6-selector-metrics {
+      min-width: 74px;
+      display: grid;
+      justify-items: end;
+      gap: 4px;
+      text-align: right;
     }
 
     .amc-module6-selector-rate {
@@ -12395,7 +12431,7 @@
     .amc-chart-tooltip-asin-value {
       display: inline;
       color: #172b4d;
-      font-weight: 700;
+      font-weight: 400;
       line-height: 1.25;
       white-space: nowrap;
     }
@@ -13480,6 +13516,7 @@
       border: 0;
       border-radius: 0;
       background: transparent;
+      font-weight: 400;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -14534,7 +14571,7 @@
     ) {
       color: #2f3e55;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 400;
     }
 
     body[data-page="amcFrame"] :is(
@@ -14749,7 +14786,7 @@
       overflow: hidden;
       color: #2e6fb5;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 400;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -15551,6 +15588,15 @@
       table-layout: fixed;
     }
 
+    .custom-mapping-file-table.is-empty {
+      height: 100%;
+    }
+
+    .custom-mapping-file-table.is-empty tbody,
+    .custom-mapping-file-table.is-empty .custom-mapping-file-empty-row {
+      height: 100%;
+    }
+
     .custom-mapping-file-table th,
     .custom-mapping-file-table td,
     .custom-mapping-detail-table th,
@@ -15662,6 +15708,23 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .custom-mapping-file-table .custom-mapping-no-file {
+      height: 100%;
+      min-height: 0;
+      padding: 0;
+      border-bottom: 0;
+      vertical-align: middle;
+    }
+
+    .custom-mapping-file-empty-message {
+      width: 100%;
+      height: 100%;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .custom-mapping-panel-pagination {
@@ -17200,7 +17263,7 @@
       max-width: 100%;
       color: #2e6fb5;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 400;
       line-height: 1.4;
     }
 
@@ -17427,27 +17490,27 @@
       font-weight: 400;
     }
 
-    /* 1.2 and 2.2 keep the ASIN as the primary, blue identifier. */
+    /* Keep ASIN values neutral and use blue only for their labels. */
     body[data-page="amcFrame"] .amc-custom-asin-display.is-asin-blue-tag-muted .amc-custom-asin-value {
-      color: #1f6fd6;
+      color: #7f8fa6;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 400;
     }
 
     body[data-page="amcFrame"] .amc-custom-asin-display.is-asin-blue-tag-muted .amc-custom-asin-label {
-      color: #46556b;
+      color: #1f6fd6;
       font-size: 11px;
       font-weight: 400;
     }
 
     body[data-page="amcFrame"] .amc-role-ranking-chart .amc-role-bar-label-asin.is-asin-blue {
-      fill: #1f6fd6;
+      fill: #7f8fa6;
       font-size: 10px;
       font-weight: 400;
     }
 
     body[data-page="amcFrame"] .amc-role-ranking-chart .amc-role-bar-label-tag.is-tag-muted {
-      fill: #46556b;
+      fill: #1f6fd6;
       font-size: 10px;
       font-weight: 400;
     }
@@ -21317,7 +21380,6 @@
                               <span class="aggregation-radio" aria-hidden="true"></span>
                               <span class="aggregation-option-label">自定义映射</span>
                             </button>
-                            <button class="frame-create-custom-mapping-upload" id="frameCreateCustomMappingUploadBtn" type="button">上传自定义映射</button>
                           </div>
                           <div class="frame-create-mapping-warning frame-create-custom-mapping-warning" id="frameCreateCustomMappingWarning" hidden role="alert">
                             <span class="frame-create-mapping-warning-copy" id="frameCreateCustomMappingWarningText"></span>
@@ -21325,6 +21387,7 @@
                           </div>
                           <div class="frame-create-custom-mapping-picker" id="frameCreateCustomMappingPicker" hidden>
                             <select id="frameCreateCustomMappingSelect" aria-label="选择自定义映射"></select>
+                            <button class="frame-create-custom-mapping-upload" id="frameCreateCustomMappingUploadBtn" type="button">上传</button>
                           </div>
                         </div>
                         <button class="aggregation-option frame-aggregation-option active" type="button" role="radio" aria-checked="true" data-frame-aggregation-value="none">
@@ -23455,16 +23518,21 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       const customFiles = frameCreateCustomMappingFiles();
       const selectedCustomFile = frameCreateSelectedCustomMappingFile();
-      customSelect.innerHTML = customFiles
-        .map(file => `<option value="${escapeHtml(file.id)}">${escapeHtml(file.dimension || "自定义映射")}</option>`)
-        .join("");
-      customSelect.value = selectedCustomFile?.id || "";
+      const showCustomPicker = selection === "custom" && customFiles.length > 0;
+      if (showCustomPicker) {
+        customSelect.innerHTML = customFiles
+          .map(file => `<option value="${escapeHtml(file.id)}">${escapeHtml(file.dimension || "自定义映射")}</option>`)
+          .join("");
+        customSelect.value = selectedCustomFile?.id || "";
+      } else {
+        customSelect.innerHTML = "";
+      }
 
       customWarning.hidden = !customMappingIsEmpty;
       customWarningText.textContent = customMappingIsEmpty ? "自定义映射为空，请先" : "";
       customAction.textContent = "上传";
       customAction.dataset.mappingTarget = customMappingIsEmpty ? "custom" : "";
-      customPicker.hidden = selection !== "custom" || customFiles.length === 0;
+      customPicker.hidden = !showCustomPicker;
     }
 
     function resetFrameCreateModelForm() {
@@ -27814,6 +27882,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const isEmptyPresentation = customMappingUsesEmptyPresentation();
       const files = isEmptyPresentation ? [] : customMappingFilteredFiles();
       const selectedFile = isEmptyPresentation ? null : customMappingSelectedFile();
+      body.closest(".custom-mapping-file-table")?.classList.toggle("is-empty", !files.length);
       total.textContent = `共 ${files.length} 条`;
       body.innerHTML = files.length ? files.map(file => `
         <tr class="${file.id === selectedFile?.id ? "is-selected" : ""}" data-custom-mapping-file-row="${escapeHtml(file.id)}" tabindex="0" aria-label="选择映射文件：${escapeHtml(file.filename)}">
@@ -27821,7 +27890,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           <td>${customMappingFileDimensionMarkup(file.dimension)}</td>
         </tr>
       `).join("") : `
-        <tr><td class="custom-mapping-no-file" colspan="2">暂无符合条件的映射文件</td></tr>
+        <tr class="custom-mapping-file-empty-row"><td class="custom-mapping-no-file" colspan="2"><div class="custom-mapping-file-empty-message">暂无符合条件的映射文件</div></td></tr>
       `;
       body.querySelectorAll("[data-custom-mapping-file-row]").forEach(row => {
         const selectFile = () => customMappingSetSelectedFile(row.dataset.customMappingFileRow || "");
@@ -32373,6 +32442,16 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       frameModule3SetEmptyChart(chart, text);
     }
 
+    function frameModule6AsinDisplayMarkup(asin) {
+      const parts = frameLabelDisplayParts(asin);
+      const hasTag = frameLabelHasTag(parts);
+      const title = hasTag ? `${parts.raw} · ${parts.label}` : parts.raw;
+      return `<span class="amc-module6-asin-display" title="${escapeHtml(title)}">
+        <span class="amc-module6-asin-display-value">${escapeHtml(parts.raw)}</span>
+        ${hasTag ? `<span class="amc-module6-asin-display-label">${escapeHtml(parts.label)}</span>` : ""}
+      </span>`;
+    }
+
     function frameModule6RenderOverview(entry) {
       if (!entry) return;
       const entryAsin = frameLabelDisplayParts(entry.leadAsin).raw;
@@ -32406,10 +32485,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           <button class="amc-module6-selector-row${selected ? " is-selected" : ""}" type="button" role="option" aria-selected="${selected}" data-module6-asin="${escapeHtml(item.leadAsin)}" title="${escapeHtml(item.leadAsin)}">
             <span class="amc-module6-selector-rank">${index + 1}</span>
             <span class="amc-module6-selector-main">
-              <span class="amc-module6-selector-asin">${frameLabelAsinMarkup(item.leadAsin)}</span>
+              <span class="amc-module6-selector-asin">${frameModule6AsinDisplayMarkup(item.leadAsin)}</span>
+            </span>
+            <span class="amc-module6-selector-metrics">
+              <span class="amc-module6-selector-rate">${frameModule6FormatPercent(item.repurchaseRate)} 二购率</span>
               <span class="amc-module6-selector-meta">${frameModule6FormatNumber(item.ntbUsers)} 新客</span>
             </span>
-            <span class="amc-module6-selector-rate">${frameModule6FormatPercent(item.repurchaseRate)} 二购率</span>
           </button>`;
       }).join("");
       list.querySelectorAll("[data-module6-asin]").forEach(button => {
@@ -33981,11 +34062,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               }),
               rich: {
                 asinBlue: {
-                  color: "#1f6fd6",
-                  fontWeight: 600
+                  color: "#7f8fa6",
+                  fontWeight: 400
                 },
                 tagMuted: {
-                  color: "#46556b",
+                  color: "#1f6fd6",
                   fontWeight: 400
                 }
               }
