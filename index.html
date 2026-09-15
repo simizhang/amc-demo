@@ -4540,6 +4540,170 @@
       background: transparent;
     }
 
+    .amc-role-ranking-chart.is-list-view {
+      height: 472px;
+      min-height: 472px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 2px 0;
+    }
+
+    .amc-role-ranking-list {
+      display: grid;
+      width: 100%;
+      color: #243a5c;
+      font-size: 12px;
+    }
+
+    .amc-role-ranking-list-row {
+      display: grid;
+      grid-template-columns: 40px minmax(132px, 156px) minmax(0, 1fr);
+      width: 100%;
+      min-width: 0;
+    }
+
+    .amc-role-ranking-list-row > span {
+      display: block;
+      min-width: 0;
+    }
+
+    .amc-role-ranking-list-row.is-header > span {
+      display: block;
+      height: 34px;
+      padding: 5px;
+      border-bottom: 1px solid #dfe7f1;
+      background: #f6f8fb;
+      color: #62738c;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .amc-role-ranking-list-row > span:first-child {
+      text-align: center;
+    }
+
+    .amc-role-ranking-list-row:not(.is-header) {
+      cursor: pointer;
+      transition: background 0.14s ease;
+    }
+
+    .amc-role-ranking-list-row:not(.is-header):hover,
+    .amc-role-ranking-list-row:not(.is-header).is-selected {
+      background: #f4f8fd;
+    }
+
+    .amc-role-ranking-list-row:not(.is-header):focus-visible {
+      outline: 2px solid rgba(74, 167, 234, 0.26);
+      outline-offset: -2px;
+    }
+
+    .amc-role-ranking-list-row:not(.is-header) > span {
+      height: 28px;
+      padding: 5px;
+      border-bottom: 1px solid #edf2f7;
+      min-width: 0;
+      vertical-align: middle;
+    }
+
+    .amc-role-ranking-list-row:last-child > span {
+      border-bottom: 0;
+    }
+
+    .amc-role-ranking-list-rank {
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #eef2f7;
+      color: #718198;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    }
+
+    .amc-role-ranking-list-rank.is-top-1 {
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(180deg, #ff7b7b 0%, #f04f58 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(91, 52, 27, 0.14);
+      box-shadow: 0 5px 10px rgba(46, 66, 112, 0.16);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
+    }
+
+    .amc-role-ranking-list-rank.is-top-2 {
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(180deg, #ffb56b 0%, #f28a34 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(91, 52, 27, 0.14);
+      box-shadow: 0 5px 10px rgba(46, 66, 112, 0.16);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
+    }
+
+    .amc-role-ranking-list-rank.is-top-3 {
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(180deg, #ffd05f 0%, #f2aa2f 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(91, 52, 27, 0.14);
+      box-shadow: 0 5px 10px rgba(46, 66, 112, 0.16);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
+    }
+
+    .amc-role-ranking-list-asin {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-role-ranking-list-asin .amc-custom-asin-display,
+    .amc-role-ranking-list-asin .amc-custom-asin-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-role-ranking-list-metric {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) max-content;
+      align-items: center;
+      width: 100%;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .amc-role-ranking-list-progress {
+      display: block;
+      width: 100%;
+      height: 14px;
+      overflow: hidden;
+      border-radius: 3px;
+      background: #edf3f8;
+    }
+
+    .amc-role-ranking-list-progress > span {
+      display: block;
+      min-width: 3px;
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    .amc-role-ranking-list-value {
+      color: #354d6d;
+      font-size: 12px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      white-space: nowrap;
+    }
+
     .amc-role-flow-chart {
       width: 100%;
       height: 450px;
@@ -4705,13 +4869,6 @@
       fill: #294364;
       font-size: 12px;
       font-weight: 500;
-    }
-
-    .amc-role-rank-index {
-      fill: #9aa7b9;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
     }
 
     .amc-role-bar-value {
@@ -6849,23 +7006,7 @@
 
     .amc-module4-grid[data-module4-layout-style="style2"] .amc-module4-top-panel {
       width: 100%;
-      height: clamp(560px, 44vw, 680px);
-    }
-
-    .amc-module4-grid[data-module4-layout-style="style2"] .amc-module4-top-panel.is-top-view {
       height: auto;
-      grid-template-rows: auto auto;
-    }
-
-    .amc-module4-grid[data-module4-layout-style="style2"] .amc-module4-top-panel.is-top-view #frameModule42TopView,
-    .amc-module4-grid[data-module4-layout-style="style2"] .amc-module4-top-panel.is-top-view .amc-module4-list-grid,
-    .amc-module4-grid[data-module4-layout-style="style2"] .amc-module4-top-panel.is-top-view .amc-module4-list-column,
-    .amc-module4-grid[data-module4-layout-style="style2"] .amc-module4-top-panel.is-top-view .amc-module4-list {
-      height: auto;
-    }
-
-    .amc-module4-grid[data-module4-layout-style="style2"] .amc-module4-top-panel.is-top-view .amc-module4-list {
-      overflow: visible;
     }
 
     .amc-module4-grid[data-module4-layout-style="style2"] .amc-module4-list-row {
@@ -6888,7 +7029,7 @@
     .amc-module4-top-panel {
       display: grid;
       grid-template-rows: auto minmax(0, 1fr);
-      height: 602px;
+      height: auto;
       overflow: hidden;
     }
 
@@ -6990,6 +7131,59 @@
       font-size: 12px;
     }
 
+    .amc-module4-rhythm-select,
+    .amc-module5-tool-select {
+      position: relative;
+    }
+
+    .amc-module4-rhythm-select select[data-amc-clear-button],
+    .amc-module5-tool-select select[data-amc-clear-button] {
+      padding-right: 51px;
+    }
+
+    .amc-module-detail-filter-clear {
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      z-index: 2;
+      width: 17px;
+      height: 17px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 1px solid #c7d1df;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #93a1b5;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .amc-module-detail-filter-clear[hidden] {
+      display: none;
+    }
+
+    .amc-module-detail-filter-clear:hover {
+      border-color: #aebdce;
+      background: #f2f5f9;
+      color: #566980;
+    }
+
+    .amc-module-detail-filter-clear:focus-visible {
+      outline: 2px solid rgba(91, 115, 242, 0.24);
+      outline-offset: 1px;
+    }
+
+    .amc-module-detail-filter-clear svg {
+      width: 10px;
+      height: 10px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-width: 1.8;
+    }
+
     .amc-module4-title-rhythm-tag[hidden],
     .amc-module4-rhythm-select[hidden] {
       display: none !important;
@@ -7027,8 +7221,8 @@
     }
 
     .amc-module4-top-panel .amc-module4-detail-table-wrap {
-      height: 100%;
-      max-height: none;
+      height: 522px;
+      max-height: 522px;
       margin: 0;
     }
 
@@ -7649,8 +7843,14 @@
     }
 
     .amc-module4-detail-rank-cell {
-      width: 56px;
+      width: 48px;
+      padding-right: 4px;
+      padding-left: 6px;
       text-align: center;
+    }
+
+    .amc-module4-detail-table :is(th, td):nth-child(2) {
+      padding-left: 6px;
     }
 
     .amc-module4-detail-rank {
@@ -8092,19 +8292,13 @@
       min-width: 0;
     }
 
-    .amc-module5-view-tabs .amc-segment-btn {
-      min-width: 62px;
-      font-size: 11px;
-    }
-
     .amc-module5-tool-select {
       display: block;
       width: 124px;
       min-width: 0;
     }
 
-    .amc-module5-tools [data-frame-module5-detail-filter][hidden],
-    .amc-module5-tools [data-frame-module5-top-filter][hidden] {
+    .amc-module5-tools [data-frame-module5-detail-filter][hidden] {
       display: none !important;
     }
 
@@ -8266,37 +8460,46 @@
     }
 
     .amc-module5-detail-rank {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 4px;
-      background: #cfd6df;
-      color: #ffffff;
-      font-size: 10px;
+      border-radius: 50%;
+      background: #eef2f7;
+      color: #718198;
+      font-size: 11px;
       font-weight: 800;
       line-height: 1;
-      box-shadow: 0 4px 9px rgba(46, 66, 112, 0.12);
-      isolation: isolate;
+      font-variant-numeric: tabular-nums;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
     }
 
     .amc-module5-detail-table tbody tr:nth-child(1) .amc-module5-detail-rank {
-      background: linear-gradient(180deg, #ff7b76 0%, #ff5262 100%);
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(180deg, #ff7b7b 0%, #f04f58 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(91, 52, 27, 0.14);
+      box-shadow: 0 5px 10px rgba(46, 66, 112, 0.16);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
     }
 
     .amc-module5-detail-table tbody tr:nth-child(2) .amc-module5-detail-rank {
-      background: linear-gradient(180deg, #ffbb62 0%, #ff8421 100%);
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(180deg, #ffb56b 0%, #f28a34 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(91, 52, 27, 0.14);
+      box-shadow: 0 5px 10px rgba(46, 66, 112, 0.16);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
     }
 
     .amc-module5-detail-table tbody tr:nth-child(3) .amc-module5-detail-rank {
-      background: linear-gradient(180deg, #ffd84f 0%, #ffb723 100%);
-    }
-
-    .amc-module5-detail-table tbody tr:nth-child(n + 4) .amc-module5-detail-rank {
-      border-radius: 50%;
-      background: linear-gradient(180deg, #cdd5df 0%, #aeb9c6 100%);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.52);
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(180deg, #ffd05f 0%, #f2aa2f 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(91, 52, 27, 0.14);
+      box-shadow: 0 5px 10px rgba(46, 66, 112, 0.16);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
     }
 
     .amc-module5-detail-strategy {
@@ -8738,32 +8941,46 @@
     }
 
     .amc-role-detail-rank {
+      width: 22px;
+      height: 22px;
       display: inline-flex;
-      width: 20px;
-      height: 20px;
       align-items: center;
       justify-content: center;
-      border-radius: 4px;
-      background: #f0f3f7;
-      color: #718096;
-      font-size: 10px;
-      font-weight: 700;
+      border-radius: 50%;
+      background: #eef2f7;
+      color: #718198;
+      font-size: 11px;
+      font-weight: 800;
       line-height: 1;
+      font-variant-numeric: tabular-nums;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
     }
 
     .amc-role-detail-table tbody tr:nth-child(1) .amc-role-detail-rank {
-      background: #fff0cf;
-      color: #a96900;
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(180deg, #ff7b7b 0%, #f04f58 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(91, 52, 27, 0.14);
+      box-shadow: 0 5px 10px rgba(46, 66, 112, 0.16);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
     }
 
     .amc-role-detail-table tbody tr:nth-child(2) .amc-role-detail-rank {
-      background: #e7edf4;
-      color: #61728a;
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(180deg, #ffb56b 0%, #f28a34 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(91, 52, 27, 0.14);
+      box-shadow: 0 5px 10px rgba(46, 66, 112, 0.16);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
     }
 
     .amc-role-detail-table tbody tr:nth-child(3) .amc-role-detail-rank {
-      background: #fae5d6;
-      color: #9c5f31;
+      border-radius: 5px 5px 3px 3px;
+      background: linear-gradient(180deg, #ffd05f 0%, #f2aa2f 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(91, 52, 27, 0.14);
+      box-shadow: 0 5px 10px rgba(46, 66, 112, 0.16);
+      clip-path: polygon(0 0, 100% 0, 100% 76%, 50% 100%, 0 76%);
     }
 
     .amc-role-detail-asin-link {
@@ -13262,6 +13479,25 @@
       white-space: nowrap;
     }
 
+    body[data-page="amcFrame"][data-asin-label-presentation] .amc-top-pairs-compact .amc-custom-asin-display.is-stacked {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
+      max-width: 100%;
+      overflow: hidden;
+      line-height: 1.15;
+      white-space: normal;
+    }
+
+    body[data-page="amcFrame"][data-asin-label-presentation] .amc-top-pairs-compact .amc-custom-asin-display.is-stacked .amc-custom-asin-value,
+    body[data-page="amcFrame"][data-asin-label-presentation] .amc-top-pairs-compact .amc-custom-asin-display.is-stacked .amc-custom-asin-label {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     body[data-page="amcFrame"] .amc-top-pairs-compact .amc-top-pair-arrow {
       flex: 0 0 auto;
       color: #233a59;
@@ -13901,9 +14137,7 @@
     }
 
     body[data-page="amcFrame"] :is(
-      .amc-role-detail-rank,
-      .amc-module3-detail-rank,
-      .amc-module5-detail-rank
+      .amc-module3-detail-rank
     ) {
       width: 21px;
       height: 21px;
@@ -14082,6 +14316,12 @@
       padding-right: 8px;
       padding-left: 8px;
       font-size: 11px;
+    }
+
+    body[data-page="amcFrame"] .amc-role-ranking-style-switch .amc-segment-btn {
+      min-width: 26px;
+      padding-right: 8px;
+      padding-left: 8px;
     }
 
     body[data-page="amcFrame"] .amc-role-ranking-selection:not([hidden]),
@@ -15281,6 +15521,103 @@
       min-height: 188px;
     }
 
+    .custom-upload-empty-row:hover {
+      background: #ffffff !important;
+    }
+
+    .custom-upload-empty-cell {
+      height: auto !important;
+      padding: 0 !important;
+      border-bottom: 0 !important;
+      color: inherit;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .custom-upload-empty {
+      width: 100%;
+      min-height: clamp(360px, calc(100vh - 282px), 640px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-sizing: border-box;
+      padding: 34px 20px;
+      border: 0;
+      background: #ffffff;
+      color: #708198;
+      font: inherit;
+      line-height: 1.5;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    body[data-page="customMappings"] .custom-upload-empty {
+      min-height: clamp(400px, calc(100vh - 220px), 680px);
+    }
+
+    .custom-upload-empty:hover,
+    .custom-upload-empty:focus-visible,
+    .custom-upload-empty.is-dragover {
+      background: #fbfcff;
+      color: #5667f5;
+      outline: none;
+    }
+
+    .custom-upload-empty:focus-visible {
+      box-shadow: inset 0 0 0 2px rgba(86, 103, 245, 0.22);
+    }
+
+    .custom-upload-empty-icon {
+      width: 104px;
+      height: 82px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #c9d2df;
+      pointer-events: none;
+    }
+
+    .custom-upload-empty-icon svg {
+      width: 104px;
+      height: 82px;
+      display: block;
+      overflow: visible;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.5;
+    }
+
+    .custom-upload-empty-icon .custom-upload-empty-cloud-fill {
+      fill: #f9fafc;
+      stroke: #dce3ec;
+    }
+
+    .custom-upload-empty-icon .custom-upload-empty-cloud-dot {
+      fill: #edf1f6;
+      stroke: none;
+    }
+
+    .custom-upload-empty-icon .custom-upload-empty-circle {
+      fill: #cbd5e1;
+      stroke: #cbd5e1;
+    }
+
+    .custom-upload-empty-icon .custom-upload-empty-arrow {
+      stroke: #ffffff;
+      stroke-width: 1.8;
+    }
+
+    .custom-upload-empty-copy {
+      color: #71819a;
+      font-size: 14px;
+      font-weight: 400;
+      pointer-events: none;
+    }
+
     :is(.amc-module4-empty, .amc-module5-empty) {
       min-height: 0;
       display: block;
@@ -16108,15 +16445,25 @@
     }
 
     body[data-asin-label-presentation="custom"] .amc-role-bar-label-tag,
-    body[data-asin-label-presentation="custom"] .amc-role-flow-label-tag {
+    body[data-asin-label-presentation="custom"] .amc-role-flow-label-tag,
+    body[data-asin-label-presentation="system-product-line"] .amc-role-bar-label-tag,
+    body[data-asin-label-presentation="system-product-line"] .amc-role-flow-label-tag {
       fill: #1f6fd6;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
     }
 
     body[data-asin-label-presentation="custom"] .amc-role-bar-label-asin,
-    body[data-asin-label-presentation="custom"] .amc-role-flow-label-asin {
+    body[data-asin-label-presentation="custom"] .amc-role-flow-label-asin,
+    body[data-asin-label-presentation="system-product-line"] .amc-role-bar-label-asin,
+    body[data-asin-label-presentation="system-product-line"] .amc-role-flow-label-asin {
       fill: #7f8fa6;
+      font-size: 10px;
+      font-weight: 400;
+    }
+
+    body[data-asin-label-presentation="custom"] .amc-role-flow-chart .amc-role-flow-node-label,
+    body[data-asin-label-presentation="system-product-line"] .amc-role-flow-chart .amc-role-flow-node-label {
       font-size: 10px;
       font-weight: 400;
     }
@@ -18987,7 +19334,7 @@
                         <thead>
                           <tr>
                             <th scope="col"></th>
-                            <th scope="col">ASIN组合</th>
+                            <th scope="col">Lead → Follow</th>
                             <th scope="col" id="frameTopPairsMetricHeader">交叉购买人数</th>
                           </tr>
                         </thead>
@@ -19074,6 +19421,10 @@
                     </div>
                   </div>
                   <div class="amc-role-ranking-tools">
+                    <div class="amc-segmented-control amc-role-ranking-style-switch" role="group" aria-label="TOP 15 ASIN 展示样式">
+                      <button class="amc-segment-btn is-active" type="button" data-role-ranking-style="style1" aria-pressed="true" aria-label="样式 1" title="样式 1：横向条形图">1</button>
+                      <button class="amc-segment-btn" type="button" data-role-ranking-style="style2" aria-pressed="false" aria-label="样式 2" title="样式 2：列表">2</button>
+                    </div>
                     <label class="amc-compact-select">
                       <span class="sr-only">排序指标</span>
                       <select id="frameRankingMetric" aria-label="TOP 15 排序指标"></select>
@@ -19383,8 +19734,8 @@
                       <label>
                         <span class="amc-compact-select">
                           <select id="frameModule39PricePath" data-amc-empty-filter aria-label="图表3.9价格路径筛选">
-                            <option value="" selected>价格路径</option>
-                            <option value="upgrade">升级购买</option>
+                            <option value="">价格路径</option>
+                            <option value="upgrade" selected>升级购买</option>
                             <option value="flat">平价流转</option>
                             <option value="downgrade">降级/配件购买</option>
                           </select>
@@ -19515,47 +19866,26 @@
                     <div class="amc-overview-module-title">
                       <span class="amc-overview-index">4.2</span>
                       <div>
-                        <h4 id="frameModule42Title">快速放量TOP 10</h4>
-                        <p id="frameModule42Subtitle">快速关联 ≤90天，按交叉购买人数降序。适合优先测试短周期 DSP 和购买后推荐。</p>
+                        <h4 id="frameModule42Title">高价值组合明细表</h4>
+                        <p id="frameModule42Subtitle">购买节奏：全部购买节奏，展示符合条件的高价值组合。</p>
                       </div>
                     </div>
                     <div class="amc-module4-panel-tools">
-                      <span class="amc-module4-title-rhythm-tag quick" id="frameModule42RhythmTag" aria-label="当前购买节奏天数">≤90天</span>
-                      <label class="amc-compact-select amc-module4-rhythm-select" id="frameModule42RhythmSelectWrap">
-                        <span class="sr-only">购买节奏</span>
-                        <select id="frameModule42RhythmSelect" aria-label="4.2 TOP组合购买节奏">
-                          <option value="quick" selected>快速放量</option>
-                          <option value="long">长尾关联</option>
-                          <option value="stable">稳定培育</option>
-                        </select>
-                      </label>
-                      <label class="amc-compact-select amc-module4-rhythm-select" id="frameModule42DetailRhythmSelectWrap" hidden>
-                        <span class="sr-only">购买节奏</span>
-                        <select id="frameModule42DetailRhythmSelect" data-amc-empty-filter aria-label="4.2 明细表购买节奏筛选">
+                      <div class="amc-compact-select amc-module4-rhythm-select" id="frameModule42DetailRhythmSelectWrap">
+                        <label class="sr-only" for="frameModule42DetailRhythmSelect">购买节奏</label>
+                        <select id="frameModule42DetailRhythmSelect" data-amc-empty-filter data-amc-clear-button="frameModule42DetailRhythmClear" aria-label="4.2 明细表购买节奏筛选">
                           <option value="" selected>购买节奏</option>
                           <option value="quick">快速放量</option>
                           <option value="long">长尾关联</option>
                           <option value="stable">稳定培育</option>
                         </select>
-                      </label>
-                      <div class="amc-segmented-control amc-module4-display-tabs" role="tablist" aria-label="4.2展示方式切换">
-                        <button class="amc-segment-btn is-active" type="button" data-module4-display-view="top" role="tab" aria-selected="true">TOP 10</button>
-                        <button class="amc-segment-btn" type="button" data-module4-display-view="detail" role="tab" aria-selected="false">明细表</button>
+                        <button class="amc-module-detail-filter-clear" id="frameModule42DetailRhythmClear" type="button" aria-label="清空购买节奏筛选" title="清空筛选" hidden>
+                          <svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3 3l6 6M9 3L3 9"></path></svg>
+                        </button>
                       </div>
                     </div>
                   </div>
-                  <div class="amc-module4-view-content" id="frameModule42TopView">
-                    <div class="amc-module4-list-grid">
-                      <div class="amc-module4-list-column">
-                        <div class="amc-module4-list-head">
-                          <h5 id="frameModule42ListTitle" class="quick">快速关联 ≤90天</h5>
-                          <p id="frameModule42ListHint">按交叉购买人数降序。适合优先测试短周期 DSP 和购买后推荐。</p>
-                        </div>
-                        <div class="amc-module4-list" id="frameModule42List" aria-label="快速放量TOP 10"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="amc-module4-view-content amc-module4-detail-view" id="frameModule42DetailView" hidden>
+                  <div class="amc-module4-view-content amc-module4-detail-view" id="frameModule42DetailView">
                     <div class="amc-module4-detail-table-wrap" id="frameModule42DetailTableWrap" aria-live="polite"></div>
                   </div>
                 </section>
@@ -19658,37 +19988,39 @@
                     </div>
                   </div>
                   <div class="amc-module5-tools">
-                    <label class="amc-module5-tool-select amc-module5-detail-filter" data-frame-module5-detail-filter hidden>
-                      <span class="sr-only">明细价格路径筛选</span>
-                      <select id="frameModule53PricePath" data-amc-empty-filter aria-label="核心组合明细价格路径筛选">
+                    <div class="amc-module5-tool-select amc-module5-detail-filter" data-frame-module5-detail-filter hidden>
+                      <label class="sr-only" for="frameModule53PricePath">明细价格路径筛选</label>
+                      <select id="frameModule53PricePath" data-amc-empty-filter data-amc-clear-button="frameModule53PricePathClear" aria-label="核心组合明细价格路径筛选">
                         <option value="" selected>价格路径</option>
                         <option value="upgrade">升级购买</option>
                         <option value="flat">平价流转</option>
                         <option value="downgrade">降级/配件购买</option>
                       </select>
-                    </label>
-                    <label class="amc-module5-tool-select amc-module5-detail-filter" data-frame-module5-detail-filter hidden>
-                      <span class="sr-only">明细购买节奏筛选</span>
-                      <select id="frameModule53Rhythm" data-amc-empty-filter aria-label="核心组合明细购买节奏筛选">
+                      <button class="amc-module-detail-filter-clear" id="frameModule53PricePathClear" type="button" aria-label="清空价格路径筛选" title="清空筛选" hidden>
+                        <svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3 3l6 6M9 3L3 9"></path></svg>
+                      </button>
+                    </div>
+                    <div class="amc-module5-tool-select amc-module5-detail-filter" data-frame-module5-detail-filter hidden>
+                      <label class="sr-only" for="frameModule53Rhythm">明细购买节奏筛选</label>
+                      <select id="frameModule53Rhythm" data-amc-empty-filter data-amc-clear-button="frameModule53RhythmClear" aria-label="核心组合明细购买节奏筛选">
                         <option value="" selected>购买节奏</option>
                         <option value="quick">快速关联</option>
                         <option value="stable">稳定培育</option>
                         <option value="long">长尾关联</option>
                       </select>
-                    </label>
-                    <label class="amc-module5-tool-select amc-module5-tool-select--strategy amc-module5-detail-filter" data-frame-module5-detail-filter hidden>
-                      <span class="sr-only">明细策略筛选</span>
-                      <select id="frameModule53Strategy" data-amc-empty-filter aria-label="核心组合策略筛选">
+                      <button class="amc-module-detail-filter-clear" id="frameModule53RhythmClear" type="button" aria-label="清空购买节奏筛选" title="清空筛选" hidden>
+                        <svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3 3l6 6M9 3L3 9"></path></svg>
+                      </button>
+                    </div>
+                    <div class="amc-module5-tool-select amc-module5-tool-select--strategy amc-module5-detail-filter" data-frame-module5-detail-filter hidden>
+                      <label class="sr-only" for="frameModule53Strategy">明细策略筛选</label>
+                      <select id="frameModule53Strategy" data-amc-empty-filter data-amc-clear-button="frameModule53StrategyClear" aria-label="核心组合策略筛选">
                         <option value="" selected>策略</option>
                       </select>
-                    </label>
-                    <label class="amc-module5-tool-select" data-frame-module5-top-filter>
-                      <span class="sr-only">明细排序指标</span>
-                      <select id="frameModule53Sort" aria-label="核心组合排序指标">
-                        <option value="scaleScore" selected>按修正指数</option>
-                        <option value="crossUsers">按交叉购买人数</option>
-                      </select>
-                    </label>
+                      <button class="amc-module-detail-filter-clear" id="frameModule53StrategyClear" type="button" aria-label="清空策略筛选" title="清空筛选" hidden>
+                        <svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3 3l6 6M9 3L3 9"></path></svg>
+                      </button>
+                    </div>
                     <button class="amc-module5-metric-config" type="button" data-frame-module5-detail-only aria-label="指标配置">
                       <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                         <path d="M5.25 3.5h7.25M5.25 8h7.25M5.25 12.5h7.25"></path>
@@ -19696,13 +20028,8 @@
                       </svg>
                       <span>指标配置</span>
                     </button>
-                    <div class="amc-segmented-control amc-module5-view-tabs" role="tablist" aria-label="核心组合表格视图">
-                      <button class="amc-segment-btn" type="button" data-frame-module5-view="top" role="tab" aria-selected="false">TOP表</button>
-                      <button class="amc-segment-btn is-active" type="button" data-frame-module5-view="detail" role="tab" aria-selected="true">明细表</button>
-                    </div>
                   </div>
                 </div>
-                <div class="amc-module5-list" id="frameModule53List" aria-label="核心组合 TOP 10 明细" hidden></div>
                 <div class="amc-module5-detail-table-wrap" id="frameModule53TableWrap" aria-label="核心组合明细表"></div>
               </section>
             </div>
@@ -23335,10 +23662,26 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function frameSyncEmptyFilterPlaceholder(select) {
       if (!select?.matches("select[data-amc-empty-filter]")) return;
       select.classList.toggle("is-placeholder", !select.value);
+      const clearButton = select.dataset.amcClearButton
+        ? document.getElementById(select.dataset.amcClearButton)
+        : null;
+      if (clearButton) clearButton.hidden = !select.value;
     }
 
     function frameSyncEmptyFilterPlaceholders() {
       document.querySelectorAll("select[data-amc-empty-filter]").forEach(frameSyncEmptyFilterPlaceholder);
+    }
+
+    function frameBindEmptyFilterClear(selectId, clearButtonId) {
+      const clearButton = document.getElementById(clearButtonId);
+      if (!clearButton || clearButton.dataset.bound === "true") return;
+      clearButton.addEventListener("click", () => {
+        const select = document.getElementById(selectId);
+        if (!select?.value) return;
+        select.value = "";
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+      clearButton.dataset.bound = "true";
     }
 
     const frameModule3State = {
@@ -23351,7 +23694,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       matrixTopN: 20,
       matrixSearchAsin: "",
       scale3HighlightedPath: "all",
-      scale3PricePath: "",
+      scale3PricePath: "upgrade",
       detailPricePath: "",
       selectedPairKey: null
     };
@@ -23911,9 +24254,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       const pairCell = record => `
         <div class="amc-module3-detail-pair-products">
-          ${frameModule4ProductBlock(record.leadAsin, "Lead")}
+          ${frameModule4ProductBlock(record.leadAsin, "Lead", { detail: true })}
           <span class="amc-module3-detail-pair-arrow" aria-hidden="true">→</span>
-          ${frameModule4ProductBlock(record.followAsin, "Follow")}
+          ${frameModule4ProductBlock(record.followAsin, "Follow", { detail: true })}
         </div>`;
       const maxScaleAdjustedScore = Math.max(...maxSourceRecords.map(record => Number(record.scaleAdjustedScore || 0)), 0);
       const maxAssociationScore = Math.max(...maxSourceRecords.map(record => Number(record.associationScore || 0)), 0);
@@ -25419,7 +25762,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       pricePath: "",
       layoutStyle: "style2",
       activeTopRhythm: "quick",
-      displayView: "top",
       detailRhythm: "",
       selectedPairKey: null,
       selectedRhythm: null
@@ -25519,8 +25861,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const showSupplementaryPanels = layoutStyle === "style1";
       const subtitle = document.getElementById("frameModule42Subtitle");
       if (subtitle) {
-        const config = frameModule4TopConfigs[frameModule4ActiveTopRhythm()];
-        subtitle.textContent = `${config.listTitle}，${config.hint}`;
+        subtitle.textContent = "购买节奏：全部购买节奏，展示符合条件的高价值组合。";
       }
       const rhythmPanel = document.querySelector('[aria-labelledby="frameModule43Title"]');
       if (rhythmPanel) rhythmPanel.hidden = !showSupplementaryPanels;
@@ -26049,6 +26390,95 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       ));
     }
 
+    function customUploadEmptyMarkup(type) {
+      const label = type === "label" ? "上传自定义标签文件" : "上传自定义映射文件";
+      return `
+        <button class="custom-upload-empty" type="button" data-custom-upload-empty="${type}" aria-label="${label}">
+          <span class="custom-upload-empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 104 82" focusable="false">
+              <ellipse class="custom-upload-empty-cloud-dot" cx="30" cy="22" rx="3" ry="3"></ellipse>
+              <ellipse class="custom-upload-empty-cloud-dot" cx="82" cy="32" rx="4" ry="4"></ellipse>
+              <ellipse class="custom-upload-empty-cloud-dot" cx="74" cy="18" rx="2.5" ry="2.5"></ellipse>
+              <path class="custom-upload-empty-cloud-fill" d="M32 56h40.8c10.1 0 18.2-7.1 18.2-15.9S82.9 24.2 72.8 24.2h-1.6C67.3 15.6 58.4 10 48.6 11.1 37.7 12.4 29.3 20.9 28 31.1c-8.8.8-15.7 6.7-15.7 14.1C12.3 51.2 19 56 32 56Z"></path>
+              <ellipse cx="52" cy="72" rx="24" ry="5.5" fill="#f2f5f8" stroke="none"></ellipse>
+              <circle class="custom-upload-empty-circle" cx="52" cy="58" r="13.5"></circle>
+              <path class="custom-upload-empty-arrow" d="M52 63.5V52.2"></path>
+              <path class="custom-upload-empty-arrow" d="m47.8 56.1 4.2-4.2 4.2 4.2"></path>
+              <path class="custom-upload-empty-arrow" d="M47.2 66.2h9.6"></path>
+            </svg>
+          </span>
+          <span class="custom-upload-empty-copy">拖拽 .xls 或 .xlsx 格式文件到此处或点击上传</span>
+        </button>
+      `;
+    }
+
+    function customUploadEmptyOpen(type) {
+      if (type === "label") {
+        openCustomLabelModal("management");
+        document.getElementById("customLabelUploadFile")?.click();
+        return;
+      }
+      openCustomMappingModal();
+      customMappingSetSource("file");
+      document.getElementById("customMappingUploadFile")?.click();
+    }
+
+    function customUploadEmptyAssignFile(input, file, fileList) {
+      if (!input || !file) return;
+      try {
+        const transfer = new DataTransfer();
+        transfer.items.add(file);
+        input.files = transfer.files;
+        return;
+      } catch (error) {
+        try {
+          if (fileList) input.files = fileList;
+        } catch (assignmentError) {
+          // Some browsers disallow assigning FileList; upload state still keeps the file.
+        }
+      }
+    }
+
+    function customUploadEmptyHandleFile(type, file, fileList) {
+      if (!file) return;
+      if (type === "label") {
+        openCustomLabelModal("management");
+        const input = document.getElementById("customLabelUploadFile");
+        customUploadEmptyAssignFile(input, file, fileList);
+        customLabelHandleFile(file);
+        return;
+      }
+      openCustomMappingModal();
+      customMappingSetSource("file");
+      const input = document.getElementById("customMappingUploadFile");
+      customUploadEmptyAssignFile(input, file, fileList);
+      customMappingHandleFile(file);
+    }
+
+    function bindCustomUploadEmpty(body) {
+      body.querySelectorAll("[data-custom-upload-empty]").forEach(empty => {
+        empty.addEventListener("click", () => customUploadEmptyOpen(empty.dataset.customUploadEmpty));
+        ["dragenter", "dragover"].forEach(eventName => {
+          empty.addEventListener(eventName, event => {
+            event.preventDefault();
+            event.stopPropagation();
+            empty.classList.add("is-dragover");
+            if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
+          });
+        });
+        ["dragleave", "drop"].forEach(eventName => {
+          empty.addEventListener(eventName, event => {
+            event.preventDefault();
+            event.stopPropagation();
+            empty.classList.remove("is-dragover");
+          });
+        });
+        empty.addEventListener("drop", event => {
+          customUploadEmptyHandleFile(empty.dataset.customUploadEmpty, event.dataTransfer?.files?.[0], event.dataTransfer?.files);
+        });
+      });
+    }
+
     function renderCustomMappingsTable() {
       const body = document.getElementById("customMappingsTableBody");
       const total = document.getElementById("customMappingsTotal");
@@ -26066,7 +26496,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           <td><span class="cell-ellipsis" title="${escapeHtml(record.creator)}">${escapeHtml(record.creator)}</span></td>
           <td class="is-nowrap">${escapeHtml(record.uploadedAt)}</td>
         </tr>
-      `).join("") : `<tr><td class="custom-labels-empty amc-list-empty-cell" colspan="4"><span class="amc-list-empty">暂无符合条件的 ASIN 映射数据</span></td></tr>`;
+      `).join("") : `<tr class="custom-upload-empty-row"><td class="custom-labels-empty custom-upload-empty-cell" colspan="4">${customUploadEmptyMarkup("mapping")}</td></tr>`;
+      bindCustomUploadEmpty(body);
       renderCustomMappingsPagination(records.length);
     }
 
@@ -26609,6 +27040,35 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       </span>`;
     }
 
+    function frameLabelFormatAsinThenTag(asin, options = {}) {
+      const parts = frameLabelDisplayParts(asin, options);
+      return parts.isCustom ? `${parts.raw} · ${parts.label}` : parts.raw;
+    }
+
+    function frameLabelFormatAsinThenTagLines(asin, options = {}) {
+      const parts = frameLabelDisplayParts(asin, options);
+      return parts.isCustom ? `${parts.raw}\n${parts.label}` : parts.raw;
+    }
+
+    function frameLabelAsinThenTagMarkup(asin, options = {}) {
+      const parts = frameLabelDisplayParts(asin, options);
+      if (!parts.isCustom) return escapeHtml(parts.raw);
+      const variantClass = `${options.inline ? " is-inline" : ""} is-asin-first`;
+      return `<span class="amc-custom-asin-display${variantClass}" title="${escapeHtml(`${parts.raw} · ${parts.label}`)}">
+        <span class="amc-custom-asin-value">${escapeHtml(parts.raw)}</span>
+        <span class="amc-custom-asin-label">${escapeHtml(parts.label)}</span>
+      </span>`;
+    }
+
+    function frameLabelAsinThenTagStackedMarkup(asin, options = {}) {
+      const parts = frameLabelDisplayParts(asin, options);
+      if (!parts.isCustom) return escapeHtml(parts.raw);
+      return `<span class="amc-custom-asin-display is-asin-first is-stacked" title="${escapeHtml(`${parts.raw} · ${parts.label}`)}">
+        <span class="amc-custom-asin-value">${escapeHtml(parts.raw)}</span>
+        <span class="amc-custom-asin-label">${escapeHtml(parts.label)}</span>
+      </span>`;
+    }
+
     function frameLabelSvgTspans(asin, x, y, classPrefix) {
       const parts = frameLabelDisplayParts(asin);
       if (!parts.isCustom) {
@@ -26616,6 +27076,15 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
       return `<tspan class="${classPrefix}-tag" x="${x}" y="${y - 6}">${escapeHtml(parts.label)}</tspan>
         <tspan class="${classPrefix}-asin" x="${x}" dy="13">${escapeHtml(parts.raw)}</tspan>`;
+    }
+
+    function frameLabelAsinThenTagSvgTspans(asin, x, y, classPrefix) {
+      const parts = frameLabelDisplayParts(asin);
+      if (!parts.isCustom) {
+        return `<tspan x="${x}" y="${y}">${escapeHtml(parts.raw)}</tspan>`;
+      }
+      return `<tspan class="${classPrefix}-asin" x="${x}" y="${y - 6}">${escapeHtml(parts.raw)}</tspan>
+        <tspan class="${classPrefix}-tag" x="${x}" dy="13">${escapeHtml(parts.label)}</tspan>`;
     }
 
     function frameLabelLooksLikeAsin(value) {
@@ -27422,7 +27891,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             <button class="custom-labels-action custom-labels-delete" type="button" data-custom-label-delete="${escapeHtml(file.id)}">删除</button>
           </td>
         </tr>
-      `).join("") : `<tr><td class="custom-labels-empty amc-list-empty-cell" colspan="9"><span class="amc-list-empty">暂无符合条件的自定义标签文件</span></td></tr>`;
+      `).join("") : `<tr class="custom-upload-empty-row"><td class="custom-labels-empty custom-upload-empty-cell" colspan="9">${customUploadEmptyMarkup("label")}</td></tr>`;
+      bindCustomUploadEmpty(body);
       renderCustomLabelsPagination(files.length);
 
       body.querySelectorAll("[data-custom-label-download]").forEach(button => {
@@ -28262,7 +28732,22 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
     }
 
-    function frameModule4ProductBlock(asin, role) {
+    function frameModule4ProductBlock(asin, role, options = {}) {
+      if (options.detail) {
+        const labelParts = frameLabelDisplayParts(asin);
+        const productTitle = frameModule4VirtualProductTitle(asin);
+        const descriptor = labelParts.isCustom ? labelParts.label : productTitle;
+        const descriptorClass = labelParts.isCustom ? " is-label" : "";
+        const title = `${asin} · ${descriptor}`;
+        return `
+          <div class="amc-module4-product amc-module4-detail-product${descriptorClass}" title="${escapeHtml(title)}">
+            <img class="amc-module4-product-thumb" src="${frameModule4ProductImage(asin, role)}" alt="${escapeHtml(productTitle)}">
+            <span class="amc-module4-product-copy">
+              <a class="amc-module4-product-asin-link" href="${escapeHtml(frameModule4AmazonUrl(asin))}" target="_blank" rel="noopener noreferrer" title="在亚马逊前台查看 ${escapeHtml(asin)}">${escapeHtml(asin)}</a>
+              <span class="amc-module4-product-title" title="${escapeHtml(descriptor)}">${escapeHtml(descriptor)}</span>
+            </span>
+          </div>`;
+      }
       if (!frameLabelUseSystemPresentation()) {
         const display = frameLabelFormatAsin(asin);
         return `
@@ -28375,61 +28860,26 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule4RenderPairLists(records) {
       const byUsers = (a, b) => b.crossUsers - a.crossUsers || b.scaleScore - a.scaleScore;
-      const rhythm = frameModule4ActiveTopRhythm();
-      const config = frameModule4TopConfigs[rhythm];
-      const isTopView = frameModule4State.displayView === "top";
-      const isDetailView = !isTopView;
       const title = document.getElementById("frameModule42Title");
       const subtitle = document.getElementById("frameModule42Subtitle");
-      const rhythmTag = document.getElementById("frameModule42RhythmTag");
-      const rhythmSelectWrap = document.getElementById("frameModule42RhythmSelectWrap");
-      const rhythmSelect = document.getElementById("frameModule42RhythmSelect");
       const detailRhythmSelectWrap = document.getElementById("frameModule42DetailRhythmSelectWrap");
       const detailRhythmSelect = document.getElementById("frameModule42DetailRhythmSelect");
-      const listTitle = document.getElementById("frameModule42ListTitle");
-      const listHint = document.getElementById("frameModule42ListHint");
-      const list = document.getElementById("frameModule42List");
-      const topView = document.getElementById("frameModule42TopView");
       const detailView = document.getElementById("frameModule42DetailView");
       const topPanel = document.querySelector(".amc-module4-top-panel");
-      if (topPanel) topPanel.classList.toggle("is-top-view", isTopView);
-      if (title) title.textContent = isDetailView ? "高价值组合明细表" : config.title;
+      if (topPanel) topPanel.classList.remove("is-top-view");
+      if (title) title.textContent = "高价值组合明细表";
       if (subtitle) {
         const detailRhythmLabel = !frameModule4State.detailRhythm
           ? "全部购买节奏"
           : frameModule4RhythmLabels[frameModule4State.detailRhythm] || "全部购买节奏";
-        subtitle.textContent = isDetailView
-          ? `购买节奏：${detailRhythmLabel}，展示符合条件的高价值组合。`
-          : `${config.listTitle}，${config.hint}`;
+        subtitle.textContent = `购买节奏：${detailRhythmLabel}，展示符合条件的高价值组合。`;
       }
-      if (topView) topView.hidden = isDetailView;
-      if (detailView) detailView.hidden = !isDetailView;
-      if (rhythmTag) {
-        rhythmTag.className = `amc-module4-title-rhythm-tag ${rhythm}`;
-        rhythmTag.textContent = frameModule4RhythmIntervals[rhythm] || "";
-        rhythmTag.setAttribute("aria-label", `${frameModule4RhythmLabels[rhythm] || "当前购买节奏"} ${frameModule4RhythmIntervals[rhythm] || ""}`);
-        rhythmTag.hidden = !isTopView;
-      }
-      if (rhythmSelectWrap) rhythmSelectWrap.hidden = !isTopView;
-      if (rhythmSelect) rhythmSelect.value = rhythm;
-      if (detailRhythmSelectWrap) detailRhythmSelectWrap.hidden = !isDetailView;
+      if (detailView) detailView.hidden = false;
+      if (detailRhythmSelectWrap) detailRhythmSelectWrap.hidden = false;
       if (detailRhythmSelect) {
         detailRhythmSelect.value = frameModule4State.detailRhythm;
         frameSyncEmptyFilterPlaceholder(detailRhythmSelect);
       }
-      if (listTitle) {
-        listTitle.textContent = config.listTitle;
-        listTitle.className = rhythm;
-      }
-      if (listHint) listHint.textContent = config.hint;
-      if (list) list.setAttribute("aria-label", config.title);
-      document.querySelectorAll("[data-module4-display-view]").forEach(button => {
-        const isActive = button.dataset.module4DisplayView === frameModule4State.displayView;
-        button.classList.toggle("is-active", isActive);
-        button.setAttribute("aria-selected", isActive ? "true" : "false");
-      });
-      const topRecords = records.filter(record => record.rhythm === rhythm).sort(byUsers).slice(0, 10);
-      frameModule4RenderList("frameModule42List", topRecords, config.empty);
       const detailRecords = !frameModule4State.detailRhythm
         ? records.slice().sort(byUsers)
         : records.filter(record => record.rhythm === frameModule4State.detailRhythm).sort(byUsers);
@@ -28711,9 +29161,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const maxCrossUsers = records.reduce((max, record) => Math.max(max, Number(record.crossUsers || 0)), 0);
       const pairCell = record => `
         <div class="amc-module3-detail-pair-products">
-          ${frameModule4ProductBlock(record.leadAsin, "Lead")}
+          ${frameModule4ProductBlock(record.leadAsin, "Lead", { detail: true })}
           <span class="amc-module3-detail-pair-arrow" aria-hidden="true">→</span>
-          ${frameModule4ProductBlock(record.followAsin, "Follow")}
+          ${frameModule4ProductBlock(record.followAsin, "Follow", { detail: true })}
         </div>`;
       const rows = records
         .slice()
@@ -28731,8 +29181,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       wrap.innerHTML = `
         <table class="amc-module4-detail-table">
           <colgroup>
-            <col style="width:7%">
-            <col style="width:33%">
+            <col style="width:5%">
+            <col style="width:35%">
             <col style="width:15%">
             <col style="width:17%">
             <col style="width:17%">
@@ -28787,14 +29237,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           frameModule4SetLayoutStyle(button.dataset.module4LayoutStyle);
         });
       });
-      document.querySelectorAll("[data-module4-display-view]").forEach(button => {
-        button.addEventListener("click", () => {
-          const nextView = button.dataset.module4DisplayView;
-          if (!["top", "detail"].includes(nextView) || frameModule4State.displayView === nextView) return;
-          frameModule4State.displayView = nextView;
-          renderFrameModule4();
-        });
-      });
       const rhythmSelect = document.getElementById("frameModule42RhythmSelect");
       rhythmSelect?.addEventListener("change", event => {
         const nextRhythm = event.target.value;
@@ -28811,6 +29253,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         frameModule4State.selectedRhythm = null;
         renderFrameModule4();
       });
+      frameBindEmptyFilterClear("frameModule42DetailRhythmSelect", "frameModule42DetailRhythmClear");
       frameModule4ApplyStaticPanels();
       const focusGrid = document.querySelector(".amc-module4-focus-grid");
       if (focusGrid && typeof ResizeObserver === "function") {
@@ -28888,9 +29331,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       selectedPairKey: null,
       detailPricePath: "",
       detailRhythm: "",
-      detailStrategyKey: "",
-      sortKey: "scaleScore",
-      viewMode: "detail"
+      detailStrategyKey: ""
     };
 
     function frameModule5StrategyKey(record) {
@@ -29057,14 +29498,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           frameModule5State.selectedPairKey = null;
           renderFrameModule5();
         });
-      });
-    }
-
-    function frameModule5RenderViewTabs() {
-      document.querySelectorAll("[data-frame-module5-view]").forEach(button => {
-        const active = button.dataset.frameModule5View === frameModule5State.viewMode;
-        button.classList.toggle("is-active", active);
-        button.setAttribute("aria-selected", String(active));
       });
     }
 
@@ -29311,9 +29744,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
       const pairCell = record => `
         <div class="amc-module3-detail-pair-products">
-          ${frameModule4ProductBlock(record.leadAsin, "Lead")}
+          ${frameModule4ProductBlock(record.leadAsin, "Lead", { detail: true })}
           <span class="amc-module3-detail-pair-arrow" aria-hidden="true">→</span>
-          ${frameModule4ProductBlock(record.followAsin, "Follow")}
+          ${frameModule4ProductBlock(record.followAsin, "Follow", { detail: true })}
         </div>`;
       const maxScaleAdjustedScore = Math.max(...rows.map(record => Number(record.scaleAdjustedScore || 0)), 0);
       const maxAssociationScore = Math.max(...rows.map(record => Number(record.associationScore || 0)), 0);
@@ -29451,49 +29884,26 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule5RenderList(records, activeStrategyKey, stats = []) {
-      const list = document.getElementById("frameModule53List");
       const tableWrap = document.getElementById("frameModule53TableWrap");
-      if (!list || !tableWrap) return;
+      if (!tableWrap) return;
       const title = document.getElementById("frameModule53Title");
-      const strategy = activeStrategyKey ? frameModule5StrategyMap.get(activeStrategyKey) : null;
-      if (title) {
-        title.textContent = frameModule5State.viewMode === "detail"
-          ? "组合明细表"
-          : (strategy ? `${strategy.label} · 核心组合 TOP 10` : "核心组合 TOP 10 与策略明细");
-      }
+      if (title) title.textContent = "组合明细表";
       const source = activeStrategyKey ? records.filter(record => record.strategyKey === activeStrategyKey) : records.slice();
       const detailSource = frameModule5FilterDetailRecords(source);
-      const sortKey = frameModule5State.sortKey;
+      const sortKey = "scaleScore";
       const priorityKeys = frameModule5StrategyPriorityKeys(stats);
-      const sorted = source
-        .slice()
-        .sort((a, b) => Number(b[sortKey] || 0) - Number(a[sortKey] || 0) || Number(b.crossUsers || 0) - Number(a.crossUsers || 0));
       const detailSorted = detailSource
         .slice()
         .sort((a, b) => Number(b[sortKey] || 0) - Number(a[sortKey] || 0) || Number(b.crossUsers || 0) - Number(a.crossUsers || 0));
-      const rows = sorted.slice(0, 10);
-      const topActive = frameModule5State.viewMode !== "detail";
-      list.hidden = !topActive;
-      tableWrap.hidden = topActive;
-      list.setAttribute("aria-hidden", String(!topActive));
-      tableWrap.setAttribute("aria-hidden", String(topActive));
+      tableWrap.hidden = false;
+      tableWrap.setAttribute("aria-hidden", "false");
       document.querySelectorAll("[data-frame-module5-detail-filter]").forEach(control => {
-        control.hidden = topActive;
-      });
-      document.querySelectorAll("[data-frame-module5-top-filter]").forEach(control => {
-        control.hidden = !topActive;
+        control.hidden = false;
       });
       document.querySelectorAll("[data-frame-module5-detail-only]").forEach(control => {
-        control.hidden = topActive;
+        control.hidden = false;
       });
-      frameModule5RenderViewTabs();
-      if (topActive) {
-        tableWrap.innerHTML = "";
-        frameModule5RenderTopList(list, rows);
-      } else {
-        list.innerHTML = "";
-        frameModule5RenderDetailTable(tableWrap, detailSorted, priorityKeys);
-      }
+      frameModule5RenderDetailTable(tableWrap, detailSorted, priorityKeys);
     }
 
     function renderFrameModule5() {
@@ -29504,9 +29914,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const strategyRecords = activeStrategyKey
         ? records.filter(record => record.strategyKey === activeStrategyKey)
         : records;
-      const visibleRecords = frameModule5State.viewMode === "detail"
-        ? frameModule5FilterDetailRecords(strategyRecords)
-        : strategyRecords;
+      const visibleRecords = frameModule5FilterDetailRecords(strategyRecords);
       const selectedExists = visibleRecords.some(record => record.pairKey === frameModule5State.selectedPairKey);
       if (!selectedExists) frameModule5State.selectedPairKey = null;
       frameModule5RenderSummary(records);
@@ -29541,18 +29949,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           renderFrameModule5();
         });
       });
-      document.getElementById("frameModule53Sort")?.addEventListener("change", event => {
-        frameModule5State.sortKey = event.target.value;
-        renderFrameModule5();
-      });
-      document.querySelectorAll("[data-frame-module5-view]").forEach(button => {
-        button.addEventListener("click", () => {
-          const nextView = button.dataset.frameModule5View || "top";
-          if (frameModule5State.viewMode === nextView) return;
-          frameModule5State.viewMode = nextView;
-          renderFrameModule5();
-        });
-      });
+      [
+        ["frameModule53PricePath", "frameModule53PricePathClear"],
+        ["frameModule53Rhythm", "frameModule53RhythmClear"],
+        ["frameModule53Strategy", "frameModule53StrategyClear"]
+      ].forEach(([selectId, clearButtonId]) => frameBindEmptyFilterClear(selectId, clearButtonId));
       window.addEventListener("resize", () => {
         ["frameModule52Chart"]
           .map(id => document.getElementById(id))
@@ -29582,6 +29983,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       matrixBaseline: "median",
       rankingView: "lead",
       rankingMetric: "crossRate",
+      rankingStyle: "style1",
       linkLayoutStyle: "style1",
       roleFilter: "all",
       detailSortKey: "crossUsers",
@@ -31114,9 +31516,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <td class="amc-top-rank-cell"><span class="amc-top-rank">${index + 1}</span></td>
               <td class="amc-top-pair-combo-cell">
                 <span class="amc-top-pair-label" title="${escapeHtml(record.pairLabel)}">
-                  <span class="amc-top-pair-asin lead">${frameLabelAsinMarkup(record.leadAsin, { mask: true })}</span>
+                  <span class="amc-top-pair-asin lead">${frameLabelAsinThenTagStackedMarkup(record.leadAsin, { mask: true })}</span>
                   <span class="amc-top-pair-arrow">→</span>
-                  <span class="amc-top-pair-asin follow">${frameLabelAsinMarkup(record.followAsin, { mask: true })}</span>
+                  <span class="amc-top-pair-asin follow">${frameLabelAsinThenTagStackedMarkup(record.followAsin, { mask: true })}</span>
                 </span>
               </td>
               <td class="amc-top-pair-metrics-cell">
@@ -31132,10 +31534,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const maskedAsin = frameOverviewMaskAsin(asin);
         const category = frameModule4ProductCategory(asin);
         if (!frameLabelUseSystemPresentation()) {
-          const display = frameLabelFormatAsin(asin, { mask: true });
+          const display = frameLabelFormatAsinThenTag(asin, { mask: true });
           return `
             <span class="amc-top-pair-product amc-label-plain-product" title="${escapeHtml(display)}">
-              <a href="${escapeHtml(frameModule4AmazonUrl(asin))}" target="_blank" rel="noopener noreferrer" title="在亚马逊前台查看 ${escapeHtml(maskedAsin)}">${frameLabelAsinMarkup(asin, { mask: true })}</a>
+              <a href="${escapeHtml(frameModule4AmazonUrl(asin))}" target="_blank" rel="noopener noreferrer" title="在亚马逊前台查看 ${escapeHtml(maskedAsin)}">${frameLabelAsinThenTagStackedMarkup(asin, { mask: true })}</a>
             </span>`;
         }
         return `
@@ -31552,6 +31954,68 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
     }
 
+    function frameModule2RankingStyle() {
+      return frameModule2State.rankingStyle === "style2" ? "style2" : "style1";
+    }
+
+    function frameModule2SetRankingStyle(style) {
+      frameModule2State.rankingStyle = style === "style2" ? "style2" : "style1";
+      renderFrameRoleRanking();
+    }
+
+    function renderFrameRoleRankingList(chartDom, items, metric, view) {
+      const current = window.echarts?.getInstanceByDom(chartDom);
+      current?.dispose();
+      chartDom.innerHTML = "";
+      chartDom.classList.add("is-list-view");
+      chartDom.setAttribute("role", "region");
+      chartDom.setAttribute("aria-label", `TOP 15 ${view === "lead" ? "Lead" : "Follow"} ASIN 列表`);
+
+      const maxValue = Math.max(...items.map(item => Number(item[metric.key] || 0)), 0.0001);
+      const seriesColor = view === "lead" ? frameModule2FlowColors.lead : frameModule2FlowColors.follow;
+      const selectedSeriesColor = view === "lead" ? "#2f6fc3" : "#159e8b";
+      const roleLabel = view === "lead" ? "Lead ASIN" : "Follow ASIN";
+      const formatValue = value => frameModule2FormatMetric(value, metric.type);
+
+      chartDom.innerHTML = `
+        <div class="amc-role-ranking-list" role="list" aria-label="TOP 15 ${roleLabel} 列表">
+          <div class="amc-role-ranking-list-row is-header" aria-hidden="true">
+            <span>排名</span>
+            <span>${roleLabel}</span>
+            <span>${escapeHtml(metric.label)}</span>
+          </div>
+          ${items.map((item, index) => {
+              const value = Number(item[metric.key] || 0);
+              const ratio = Math.max(0, Math.min(100, (value / maxValue) * 100));
+              const selected = item.asin === frameModule2State.selectedAsin;
+              const color = selected ? selectedSeriesColor : seriesColor;
+              const display = frameLabelFormatAsin(item.asin);
+              const valueText = formatValue(value);
+              return `
+                <div class="amc-role-ranking-list-row${selected ? " is-selected" : ""}" data-ranking-list-asin="${escapeHtml(item.asin)}" tabindex="0" role="button" aria-pressed="${selected}" aria-label="第 ${index + 1} 名，${escapeHtml(display)}，${escapeHtml(metric.label)} ${escapeHtml(valueText)}" title="${escapeHtml(`${display} · ${metric.label} ${valueText}`)}">
+                  <span><span class="amc-role-ranking-list-rank${index < 3 ? ` is-top-${index + 1}` : ""}">${String(index + 1).padStart(2, "0")}</span></span>
+                  <span class="amc-role-ranking-list-asin">${frameLabelAsinMarkup(item.asin)}</span>
+                  <span>
+                    <span class="amc-role-ranking-list-metric">
+                      <span class="amc-role-ranking-list-progress" aria-hidden="true"><span style="width:${ratio.toFixed(2)}%;background:${color};"></span></span>
+                      <strong class="amc-role-ranking-list-value">${escapeHtml(valueText)}</strong>
+                    </span>
+                  </span>
+                </div>`;
+            }).join("")}
+        </div>`;
+
+      chartDom.querySelectorAll("[data-ranking-list-asin]").forEach(row => {
+        const selectItem = () => frameModule2SetSelectedAsin(row.dataset.rankingListAsin, view);
+        row.addEventListener("click", selectItem);
+        row.addEventListener("keydown", event => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          selectItem();
+        });
+      });
+    }
+
     function renderFrameRoleRanking() {
       const chartDom = document.getElementById("frameRoleRankingChart");
       const select = document.getElementById("frameRankingMetric");
@@ -31575,12 +32039,26 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (rankingTitle) {
         rankingTitle.textContent = view === "lead" ? "TOP 15 Lead ASIN" : "TOP 15 Follow ASIN";
       }
+      const rankingStyle = frameModule2RankingStyle();
+      document.querySelectorAll("[data-role-ranking-style]").forEach(button => {
+        const active = button.dataset.roleRankingStyle === rankingStyle;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
 
       const items = frameModule2RoleFilteredItems(view)
         .slice()
         .sort((a, b) => Number(b[metric.key] || 0) - Number(a[metric.key] || 0))
         .slice(0, 15);
 
+      if (rankingStyle === "style2" && metric && items.length) {
+        renderFrameRoleRankingList(chartDom, items, metric, view);
+        return;
+      }
+
+      chartDom.classList.remove("is-list-view");
+      chartDom.setAttribute("role", "img");
+      chartDom.setAttribute("aria-label", "TOP 15 ASIN 横向排行图");
       if (!window.echarts || !metric || !items.length) {
         renderFrameRoleRankingLegacy();
         return;
@@ -31602,7 +32080,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         : `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>收割用户数：${frameModule2FormatNumber(item.capturedUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.captureRate)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}`;
 
       const current = window.echarts.getInstanceByDom(chartDom);
-      if (!current && chartDom.querySelector("svg")) {
+      if (!current && (chartDom.querySelector("svg") || chartDom.querySelector(".amc-role-ranking-list"))) {
         chartDom.innerHTML = "";
       }
       const chart = current || window.echarts.init(chartDom, null, { renderer: "canvas" });
@@ -31621,7 +32099,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         )
       );
       const gridRight = compact ? 18 : 22;
-      const gridBottom = chartHeight < 420 ? 48 : (compact ? 52 : 56);
+      const gridBottom = chartHeight < 420 ? 54 : (compact ? 60 : 64);
       const axisLabelWidth = Math.max(78, gridLeft - 20);
       const barCategoryGap = compact ? "40%" : "38%";
 
@@ -31631,7 +32109,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           grid: {
             left: gridLeft,
             right: gridRight,
-            top: 8,
+            top: 16,
             bottom: gridBottom
           },
           tooltip: {
@@ -31697,6 +32175,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               lineHeight: hasCustomLabels ? 13 : 14,
               width: axisLabelWidth,
               overflow: "truncate",
+              interval: 0,
+              showMinLabel: true,
+              showMaxLabel: true,
+              hideOverlap: false,
               formatter: value => {
                 const label = frameLabelAxisText(value);
                 return isLinkedLayout && value === selectedAsin
@@ -31788,8 +32270,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const selectedClass = direction === "lead" ? "lead" : "follow";
       const relatedCount = Array.isArray(links) ? links.length : 0;
       const totalUsers = (links || []).reduce((sum, link) => sum + Number(link.crossUsers || 0), 0);
-      const selectedDisplay = frameLabelFormatAsin(selectedAsin);
-      const selectedMarkup = `<strong class="amc-role-link-asin ${selectedClass}" title="${escapeHtml(selectedDisplay)}">${frameLabelAsinMarkup(selectedAsin, { inline: true })}</strong>`;
+      const selectedDisplay = frameLabelFormatAsinThenTag(selectedAsin);
+      const selectedMarkup = `<strong class="amc-role-link-asin ${selectedClass}" title="${escapeHtml(selectedDisplay)}">${frameLabelAsinThenTagMarkup(selectedAsin, { inline: true })}</strong>`;
       const counterpartMarkup = `<span class="amc-role-link-counterpart">${relatedCount} 个 ${counterpartRole}</span>`;
 
       if (rankingSelection) {
@@ -31841,7 +32323,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       if (asinSelect) {
         asinSelect.innerHTML = choices
-          .map(item => `<option value="${escapeHtml(item.asin)}">${escapeHtml(frameLabelFormatAsin(item.asin))}</option>`)
+          .map(item => `<option value="${escapeHtml(item.asin)}">${escapeHtml(frameLabelFormatAsinThenTag(item.asin))}</option>`)
           .join("");
         asinSelect.value = selectedAsin || "";
       }
@@ -31873,8 +32355,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
       if (subtitle) {
         subtitle.textContent = direction === "lead"
-          ? `选中 Lead ASIN“${frameLabelFormatAsin(selectedAsin) || "—"}”，展示其 TOP 10 Follow ASIN`
-          : `选中 Follow ASIN“${frameLabelFormatAsin(selectedAsin) || "—"}”，展示带动它的 TOP 10 Lead ASIN`;
+          ? `选中 Lead ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示其 TOP 10 Follow ASIN`
+          : `选中 Follow ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示带动它的 TOP 10 Lead ASIN`;
       }
 
       const current = window.echarts?.getInstanceByDom(chartDom);
@@ -32148,9 +32630,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const formatFlowTooltip = params => {
         const item = params.data || {};
         if (item.kind === "link") {
-          return `<strong>${escapeHtml(`${frameLabelFormatAsin(item.sourceAsin)} → ${frameLabelFormatAsin(item.targetAsin)}`)}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.crossUsers)}<br>平均关联购买间隔：${item.avgInterval.toFixed(1)} 天`;
+          return `<strong>${escapeHtml(`${frameLabelFormatAsinThenTag(item.sourceAsin)} → ${frameLabelFormatAsinThenTag(item.targetAsin)}`)}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.crossUsers)}<br>平均关联购买间隔：${item.avgInterval.toFixed(1)} 天`;
         }
-        return `<strong>${escapeHtml(frameLabelFormatAsin(item.asin || ""))}</strong><br>${escapeHtml(item.role || "")}<br>流量数值：${frameModule2FormatNumber(item.value)}`;
+        return `<strong>${escapeHtml(frameLabelFormatAsinThenTag(item.asin || ""))}</strong><br>${escapeHtml(item.role || "")}<br>流量数值：${frameModule2FormatNumber(item.value)}`;
       };
 
       try {
@@ -32412,6 +32894,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             Number(b.totalUsers || 0) - Number(a.totalUsers || 0) ||
             a.asin.localeCompare(b.asin, "zh-CN");
         });
+      const crossUserKey = isLead ? "crossUsers" : "capturedUsers";
+      const maxCrossUsers = items.reduce((max, item) => Math.max(max, Number(item[crossUserKey] || 0)), 0);
 
       if (title) title.textContent = isLead ? "Lead ASIN明细表" : "Follow ASIN明细表";
       if (subtitle) subtitle.textContent = "按照当前分析视图展示 ASIN 明细，可按产品角色筛选并按指标排序";
@@ -32423,10 +32907,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           return `
             <tr class="${selected ? "is-selected" : ""}" data-role-detail-asin="${escapeHtml(item.asin)}" tabindex="0" role="button" aria-pressed="${selected ? "true" : "false"}" title="${escapeHtml(`点击联动 2.1 角色矩阵：${item.asin}`)}">
               <td class="is-center"><span class="amc-role-detail-rank">${index + 1}</span></td>
-              <td class="is-left">${frameModule4ProductBlock(item.asin, isLead ? "Lead" : "Follow")}</td>
+              <td class="is-left">${frameModule4ProductBlock(item.asin, isLead ? "Lead" : "Follow", { detail: true })}</td>
               <td class="is-right"><span class="amc-role-detail-price">${frameModule2DetailPrice(item.price)}</span></td>
               <td class="is-right"><span class="amc-role-detail-number">${frameModule2FormatNumber(item.totalUsers)}</span></td>
-              <td class="is-right"><span class="amc-role-detail-number">${frameModule2FormatNumber(isLead ? item.crossUsers : item.capturedUsers)}</span></td>
+              <td class="is-right">${frameDetailUsersProgressCell(item[crossUserKey], "amc-role-detail-number", maxCrossUsers)}</td>
               <td class="is-right">${frameModule2DetailRateCell(isLead ? item.crossRate : item.captureRate)}</td>
               <td class="is-right"><span class="amc-role-detail-number">${frameModule2FormatNumber(item.relatedCount)}</span></td>
               <td class="is-right"><span class="amc-role-detail-number">${item.avgInterval ? item.avgInterval.toFixed(item.avgInterval >= 100 ? 0 : 1) : "0.0"}</span></td>
@@ -32498,7 +32982,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           const selected = item.asin === selectedAsin;
           return `
             <button class="amc-flow-asin-option${selected ? " is-selected" : ""}" type="button" role="option" aria-selected="${selected}" data-flow-asin="${escapeHtml(item.asin)}">
-              ${frameLabelAsinMarkup(item.asin)}
+              ${frameLabelAsinThenTagMarkup(item.asin)}
             </button>`;
         }).join("")
         : `<div class="amc-flow-asin-empty">暂无匹配 ASIN</div>`;
@@ -32519,10 +33003,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
       frameFlowAsinPickerState.choices = choices;
       value.innerHTML = selectedAsin
-        ? frameLabelAsinMarkup(selectedAsin, { inline: true })
+        ? frameLabelAsinThenTagMarkup(selectedAsin, { inline: true })
         : "选择 ASIN";
       search.value = frameFlowAsinPickerState.query;
-      trigger.setAttribute("aria-label", selectedAsin ? `当前选择 ${frameLabelFormatAsin(selectedAsin)}` : "选择 ASIN");
+      trigger.setAttribute("aria-label", selectedAsin ? `当前选择 ${frameLabelFormatAsinThenTag(selectedAsin)}` : "选择 ASIN");
       if (asinSelect) asinSelect.value = selectedAsin || "";
       renderFrameFlowAsinOptions();
     }
@@ -32624,7 +33108,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       if (asinSelect) {
         asinSelect.innerHTML = choices
-          .map(item => `<option value="${escapeHtml(item.asin)}">${escapeHtml(item.asin)}</option>`)
+          .map(item => `<option value="${escapeHtml(item.asin)}">${escapeHtml(frameLabelFormatAsinThenTag(item.asin))}</option>`)
           .join("");
         asinSelect.value = selectedAsin || "";
       }
@@ -32656,8 +33140,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
       if (subtitle) {
         subtitle.textContent = direction === "lead"
-          ? `选中 Lead ASIN“${selectedAsin || "—"}”，展示其 TOP 10 Follow ASIN`
-          : `选中 Follow ASIN“${selectedAsin || "—"}”，展示带动它的 TOP 10 Lead ASIN`;
+          ? `选中 Lead ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示其 TOP 10 Follow ASIN`
+          : `选中 Follow ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示带动它的 TOP 10 Lead ASIN`;
       }
 
       if (!selectedAsin || !selectedProduct || links.length < 1) {
@@ -32751,7 +33235,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       ));
       const chartWidth = chartDom.clientWidth || 1120;
       const chartHeight = chartDom.clientHeight || 450;
-      const horizontalInset = Math.max(88, Math.min(128, Math.round(chartWidth * 0.14)));
+      const horizontalInset = Math.max(72, Math.min(88, Math.round(chartWidth * 0.09)));
       const seriesLeft = horizontalInset;
       const seriesRight = horizontalInset;
       const seriesTop = 24;
@@ -32764,9 +33248,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const formatFlowTooltip = params => {
         const data = params.data || {};
         if (params.dataType === "edge") {
-          return `<strong>${escapeHtml(`${data.sourceAsin} → ${data.targetAsin}`)}</strong><br>交叉购买人数：${frameModule2FormatNumber(data.crossUsers)}<br>平均关联购买间隔：${data.avgInterval.toFixed(1)} 天`;
+          const sourceDisplay = frameLabelFormatAsinThenTag(data.sourceAsin);
+          const targetDisplay = frameLabelFormatAsinThenTag(data.targetAsin);
+          return `<strong>${escapeHtml(`${sourceDisplay} → ${targetDisplay}`)}</strong><br>交叉购买人数：${frameModule2FormatNumber(data.crossUsers)}<br>平均关联购买间隔：${data.avgInterval.toFixed(1)} 天`;
         }
-        return `<strong>${escapeHtml(data.asin || data.name || "")}</strong><br>${escapeHtml(data.roleLabel || "")}<br>流量数值：${frameModule2FormatNumber(data.value)}`;
+        return `<strong>${escapeHtml(frameLabelFormatAsinThenTag(data.asin || data.name || ""))}</strong><br>${escapeHtml(data.roleLabel || "")}<br>流量数值：${frameModule2FormatNumber(data.value)}`;
       };
 
       try {
@@ -32825,9 +33311,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             label: {
               ...(node.label || {}),
               show: true,
-              formatter: params => params.data?.asin || "",
+              formatter: params => frameLabelFormatAsinThenTagLines(params.data?.asin || ""),
               color: "#324962",
-              fontSize: 13,
+              fontSize: 10,
+              lineHeight: 13,
               fontWeight: 400,
               distance: 10
             },
@@ -32836,7 +33323,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           label: {
             show: true,
             color: "#324962",
-            fontSize: 13,
+            fontSize: 10,
+            lineHeight: 13,
             fontWeight: 400,
             distance: 10
           },
@@ -32928,7 +33416,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const selectedAsin = frameModule2State.selectedAsin;
       const choices = items.slice().sort((a, b) => Number(b[scaleKey] || 0) - Number(a[scaleKey] || 0));
       if (asinSelect) {
-        asinSelect.innerHTML = choices.map(item => `<option value="${escapeHtml(item.asin)}">${escapeHtml(item.asin)}</option>`).join("");
+        asinSelect.innerHTML = choices.map(item => `<option value="${escapeHtml(item.asin)}">${escapeHtml(frameLabelFormatAsinThenTag(item.asin))}</option>`).join("");
         asinSelect.value = selectedAsin || "";
       }
 
@@ -32949,8 +33437,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
       if (subtitle) {
         subtitle.textContent = direction === "lead"
-          ? `选中 Lead ASIN“${selectedAsin || "—"}”，展示其 TOP 10 Follow ASIN`
-          : `选中 Follow ASIN“${selectedAsin || "—"}”，展示带动它的 TOP 10 Lead ASIN`;
+          ? `选中 Lead ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示其 TOP 10 Follow ASIN`
+          : `选中 Follow ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示带动它的 TOP 10 Lead ASIN`;
       }
 
       const height = 360;
@@ -32959,7 +33447,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const width = Math.max(720, Math.round(renderedWidth * height / Math.max(1, renderedHeight)));
       svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
       const nodeWidth = 18;
-      const sideLabelWidth = Math.max(124, Math.min(158, Math.round(width * 0.14)));
+      const sideLabelWidth = Math.max(96, Math.min(120, Math.round(width * 0.105)));
       const leftX = sideLabelWidth;
       const rightX = width - sideLabelWidth - nodeWidth;
       const top = 24;
@@ -33060,11 +33548,16 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ].join(" ");
       };
 
-      const drawNode = node => `
+      const drawNode = node => {
+        const labelX = node.side === "left"
+          ? node.x - 12
+          : node.x + nodeWidth + 12;
+        return `
         <g class="amc-role-flow-node-group">
           <rect class="amc-role-flow-node ${node.role} ${node.side}${node.selected ? " selected" : ""}${node.single ? " single" : ""}" x="${node.x}" y="${node.y}" width="${nodeWidth}" height="${node.height}" rx="4"></rect>
-          <text class="amc-role-flow-node-label ${node.side}" x="${node.side === "left" ? node.x - 12 : node.x + nodeWidth + 12}" y="${node.centerY + 5}">${frameLabelSvgTspans(node.asin, node.side === "left" ? node.x - 12 : node.x + nodeWidth + 12, node.centerY + 5, "amc-role-flow-label")}</text>
+          <text class="amc-role-flow-node-label ${node.side}" x="${labelX}" y="${node.centerY + 5}">${frameLabelAsinThenTagSvgTspans(node.asin, labelX, node.centerY + 5, "amc-role-flow-label")}</text>
         </g>`;
+      };
 
       const drawLink = link => {
         const source = direction === "lead"
@@ -33533,6 +34026,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         renderFrameRoleRanking();
       });
 
+      document.querySelectorAll("[data-role-ranking-style]").forEach(button => {
+        button.addEventListener("click", () => {
+          frameModule2SetRankingStyle(button.dataset.roleRankingStyle);
+        });
+      });
+
       setupFrameFlowAsinPicker();
       document.querySelectorAll("[data-role-link-layout-style]").forEach(button => {
         button.addEventListener("click", () => {
@@ -33617,7 +34116,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       frameTopPairsSort: "选择核心组合 TOP 表的排序指标。",
       frameRankingMetric: "选择 ASIN 排名图的展示指标。",
       frameModule34Metric: "选择关联热力图的颜色编码指标。",
-      frameModule53Sort: "选择组合明细表的排序指标。",
       topSortMetric: "选择 TOP20 关联商品组合的排序指标。"
     };
 
