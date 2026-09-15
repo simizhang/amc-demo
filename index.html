@@ -4869,6 +4869,7 @@
       max-width: none;
       overflow: visible;
       text-overflow: clip;
+      font-weight: 400;
     }
 
     .amc-role-ranking-list-asin .amc-custom-asin-display.is-asin-blue-tag-muted .amc-custom-asin-label {
@@ -17442,7 +17443,7 @@
     body[data-page="amcFrame"] .amc-role-ranking-chart .amc-role-bar-label-asin.is-asin-blue {
       fill: #1f6fd6;
       font-size: 10px;
-      font-weight: 600;
+      font-weight: 400;
     }
 
     body[data-page="amcFrame"] .amc-role-ranking-chart .amc-role-bar-label-tag.is-tag-muted {
@@ -30437,15 +30438,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function frameModule4ProductBlock(asin, role, options = {}) {
       if (options.detail) {
         const labelParts = frameLabelDisplayParts(asin);
-        const productTitle = frameModule4VirtualProductTitle(asin);
-        const descriptor = labelParts.isCustom ? labelParts.label : productTitle;
-        const descriptorClass = labelParts.isCustom ? " is-label" : "";
+        const descriptor = frameLabelHasTag(labelParts) ? labelParts.label : "";
+        const descriptorClass = descriptor ? " is-label" : "";
         const roleLabel = /ASIN$/i.test(String(role || "")) ? String(role) : `${role} ASIN`;
         return `
           <div class="amc-module4-product amc-module4-detail-product is-text-only${descriptorClass}" data-role-detail-product="true" data-role-detail-product-asin="${escapeHtml(asin)}" data-role-detail-product-role="${escapeHtml(roleLabel)}">
             <span class="amc-module4-product-copy">
               <a class="amc-module4-product-asin-link" href="${escapeHtml(frameModule4AmazonUrl(asin))}" target="_blank" rel="noopener noreferrer">${escapeHtml(asin)}</a>
-              <span class="amc-module4-product-title" title="${escapeHtml(descriptor)}">${escapeHtml(descriptor)}</span>
+              ${descriptor ? `<span class="amc-module4-product-title" title="${escapeHtml(descriptor)}">${escapeHtml(descriptor)}</span>` : ""}
             </span>
           </div>`;
       }
