@@ -921,7 +921,7 @@
       min-height: 32px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 8px;
       padding: 0 12px;
       border: 0;
@@ -9732,16 +9732,6 @@
       height: 340px;
     }
 
-    .amc-module6-summary-card {
-      padding: 12px 14px;
-      border-left: 3px solid #efb13d;
-      border-radius: 0 8px 8px 0;
-      background: #fff7e3;
-      color: #2f4057;
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
     .amc-module6-toolbar {
       display: flex;
       align-items: center;
@@ -9875,6 +9865,10 @@
       font-weight: 400;
     }
 
+    .amc-module6-donut-legend-item.has-dual-share {
+      grid-template-columns: 12px 76px minmax(48px, max-content) minmax(260px, max-content);
+    }
+
     .amc-module6-donut-swatch {
       width: 12px;
       height: 12px;
@@ -9907,6 +9901,7 @@
       font-variant-numeric: tabular-nums;
       text-align: right;
       white-space: nowrap;
+      line-height: 16px;
     }
 
     .amc-module6-dot {
@@ -15250,9 +15245,13 @@
 
     .custom-mapping-presentation-switcher {
       flex: 0 0 auto;
-      display: inline-flex;
+      display: none;
       align-items: center;
       gap: 8px;
+    }
+
+    body[data-page="customMappings"] .custom-mapping-presentation-switcher {
+      display: inline-flex;
     }
 
     .custom-mapping-presentation-label {
@@ -16890,6 +16889,7 @@
     }
 
     .frame-label-select-category-label {
+      flex: 1 1 auto;
       min-width: 0;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -16930,6 +16930,8 @@
       min-height: 36px;
       display: flex;
       align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
       padding: 0 16px;
       border: 0;
       border-radius: 0;
@@ -16939,6 +16941,41 @@
       line-height: 1.3;
       text-align: left;
       white-space: nowrap;
+    }
+
+    .frame-label-select-option-label {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .frame-label-coverage-badge {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      height: 19px;
+      padding: 0 6px;
+      border: 1px solid #c9d7ff;
+      border-radius: 999px;
+      background: #f3f6ff;
+      color: #315cdb;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .frame-label-coverage-badge svg {
+      width: 11px;
+      height: 11px;
+      flex: 0 0 11px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2;
     }
 
     .frame-label-select-option:hover,
@@ -17678,6 +17715,26 @@
       box-shadow: 0 0 0 2px rgba(211, 72, 72, 0.1);
     }
 
+    #customMappingUploadName {
+      padding-right: 48px;
+    }
+
+    .custom-mapping-upload-name-control {
+      position: relative;
+    }
+
+    .custom-mapping-upload-name-count {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: #9aa7b8;
+      font-size: 12px;
+      line-height: 16px;
+      white-space: nowrap;
+    }
+
     .custom-mapping-upload-meta .custom-label-form-field {
       align-content: start;
     }
@@ -18342,7 +18399,8 @@
       color: #5579d7;
     }
 
-    #customLabelUploadApply[hidden] {
+    #customLabelUploadApply[hidden],
+    #customMappingUploadApply[hidden] {
       display: none !important;
     }
 
@@ -18370,6 +18428,7 @@
     }
 
     .custom-label-modal-foot #customMappingUploadConfirm:not(:disabled),
+    .custom-label-modal-foot #customMappingUploadApply:not(:disabled),
     .custom-label-modal-foot #customLabelUploadApply:not(:disabled) {
       border-color: #3c6efc;
       background: #3c6efc;
@@ -18378,6 +18437,8 @@
 
     .custom-label-modal-foot #customMappingUploadConfirm:not(:disabled):hover,
     .custom-label-modal-foot #customMappingUploadConfirm:not(:disabled):focus-visible,
+    .custom-label-modal-foot #customMappingUploadApply:not(:disabled):hover,
+    .custom-label-modal-foot #customMappingUploadApply:not(:disabled):focus-visible,
     .custom-label-modal-foot #customLabelUploadApply:not(:disabled):hover,
     .custom-label-modal-foot #customLabelUploadApply:not(:disabled):focus-visible {
       border-color: #315cdb;
@@ -19231,10 +19292,6 @@
         flex-direction: column;
       }
 
-      .custom-mapping-presentation-switcher {
-        align-self: flex-end;
-      }
-
       .frame-label-select-menu {
         width: min(380px, calc(100vw - 32px));
       }
@@ -19485,6 +19542,13 @@
             </svg>
           </button>
           <div class="custom-mapping-instance-menu" id="customMappingTopInstanceMenu" role="listbox" aria-label="Instance 选项">
+          </div>
+        </div>
+        <div class="custom-mapping-presentation-switcher" aria-label="页面样式切换">
+          <span class="custom-mapping-presentation-label" id="customMappingPresentationLabel" tabindex="0">样式</span>
+          <div class="custom-mapping-presentation-tabs" id="customMappingPresentationTabs" role="tablist" aria-label="自定义映射页面样式">
+            <button class="is-active" type="button" role="tab" aria-selected="true" data-custom-mapping-presentation="populated">有数据</button>
+            <button type="button" role="tab" aria-selected="false" data-custom-mapping-presentation="empty">无数据</button>
           </div>
         </div>
         <button class="section-notes-toggle" id="sectionNotesToggle" type="button" aria-pressed="false" aria-label="显示板块标记" title="显示板块标记">
@@ -21175,8 +21239,6 @@
                 <div class="amc-module6-chart amc-module6-chart-bar" id="frameModule63Chart" role="img" aria-label="入口 ASIN 及其二购分布"></div>
               </section>
 
-              <section class="amc-module6-summary-card" id="frameModule63Summary" aria-live="polite"></section>
-
               <section class="amc-module6-panel amc-module6-donut-analysis" aria-labelledby="frameModule64Title">
                 <div class="amc-module6-panel-head amc-overview-module-head amc-module6-donut-analysis-head">
                   <div class="amc-overview-module-title">
@@ -21199,7 +21261,7 @@
                 </div>
 
                 <div class="amc-module6-donut-grid">
-                  <section class="amc-module6-donut-card" aria-label="二购 ASIN 购买人数结构">
+                  <section class="amc-module6-donut-card" aria-label="二购 ASIN 购买人次结构">
                     <div class="amc-module6-chart amc-module6-chart-donut" id="frameModule64Chart" role="img" aria-label="二购ASIN人次结构"></div>
                     <div class="amc-module6-donut-legend" id="frameModule64Legend" aria-label="二购 ASIN 人次结构图例" hidden></div>
                   </section>
@@ -21488,13 +21550,6 @@
           <div class="custom-mapping-page-top">
             <div class="custom-mapping-page-notice" role="note" aria-label="自定义映射使用说明">
               自定义标签用于“购物篮关联购买分析模型”：1）创建报告选择自定义映射后，即可按自定义映射维度聚合输出报告；2）创建报告选择不提供映射，报告页面支持按照自定义映射维度给ASIN打标签，仅用于展示，辅助ASIN识别。
-            </div>
-            <div class="custom-mapping-presentation-switcher" aria-label="页面样式切换">
-              <span class="custom-mapping-presentation-label" id="customMappingPresentationLabel" tabindex="0">样式</span>
-              <div class="custom-mapping-presentation-tabs" id="customMappingPresentationTabs" role="tablist" aria-label="自定义映射页面样式">
-                <button class="is-active" type="button" role="tab" aria-selected="true" data-custom-mapping-presentation="populated">有数据</button>
-                <button type="button" role="tab" aria-selected="false" data-custom-mapping-presentation="empty">无数据</button>
-              </div>
             </div>
           </div>
           <div class="custom-mapping-workbench">
@@ -22063,8 +22118,11 @@
             <select id="customMappingUploadInstance" aria-label="上传映射所属 Instance" required></select>
           </div>
           <div class="custom-label-form-field">
-            <label for="customMappingUploadName"><span class="required" aria-hidden="true">*</span>映射名称</label>
-            <input id="customMappingUploadName" type="text" maxlength="20" placeholder="请输入映射名称" aria-describedby="customMappingUploadNameError" required>
+            <label for="customMappingUploadName"><span class="required" aria-hidden="true">*</span>映射维度</label>
+            <div class="custom-mapping-upload-name-control">
+              <input id="customMappingUploadName" type="text" maxlength="10" placeholder="请输入映射维度" aria-describedby="customMappingUploadNameCount customMappingUploadNameError" required>
+              <span class="custom-mapping-upload-name-count" id="customMappingUploadNameCount" aria-hidden="true">0/10</span>
+            </div>
             <span class="custom-label-dimension-error" id="customMappingUploadNameError" role="alert" hidden></span>
           </div>
         </div>
@@ -22072,7 +22130,7 @@
           <ol class="custom-mapping-upload-guide-list">
             <li>请使用标准模板（单工作表 Excel 格式）导入数据。</li>
             <li>模板中的标题不可更改或删除。</li>
-            <li>ASIN GROUP NAME 表示当前映射维度下的分组名称。</li>
+            <li>ASIN GROUP NAME 表示当前映射维度下的ASIN分组名称。</li>
             <li>自定义映射可用于创建报告时的维度聚合，或在 ASIN 维度报告中作为标签展示。</li>
             <li>已生成的 AMC 报告不受影响。</li>
           </ol>
@@ -22134,6 +22192,7 @@
       <footer class="custom-label-modal-foot">
         <button class="ghost-btn" id="customMappingModalCancel" type="button">取消</button>
         <button class="download-btn" id="customMappingUploadConfirm" type="button" disabled>确认</button>
+        <button class="download-btn" id="customMappingUploadApply" type="button" disabled hidden>确认并应用</button>
       </footer>
     </section>
   </div>
@@ -27439,6 +27498,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         rows: [],
         errorMessage: "",
         source: "file",
+        entrySource: "management",
         selectedLabelFileId: "",
         requestId: 0
       }
@@ -28092,6 +28152,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       error.hidden = !message;
     }
 
+    function customMappingUpdateNameCount() {
+      const input = document.getElementById("customMappingUploadName");
+      const count = document.getElementById("customMappingUploadNameCount");
+      if (!input || !count) return;
+      count.textContent = `${input.value.length}/10`;
+    }
+
     function customMappingRenderUploadInstances() {
       const select = document.getElementById("customMappingUploadInstance");
       if (!select) return;
@@ -28112,11 +28179,17 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function customMappingValidateUploadForm({ showErrors = false } = {}) {
       const values = customMappingUploadFormValues();
-      const nameError = values.name ? "" : "请输入映射名称";
+      const hasDuplicateDimension = Boolean(values.name) && customMappingFilesForInstance(values.instance)
+        .some(file => String(file.dimension || "").trim().toLocaleLowerCase() === values.name.toLocaleLowerCase());
+      const nameError = !values.name
+        ? "请输入映射维度"
+        : hasDuplicateDimension
+          ? "当前映射映射维度已存在"
+          : "";
       if (showErrors || values.name) customMappingSetNameError(nameError);
       return {
         ...values,
-        valid: Boolean(values.instance && values.name)
+        valid: Boolean(values.instance && values.name && !hasDuplicateDimension)
       };
     }
 
@@ -28143,16 +28216,28 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function customMappingUpdateUploadAction() {
       const button = document.getElementById("customMappingUploadConfirm");
-      if (!button) return;
+      const applyButton = document.getElementById("customMappingUploadApply");
+      if (!button && !applyButton) return;
+      const showApplyButton = customMappingState.upload.entrySource === "report";
+      if (applyButton) applyButton.hidden = !showApplyButton;
       const { valid } = customMappingValidateUploadForm();
       if (customMappingState.upload.phase === "uploading") {
-        button.textContent = "上传中...";
-        button.disabled = true;
+        [button, applyButton].forEach(actionButton => {
+          if (!actionButton) return;
+          actionButton.textContent = "上传中...";
+          actionButton.disabled = true;
+        });
         return;
       }
       const hasSelectedFile = customMappingState.upload.phase === "selected" && customMappingState.upload.file;
-      button.textContent = hasSelectedFile ? "上传文件" : "确认";
-      button.disabled = !hasSelectedFile || !valid;
+      if (button) {
+        button.textContent = hasSelectedFile ? "上传文件" : "确认";
+        button.disabled = !hasSelectedFile || !valid;
+      }
+      if (applyButton) {
+        applyButton.textContent = "确认并应用";
+        applyButton.disabled = !showApplyButton || !hasSelectedFile || !valid;
+      }
     }
 
     function customMappingRenderSelectedFile() {
@@ -28194,12 +28279,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       customMappingState.upload.rows = [];
       customMappingState.upload.errorMessage = "";
       customMappingState.upload.source = "file";
+      customMappingState.upload.entrySource = "management";
       customMappingState.upload.selectedLabelFileId = "";
       customMappingState.upload.requestId += 1;
       const fileInput = document.getElementById("customMappingUploadFile");
       const nameInput = document.getElementById("customMappingUploadName");
       if (fileInput) fileInput.value = "";
       if (nameInput) nameInput.value = "";
+      customMappingUpdateNameCount();
       customMappingRenderUploadInstances();
       closeCustomMappingUploadToast();
       customMappingSetUploadError("");
@@ -28239,10 +28326,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       customMappingUpdateUploadAction();
     }
 
-    function openCustomMappingModal() {
+    function openCustomMappingModal(options = {}) {
       const modal = document.getElementById("customMappingModal");
       if (!modal) return;
+      const entrySource = options?.source === "report" ? "report" : "management";
       customMappingResetUploadState();
+      customMappingState.upload.entrySource = entrySource;
+      customMappingUpdateUploadAction();
       modal.hidden = false;
     }
 
@@ -28353,8 +28443,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       frameLabelToast(`已保存映射文件：${mappingFile.filename}`);
     }
 
-    async function customMappingConfirmUpload() {
+    async function customMappingConfirmUpload({ applyAfterUpload = false } = {}) {
       const upload = customMappingState.upload;
+      const shouldApplyAfterUpload = Boolean(applyAfterUpload && upload.entrySource === "report");
       const form = customMappingValidateUploadForm({ showErrors: true });
       if (!form.valid) {
         customMappingUpdateUploadAction();
@@ -28405,13 +28496,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           })),
           instance: form.instance
         });
+        if (shouldApplyAfterUpload) {
+          frameLabelState.selectedKey = mappingFile.id;
+          frameLabelState.activeCategory = "custom";
+          frameLabelState.searchQuery = "";
+        }
         closeCustomMappingModal();
         renderCustomMappingInstanceFilter();
         renderCustomMappingFilesTable();
         renderCustomMappingsTable();
         renderFrameCreateAggregationState();
         frameLabelRefreshReport();
-        frameLabelToast(`映射上传成功：${mappingFile.filename}`);
+        frameLabelToast(shouldApplyAfterUpload
+          ? `映射上传成功并已应用：${mappingFile.filename}`
+          : `映射上传成功：${mappingFile.filename}`);
       } catch (error) {
         if (requestId !== upload.requestId) return;
         upload.phase = "failed";
@@ -28891,6 +28989,60 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       return option.label;
     }
 
+    function frameLabelCoverageForOption(option) {
+      if (!option || option.value === "none") return null;
+      const normalize = value => String(value || "").trim().toLocaleUpperCase();
+      const reportAsins = frameLabelAllAsins().map(normalize).filter(Boolean);
+      const reportAsinSet = new Set(reportAsins);
+      const total = reportAsinSet.size;
+      if (!total) return { covered: 0, total, text: "0%" };
+
+      const covered = new Set();
+      if (option.value === "system") {
+        reportAsins.forEach(asin => {
+          if (frameLabelRsiProductName(asin)) covered.add(asin);
+        });
+      } else if (option.value === "system-product-line") {
+        const instance = frameLabelCurrentInstance();
+        systemMappingState.records.forEach(record => {
+          const asin = normalize(record.asin);
+          if ((record.instance || instance) === instance && reportAsinSet.has(asin) && String(record.groupName || "").trim()) {
+            covered.add(asin);
+          }
+        });
+      } else {
+        const file = frameLabelFileByKey(option.value);
+        (file?.records || []).forEach(record => {
+          const asin = normalize(record.asin);
+          if (reportAsinSet.has(asin) && String(record.groupName || "").trim()) {
+            covered.add(asin);
+          }
+        });
+      }
+
+      const percent = Math.round((covered.size / total) * 1000) / 10;
+      return {
+        covered: covered.size,
+        total,
+        text: `${Number.isInteger(percent) ? percent : percent.toFixed(1)}%`
+      };
+    }
+
+    function frameLabelCoverageBadgeMarkup(option) {
+      const coverage = frameLabelCoverageForOption(option);
+      if (!coverage) return "";
+      const title = `覆盖率：${coverage.text}（覆盖 ${coverage.covered}/${coverage.total} 个ASIN）`;
+      return `
+        <span class="frame-label-coverage-badge" title="${escapeHtml(title)}" aria-label="${escapeHtml(title)}">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="8"></circle>
+            <path d="M12 4v8l5.6 5.6"></path>
+          </svg>
+          <span>${escapeHtml(coverage.text)}</span>
+        </span>
+      `;
+    }
+
     function frameLabelSyncSelection() {
       const selectedCategory = frameLabelCategoryForValue(frameLabelState.selectedKey);
       if (selectedCategory) frameLabelState.activeCategory = selectedCategory;
@@ -28937,9 +29089,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameLabelOptionMarkup(option, selectedValue) {
       const selected = option.value === selectedValue;
+      const title = frameLabelOptionDisplayLabel(option);
       return `
-        <button class="frame-label-select-option${selected ? " is-selected" : ""}" type="button" role="option" aria-selected="${selected}" title="${escapeHtml(frameLabelOptionDisplayLabel(option))}" data-frame-label-option="${escapeHtml(option.value)}">
-          <span>${escapeHtml(option.label)}</span>
+        <button class="frame-label-select-option${selected ? " is-selected" : ""}" type="button" role="option" aria-selected="${selected}" title="${escapeHtml(title)}" data-frame-label-option="${escapeHtml(option.value)}">
+          <span class="frame-label-select-option-label">${escapeHtml(option.label)}</span>
+          ${frameLabelCoverageBadgeMarkup(option)}
         </button>
       `;
     }
@@ -28953,6 +29107,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           : `aria-pressed="${isActive}" data-frame-label-category="${escapeHtml(category)}"`
         }>
           <span class="frame-label-select-category-label">${escapeHtml(label)}</span>
+          ${isLeaf ? frameLabelCoverageBadgeMarkup(option) : ""}
           ${isLeaf ? "" : `
             <svg class="frame-label-select-category-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <path d="m9 18 6-6-6-6"></path>
@@ -30282,7 +30437,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const uploadButton = event.target.closest("#frameLabelUploadMappingBtn");
         if (uploadButton) {
           frameLabelSetDropdownOpen(false);
-          openCustomMappingModal();
+          openCustomMappingModal({ source: "report" });
           return;
         }
         const category = event.target.closest("[data-frame-label-category]");
@@ -30382,6 +30537,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       document.getElementById("customMappingModalCancel")?.addEventListener("click", closeCustomMappingModal);
       document.getElementById("customMappingTemplateDownload")?.addEventListener("click", customMappingDownloadTemplate);
       document.getElementById("customMappingUploadConfirm")?.addEventListener("click", customMappingConfirmUpload);
+      document.getElementById("customMappingUploadApply")?.addEventListener("click", () => customMappingConfirmUpload({ applyAfterUpload: true }));
       document.getElementById("customMappingUploadToastClose")?.addEventListener("click", closeCustomMappingUploadToast);
       document.getElementById("customMappingUploadFileDelete")?.addEventListener("click", () => {
         if (customMappingState.upload.phase !== "uploading") customMappingResetUploadState();
@@ -30390,6 +30546,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         customMappingHandleFile(event.target.files?.[0]);
       });
       document.getElementById("customMappingUploadName")?.addEventListener("input", () => {
+        customMappingUpdateNameCount();
         customMappingSetNameError("");
         customMappingUpdateUploadAction();
       });
@@ -32693,16 +32850,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
     }
 
-    function frameModule6RenderSummary(entry) {
-      const summary = document.getElementById("frameModule63Summary");
-      if (!summary) return;
-      const topAsins = entry.followItems.slice(0, 3).map(item => frameLabelFormatAsin(item.asin)).filter(Boolean);
-      const bucketText = frameModule6State.selectedBucket ? `当前高亮时长桶：${escapeHtml(frameModule6State.selectedBucket)}。` : "";
-      summary.innerHTML = `
-        <strong>结论摘要：</strong>${escapeHtml(frameLabelFormatAsin(entry.leadAsin))} 带来 ${frameModule6FormatNumber(entry.ntbUsers)} 新客，其中 ${frameModule6FormatNumber(entry.repurchaseUsers)} 人完成二购（二购率 ${frameModule6FormatPercent(entry.repurchaseRate)}）。二购 ASIN 共 ${frameModule6FormatNumber(entry.totalRepurchasePersonTimes)} 人次，跨品承接占比 ${frameModule6FormatPercent(entry.crossShare)}，二购销售额 ${frameModule6FormatCompactMoney(entry.secondSales)}，二购销售占比 ${frameModule6FormatPercent(entry.valueShare)}。重点二购 ASIN：${escapeHtml(topAsins.join("、") || "—")}。${bucketText}
-      `;
-    }
-
     function frameModule6ClearDonutLegend(legendId) {
       const legend = document.getElementById(legendId);
       if (!legend) return;
@@ -32710,7 +32857,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       legend.hidden = true;
     }
 
-    function frameModule6RenderDonutLegend(legendId, items, metricKey, totalVisible, entry) {
+    function frameModule6RenderDonutLegend(legendId, items, metricKey, totalVisible, entry, totalAllPersonTimes = 0, topNLabel = "TOP N") {
       const legend = document.getElementById(legendId);
       if (!legend) return;
       if (!items.length || !totalVisible) {
@@ -32718,35 +32865,28 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         return;
       }
       const isSalesLegend = metricKey === "salesAmount";
-      const groups = isSalesLegend
-        ? [
-          {
-            name: "同品二购",
-            color: frameModule6Palette.same[0],
-            value: Number(entry?.sameRepurchaseSales || 0),
-            personTimes: Number(entry?.sameRepurchasePersonTimes || 0)
-          },
-          {
-            name: "跨品二购",
-            color: frameModule6Palette.cross[0],
-            value: Number(entry?.crossRepurchaseSales || 0),
-            personTimes: Number(entry?.crossRepurchasePersonTimes || 0)
-          }
-        ]
-        : [
-          {
-            name: "同品二购",
-            color: frameModule6Palette.same[0],
-            value: items.filter(item => item.same).reduce((sum, item) => sum + Number(item.value || 0), 0),
-            personTimes: items.filter(item => item.same).reduce((sum, item) => sum + Number(item.personTimes || 0), 0)
-          },
-          {
-            name: "跨品二购",
-            color: frameModule6Palette.cross[0],
-            value: items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.value || 0), 0),
-            personTimes: items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.personTimes || 0), 0)
-          }
-        ];
+      const groups = [
+        {
+          name: "同品二购",
+          color: frameModule6Palette.same[0],
+          value: isSalesLegend
+            ? Number(entry?.sameRepurchaseSales || 0)
+            : items.filter(item => item.same).reduce((sum, item) => sum + Number(item.value || 0), 0),
+          personTimes: isSalesLegend
+            ? Number(entry?.sameRepurchasePersonTimes || 0)
+            : items.filter(item => item.same).reduce((sum, item) => sum + Number(item.personTimes || item.value || 0), 0)
+        },
+        {
+          name: "跨品二购",
+          color: frameModule6Palette.cross[0],
+          value: isSalesLegend
+            ? Number(entry?.crossRepurchaseSales || 0)
+            : items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.value || 0), 0),
+          personTimes: isSalesLegend
+            ? Number(entry?.crossRepurchasePersonTimes || 0)
+            : items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.personTimes || item.value || 0), 0)
+        }
+      ].filter(item => Number(item.value || 0) > 0);
       const total = isSalesLegend
         ? groups.reduce((sum, item) => sum + Number(item.value || 0), 0)
         : totalVisible;
@@ -32757,20 +32897,27 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       legend.hidden = false;
       legend.innerHTML = groups.map(item => {
         const share = Number(item.value || 0) / Math.max(1, total);
+        const fullShare = !isSalesLegend && totalAllPersonTimes
+          ? Number(item.value || 0) / Math.max(1, totalAllPersonTimes)
+          : 0;
         const personTimes = frameModule6FormatNumber(item.personTimes);
         const metricValueText = isSalesLegend
           ? frameModule6FormatCompactMoney(item.value)
           : `${personTimes}人次`;
         const shareText = frameModule6FormatPercent(share);
+        const fullShareText = frameModule6FormatPercent(fullShare);
+        const shareMarkup = isSalesLegend
+          ? escapeHtml(shareText)
+          : `${escapeHtml(topNLabel)} 占比：${escapeHtml(shareText)} ｜ 全量占比：${escapeHtml(fullShareText)}`;
         const title = isSalesLegend
           ? `${item.name} · 销售额 ${frameModule6FormatMoney(item.value)} · 占比 ${shareText}`
-          : `${item.name} · ${personTimes}人次 · 占比 ${shareText}`;
+          : `${item.name} · ${personTimes}人次 · ${topNLabel} 占比 ${shareText} · 全量占比 ${fullShareText}`;
         return `
-          <span class="amc-module6-donut-legend-item" title="${escapeHtml(title)}">
+          <span class="amc-module6-donut-legend-item${isSalesLegend ? "" : " has-dual-share"}" title="${escapeHtml(title)}">
             <i class="amc-module6-donut-swatch" style="--legend-color:${escapeHtml(item.color)}" aria-hidden="true"></i>
             <span class="amc-module6-donut-name">${escapeHtml(item.name)}</span>
             <span class="amc-module6-donut-count">${metricValueText}</span>
-            <span class="amc-module6-donut-share">${shareText}</span>
+            <span class="amc-module6-donut-share">${shareMarkup}</span>
           </span>`;
       }).join("");
     }
@@ -32798,15 +32945,24 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         frameModule6ClearDonutLegend(legendId);
         return;
       }
+      const isPersonTimesMetric = metricKey === "personTimes";
+      const topNLabel = `TOP ${topN}`;
+      const totalAllPersonTimes = isPersonTimesMetric
+        ? (entry.followItems || []).reduce((sum, item) => sum + Number(item.personTimes || 0), 0)
+        : 0;
       const data = slices.map((item, index) => {
         const palette = item.same ? frameModule6Palette.same : frameModule6Palette.cross;
         const color = palette[index % palette.length];
+        const value = Number(item[metricKey] || 0);
         return {
           name: item.asin,
-          value: Number(item[metricKey] || 0),
+          value,
           personTimes: Number(item.personTimes || 0),
           same: Boolean(item.same),
           color,
+          topNShare: isPersonTimesMetric ? value / Math.max(1, totalVisible) : null,
+          fullShare: isPersonTimesMetric ? value / Math.max(1, totalAllPersonTimes) : null,
+          topNLabel,
           itemStyle: {
             color,
             borderColor: "#ffffff",
@@ -32814,11 +32970,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           }
         };
       });
-      const centerLabel = metricKey === "salesAmount" ? "销售额" : "购买人数";
+      const centerLabel = metricKey === "salesAmount" ? "销售额" : "购买人次";
       const centerValue = metricKey === "salesAmount"
         ? frameModule6FormatCompactMoney(totalVisible)
-        : `${frameModule6FormatNumber(totalVisible)}人`;
-      frameModule6RenderDonutLegend(legendId, data, metricKey, totalVisible, entry);
+        : `${frameModule6FormatNumber(totalVisible)}人次`;
+      frameModule6RenderDonutLegend(legendId, data, metricKey, totalVisible, entry, totalAllPersonTimes, topNLabel);
       chart.setOption({
         animation: false,
         graphic: [
@@ -32868,8 +33024,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           extraCssText: "box-shadow:0 8px 18px rgba(30,53,101,0.10);border-radius:6px;",
           formatter: params => {
             const item = params.data;
+            if (!item) return "";
+            if (metricKey === "salesAmount") {
+              return `<strong>${escapeHtml(frameLabelFormatAsin(item.name))}</strong><br>销售额：${frameModule6FormatMoney(item.value)}<br>占比：${Number(params.percent || 0).toFixed(1)}%`;
+            }
             return item
-              ? `<strong>${escapeHtml(frameLabelFormatAsin(item.name))}</strong><br>${metricKey === "salesAmount" ? `销售额：${frameModule6FormatMoney(item.value)}` : `购买人数：${frameModule6FormatNumber(item.value)}`}<br>占比：${Number(params.percent || 0).toFixed(1)}%`
+              ? `<strong>${escapeHtml(frameLabelFormatAsin(item.name))}</strong><br>购买人次：${frameModule6FormatNumber(item.value)}人次<br>${escapeHtml(item.topNLabel || "TOP N")} 占比：${frameModule6FormatPercent(item.topNShare)}<br>全量占比：${frameModule6FormatPercent(item.fullShare)}`
               : "";
           }
         },
@@ -32886,7 +33046,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               color: "#4b5d74",
               fontSize: 12,
               lineHeight: 16,
-              formatter: params => `${frameLabelAxisText(params.name)}\n${metricKey === "salesAmount" ? frameModule6FormatCompactMoney(params.value) : `${frameModule6FormatNumber(params.value)}人次`}`
+              formatter: params => {
+                if (metricKey === "salesAmount") {
+                  return `${frameLabelAxisText(params.name)}\n${frameModule6FormatCompactMoney(params.value)}`;
+                }
+                return `${frameLabelAxisText(params.name)}\n${frameModule6FormatNumber(params.value)}人次`;
+              }
             },
             labelLine: {
               length: 14,
@@ -32953,7 +33118,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         },
         yAxis: {
           type: "value",
-          name: "购买人数",
+          name: "购买人次",
           nameLocation: "middle",
           nameGap: 48,
           axisLabel: { color: "#8a98aa", fontSize: 12, margin: 8 },
@@ -33008,7 +33173,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         frameModule6SetHtml("frameModule61Kpis", `<div class="amc-module6-empty">暂无足够数据</div>`);
         frameModule6SetHtml("frameModule62List", `<div class="amc-module6-empty"><span class="amc-list-empty">暂无入口 ASIN 数据</span></div>`);
         frameModule6RenderAsinPicker(null);
-        frameModule6SetHtml("frameModule63Summary", `<div class="amc-module6-empty">暂无新客二购数据</div>`);
         ["frameModule63Chart", "frameModule64Chart", "frameModule65Chart", "frameModule66Chart"].forEach(id => {
           const chart = frameModule6GetChart(id);
           if (chart) frameModule6SetEmptyChart(chart, "暂无数据");
@@ -33023,7 +33187,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       frameModule6RenderOverview(entry);
       frameModule6RenderSelector(entry);
       frameModule6RenderChart63(entry);
-      frameModule6RenderSummary(entry);
       frameModule6RenderDonutCard(entry, "frameModule64Chart", "personTimes", "frameModule64Legend");
       frameModule6RenderDonutCard(entry, "frameModule65Chart", "salesAmount", "frameModule65Legend");
       frameModule6RenderChart66(entry);
@@ -33531,6 +33694,40 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       renderFrameRoleDetailTable();
     }
 
+    const frameModule2MatrixLayoutState = {
+      resizeObserver: null,
+      syncFrame: 0
+    };
+
+    function frameModule2MatrixSizeSignature(svg) {
+      if (!svg) return "";
+      const width = Math.round(svg.clientWidth || 0);
+      const height = Math.round(svg.clientHeight || 0);
+      return width > 0 && height > 0 ? `${width}x${height}` : "";
+    }
+
+    function frameModule2SyncMatrixLayout() {
+      if (frameModule2MatrixLayoutState.syncFrame) {
+        cancelAnimationFrame(frameModule2MatrixLayoutState.syncFrame);
+      }
+      frameModule2MatrixLayoutState.syncFrame = requestAnimationFrame(() => {
+        frameModule2MatrixLayoutState.syncFrame = 0;
+        const svg = document.getElementById("frameRoleMatrixChart");
+        const signature = frameModule2MatrixSizeSignature(svg);
+        if (!signature || signature === svg.dataset.frameRoleMatrixSize) return;
+        renderFrameRoleMatrix();
+      });
+    }
+
+    function frameModule2ObserveMatrixLayout() {
+      const plot = document.querySelector(".amc-role-matrix-plot");
+      if (!plot || frameModule2MatrixLayoutState.resizeObserver || typeof ResizeObserver !== "function") return;
+      frameModule2MatrixLayoutState.resizeObserver = new ResizeObserver(() => {
+        frameModule2SyncMatrixLayout();
+      });
+      frameModule2MatrixLayoutState.resizeObserver.observe(plot);
+    }
+
     function renderFrameRoleMatrix() {
       const svg = document.getElementById("frameRoleMatrixChart");
       const subtitle = document.getElementById("frameRoleMatrixSubtitle");
@@ -33584,7 +33781,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const renderedWidth = svg.clientWidth || 860;
       const renderedHeight = svg.clientHeight || height;
       const width = Math.max(360, Math.round(renderedWidth * height / Math.max(1, renderedHeight)));
+      svg.dataset.frameRoleMatrixSize = frameModule2MatrixSizeSignature(svg);
       svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      frameModule2SyncMatrixLayout();
       const padding = { top: 28, right: 12, bottom: 62, left: 70 };
       const plotWidth = width - padding.left - padding.right;
       const plotHeight = height - padding.top - padding.bottom;
@@ -35942,6 +36141,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         renderFrameRoleDetailTable();
       });
       setupFrameFlowAsinPicker();
+      frameModule2ObserveMatrixLayout();
       frameModule2SetLinkLayoutStyle(frameModule2LinkLayoutStyle());
     }
 
