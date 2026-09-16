@@ -9068,6 +9068,22 @@
       min-height: 0;
     }
 
+    .amc-module6-entry-asin {
+      display: inline-block;
+      margin-right: 4px;
+      color: #102346;
+      font-size: 20px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.2;
+      vertical-align: middle;
+    }
+
+    .amc-module6-entry-title-suffix {
+      color: #102346;
+      vertical-align: middle;
+    }
+
     .amc-module6-kpi-grid {
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -9589,6 +9605,36 @@
       text-align: left;
       cursor: pointer;
       outline: none;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .amc-module6-selector-area {
+      position: absolute;
+      top: 0;
+      right: 96px;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .amc-module6-selector-area::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: var(--module6-ntb-share, 0%);
+      background: rgba(26, 115, 232, 0.14);
+      content: "";
+    }
+
+    .amc-module6-selector-rank,
+    .amc-module6-selector-main,
+    .amc-module6-selector-metrics {
+      position: relative;
+      z-index: 1;
     }
 
     .amc-module6-selector-row:hover,
@@ -9780,13 +9826,13 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       align-items: start;
-      justify-items: center;
+      justify-items: stretch;
       gap: 7px;
       max-height: 112px;
       overflow: auto;
-      padding: 0 14px 12px;
+      padding: 0 10px 12px;
       color: #334155;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 400;
       line-height: 1.35;
       scrollbar-color: #cbd7ea transparent;
@@ -9809,13 +9855,13 @@
 
     .amc-module6-donut-legend-item {
       min-width: 0;
-      width: max-content;
+      width: 100%;
       max-width: 100%;
       display: grid;
-      grid-template-columns: 12px 76px minmax(48px, max-content) minmax(54px, max-content);
+      grid-template-columns: 12px minmax(56px, 70px) minmax(58px, 84px) minmax(0, 1fr);
       align-items: center;
       justify-content: start;
-      column-gap: 10px;
+      column-gap: 6px;
       padding: 1px 0;
       background: transparent;
       color: #334155;
@@ -9823,7 +9869,7 @@
     }
 
     .amc-module6-donut-legend-item.has-dual-share {
-      grid-template-columns: 12px 76px minmax(48px, max-content) minmax(260px, max-content);
+      grid-template-columns: 12px minmax(56px, 70px) minmax(58px, 84px) minmax(0, 1fr);
     }
 
     .amc-module6-donut-swatch {
@@ -9852,13 +9898,20 @@
     }
 
     .amc-module6-donut-share {
-      justify-self: end;
+      min-width: 0;
+      justify-self: stretch;
       color: #334155;
       font-weight: 400;
       font-variant-numeric: tabular-nums;
-      text-align: right;
+      text-align: left;
+      white-space: normal;
+      line-height: 15px;
+    }
+
+    .amc-module6-donut-share-part {
+      display: inline-block;
+      margin-right: 8px;
       white-space: nowrap;
-      line-height: 16px;
     }
 
     .amc-module6-dot {
@@ -15203,7 +15256,7 @@
 
     .custom-mapping-page-notice .custom-mapping-notice-emphasis {
       color: #315cff;
-      font-weight: 700;
+      font-weight: 400;
     }
 
     .custom-mapping-presentation-switcher {
@@ -21122,7 +21175,7 @@
                   <div class="amc-overview-module-title">
                     <span class="amc-overview-index">6.1</span>
                     <div>
-                      <h4 id="frameModule61Title">{ASIN} 新客二购表现</h4>
+                      <h4 id="frameModule61Title"><span class="amc-module6-entry-asin">{ASIN}</span><span class="amc-module6-entry-title-suffix">新客二购表现</span></h4>
                       <p id="frameModule61Subtitle">{ASIN}引入新客后，二购买什么？</p>
                     </div>
                   </div>
@@ -21150,7 +21203,7 @@
                     <span class="amc-overview-index">6.4</span>
                     <div>
                       <h4 id="frameModule64Title">二购 ASIN 结构分析</h4>
-                      <p>按 TOP N 查看二购 ASIN 的人次与销售额结构。</p>
+                      <p>查看当前Entry ASIN的二购分布。</p>
                     </div>
                   </div>
                   <div class="amc-module6-toolbar">
@@ -31140,6 +31193,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (element) element.innerHTML = value;
     }
 
+    function frameModule6OverviewTitleMarkup(entryAsin) {
+      const asin = String(entryAsin || "--");
+      const title = `${asin} 新客二购表现`;
+      return `<span class="amc-module6-entry-asin" title="${escapeHtml(title)}">${escapeHtml(asin)}</span><span class="amc-module6-entry-title-suffix">新客二购表现</span>`;
+    }
+
     function frameModule6GetChart(id) {
       return frameModule3GetChart(id);
     }
@@ -31162,7 +31221,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (!entry) return;
       const entryAsin = frameLabelDisplayParts(entry.leadAsin).raw;
       const entryLabel = frameLabelFormatAsin(entry.leadAsin);
-      frameModule6SetText("frameModule61Title", `${entryAsin} 新客二购表现`);
+      frameModule6SetHtml("frameModule61Title", frameModule6OverviewTitleMarkup(entryAsin));
       frameModule6SetText("frameModule61Subtitle", `${entryLabel}引入新客后，二购买什么？`);
       const metrics = [
         { label: "入口新客", value: frameModule6FormatNumber(entry.ntbUsers), note: "New-to-Brand 新客总人数", color: "#20385d" },
@@ -31185,10 +31244,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const list = document.getElementById("frameModule62List");
       if (!list) return;
       frameModule6RenderAsinPicker(entry);
+      const maxNtbUsers = Math.max(1, ...frameModule6Store.top50.map(item => frameModule6Num(item.ntbUsers)));
       list.innerHTML = frameModule6Store.top50.map((item, index) => {
         const selected = item.leadAsin === entry.leadAsin;
+        const ntbShare = Math.min(100, Math.max(0, (frameModule6Num(item.ntbUsers) / maxNtbUsers) * 100));
         return `
           <button class="amc-module6-selector-row${selected ? " is-selected" : ""}" type="button" role="option" aria-selected="${selected}" data-module6-asin="${escapeHtml(item.leadAsin)}" title="${escapeHtml(item.leadAsin)}">
+            <span class="amc-module6-selector-area" aria-hidden="true" style="--module6-ntb-share:${ntbShare.toFixed(2)}%"></span>
             <span class="amc-module6-selector-rank">${index + 1}</span>
             <span class="amc-module6-selector-main">
               <span class="amc-module6-selector-asin">${frameModule6AsinDisplayMarkup(item.leadAsin)}</span>
@@ -31406,7 +31468,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       legend.hidden = true;
     }
 
-    function frameModule6RenderDonutLegend(legendId, items, metricKey, totalVisible, entry, totalAllPersonTimes = 0, topNLabel = "TOP N") {
+    function frameModule6RenderDonutLegend(legendId, items, metricKey, totalVisible, totalAll, topNLabel = "TOP N") {
       const legend = document.getElementById(legendId);
       if (!legend) return;
       if (!items.length || !totalVisible) {
@@ -31418,27 +31480,17 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         {
           name: "同品二购",
           color: frameModule6Palette.same[0],
-          value: isSalesLegend
-            ? Number(entry?.sameRepurchaseSales || 0)
-            : items.filter(item => item.same).reduce((sum, item) => sum + Number(item.value || 0), 0),
-          personTimes: isSalesLegend
-            ? Number(entry?.sameRepurchasePersonTimes || 0)
-            : items.filter(item => item.same).reduce((sum, item) => sum + Number(item.personTimes || item.value || 0), 0)
+          value: items.filter(item => item.same).reduce((sum, item) => sum + Number(item.value || 0), 0),
+          personTimes: items.filter(item => item.same).reduce((sum, item) => sum + Number(item.personTimes || item.value || 0), 0)
         },
         {
           name: "跨品二购",
           color: frameModule6Palette.cross[0],
-          value: isSalesLegend
-            ? Number(entry?.crossRepurchaseSales || 0)
-            : items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.value || 0), 0),
-          personTimes: isSalesLegend
-            ? Number(entry?.crossRepurchasePersonTimes || 0)
-            : items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.personTimes || item.value || 0), 0)
+          value: items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.value || 0), 0),
+          personTimes: items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.personTimes || item.value || 0), 0)
         }
       ].filter(item => Number(item.value || 0) > 0);
-      const total = isSalesLegend
-        ? groups.reduce((sum, item) => sum + Number(item.value || 0), 0)
-        : totalVisible;
+      const total = totalVisible;
       if (!total) {
         frameModule6ClearDonutLegend(legendId);
         return;
@@ -31446,8 +31498,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       legend.hidden = false;
       legend.innerHTML = groups.map(item => {
         const share = Number(item.value || 0) / Math.max(1, total);
-        const fullShare = !isSalesLegend && totalAllPersonTimes
-          ? Number(item.value || 0) / Math.max(1, totalAllPersonTimes)
+        const fullShare = totalAll
+          ? Number(item.value || 0) / Math.max(1, totalAll)
           : 0;
         const personTimes = frameModule6FormatNumber(item.personTimes);
         const metricValueText = isSalesLegend
@@ -31455,14 +31507,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           : `${personTimes}人次`;
         const shareText = frameModule6FormatPercent(share);
         const fullShareText = frameModule6FormatPercent(fullShare);
-        const shareMarkup = isSalesLegend
-          ? escapeHtml(shareText)
-          : `${escapeHtml(topNLabel)} 占比：${escapeHtml(shareText)} ｜ 全量占比：${escapeHtml(fullShareText)}`;
-        const title = isSalesLegend
-          ? `${item.name} · 销售额 ${frameModule6FormatMoney(item.value)} · 占比 ${shareText}`
-          : `${item.name} · ${personTimes}人次 · ${topNLabel} 占比 ${shareText} · 全量占比 ${fullShareText}`;
+        const shareMarkup = `<span class="amc-module6-donut-share-part">占比${escapeHtml(topNLabel)}：${escapeHtml(shareText)}</span><span class="amc-module6-donut-share-part">占比全量：${escapeHtml(fullShareText)}</span>`;
+        const title = metricKey === "salesAmount"
+          ? `${item.name} · 销售额 ${frameModule6FormatMoney(item.value)} · 占比${topNLabel} ${shareText} · 占比全量 ${fullShareText}`
+          : `${item.name} · ${personTimes}人次 · 占比${topNLabel} ${shareText} · 占比全量 ${fullShareText}`;
         return `
-          <span class="amc-module6-donut-legend-item${isSalesLegend ? "" : " has-dual-share"}" title="${escapeHtml(title)}">
+          <span class="amc-module6-donut-legend-item has-dual-share" title="${escapeHtml(title)}">
             <i class="amc-module6-donut-swatch" style="--legend-color:${escapeHtml(item.color)}" aria-hidden="true"></i>
             <span class="amc-module6-donut-name">${escapeHtml(item.name)}</span>
             <span class="amc-module6-donut-count">${metricValueText}</span>
@@ -31494,11 +31544,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         frameModule6ClearDonutLegend(legendId);
         return;
       }
-      const isPersonTimesMetric = metricKey === "personTimes";
       const topNLabel = `TOP ${topN}`;
-      const totalAllPersonTimes = isPersonTimesMetric
-        ? (entry.followItems || []).reduce((sum, item) => sum + Number(item.personTimes || 0), 0)
-        : 0;
+      const totalAll = (entry.followItems || []).reduce((sum, item) => sum + Number(item[metricKey] || 0), 0);
+      const coverage = totalVisible / Math.max(1, totalAll);
       const data = slices.map((item, index) => {
         const palette = item.same ? frameModule6Palette.same : frameModule6Palette.cross;
         const color = palette[index % palette.length];
@@ -31509,8 +31557,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           personTimes: Number(item.personTimes || 0),
           same: Boolean(item.same),
           color,
-          topNShare: isPersonTimesMetric ? value / Math.max(1, totalVisible) : null,
-          fullShare: isPersonTimesMetric ? value / Math.max(1, totalAllPersonTimes) : null,
+          topNShare: value / Math.max(1, totalVisible),
+          fullShare: value / Math.max(1, totalAll),
           topNLabel,
           itemStyle: {
             color,
@@ -31523,7 +31571,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const centerValue = metricKey === "salesAmount"
         ? frameModule6FormatCompactMoney(totalVisible)
         : `${frameModule6FormatNumber(totalVisible)}人次`;
-      frameModule6RenderDonutLegend(legendId, data, metricKey, totalVisible, entry, totalAllPersonTimes, topNLabel);
+      frameModule6RenderDonutLegend(legendId, data, metricKey, totalVisible, totalAll, topNLabel);
       chart.setOption({
         animation: false,
         graphic: [
@@ -31536,11 +31584,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               {
                 type: "text",
                 left: "center",
-                top: -18,
+                top: -26,
                 style: {
                   text: centerLabel,
                   fill: "#51627a",
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: 400,
                   lineHeight: 16,
                   textAlign: "center"
@@ -31549,13 +31597,26 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               {
                 type: "text",
                 left: "center",
-                top: 2,
+                top: -5,
                 style: {
                   text: centerValue,
                   fill: "#12213d",
-                  fontSize: 18,
+                  fontSize: 17,
                   fontWeight: 700,
-                  lineHeight: 22,
+                  lineHeight: 20,
+                  textAlign: "center"
+                }
+              },
+              {
+                type: "text",
+                left: "center",
+                top: 21,
+                style: {
+                  text: `覆盖率：${frameModule6FormatPercent(coverage)}`,
+                  fill: "#7b89a2",
+                  fontSize: 11,
+                  fontWeight: 400,
+                  lineHeight: 16,
                   textAlign: "center"
                 }
               }
@@ -31574,12 +31635,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const item = params.data;
             if (!item) return "";
-            if (metricKey === "salesAmount") {
-              return `<strong>${escapeHtml(frameLabelFormatAsin(item.name))}</strong><br>销售额：${frameModule6FormatMoney(item.value)}<br>占比：${Number(params.percent || 0).toFixed(1)}%`;
-            }
-            return item
-              ? `<strong>${escapeHtml(frameLabelFormatAsin(item.name))}</strong><br>购买人次：${frameModule6FormatNumber(item.value)}人次<br>${escapeHtml(item.topNLabel || "TOP N")} 占比：${frameModule6FormatPercent(item.topNShare)}<br>全量占比：${frameModule6FormatPercent(item.fullShare)}`
-              : "";
+            const metricMarkup = metricKey === "salesAmount"
+              ? `销售额：${frameModule6FormatMoney(item.value)}`
+              : `购买人数：${frameModule6FormatNumber(item.value)}`;
+            return `<strong>${escapeHtml(frameLabelFormatAsin(item.name))}</strong><br>${metricMarkup}<br>占比${escapeHtml(item.topNLabel || "TOP N")}：${frameModule6FormatPercent(item.topNShare)}<br>占比全量：${frameModule6FormatPercent(item.fullShare)}`;
           }
         },
         series: [
@@ -31636,6 +31695,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           itemHeight: 10,
           itemGap: 14,
           icon: "circle",
+          selectedMode: false,
           textStyle: { color: "#34445f", fontSize: 12, fontWeight: 400 }
         },
         tooltip: {
@@ -31706,6 +31766,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           }
         ]
       }, true);
+      chart.off("legendselectchanged");
       chart.off("click");
       chart.on("click", params => {
         frameModule6State.selectedBucket = frameModule6State.selectedBucket === params.name ? null : params.name;
@@ -31717,7 +31778,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       frameModule6EnsureSelection();
       const entry = frameModule6GetEntry();
       if (!entry) {
-        frameModule6SetText("frameModule61Title", "{ASIN} 新客二购表现");
+        frameModule6SetHtml("frameModule61Title", frameModule6OverviewTitleMarkup("--"));
         frameModule6SetText("frameModule61Subtitle", "暂无足够数据");
         frameModule6SetHtml("frameModule61Kpis", `<div class="amc-module6-empty">暂无足够数据</div>`);
         frameModule6SetHtml("frameModule62List", `<div class="amc-module6-empty"><span class="amc-list-empty">暂无入口 ASIN 数据</span></div>`);
