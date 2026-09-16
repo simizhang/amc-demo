@@ -7395,30 +7395,6 @@
       min-width: 0;
     }
 
-    .amc-module4-rhythm-toggle {
-      height: 28px;
-      padding: 0 9px;
-      border: 1px solid #d4ddea;
-      border-radius: 4px;
-      background: #ffffff;
-      color: #52647d;
-      font-size: 12px;
-      line-height: 26px;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-
-    .amc-module4-rhythm-toggle:hover {
-      border-color: #aebfd5;
-      background: #f6f8fb;
-      color: #355bd5;
-    }
-
-    .amc-module4-rhythm-toggle:focus-visible {
-      outline: 2px solid rgba(91, 115, 242, 0.28);
-      outline-offset: 1px;
-    }
-
     .amc-module4-rhythm-select {
       min-width: 142px;
     }
@@ -7550,29 +7526,10 @@
       height: 580px;
     }
 
-    .amc-module4-chart-matrix.is-rhythm-summary-hidden {
-      height: 520px;
-    }
-
-    .amc-module4-rhythm-summary-panel {
-      padding-bottom: 14px;
-    }
-
-    .amc-module4-chart-rhythm-summary {
-      height: 108px;
-    }
-
     .amc-module4-chart-donut {
       height: 218px;
       overflow: hidden;
       contain: layout paint;
-    }
-
-    .amc-module4-footnote {
-      margin: 2px 6px 0;
-      color: #8b98ab;
-      font-size: 11px;
-      line-height: 1.45;
     }
 
     .amc-module4-list-grid {
@@ -10194,13 +10151,6 @@
         height: 520px;
       }
 
-      .amc-module4-chart-matrix.is-rhythm-summary-hidden {
-        height: 460px;
-      }
-
-      .amc-module4-chart-rhythm-summary {
-        height: 118px;
-      }
     }
 
     @media (max-width: 520px) {
@@ -13677,6 +13627,11 @@
       box-shadow: 0 8px 20px rgba(48, 70, 112, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.82);
     }
 
+    body[data-page="amcFrame"] .amc-overview-panel.interval-panel,
+    body[data-page="amcFrame"] .amc-overview-panel.top-pairs-panel.amc-top-pairs-compact {
+      box-shadow: none;
+    }
+
     body[data-page="amcFrame"] .amc-top-pairs-compact .amc-overview-module-head {
       align-items: center;
       gap: 10px;
@@ -14854,7 +14809,7 @@
       text-align: right;
     }
 
-    /* Mapping Upload > 自定义标签：独立于 AMC Report 的标签文件管理页。 */
+    /* Mapping Upload 二级菜单与映射管理页面。 */
     .nav-group {
       position: relative;
       display: block;
@@ -14946,15 +14901,11 @@
       cursor: default;
     }
 
-    body[data-page="customLabels"] .workspace,
     body[data-page="customMappings"] .workspace,
     body[data-page="systemMappings"] .workspace {
       background: linear-gradient(90deg, #eaf4ff 0%, #eff2ff 100%);
     }
 
-    body[data-page="customLabels"] .section-notes-toggle,
-    body[data-page="customLabels"] #topPeriodLabel,
-    body[data-page="customLabels"] .top-actions,
     body[data-page="customMappings"] .section-notes-toggle,
     body[data-page="customMappings"] #topPeriodLabel,
     body[data-page="customMappings"] .top-actions,
@@ -15125,11 +15076,6 @@
       border-bottom: 1px solid #edf1f6;
     }
 
-    #customLabelsPage .custom-labels-filter-bar #customLabelMappingBtn {
-      margin-left: auto;
-      flex: 0 0 auto;
-    }
-
     .custom-labels-list-toolbar {
       min-width: 1246px;
       display: flex;
@@ -15141,29 +15087,24 @@
       box-sizing: border-box;
     }
 
-    body[data-page="customLabels"],
     body[data-page="customMappings"] {
       overflow: hidden;
     }
 
-    body[data-page="customLabels"] .top-tabs,
     body[data-page="customMappings"] .top-tabs {
       flex: 0 0 var(--top-nav-height);
     }
 
-    body[data-page="customLabels"] .utility,
     body[data-page="customMappings"] .utility {
       flex: 0 0 46px;
     }
 
-    body[data-page="customLabels"] .workspace,
     body[data-page="customMappings"] .workspace {
       height: 100vh;
       min-height: 0;
       overflow: hidden;
     }
 
-    body[data-page="customLabels"] .custom-labels-page,
     body[data-page="customMappings"] .custom-mappings-page {
       height: 0;
       flex: 1 1 0;
@@ -15174,16 +15115,10 @@
       overflow: hidden;
     }
 
-    body[data-page="customLabels"] .custom-labels-page-shell,
     body[data-page="customMappings"] .custom-labels-page-shell {
       height: 100%;
       min-height: 0;
       overflow: hidden;
-    }
-
-    body[data-page="customLabels"] .custom-labels-page-shell {
-      display: grid;
-      grid-template-rows: auto auto minmax(0, 1fr) auto;
     }
 
     body[data-page="customMappings"] .custom-labels-page-shell {
@@ -15191,7 +15126,6 @@
       grid-template-rows: auto minmax(0, 1fr) auto;
     }
 
-    body[data-page="customLabels"] .custom-labels-table-wrap,
     body[data-page="customMappings"] .custom-labels-table-wrap {
       min-width: 0;
       min-height: 0;
@@ -15201,14 +15135,12 @@
       overscroll-behavior: contain;
     }
 
-    body[data-page="customLabels"] .custom-labels-table thead th,
     body[data-page="customMappings"] .custom-labels-table thead th {
       position: sticky;
       top: 0;
       z-index: 1;
     }
 
-    body[data-page="customLabels"] .custom-labels-pagination,
     body[data-page="customMappings"] .custom-labels-pagination {
       min-width: 940px;
       width: 100%;
@@ -15247,21 +15179,14 @@
       flex: 0 0 auto;
       display: none;
       align-items: center;
-      gap: 8px;
     }
 
     body[data-page="customMappings"] .custom-mapping-presentation-switcher {
       display: inline-flex;
     }
 
-    .custom-mapping-presentation-label {
-      color: #5f6f88;
-      font-size: 12px;
-      line-height: 1;
-      cursor: help;
-    }
-
-    .custom-mapping-presentation-tabs {
+    .custom-mapping-presentation-tabs,
+    .frame-plan-switcher-options {
       min-height: 30px;
       display: inline-flex;
       align-items: center;
@@ -15272,7 +15197,8 @@
       box-sizing: border-box;
     }
 
-    .custom-mapping-presentation-tabs button {
+    .custom-mapping-presentation-tabs button,
+    .frame-plan-switcher-option {
       min-width: 56px;
       height: 24px;
       padding: 0 8px;
@@ -15286,12 +15212,15 @@
     }
 
     .custom-mapping-presentation-tabs button:hover,
-    .custom-mapping-presentation-tabs button:focus-visible {
+    .custom-mapping-presentation-tabs button:focus-visible,
+    .frame-plan-switcher-option:hover,
+    .frame-plan-switcher-option:focus-visible {
       color: #315cff;
       outline: none;
     }
 
-    .custom-mapping-presentation-tabs button.is-active {
+    .custom-mapping-presentation-tabs button.is-active,
+    .frame-plan-switcher-option[aria-pressed="true"] {
       background: #ffffff;
       color: #315cff;
       font-weight: 600;
@@ -16645,45 +16574,16 @@
     .frame-plan-switcher-options {
       display: inline-flex;
       align-items: center;
-      gap: 2px;
-      padding: 2px;
-      border: 1px solid #d6deec;
-      border-radius: 5px;
-      background: #f5f7fb;
     }
 
     .frame-plan-switcher-option {
-      min-width: 48px;
-      height: 26px;
-      padding: 0 9px;
-      border: 1px solid transparent;
-      border-radius: 3px;
-      background: transparent;
-      color: #71809a;
-      font-size: 11px;
       font-weight: 600;
-      line-height: 1;
       white-space: nowrap;
-    }
-
-    .frame-plan-switcher-option:hover,
-    .frame-plan-switcher-option:focus-visible {
-      color: #4965ca;
-      outline: none;
-    }
-
-    .frame-plan-switcher-option[aria-pressed="true"] {
-      border-color: #4967f0;
-      background: #4f6ff3;
-      color: #ffffff;
-      box-shadow: 0 1px 3px rgba(55, 82, 190, 0.18);
     }
 
     .frame-plan-switcher-option[aria-pressed="true"]:hover,
     .frame-plan-switcher-option[aria-pressed="true"]:focus-visible {
-      border-color: #3855de;
-      background: #3f5ee8;
-      color: #ffffff;
+      color: #315cff;
     }
 
     .frame-label-toolbar {
@@ -17681,12 +17581,6 @@
       box-shadow: 0 0 0 2px rgba(77, 102, 238, 0.1);
     }
 
-    #customLabelUploadDimension::placeholder {
-      color: #b5c0cf;
-      font-weight: 400;
-      opacity: 1;
-    }
-
     .custom-label-dimension-error {
       display: block;
       min-height: 16px;
@@ -17703,11 +17597,6 @@
 
     .custom-label-dimension-error[hidden] {
       display: none;
-    }
-
-    #customLabelUploadDimension[aria-invalid="true"] {
-      border-color: #d34848;
-      box-shadow: 0 0 0 2px rgba(211, 72, 72, 0.1);
     }
 
     #customMappingUploadName[aria-invalid="true"] {
@@ -18399,7 +18288,6 @@
       color: #5579d7;
     }
 
-    #customLabelUploadApply[hidden],
     #customMappingUploadApply[hidden] {
       display: none !important;
     }
@@ -18428,8 +18316,7 @@
     }
 
     .custom-label-modal-foot #customMappingUploadConfirm:not(:disabled),
-    .custom-label-modal-foot #customMappingUploadApply:not(:disabled),
-    .custom-label-modal-foot #customLabelUploadApply:not(:disabled) {
+    .custom-label-modal-foot #customMappingUploadApply:not(:disabled) {
       border-color: #3c6efc;
       background: #3c6efc;
       color: #ffffff;
@@ -18438,9 +18325,7 @@
     .custom-label-modal-foot #customMappingUploadConfirm:not(:disabled):hover,
     .custom-label-modal-foot #customMappingUploadConfirm:not(:disabled):focus-visible,
     .custom-label-modal-foot #customMappingUploadApply:not(:disabled):hover,
-    .custom-label-modal-foot #customMappingUploadApply:not(:disabled):focus-visible,
-    .custom-label-modal-foot #customLabelUploadApply:not(:disabled):hover,
-    .custom-label-modal-foot #customLabelUploadApply:not(:disabled):focus-visible {
+    .custom-label-modal-foot #customMappingUploadApply:not(:disabled):focus-visible {
       border-color: #315cdb;
       background: #315cdb;
       outline: none;
@@ -19545,8 +19430,7 @@
           </div>
         </div>
         <div class="custom-mapping-presentation-switcher" aria-label="页面样式切换">
-          <span class="custom-mapping-presentation-label" id="customMappingPresentationLabel" tabindex="0">样式</span>
-          <div class="custom-mapping-presentation-tabs" id="customMappingPresentationTabs" role="tablist" aria-label="自定义映射页面样式">
+          <div class="custom-mapping-presentation-tabs" id="customMappingPresentationTabs" role="tablist" aria-label="自定义映射页面样式" tabindex="0" title="样式切换，不展示在实际报告中">
             <button class="is-active" type="button" role="tab" aria-selected="true" data-custom-mapping-presentation="populated">有数据</button>
             <button type="button" role="tab" aria-selected="false" data-custom-mapping-presentation="empty">无数据</button>
           </div>
@@ -19560,7 +19444,7 @@
         </button>
         <span class="status" id="pageStatus">已生成</span>
         <div class="top-actions" aria-label="报告筛选与下载">
-          <div class="frame-plan-switcher" id="framePlanSwitcher" role="group" aria-label="报告样式">
+          <div class="frame-plan-switcher" id="framePlanSwitcher" role="group" aria-label="报告样式" tabindex="0" title="样式切换，不展示在实际报告中">
             <div class="frame-plan-switcher-options">
               <button class="frame-plan-switcher-option" type="button" data-customer-plan-option="paid" aria-pressed="true">付费</button>
               <button class="frame-plan-switcher-option" type="button" data-customer-plan-option="free" aria-pressed="false">非付费</button>
@@ -19718,15 +19602,15 @@
 
       <section class="page app-page amc-frame-page active" id="amcFramePage">
         <div class="amc-frame-layout">
-          <section class="intro-panel amc-frame-intro-panel" aria-labelledby="framePageTitle" data-frame-model-source="广告触达28天内数据" data-frame-model-mapping="不提供映射（ASIN维度）">
+          <section class="intro-panel amc-frame-intro-panel" aria-labelledby="framePageTitle" data-frame-model-source="触达后28天内转化数据" data-frame-model-mapping="不提供映射（ASIN维度）">
             <div class="intro-copy">
               <h1 id="framePageTitle">02 购物篮关联购买分析模型</h1>
               <p>
-                用于识别 Lead ASIN 与 Follow ASIN 的关联购买路径，评估交叉购买人数、购买间隔和连带销售机会。当前已生成模块 1、模块 2、模块 3 和模块 4 的可视化分析。
+                用于识别 Lead ASIN 与 Follow ASIN 的关联购买路径，评估交叉购买人数、购买间隔和连带销售机会。当前已覆盖模块 1 至模块 6 的可视化分析。
               </p>
               <div class="amc-frame-intro-metrics" aria-label="模型指标说明">
-                <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">数据源</span><strong id="frameIntroDataSource">广告触达28天内数据</strong></span>
-                <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">映射配置</span><strong id="frameIntroMapping">不提供映射（ASIN维度）</strong></span>
+                <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">数据源</span><strong id="frameIntroDataSource">触达后28天内转化数据</strong></span>
+                <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">数据聚合方式</span><strong id="frameIntroMapping">不提供映射（ASIN维度）</strong></span>
                 <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">涉及ASIN</span><strong id="frameIntroAsinCount">80个</strong></span>
                 <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">有效关联组合数</span><strong id="frameIntroComboCount">2,104个</strong></span>
               </div>
@@ -20588,7 +20472,7 @@
                         </svg>
                       </button>
                       <div class="amc-flow-asin-popover">
-                        <input class="amc-flow-asin-search" id="frameFlowAsinSearch" type="search" autocomplete="off" placeholder="搜索 ASIN" aria-label="模糊搜索 ASIN">
+                        <input class="amc-flow-asin-search" id="frameFlowAsinSearch" type="search" autocomplete="off" placeholder="搜索 ASIN 或标签" aria-label="搜索 ASIN 或标签">
                         <div class="amc-flow-asin-options" id="frameFlowAsinOptions" role="listbox" aria-label="ASIN选项"></div>
                       </div>
                       <select id="frameFlowAsin" class="sr-only" aria-hidden="true" tabindex="-1"></select>
@@ -20738,6 +20622,7 @@
                         <span class="sr-only">TOP值选择</span>
                         <select id="frameModule34TopN" aria-label="TOP值选择">
                           <option value="10">TOP 10</option>
+                          <option value="15">TOP 15</option>
                           <option value="20" selected>TOP 20</option>
                           <option value="30">TOP 30</option>
                         </select>
@@ -20890,10 +20775,10 @@
                 <label class="amc-module4-select-field">
                   <span>关联强度:</span>
                   <select id="frameModule4Strength" aria-label="关联强度筛选">
-                    <option value="10">TOP10%</option>
-                    <option value="20">TOP20%</option>
-                    <option value="30" selected>TOP30%</option>
-                    <option value="50">TOP50%</option>
+                    <option value="10">TOP 10%</option>
+                    <option value="20">TOP 20%</option>
+                    <option value="30" selected>TOP 30%</option>
+                    <option value="100">不限</option>
                   </select>
                 </label>
                 <label class="amc-module4-select-field">
@@ -20931,35 +20816,20 @@
                 </article>
               </div>
 
-              <section class="amc-module4-panel amc-module4-panel-wide amc-module4-rhythm-summary-panel" aria-labelledby="frameModule4RhythmTitle">
-                <div class="amc-module4-panel-head">
-                  <div class="amc-overview-module-title">
-                    <div>
-                      <h4 id="frameModule4RhythmTitle">购买节奏</h4>
-                      <p id="frameModule4RhythmSubtitle">按交叉购买人数汇总不同购买节奏的高价值组合。</p>
-                    </div>
-                  </div>
-                  <span class="status-pill">交叉购买人数</span>
-                </div>
-                <div class="amc-module4-chart amc-module4-chart-rhythm-summary" id="frameModule4RhythmChart" role="img" aria-label="高价值组合购买节奏交叉购买人数水平堆积条形图"></div>
-              </section>
-
               <section class="amc-module4-panel amc-module4-panel-wide" aria-labelledby="frameModule41Title">
                 <div class="amc-module4-panel-head">
                   <div class="amc-overview-module-title">
                     <span class="amc-overview-index">4.1</span>
                     <div>
                       <h4 id="frameModule41Title">组合规模 × 购买速度矩阵</h4>
-                      <p>横轴为关联购买平均间隔，Y轴为交叉购买人数（对数），气泡大小代表修正关联指数。</p>
+                      <p>横轴为关联购买平均间隔，Y轴为交叉购买人数（对数），气泡大小代表修正关联指数。交叉购买人数为路径人次，同一用户可能出现在多个组合中。</p>
                     </div>
                   </div>
                   <div class="amc-module4-panel-tools">
                     <span class="status-pill">节奏矩阵</span>
-                    <button class="amc-module4-rhythm-toggle" id="frameModule41RhythmToggle" type="button" aria-controls="frameModule41Chart" aria-pressed="false">显示购买节奏</button>
                   </div>
                 </div>
-                <div class="amc-module4-chart amc-module4-chart-matrix is-rhythm-summary-hidden" id="frameModule41Chart" role="img" aria-label="组合规模与购买速度气泡矩阵"></div>
-                <p class="amc-module4-footnote">* 快速关联：≤90天；稳定培育：91-180天；长尾关联：>180天。交叉购买人数为路径人次，同一用户可能出现在多个组合中。</p>
+                <div class="amc-module4-chart amc-module4-chart-matrix" id="frameModule41Chart" role="img" aria-label="组合规模与购买速度气泡矩阵"></div>
               </section>
 
               <div class="amc-module4-focus-grid">
@@ -21056,10 +20926,10 @@
                 <label class="amc-module5-select-field">
                   <span>关联强度:</span>
                   <select id="frameModule5Strength" aria-label="产品组合策略关联强度筛选">
-                    <option value="10">TOP10%</option>
-                    <option value="20">TOP20%</option>
-                    <option value="30" selected>TOP30%</option>
-                    <option value="50">TOP50%</option>
+                    <option value="10">TOP 10%</option>
+                    <option value="20">TOP 20%</option>
+                    <option value="30" selected>TOP 30%</option>
+                    <option value="100">不限</option>
                   </select>
                 </label>
                 <div class="amc-module5-filter-summary" aria-live="polite">
@@ -21245,13 +21115,12 @@
                     <span class="amc-overview-index">6.4</span>
                     <div>
                       <h4 id="frameModule64Title">二购 ASIN 结构分析</h4>
-                      <p>按展示数量查看二购 ASIN 的人次与销售额结构。</p>
+                      <p>按 TOP N 查看二购 ASIN 的人次与销售额结构。</p>
                     </div>
                   </div>
                   <div class="amc-module6-toolbar">
-                    <div class="amc-module6-toolbar-label">展示数量</div>
                     <label class="amc-module6-select">
-                      <select id="frameModule6TopN" aria-label="二购 ASIN 展示数量">
+                      <select id="frameModule6TopN" aria-label="二购 ASIN TOP N">
                         <option value="5" selected>TOP 5</option>
                         <option value="10">TOP 10</option>
                         <option value="15">TOP 15</option>
@@ -21358,9 +21227,9 @@
                   <div class="form-field">
                     <label><span class="required">*</span>数据源<span class="field-help" aria-hidden="true">?</span></label>
                     <select id="createDataSelect" aria-label="数据源">
-                      <option selected>广告触达28天内数据</option>
-                      <option>全量购买数据（FSI）</option>
-                      <option>5年购买数据（ARP）</option>
+                      <option selected>触达后28天内转化数据</option>
+                      <option>全量广告与自然转化数据（FSI）</option>
+                      <option>5年零售数据（ARP）</option>
                     </select>
                   </div>
                   <div class="form-field">
@@ -21423,9 +21292,9 @@
                   <div class="form-field">
                     <label><span class="required">*</span>数据源<span class="field-help" aria-hidden="true">?</span></label>
                     <select id="createFrameDataSelect" aria-label="02模型数据源">
-                      <option selected>广告触达28天内数据</option>
-                      <option>全量购买数据（FSI）</option>
-                      <option>5年购买数据（ARP）</option>
+                      <option selected>触达后28天内转化数据</option>
+                      <option>全量广告与自然转化数据（FSI）</option>
+                      <option>5年零售数据（ARP）</option>
                     </select>
                   </div>
                   <div class="form-field">
@@ -21474,74 +21343,6 @@
         <div class="create-footer">
           <button class="ghost-btn" id="cancelCreateReport" type="button">取消</button>
           <button class="download-btn" id="submitCreateReport" type="button">创建报告</button>
-        </div>
-      </section>
-
-      <section class="page app-page custom-labels-page" id="customLabelsPage" aria-label="自定义标签">
-        <div class="custom-labels-page-shell">
-          <div class="custom-labels-notice" role="note" aria-label="自定义标签说明">
-            自定义标签用于购物篮模型，仅通过标签辅助识别 ASIN，不合并、不聚合、不改变报告数据口径，<strong>报告仍按ASIN维度展示</strong>。
-          </div>
-          <div class="custom-labels-filter-bar" aria-label="自定义标签筛选">
-            <div class="custom-label-multi-select" id="customLabelFilterInstance" data-filter-key="instance" data-filter-label="Instance"></div>
-            <label class="custom-labels-search-field" for="customLabelFilterFilename">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <circle cx="11" cy="11" r="6.5"></circle>
-                <path d="m16 16 4 4"></path>
-              </svg>
-              <input id="customLabelFilterFilename" type="search" placeholder="文件名" autocomplete="off" aria-label="文件名">
-            </label>
-            <div class="custom-label-multi-select" id="customLabelFilterStatus" data-filter-key="status" data-filter-label="状态"></div>
-            <div class="custom-label-multi-select" id="customLabelFilterDimension" data-filter-key="dimension" data-filter-label="标签维度"></div>
-            <div class="custom-label-multi-select" id="customLabelFilterCreator" data-filter-key="creator" data-filter-label="创建人"></div>
-            <button class="custom-labels-reset" id="customLabelResetBtn" type="button">重置</button>
-            <button class="custom-labels-primary" id="customLabelMappingBtn" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M12 16V5"></path>
-                <path d="m7.5 9.5 4.5-4.5 4.5 4.5"></path>
-                <path d="M5 19h14"></path>
-              </svg>
-              <span>自定义标签</span>
-            </button>
-          </div>
-
-          <div class="custom-labels-table-wrap">
-            <table class="custom-labels-table" aria-label="自定义标签文件列表">
-              <colgroup>
-                <col style="width:17%">
-                <col style="width:8%">
-                <col style="width:15%">
-                <col style="width:8%">
-                <col style="width:17%">
-                <col style="width:7%">
-                <col style="width:11%">
-                <col style="width:12%">
-                <col style="width:5%">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th class="is-nowrap">Instance</th>
-                  <th class="is-nowrap">操作类型</th>
-                  <th>文件名</th>
-                  <th class="is-nowrap">状态</th>
-                  <th class="is-nowrap">标签维度</th>
-                  <th class="is-nowrap">附件</th>
-                  <th>创建人</th>
-                  <th class="is-nowrap">上传时间</th>
-                  <th class="is-nowrap">操作</th>
-                </tr>
-              </thead>
-              <tbody id="customLabelsTableBody"></tbody>
-            </table>
-          </div>
-          <footer class="custom-labels-pagination">
-            <span id="customLabelsTotal">共 0 条</span>
-            <div class="custom-labels-pages" id="customLabelsPaginationPages" aria-label="分页"></div>
-            <select class="custom-labels-page-size" id="customLabelsPageSize" aria-label="每页条数">
-              <option value="20">20条/页</option>
-              <option value="50">50条/页</option>
-            </select>
-          </footer>
         </div>
       </section>
 
@@ -22010,101 +21811,6 @@
   </div>
 
   <div class="tooltip" id="tooltip"></div>
-  <div class="custom-label-modal" id="customLabelModal" hidden>
-    <section class="custom-label-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="customLabelModalTitle">
-      <header class="custom-label-modal-head">
-        <h2 id="customLabelModalTitle">上传自定义标签</h2>
-        <button class="custom-label-modal-close" id="customLabelModalClose" type="button" aria-label="关闭">×</button>
-      </header>
-      <div class="custom-label-modal-body">
-        <div class="custom-label-modal-notice" role="note" aria-label="自定义标签使用说明">
-          导入标签仅通过打标签辅助识别 ASIN，不合并、不聚合、不改变报告数据口径，<strong>报告仍按ASIN维度展示</strong>。如需按产品线 / Group 聚合分析，请在“<button class="custom-label-modal-notice-link" type="button" data-page-target="systemMappings">系统映射</button> / <button class="custom-label-modal-notice-link" type="button" data-page-target="customMappings">自定义映射</button>”上传映射后重新创建报告。
-        </div>
-        <div class="custom-label-upload-meta">
-          <div class="custom-label-form-field">
-            <label for="customLabelUploadInstance"><span class="required" aria-hidden="true">*</span>Instance</label>
-            <select id="customLabelUploadInstance" aria-label="上传标签所属 Instance"></select>
-          </div>
-          <div class="custom-label-form-field">
-            <label for="customLabelUploadDimension"><span class="required" aria-hidden="true">*</span>标签名称</label>
-            <input id="customLabelUploadDimension" type="text" maxlength="20" placeholder="请输入标签名称，例如：产品名、新老产品等" aria-describedby="customLabelTemplateHint customLabelUploadDimensionError">
-            <span class="custom-label-dimension-error" id="customLabelUploadDimensionError" role="alert" hidden></span>
-          </div>
-        </div>
-        <div class="custom-label-modal-template" id="customLabelTemplateHint">
-          <div class="custom-label-upload-guide">
-            <div class="custom-label-upload-guide-copy">
-              <ol class="custom-label-upload-guide-list">
-                <li>请使用标准模板(Excel格式)导入数据。</li>
-                <li>模板中的标题不可更改或删除，请在ASIN GROUP NAME字段列补充标签内容。</li>
-                <li>导入标签仅辅助识别 ASIN，不合并、不聚合、不改变报告数据口径。</li>
-              </ol>
-            </div>
-            <button class="custom-label-template-download" id="customLabelTemplateDownload" type="button">
-              <svg class="custom-label-template-download-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 3v11"></path>
-                <path d="m7.5 10.5 4.5 4.5 4.5-4.5"></path>
-                <path d="M5 20h14"></path>
-              </svg>
-              下载模板
-            </button>
-          </div>
-        </div>
-        <div class="custom-label-form-field">
-          <label><span class="required" aria-hidden="true">*</span>标签文件</label>
-          <label class="custom-label-file-picker" for="customLabelUploadFile">
-            <input id="customLabelUploadFile" type="file" accept=".xlsx,.xls">
-            <span class="custom-label-upload-drop-content">
-              <span class="custom-label-upload-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 16V5"></path>
-                  <path d="m7.5 9.5 4.5-4.5 4.5 4.5"></path>
-                  <path d="M5 18.5h14"></path>
-                </svg>
-              </span>
-              <span class="custom-label-upload-drop-hint">拖拽 .xlsx 或 .xls 文件到此处或点击上传</span>
-            </span>
-          </label>
-        </div>
-        <div class="custom-label-upload-file-list" id="customLabelUploadFileList" hidden aria-live="polite">
-          <div class="custom-label-upload-file-row">
-            <span class="custom-label-upload-file-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M7 3.75h6.5L18 8.25v12H7z"></path>
-                <path d="M13.5 3.75v4.5H18"></path>
-                <path d="M9.5 13h5"></path>
-                <path d="M9.5 16h5"></path>
-              </svg>
-            </span>
-            <span class="custom-label-upload-file-copy">
-              <span class="custom-label-upload-file-title" id="customLabelUploadFileName"></span>
-              <span class="custom-label-upload-file-meta">
-                <span id="customLabelUploadFileSize"></span>
-                <span class="custom-label-upload-file-state" id="customLabelUploadFileState"></span>
-                <button class="custom-label-upload-failure-download" id="customLabelFailureDownload" type="button" hidden>下载失败文件</button>
-              </span>
-            </span>
-            <span class="custom-label-upload-file-spinner" id="customLabelUploadFileSpinner" hidden aria-hidden="true"></span>
-            <button class="custom-label-upload-file-delete" id="customLabelUploadFileDelete" type="button" aria-label="删除已选文件" title="删除文件">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4 7h16"></path>
-                <path d="M9 7V4.5h6V7"></path>
-                <path d="M7 7l.8 12.5h8.4L17 7"></path>
-                <path d="M10 11v5"></path>
-                <path d="M14 11v5"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div class="custom-label-upload-error" id="customLabelUploadError" hidden role="alert"></div>
-      </div>
-      <footer class="custom-label-modal-foot">
-        <button class="ghost-btn" id="customLabelModalCancel" type="button">取消</button>
-        <button class="download-btn custom-label-upload-only" id="customLabelUploadOnly" type="button" disabled>上传</button>
-        <button class="download-btn" id="customLabelUploadApply" type="button" disabled hidden>上传并应用</button>
-      </footer>
-    </section>
-  </div>
   <div class="custom-label-modal custom-mapping-modal" id="customMappingModal" hidden>
     <section class="custom-label-modal-dialog custom-mapping-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="customMappingModalTitle">
       <header class="custom-label-modal-head">
@@ -22230,30 +21936,6 @@
           </svg>
           <span>确认清空</span>
         </button>
-      </footer>
-    </section>
-  </div>
-  <div class="custom-label-modal custom-label-delete-modal" id="customLabelDeleteModal" hidden>
-    <section class="custom-label-modal-dialog custom-label-delete-dialog" role="alertdialog" aria-modal="true" aria-labelledby="customLabelDeleteTitle">
-      <header class="custom-label-modal-head">
-        <h2 id="customLabelDeleteTitle">确认删除标签</h2>
-        <button class="custom-label-modal-close" id="customLabelDeleteClose" type="button" aria-label="关闭">×</button>
-      </header>
-      <div class="custom-label-delete-body">
-        <div class="custom-label-delete-warning">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 22 21H2L12 3Zm0 5.8v5.5m0 3.1v.1"></path></svg>
-          <span>删除后标签将不再应用于报告展示。</span>
-        </div>
-        <p class="custom-label-delete-note">当前范围：<span id="customLabelDeleteInstance"></span>，自定义标签，标签维度：<span id="customLabelDeleteDimension"></span>，共<strong id="customLabelDeleteCount">0</strong>条。</p>
-        <ul class="custom-label-delete-list">
-          <li>已生成的 AMC 报告将去掉该标签。</li>
-          <li>新的 AMC报告暂时无法应用该标签。</li>
-          <li>重新上传自定义标签后可再次恢复使用。</li>
-        </ul>
-      </div>
-      <footer class="custom-label-modal-foot">
-        <button class="ghost-btn" id="customLabelDeleteCancel" type="button">取消</button>
-        <button class="download-btn custom-label-delete-confirm" id="customLabelDeleteConfirm" type="button">确认</button>
       </footer>
     </section>
   </div>
@@ -23171,7 +22853,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       };
 
       const syncAggregationState = () => {
-        const shouldDisableParent = dataSelect.value === "广告触达28天内数据" || dataSelect.value === "全量购买数据（FSI）";
+        const shouldDisableParent = dataSelect.value === "触达后28天内转化数据" || dataSelect.value === "全量广告与自然转化数据（FSI）";
         const parentInput = parentAsinOption.querySelector("input[type='checkbox']");
         parentAsinOption.classList.toggle("is-disabled", shouldDisableParent);
         parentAsinOption.setAttribute("aria-disabled", String(shouldDisableParent));
@@ -23475,7 +23157,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       customFileId: ""
     };
     const frameReportCreationState = {
-      dataSource: "广告触达28天内数据",
+      dataSource: "触达后28天内转化数据",
       mapping: "不提供映射（ASIN维度）",
       mappingSelection: "none"
     };
@@ -25066,7 +24748,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const panel = document.querySelector("#amcFramePage .amc-frame-intro-panel");
       const source = frameReportCreationState.dataSource
         || panel?.dataset.frameModelSource
-        || "广告触达28天内数据";
+        || "触达后28天内转化数据";
       const mapping = frameReportCreationState.mapping
         || panel?.dataset.frameModelMapping
         || "不提供映射（ASIN维度）";
@@ -26079,19 +25761,23 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const chartElement = chart.getDom();
       const isNarrow = chartElement.clientWidth < 680;
       const chartHeight = chartElement.clientWidth < 760 ? 560 : 660;
-      const gridLeft = isNarrow ? 164 : 178;
-      const gridTop = 18;
-      const heatmapAxisTagLimit = isNarrow ? 6 : 8;
+      const gridLeft = isNarrow ? 92 : 98;
+      const gridRight = isNarrow ? 10 : 14;
+      const gridTop = 10;
+      const heatmapAxisTagLimit = isNarrow ? 4 : 5;
       const heatmapAxisLabel = asin => {
         const parts = frameLabelDisplayParts(asin);
         return frameLabelHasTag(parts)
           ? `${parts.raw}\n${frameLabelTruncateText(parts.label, heatmapAxisTagLimit)}`
           : parts.raw;
       };
-      const xAxisRotate = followAsins.length > 10 ? 42 : 0;
-      const gridBottom = xAxisRotate ? (isNarrow ? 122 : 114) : (isNarrow ? 88 : 82);
+      const xAxisRotate = followAsins.length > 10 ? 38 : 0;
+      const gridBottom = xAxisRotate ? (isNarrow ? 62 : 58) : (isNarrow ? 44 : 40);
+      const xAxisNameGap = xAxisRotate ? (isNarrow ? 50 : 48) : (isNarrow ? 30 : 28);
+      const yAxisLabelWidth = isNarrow ? 62 : 70;
+      const yAxisNameGap = yAxisLabelWidth + 12;
       const chartWidth = chartElement.clientWidth || chart.getWidth?.() || 0;
-      const xAxisLabelCapacity = Math.max(4, Math.floor((chartWidth - gridLeft - (isNarrow ? 14 : 22)) / 48));
+      const xAxisLabelCapacity = Math.max(4, Math.floor((chartWidth - gridLeft - gridRight) / 40));
       const xAxisLabelInterval = Math.max(0, Math.ceil(followAsins.length / xAxisLabelCapacity) - 1);
       const yAxisLabelCapacity = Math.max(1, Math.floor((chartHeight - gridTop - gridBottom) / 22));
       const yAxisLabelInterval = Math.max(0, Math.ceil(leadAsins.length / yAxisLabelCapacity) - 1);
@@ -26135,7 +25821,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       chart.setOption({
         animation: false,
         backgroundColor: "#ffffff",
-        grid: { left: gridLeft, right: isNarrow ? 14 : 22, top: gridTop, bottom: gridBottom },
+        grid: { left: gridLeft, right: gridRight, top: gridTop, bottom: gridBottom },
         tooltip: {
           position: "top",
           confine: true,
@@ -26164,17 +25850,19 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           type: "category",
           name: "Follow ASIN",
           nameLocation: "middle",
-          nameGap: isNarrow ? 62 : 56,
+          nameGap: xAxisNameGap,
           nameTextStyle: { color: "#63748d", fontSize: 12, fontWeight: 500 },
           data: followAsins,
           splitArea: { show: false },
           splitLine: { show: false },
           axisLabel: {
             color: "#68788e",
-            fontSize: isNarrow ? 9 : 10,
-            lineHeight: isNarrow ? 11 : 12,
+            fontSize: isNarrow ? 8 : 9,
+            lineHeight: isNarrow ? 10 : 11,
             rotate: xAxisRotate,
-            margin: 12,
+            margin: 4,
+            width: isNarrow ? 50 : 56,
+            overflow: "truncate",
             interval: xAxisLabelInterval,
             hideOverlap: true,
             formatter: heatmapAxisLabel
@@ -26186,7 +25874,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           type: "category",
           name: "Lead ASIN",
           nameLocation: "middle",
-          nameGap: isNarrow ? 144 : 158,
+          nameGap: yAxisNameGap,
           nameTextStyle: { color: "#63748d", fontSize: 12, fontWeight: 500 },
           inverse: true,
           data: leadAsins,
@@ -26196,8 +25884,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             color: "#68788e",
             fontSize: isNarrow ? 9 : 10,
             lineHeight: isNarrow ? 11 : 12,
-            margin: 10,
-            width: isNarrow ? 120 : 134,
+            margin: 5,
+            width: yAxisLabelWidth,
             overflow: "truncate",
             interval: yAxisLabelInterval,
             hideOverlap: true,
@@ -26277,9 +25965,18 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           ? { borderColor: "#147c71", borderWidth: 2.5, shadowBlur: 8, shadowColor: "rgba(20, 124, 113, 0.24)" }
           : { borderColor: "#ffffff", borderWidth: 1.2 }
       }));
+      const chartElement = chart.getDom();
+      const compact = chartElement.clientWidth < 560;
+      const axisFontSize = compact ? 10 : 11;
       chart.setOption({
         animation: false,
-        grid: { left: 70, right: 28, top: 26, bottom: 58 },
+        grid: {
+          left: compact ? 38 : 42,
+          right: compact ? 12 : 16,
+          top: 14,
+          bottom: compact ? 36 : 38,
+          containLabel: true
+        },
         tooltip: {
           confine: true,
           formatter: params => {
@@ -26300,10 +25997,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           type: "value",
           name: "转化率",
           nameLocation: "middle",
-          nameGap: 34,
+          nameGap: compact ? 24 : 26,
           min: 0,
           max: xMax,
-          axisLabel: { color: "#8a98aa", fontSize: 11, formatter: value => `${(value * 100).toFixed(0)}%` },
+          axisLabel: { color: "#8a98aa", fontSize: axisFontSize, margin: 5, formatter: value => `${(value * 100).toFixed(0)}%` },
           nameTextStyle: { color: "#63748d", fontSize: 12 },
           splitLine: { lineStyle: { color: "#e1f0ed", width: 1 } }
         },
@@ -26311,10 +26008,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           type: "value",
           name: "吸引率",
           nameLocation: "middle",
-          nameGap: 48,
+          nameGap: compact ? 28 : 30,
           min: 0,
           max: yMax,
-          axisLabel: { color: "#8a98aa", fontSize: 11, formatter: value => `${(value * 100).toFixed(0)}%` },
+          axisLabel: { color: "#8a98aa", fontSize: axisFontSize, margin: 5, formatter: value => `${(value * 100).toFixed(0)}%` },
           nameTextStyle: { color: "#63748d", fontSize: 12 },
           splitLine: { lineStyle: { color: "#e1f0ed", width: 1 } }
         },
@@ -26883,7 +26580,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
       topNSelect?.addEventListener("change", event => {
         const nextTopN = Number(event.target.value);
-        if (![10, 20, 30].includes(nextTopN) || nextTopN === Number(frameModule3State.matrixTopN)) return;
+        if (![10, 15, 20, 30].includes(nextTopN) || nextTopN === Number(frameModule3State.matrixTopN)) return;
         frameModule3State.matrixTopN = nextTopN;
         frameModule3State.selectedPairKey = null;
         frameModule3RenderAll();
@@ -27064,8 +26761,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       detailRhythm: "",
       detailAsinQuery: "",
       selectedPairKey: null,
-      selectedRhythm: null,
-      showRhythmSummary: false
+      selectedRhythm: null
     };
 
     function frameModule4ActiveTopRhythm() {
@@ -27135,7 +26831,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule4ResizeCharts() {
-      const chartIds = ["frameModule4RhythmChart", "frameModule41Chart"];
+      const chartIds = ["frameModule41Chart"];
       if (frameModule4LayoutStyle() === "style1") chartIds.push("frameModule43Chart");
       chartIds
         .map(id => document.getElementById(id))
@@ -27187,125 +26883,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       frameModule4SetHtml("frameModule4KpiQuickNote", frameModule4RenderKpiNote("≤90天", stats.quick.share, stats.quick.users));
       frameModule4SetHtml("frameModule4KpiStableNote", frameModule4RenderKpiNote("91-180天", stats.stable.share, stats.stable.users));
       frameModule4SetHtml("frameModule4KpiLongNote", frameModule4RenderKpiNote(">180天", stats.long.share, stats.long.users));
-    }
-
-    function frameModule4RenderRhythmChart(records) {
-      const chart = frameModule3GetChart("frameModule4RhythmChart");
-      if (!chart) return;
-      const subtitle = document.getElementById("frameModule4RhythmSubtitle");
-      const order = ["quick", "stable", "long"];
-      const { stats } = frameModule4Stats(records);
-      const totalUsers = order.reduce((sum, rhythm) => sum + Number(stats[rhythm].users || 0), 0);
-      if (subtitle) {
-        subtitle.textContent = totalUsers
-          ? `高价值组合交叉购买人数：${frameModule2FormatNumber(totalUsers)}人。`
-          : "暂无满足条件的高价值组合。";
-      }
-      if (!records.length || totalUsers <= 0) {
-        frameModule3SetEmptyChart(chart, "暂无可展示的购买节奏数据");
-        return;
-      }
-      const compact = chart.getDom().clientWidth < 600;
-      chart.setOption({
-        animation: false,
-        grid: { left: compact ? 4 : 12, right: compact ? 4 : 12, top: 34, bottom: 10 },
-        color: order.map(rhythm => frameModule4Colors[rhythm]),
-        tooltip: {
-          trigger: "item",
-          confine: true,
-          backgroundColor: "#ffffff",
-          borderColor: "#e1e8f2",
-          borderWidth: 1,
-          padding: [8, 10],
-          textStyle: { color: "#1d2a3d", fontSize: 12, lineHeight: 18 },
-          extraCssText: "box-shadow:0 8px 18px rgba(30,53,101,0.10);border-radius:6px;",
-          formatter: params => {
-            const data = params.data || {};
-            const rhythm = data.rhythm;
-            return rhythm
-              ? `<strong>${frameModule4RhythmLabels[rhythm]}</strong> ${frameModule4RhythmIntervals[rhythm]}<br>交叉购买人数：${frameModule2FormatNumber(data.value)}人<br>交叉购买组合数：${frameModule2FormatNumber(data.pairCount)}个<br>占比：${frameModule4FormatShare(data.share)}`
-              : "";
-          }
-        },
-        legend: {
-          top: 0,
-          left: "center",
-          itemWidth: 9,
-          itemHeight: 9,
-          itemGap: compact ? 10 : 18,
-          icon: "circle",
-          data: order.map(rhythm => frameModule4RhythmLabels[rhythm]),
-          formatter: name => {
-            const rhythm = order.find(item => frameModule4RhythmLabels[item] === name);
-            return rhythm ? `${name} ${frameModule4RhythmIntervals[rhythm]}` : name;
-          },
-          textStyle: { color: "#52647c", fontSize: compact ? 10 : 11 }
-        },
-        xAxis: {
-          type: "value",
-          max: totalUsers,
-          show: false
-        },
-        yAxis: {
-          type: "category",
-          data: ["高价值组合"],
-          show: false
-        },
-        series: order.map(rhythm => {
-          const entry = stats[rhythm];
-          const isSelected = frameModule4State.selectedRhythm === rhythm;
-          return {
-            name: frameModule4RhythmLabels[rhythm],
-            type: "bar",
-            stack: "rhythm",
-            barWidth: compact ? 32 : 36,
-            data: [{
-              value: entry.users,
-              rhythm,
-              pairCount: entry.count,
-              share: entry.share,
-              itemStyle: {
-                color: frameModule4Colors[rhythm],
-                borderColor: "#ffffff",
-                borderWidth: isSelected ? 2 : 1
-              }
-            }],
-            label: {
-              show: entry.users > 0,
-              position: "inside",
-              color: rhythm === "long" ? "#5b420c" : "#ffffff",
-              fontSize: compact ? 10 : 11,
-              fontWeight: 700,
-              overflow: "truncate",
-              formatter: params => {
-                const share = Number(params.data?.share || 0);
-                if (share < 0.12) return `${(share * 100).toFixed(1)}%`;
-                return `${frameModule2FormatNumber(params.value)}人 · ${(share * 100).toFixed(1)}%`;
-              }
-            },
-            emphasis: {
-              focus: "series",
-              itemStyle: {
-                opacity: 1,
-                borderColor: "#ffffff",
-                borderWidth: 2
-              }
-            }
-          };
-        })
-      }, true);
-      chart.off("click");
-      chart.on("click", params => {
-        const rhythm = params.data?.rhythm;
-        if (!rhythm) return;
-        const next = records
-          .filter(record => record.rhythm === rhythm)
-          .sort((a, b) => b.crossUsers - a.crossUsers || b.scaleScore - a.scaleScore)[0];
-        frameModule4State.selectedRhythm = rhythm;
-        frameModule4State.selectedPairKey = next?.pairKey || null;
-        frameModule4State.activeTopRhythm = rhythm;
-        renderFrameModule4();
-      });
     }
 
     function frameModule4SelectedRecord(records) {
@@ -27386,8 +26963,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       rsiAvailable: false,
       selectedKey: "",
       activeCategory: "rsi",
-      searchQuery: "",
-      files: []
+      searchQuery: ""
     };
 
     const frameRsiRefreshState = {
@@ -27395,50 +26971,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       requestId: 0,
       position: null,
       drag: null
-    };
-
-    const customLabelFilterDefinitions = [
-      { key: "instance", id: "customLabelFilterInstance", label: "Instance" },
-      { key: "status", id: "customLabelFilterStatus", label: "状态" },
-      { key: "dimension", id: "customLabelFilterDimension", label: "标签维度" },
-      { key: "creator", id: "customLabelFilterCreator", label: "创建人" }
-    ];
-
-    const customLabelFilterState = {
-      selected: {
-        instance: [],
-        status: [],
-        dimension: [],
-        creator: []
-      },
-      search: {
-        instance: "",
-        status: "",
-        dimension: "",
-        creator: ""
-      },
-      page: 1,
-      pageSize: 20
-    };
-
-    const customLabelDimensionEditState = {
-      fileId: ""
-    };
-
-    const customLabelDeleteState = {
-      fileId: ""
-    };
-
-    const customLabelUploadState = {
-      phase: "idle",
-      file: null,
-      rows: [],
-      rawRows: [],
-      errorCount: 0,
-      failureRows: null,
-      dimension: "",
-      source: "management",
-      requestId: 0
     };
 
     const customMappingState = {
@@ -27497,9 +27029,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         file: null,
         rows: [],
         errorMessage: "",
-        source: "file",
         entrySource: "management",
-        selectedLabelFileId: "",
         requestId: 0
       }
     };
@@ -27542,21 +27072,25 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function bindCustomMappingPresentationTooltip() {
-      const label = document.getElementById("customMappingPresentationLabel");
-      if (!label || label.dataset.tooltipBound === "true") return;
-      label.dataset.tooltipBound = "true";
       const tooltipHtml = "样式切换，不展示在实际报告中";
-      label.addEventListener("mouseenter", event => showTooltip(event, tooltipHtml));
-      label.addEventListener("mousemove", moveTooltip);
-      label.addEventListener("mouseleave", hideTooltip);
-      label.addEventListener("focus", () => {
-        const rect = label.getBoundingClientRect();
-        showTooltip({
-          clientX: rect.left + rect.width / 2,
-          clientY: rect.bottom
-        }, tooltipHtml);
+      [
+        document.getElementById("customMappingPresentationTabs"),
+        document.getElementById("framePlanSwitcher")
+      ].forEach(target => {
+        if (!target || target.dataset.tooltipBound === "true") return;
+        target.dataset.tooltipBound = "true";
+        target.addEventListener("mouseenter", event => showTooltip(event, tooltipHtml));
+        target.addEventListener("mousemove", moveTooltip);
+        target.addEventListener("mouseleave", hideTooltip);
+        target.addEventListener("focus", () => {
+          const rect = target.getBoundingClientRect();
+          showTooltip({
+            clientX: rect.left + rect.width / 2,
+            clientY: rect.bottom
+          }, tooltipHtml);
+        });
+        target.addEventListener("blur", hideTooltip);
       });
-      label.addEventListener("blur", hideTooltip);
     }
 
     function customMappingSortFiles(files) {
@@ -27640,117 +27174,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       renderCustomMappingsTable();
       renderFrameCreateAggregationState();
       frameLabelRefreshReport();
-    }
-
-    function customMappingExistingLabelFiles(instance = customMappingCurrentInstance()) {
-      return (Array.isArray(frameLabelState?.files) ? frameLabelState.files : [])
-        .filter(file => (
-          frameLabelFileBelongsToInstance(file, instance) &&
-          (!file.status || file.status === "成功")
-        ));
-    }
-
-    function customMappingLabelDimensionIcon() {
-      return `
-        <span class="custom-mapping-label-dimension-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="m4.5 8.5 7.5-4 7.5 4-7.5 4-7.5-4Z"></path>
-            <path d="m4.5 12.5 7.5 4 7.5-4"></path>
-            <path d="m4.5 16.5 7.5 4 7.5-4"></path>
-          </svg>
-        </span>
-      `;
-    }
-
-    function customMappingLabelFileMarkup(file) {
-      if (!file) return "";
-      return `
-        <span class="custom-mapping-label-select-option-name" title="${escapeHtml(file.filename || "")}">${escapeHtml(file.filename || "")}</span>
-        ${customMappingLabelDimensionIcon()}
-      `;
-    }
-
-    function customMappingCloseExistingLabelSelect() {
-      const root = document.getElementById("customMappingExistingLabelSelect");
-      const trigger = document.getElementById("customMappingExistingLabelSelectTrigger");
-      const menu = document.getElementById("customMappingExistingLabelSelectMenu");
-      root?.classList.remove("is-open");
-      trigger?.setAttribute("aria-expanded", "false");
-      if (menu) menu.hidden = true;
-    }
-
-    function customMappingRenderExistingLabelOptions() {
-      const value = document.getElementById("customMappingExistingLabelSelectValue");
-      const menu = document.getElementById("customMappingExistingLabelSelectMenu");
-      const options = document.getElementById("customMappingExistingLabelSelectOptions");
-      const trigger = document.getElementById("customMappingExistingLabelSelectTrigger");
-      if (!value || !menu || !options || !trigger) return;
-
-      const files = customMappingExistingLabelFiles();
-      const selectedFile = files.find(file => file.id === customMappingState.upload.selectedLabelFileId);
-      if (!selectedFile) customMappingState.upload.selectedLabelFileId = "";
-
-      value.innerHTML = selectedFile
-        ? customMappingLabelFileMarkup(selectedFile)
-        : "请选择已有自定义标签";
-      value.classList.toggle("is-placeholder", !selectedFile);
-      trigger.setAttribute("aria-label", selectedFile
-        ? `当前自定义标签：${selectedFile.filename}`
-        : "选择已有自定义标签");
-
-      options.innerHTML = files.length
-        ? files.map(file => `
-            <button class="custom-mapping-label-select-option${file.id === customMappingState.upload.selectedLabelFileId ? " is-selected" : ""}" type="button" role="option" aria-selected="${file.id === customMappingState.upload.selectedLabelFileId}" data-custom-mapping-label-file="${escapeHtml(file.id)}">
-              ${customMappingLabelFileMarkup(file)}
-            </button>
-          `).join("")
-        : `<div class="custom-mapping-label-select-empty">当前 Instance 下暂无已上传的自定义标签</div>`;
-    }
-
-    function customMappingRenderSourceTabs() {
-      const tabs = document.getElementById("customMappingSourceTabs");
-      const fileTab = document.getElementById("customMappingFileTab");
-      const labelTab = document.getElementById("customMappingLabelTab");
-      const filePanel = document.getElementById("customMappingFilePanel");
-      const labelPanel = document.getElementById("customMappingLabelPanel");
-      if (!tabs || !fileTab || !labelTab || !filePanel || !labelPanel) return;
-
-      const files = customMappingExistingLabelFiles();
-      const hasExistingLabels = files.length > 0;
-      if (!hasExistingLabels) {
-        customMappingState.upload.source = "file";
-        customMappingState.upload.selectedLabelFileId = "";
-      }
-
-      const source = customMappingState.upload.source === "label" && hasExistingLabels ? "label" : "file";
-      customMappingState.upload.source = source;
-      tabs.hidden = !hasExistingLabels;
-      fileTab.setAttribute("aria-selected", String(source === "file"));
-      labelTab.setAttribute("aria-selected", String(source === "label"));
-      filePanel.hidden = source !== "file";
-      labelPanel.hidden = source !== "label";
-      customMappingRenderExistingLabelOptions();
-    }
-
-    function customMappingSetSource() {
-      customMappingState.upload.source = "file";
-      customMappingState.upload.selectedLabelFileId = "";
-      customMappingSetUploadError("");
-      customMappingSetLabelError("");
-      closeCustomMappingUploadToast();
-      customMappingUpdateUploadAction();
-    }
-
-    function customMappingSelectExistingLabel(fileId) {
-      const file = customMappingExistingLabelFiles().find(item => item.id === fileId);
-      if (!file) return;
-      customMappingState.upload.selectedLabelFileId = file.id;
-      customMappingState.upload.source = "label";
-      customMappingCloseExistingLabelSelect();
-      customMappingSetUploadError("");
-      customMappingSetLabelError("");
-      customMappingRenderExistingLabelOptions();
-      customMappingUpdateUploadAction();
     }
 
     function customMappingInstanceValues() {
@@ -27857,7 +27280,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function customUploadEmptyMarkup(type) {
-      const label = type === "label" ? "上传自定义标签文件" : "上传自定义映射文件";
+      const label = "上传自定义映射文件";
       return `
         <button class="custom-upload-empty" type="button" data-custom-upload-empty="${type}" aria-label="${label}">
           <span class="custom-upload-empty-icon" aria-hidden="true">
@@ -27880,7 +27303,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function customUploadEmptyOpen() {
       openCustomMappingModal();
-      customMappingSetSource();
       document.getElementById("customMappingUploadFile")?.click();
     }
 
@@ -27903,7 +27325,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function customUploadEmptyHandleFile(type, file, fileList) {
       if (!file) return;
       openCustomMappingModal();
-      customMappingSetSource();
       const input = document.getElementById("customMappingUploadFile");
       customUploadEmptyAssignFile(input, file, fileList);
       customMappingHandleFile(file);
@@ -28085,8 +27506,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const sourceRows = Array.isArray(rawRows) ? rawRows : [];
       const header = Array.isArray(sourceRows[0]) ? sourceRows[0] : [];
       const firstHeader = String(header[0] ?? "").trim().toLocaleUpperCase();
-      if (firstHeader !== "ASIN") {
-        return { headerError: true, empty: false, rows: [], errorCount: 1 };
+      const secondHeader = String(header[1] ?? "").trim().toLocaleUpperCase();
+      const headerErrorMessage = firstHeader !== "ASIN"
+        ? "首列ASIN缺失"
+        : (secondHeader !== "ASIN GROUP NAME" ? "第二列ASIN GROUP NAME缺失" : "");
+      if (headerErrorMessage) {
+        return { headerError: true, headerErrorMessage, empty: false, rows: [], errorCount: 1 };
       }
 
       const rows = [];
@@ -28121,7 +27546,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function customMappingValidationMessage(result) {
-      if (result.headerError) return "首列ASIN缺失";
+      if (result.headerError) return result.headerErrorMessage || "首列ASIN缺失";
       if (result.empty) return "映射内容不能为空";
       const errorRows = result.rows.filter(row => row.errors.length);
       const details = errorRows.slice(0, 3).map(row => `第${row.rowNumber}行：${row.errors.join("；")}`);
@@ -28131,13 +27556,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function customMappingSetUploadError(message = "") {
       const error = document.getElementById("customMappingUploadError");
-      if (!error) return;
-      error.textContent = message;
-      error.hidden = !message;
-    }
-
-    function customMappingSetLabelError(message = "") {
-      const error = document.getElementById("customMappingExistingLabelError");
       if (!error) return;
       error.textContent = message;
       error.hidden = !message;
@@ -28278,9 +27696,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       customMappingState.upload.file = null;
       customMappingState.upload.rows = [];
       customMappingState.upload.errorMessage = "";
-      customMappingState.upload.source = "file";
       customMappingState.upload.entrySource = "management";
-      customMappingState.upload.selectedLabelFileId = "";
       customMappingState.upload.requestId += 1;
       const fileInput = document.getElementById("customMappingUploadFile");
       const nameInput = document.getElementById("customMappingUploadName");
@@ -28290,7 +27706,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       customMappingRenderUploadInstances();
       closeCustomMappingUploadToast();
       customMappingSetUploadError("");
-      customMappingSetLabelError("");
       customMappingSetNameError("");
       customMappingRenderSelectedFile();
       customMappingUpdateUploadAction();
@@ -28303,7 +27718,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       customMappingState.upload.rows = [];
       customMappingState.upload.errorMessage = "";
       customMappingSetUploadError("");
-      customMappingSetLabelError("");
 
       if (!file) {
         customMappingRenderSelectedFile();
@@ -28342,42 +27756,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       customMappingResetUploadState();
     }
 
-    function customMappingLabelFileValue(file, asin) {
-      const values = file?.values;
-      if (values && typeof values === "object") {
-        const normalizedAsin = String(asin || "").trim().toLocaleUpperCase();
-        const key = Object.keys(values).find(value => (
-          String(value || "").trim().toLocaleUpperCase() === normalizedAsin
-        ));
-        return key ? String(values[key] || "").trim() : "";
-      }
-      return frameLabelDefaultValue(asin, file?.dimension);
-    }
-
-    function customMappingRecordsFromLabelFile(file) {
-      if (!file) return [];
-      const values = file.values && typeof file.values === "object" ? file.values : {};
-      const asins = new Set([
-        ...(typeof frameLabelAllAsins === "function" ? frameLabelAllAsins() : []),
-        ...Object.keys(values)
-      ]);
-      const uploadedAt = customLabelNowText();
-      return Array.from(asins)
-        .map(asin => {
-          const normalizedAsin = String(asin || "").trim().toLocaleUpperCase();
-          const groupName = customMappingLabelFileValue(file, normalizedAsin);
-          if (!normalizedAsin || !groupName) return null;
-          return {
-            instance: customMappingCurrentInstance(),
-            asin: normalizedAsin,
-            groupName,
-            creator: "Demo.CrossBorder@outlook.com",
-            uploadedAt
-          };
-        })
-        .filter(Boolean);
-    }
-
     function customMappingAddFile({ filename, dimension, creator, uploadedAt, records, instance = customMappingCurrentInstance() }) {
       const normalizedRecords = (Array.isArray(records) ? records : []).map(record => ({
         ...record,
@@ -28401,46 +27779,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       customMappingState.detailPage = 1;
       customMappingSyncSelectedRecords();
       return file;
-    }
-
-    function customMappingApplyExistingLabel() {
-      const form = customMappingValidateUploadForm({ showErrors: true });
-      if (!form.valid) {
-        customMappingUpdateUploadAction();
-        return;
-      }
-      const file = customMappingExistingLabelFiles().find(item => (
-        item.id === customMappingState.upload.selectedLabelFileId
-      ));
-      if (!file) {
-        customMappingSetLabelError("请先选择已有自定义标签");
-        customMappingUpdateUploadAction();
-        return;
-      }
-
-      const records = customMappingRecordsFromLabelFile(file);
-      if (!records.length) {
-        customMappingSetLabelError("所选自定义标签暂无可应用的标签内容");
-        customMappingUploadToast("所选自定义标签暂无可应用的标签内容");
-        return;
-      }
-
-      const uploadedAt = customLabelNowText();
-      const mappingFile = customMappingAddFile({
-        filename: `${String(file.filename || "自定义标签").replace(/\.xlsx?$/i, "")}-映射.xlsx`,
-        dimension: form.name,
-        creator: "Demo.CrossBorder@outlook.com",
-        uploadedAt,
-        records,
-        instance: form.instance
-      });
-      closeCustomMappingModal();
-      renderCustomMappingInstanceFilter();
-      renderCustomMappingFilesTable();
-      renderCustomMappingsTable();
-      renderFrameCreateAggregationState();
-      frameLabelRefreshReport();
-      frameLabelToast(`已保存映射文件：${mappingFile.filename}`);
     }
 
     async function customMappingConfirmUpload({ applyAfterUpload = false } = {}) {
@@ -29511,455 +28849,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
     }
 
-    const customLabelTemplateHeaders = ["ASIN", "ASIN GROUP NAME"];
-
-    function frameLabelDownloadWorkbook(filename, dimension, includeValues, valuesMap = null) {
-      const asins = new Set(frameLabelAllAsins());
-      if (valuesMap) Object.keys(valuesMap).forEach(asin => asins.add(asin));
-      const rows = Array.from(asins).filter(Boolean).sort((a, b) => a.localeCompare(b, "zh-CN")).map(asin => [
-        asin,
-        includeValues
-          ? (valuesMap
-            ? (Object.prototype.hasOwnProperty.call(valuesMap, asin) ? valuesMap[asin] : "")
-            : frameLabelDefaultValue(asin, dimension))
-          : ""
-      ]);
-      if (!window.XLSX) {
-        frameLabelToast("模板生成组件加载失败，请刷新页面后重试");
-        return;
-      }
-      const worksheet = XLSX.utils.aoa_to_sheet([customLabelTemplateHeaders, ...rows]);
-      worksheet["!cols"] = [{ wch: 18 }, { wch: 20 }];
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "自定义标签");
-      XLSX.writeFile(workbook, filename);
-    }
-
-    function customLabelNormalizeName(value) {
-      return String(value || "").trim().replace(/\s+/g, " ").toLocaleLowerCase();
-    }
-
-    function customLabelValidateName(instance, value, checkDuplicate = false) {
-      const name = String(value || "").trim();
-      if (!name) {
-        return { name: "", error: "请输入标签名称" };
-      }
-      if (Array.from(name).length > 20) {
-        return { name, error: "标签名称最多可填写20个字符" };
-      }
-      const normalizedInstance = String(instance || "").trim();
-      const normalizedName = customLabelNormalizeName(name);
-      const duplicated = checkDuplicate && frameLabelState.files.some(file =>
-        String(file.instance || "").trim() === normalizedInstance &&
-        customLabelNormalizeName(file.dimension) === normalizedName
-      );
-      return duplicated
-        ? { name, error: `当前 Instance 下已存在标签名称“${name}”，请更换后重试` }
-        : { name, error: "" };
-    }
-
-    function frameLabelDownloadTemplate() {
-      const instance = document.getElementById("customLabelUploadInstance")?.value || "4kmilesyaheetechus";
-      const nameInput = document.getElementById("customLabelUploadDimension");
-      const validation = customLabelValidateName(instance, nameInput?.value);
-      if (validation.error) {
-        customLabelSetDimensionError(validation.error);
-        nameInput?.focus();
-        return;
-      }
-      const dimension = validation.name;
-      frameLabelDownloadWorkbook(`${instance}-${dimension}.xlsx`, dimension, false);
-      frameLabelToast(`已下载模板：${instance}-${dimension}.xlsx`);
-    }
-
-    function frameLabelDownloadFile(file) {
-      if (!file) return;
-      frameLabelDownloadWorkbook(file.filename, file.dimension, true, file.values || null);
-    }
-
-    function customLabelFilterValues(key) {
-      return Array.from(new Set(frameLabelState.files.map(file => file[key]).filter(Boolean)))
-        .sort((a, b) => String(a).localeCompare(String(b), "zh-CN"));
-    }
-
-    function renderCustomLabelUploadInstances() {
-      const uploadSelect = document.getElementById("customLabelUploadInstance");
-      if (uploadSelect) {
-        const current = uploadSelect.value;
-        const instances = typeof customMappingInstanceValues === "function"
-          ? customMappingInstanceValues()
-          : customLabelFilterValues("instance");
-        uploadSelect.innerHTML = instances.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join("");
-        uploadSelect.value = instances.includes(current) ? current : (instances[0] || "");
-      }
-    }
-
-    function customLabelFilterOptionRows(key) {
-      const selected = new Set(customLabelFilterState.selected[key]);
-      const keyword = customLabelFilterState.search[key].trim().toLocaleLowerCase();
-      const values = customLabelFilterValues(key).filter(value =>
-        !keyword || String(value).toLocaleLowerCase().includes(keyword)
-      );
-      if (!values.length) {
-        return `<div class="custom-label-multi-empty">无匹配结果</div>`;
-      }
-      return values.map((value, index) => {
-        const optionId = `customLabelFilter-${key}-${index}`;
-        return `
-          <label class="custom-label-multi-option" for="${optionId}" title="${escapeHtml(value)}">
-            <input id="${optionId}" type="checkbox" value="${escapeHtml(value)}"${selected.has(value) ? " checked" : ""}>
-            <span>${escapeHtml(value)}</span>
-          </label>
-        `;
-      }).join("");
-    }
-
-    function customLabelFilterSummary(key, label) {
-      const selected = customLabelFilterState.selected[key];
-      if (!selected.length) return label;
-      if (selected.length === 1) return selected[0];
-      return `${label}（已选 ${selected.length} 项）`;
-    }
-
-    function syncCustomLabelFilterControl(key) {
-      const definition = customLabelFilterDefinitions.find(item => item.key === key);
-      const root = definition ? document.getElementById(definition.id) : null;
-      if (!definition || !root) return;
-
-      const values = customLabelFilterValues(key);
-      const selected = customLabelFilterState.selected[key].filter(value => values.includes(value));
-      customLabelFilterState.selected[key] = selected;
-
-      const value = root.querySelector(".custom-label-multi-value");
-      if (value) {
-        value.textContent = customLabelFilterSummary(key, definition.label);
-        value.classList.toggle("is-placeholder", selected.length === 0);
-        value.title = selected.length ? selected.join("、") : definition.label;
-      }
-
-      const count = root.querySelector(".custom-label-multi-count");
-      if (count) count.textContent = `已选 (${selected.length})`;
-
-      const selectAll = root.querySelector(".custom-label-multi-select-all");
-      if (selectAll) {
-        selectAll.checked = values.length > 0 && selected.length === values.length;
-        selectAll.indeterminate = selected.length > 0 && selected.length < values.length;
-      }
-
-      const options = root.querySelector(".custom-label-multi-options");
-      if (options) options.innerHTML = customLabelFilterOptionRows(key);
-    }
-
-    function closeCustomLabelFilterMenus(except = null) {
-      document.querySelectorAll(".custom-label-multi-select.is-open").forEach(root => {
-        if (root === except) return;
-        root.classList.remove("is-open");
-        root.querySelector(".custom-label-multi-trigger")?.setAttribute("aria-expanded", "false");
-      });
-    }
-
-    function bindCustomLabelFilterControl(definition) {
-      const root = document.getElementById(definition.id);
-      const trigger = root?.querySelector(".custom-label-multi-trigger");
-      const search = root?.querySelector(".custom-label-multi-search");
-      if (!root || !trigger || !search) return;
-
-      trigger.addEventListener("click", () => {
-        const shouldOpen = !root.classList.contains("is-open");
-        closeCustomLabelFilterMenus(root);
-        root.classList.toggle("is-open", shouldOpen);
-        trigger.setAttribute("aria-expanded", String(shouldOpen));
-        if (shouldOpen) {
-          window.setTimeout(() => search.focus(), 0);
-        }
-      });
-
-      search.addEventListener("input", event => {
-        customLabelFilterState.search[definition.key] = event.target.value;
-        syncCustomLabelFilterControl(definition.key);
-      });
-
-      root.addEventListener("change", event => {
-        if (event.target.matches(".custom-label-multi-select-all")) {
-          customLabelFilterState.selected[definition.key] = event.target.checked
-            ? customLabelFilterValues(definition.key)
-            : [];
-          syncCustomLabelFilterControl(definition.key);
-          customLabelFilterState.page = 1;
-          renderCustomLabelsTable();
-          return;
-        }
-
-        if (!event.target.matches(".custom-label-multi-option input")) return;
-        const selected = new Set(customLabelFilterState.selected[definition.key]);
-        if (event.target.checked) {
-          selected.add(event.target.value);
-        } else {
-          selected.delete(event.target.value);
-        }
-        customLabelFilterState.selected[definition.key] = Array.from(selected);
-        syncCustomLabelFilterControl(definition.key);
-        customLabelFilterState.page = 1;
-        renderCustomLabelsTable();
-      });
-
-      root.addEventListener("keydown", event => {
-        if (event.key !== "Escape") return;
-        root.classList.remove("is-open");
-        trigger.setAttribute("aria-expanded", "false");
-        trigger.focus();
-      });
-    }
-
-    function renderCustomLabelFilterOptions() {
-      customLabelFilterDefinitions.forEach(definition => {
-        const root = document.getElementById(definition.id);
-        if (!root) return;
-        root.innerHTML = `
-          <button class="custom-label-multi-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="${escapeHtml(definition.label)}筛选">
-            <span class="custom-label-multi-value is-placeholder">${escapeHtml(definition.label)}</span>
-            <svg class="custom-label-multi-caret" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="m7 9 5 5 5-5"></path>
-            </svg>
-          </button>
-          <div class="custom-label-multi-menu">
-            <div class="custom-label-multi-search-wrap">
-              <svg class="custom-label-multi-search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <circle cx="11" cy="11" r="6.5"></circle>
-                <path d="m16 16 4 4"></path>
-              </svg>
-              <input class="custom-label-multi-search" type="search" value="${escapeHtml(customLabelFilterState.search[definition.key])}" autocomplete="off" placeholder="查找" aria-label="搜索${escapeHtml(definition.label)}">
-            </div>
-            <div class="custom-label-multi-head">
-              <label class="custom-label-multi-all">
-                <input class="custom-label-multi-select-all" type="checkbox" aria-label="全选${escapeHtml(definition.label)}">
-                <span>全选</span>
-              </label>
-              <span class="custom-label-multi-count">已选 (0)</span>
-            </div>
-            <div class="custom-label-multi-options" role="listbox" aria-label="${escapeHtml(definition.label)}多选"></div>
-          </div>
-        `;
-        bindCustomLabelFilterControl(definition);
-        syncCustomLabelFilterControl(definition.key);
-      });
-      renderCustomLabelUploadInstances();
-    }
-
-    function customLabelFilteredFiles() {
-      const filename = (document.getElementById("customLabelFilterFilename")?.value || "").trim().toLocaleLowerCase();
-      const matches = (key, value) => (
-        customLabelFilterState.selected[key].length === 0 ||
-        customLabelFilterState.selected[key].includes(value)
-      );
-      return frameLabelState.files.filter(file => (
-        matches("instance", file.instance) &&
-        (!filename || file.filename.toLocaleLowerCase().includes(filename)) &&
-        matches("status", file.status) &&
-        matches("dimension", file.dimension) &&
-        matches("creator", file.creator)
-      ));
-    }
-
-    function renderCustomLabelsPagination(total) {
-      const pagesRoot = document.getElementById("customLabelsPaginationPages");
-      if (!pagesRoot) return;
-      const pageCount = Math.max(1, Math.ceil(total / customLabelFilterState.pageSize));
-      customLabelFilterState.page = Math.min(customLabelFilterState.page, pageCount);
-      pagesRoot.innerHTML = `
-        <button type="button" aria-label="上一页" data-custom-label-page="${Math.max(1, customLabelFilterState.page - 1)}" ${customLabelFilterState.page <= 1 ? "disabled" : ""}>‹</button>
-        ${Array.from({ length: pageCount }, (_, index) => index + 1).map(page => `
-          <button type="button" class="${page === customLabelFilterState.page ? "active" : ""}" aria-current="${page === customLabelFilterState.page ? "page" : "false"}" data-custom-label-page="${page}">${page}</button>
-        `).join("")}
-        <button type="button" aria-label="下一页" data-custom-label-page="${Math.min(pageCount, customLabelFilterState.page + 1)}" ${customLabelFilterState.page >= pageCount ? "disabled" : ""}>›</button>
-      `;
-      pagesRoot.querySelectorAll("[data-custom-label-page]").forEach(button => {
-        button.addEventListener("click", () => {
-          const nextPage = Number(button.dataset.customLabelPage);
-          if (!Number.isInteger(nextPage) || nextPage === customLabelFilterState.page) return;
-          customLabelFilterState.page = nextPage;
-          renderCustomLabelsTable();
-        });
-      });
-    }
-
-    function customLabelDimensionEditIcon(type) {
-      return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m4.5 19.5 4.1-1 9.8-9.8a2.1 2.1 0 0 0-3-3L5.6 15.5l-1.1 4Z"></path><path d="m13.8 7.3 3 3"></path></svg>`;
-    }
-
-    function customLabelDimensionCell(file) {
-      const isEditing = customLabelDimensionEditState.fileId === file.id;
-      if (isEditing) {
-        return `
-          <td class="custom-label-dimension-cell">
-            <div class="custom-label-dimension-editor">
-              <input class="custom-label-dimension-input" type="text" maxlength="20" value="${escapeHtml(file.dimension)}" aria-label="编辑标签维度：${escapeHtml(file.dimension)}" data-custom-label-dimension-input="${escapeHtml(file.id)}">
-              <button class="custom-label-dimension-save" type="button" aria-label="保存标签维度" data-custom-label-dimension-save="${escapeHtml(file.id)}">保存</button>
-              <button class="custom-label-dimension-cancel" type="button" aria-label="取消编辑标签维度" data-custom-label-dimension-cancel="${escapeHtml(file.id)}">取消</button>
-            </div>
-          </td>
-        `;
-      }
-      return `
-        <td class="custom-label-dimension-cell">
-          <div class="custom-label-dimension-display">
-            <span class="cell-ellipsis" title="${escapeHtml(file.dimension)}">${escapeHtml(file.dimension)}</span>
-            <button class="custom-label-dimension-edit" type="button" title="编辑标签维度" aria-label="编辑标签维度：${escapeHtml(file.dimension)}" data-custom-label-dimension-edit="${escapeHtml(file.id)}">${customLabelDimensionEditIcon("edit")}</button>
-          </div>
-        </td>
-      `;
-    }
-
-    function customLabelValidateDimensionEdit(file, value) {
-      const validation = customLabelValidateName(file.instance, value);
-      if (validation.error) return validation;
-      const duplicated = frameLabelState.files.some(candidate =>
-        candidate.id !== file.id &&
-        String(candidate.instance || "").trim() === String(file.instance || "").trim() &&
-        customLabelNormalizeName(candidate.dimension) === customLabelNormalizeName(validation.name)
-      );
-      return duplicated
-        ? { name: validation.name, error: `当前 Instance 下已存在标签名称“${validation.name}”，请更换后重试` }
-        : validation;
-    }
-
-    function customLabelSaveDimensionEdit(fileId) {
-      const file = frameLabelFileByKey(fileId);
-      const input = document.querySelector(`[data-custom-label-dimension-input="${CSS.escape(fileId)}"]`);
-      if (!file || !input) return;
-      const validation = customLabelValidateDimensionEdit(file, input.value);
-      if (validation.error) {
-        input.setAttribute("aria-invalid", "true");
-        input.title = validation.error;
-        input.focus();
-        frameLabelToast(validation.error);
-        return;
-      }
-      file.dimension = validation.name;
-      customLabelDimensionEditState.fileId = "";
-      renderCustomLabelFilterOptions();
-      frameLabelRefreshReport();
-      frameLabelToast("标签维度已更新");
-    }
-
-    function customLabelDeleteCount(file) {
-      if (file?.values && typeof file.values === "object") {
-        return Object.values(file.values).filter(value => String(value || "").trim()).length;
-      }
-      return frameLabelAllAsins().length;
-    }
-
-    function openCustomLabelDeleteModal(fileId) {
-      const file = frameLabelFileByKey(fileId);
-      const modal = document.getElementById("customLabelDeleteModal");
-      const instance = document.getElementById("customLabelDeleteInstance");
-      const dimension = document.getElementById("customLabelDeleteDimension");
-      const count = document.getElementById("customLabelDeleteCount");
-      if (!file || !modal || !instance || !dimension || !count) return;
-      customLabelDeleteState.fileId = file.id;
-      instance.textContent = file.instance || frameLabelCurrentInstance();
-      dimension.textContent = file.dimension || "";
-      count.textContent = String(customLabelDeleteCount(file));
-      modal.hidden = false;
-      window.setTimeout(() => document.getElementById("customLabelDeleteCancel")?.focus(), 0);
-    }
-
-    function closeCustomLabelDeleteModal() {
-      const modal = document.getElementById("customLabelDeleteModal");
-      if (modal) modal.hidden = true;
-      customLabelDeleteState.fileId = "";
-    }
-
-    function confirmCustomLabelDelete() {
-      const id = customLabelDeleteState.fileId;
-      const file = frameLabelFileByKey(id);
-      if (!file) {
-        closeCustomLabelDeleteModal();
-        return;
-      }
-      if (customLabelDimensionEditState.fileId === id) customLabelDimensionEditState.fileId = "";
-      frameLabelState.files = frameLabelState.files.filter(item => item.id !== id);
-      if (frameLabelState.selectedKey === id) {
-        const reportFiles = frameLabelReportFiles();
-        frameLabelState.selectedKey = frameLabelCanUseRsi() ? "system" : (reportFiles[0]?.id || "");
-      }
-      closeCustomLabelDeleteModal();
-      renderCustomLabelFilterOptions();
-      frameLabelRefreshReport();
-      frameLabelToast(`已删除标签文件：${file.filename}`);
-    }
-
-    function renderCustomLabelsTable() {
-      const body = document.getElementById("customLabelsTableBody");
-      const total = document.getElementById("customLabelsTotal");
-      if (!body || !total) return;
-      const files = customLabelFilteredFiles();
-      total.textContent = `共 ${files.length} 条`;
-      const pageCount = Math.max(1, Math.ceil(files.length / customLabelFilterState.pageSize));
-      customLabelFilterState.page = Math.min(customLabelFilterState.page, pageCount);
-      const start = (customLabelFilterState.page - 1) * customLabelFilterState.pageSize;
-      const pageFiles = files.slice(start, start + customLabelFilterState.pageSize);
-      body.innerHTML = pageFiles.length ? pageFiles.map(file => `
-        <tr>
-          <td class="is-nowrap"><span class="cell-ellipsis" title="${escapeHtml(file.instance)}">${escapeHtml(file.instance)}</span></td>
-          <td class="is-nowrap">${escapeHtml(file.operation)}</td>
-          <td><span class="cell-ellipsis" title="${escapeHtml(file.filename)}">${escapeHtml(file.filename)}</span></td>
-          <td class="is-nowrap"><span class="custom-labels-success">${escapeHtml(file.status)}</span></td>
-          ${customLabelDimensionCell(file)}
-          <td class="is-nowrap"><button class="custom-labels-link" type="button" data-custom-label-download="${escapeHtml(file.id)}">下载</button></td>
-          <td><span class="cell-ellipsis" title="${escapeHtml(file.creator)}">${escapeHtml(file.creator)}</span></td>
-          <td class="is-nowrap">${escapeHtml(file.uploadedAt)}</td>
-          <td class="is-nowrap">
-            <button class="custom-labels-action custom-labels-delete" type="button" data-custom-label-delete="${escapeHtml(file.id)}">删除</button>
-          </td>
-        </tr>
-      `).join("") : `<tr class="custom-upload-empty-row"><td class="custom-labels-empty custom-upload-empty-cell" colspan="9">${customUploadEmptyMarkup("label")}</td></tr>`;
-      bindCustomUploadEmpty(body);
-      renderCustomLabelsPagination(files.length);
-
-      body.querySelectorAll("[data-custom-label-download]").forEach(button => {
-        button.addEventListener("click", () => frameLabelDownloadFile(frameLabelFileByKey(button.dataset.customLabelDownload)));
-      });
-      body.querySelectorAll("[data-custom-label-dimension-edit]").forEach(button => {
-        button.addEventListener("click", () => {
-          customLabelDimensionEditState.fileId = button.dataset.customLabelDimensionEdit;
-          renderCustomLabelsTable();
-          const input = body.querySelector(`[data-custom-label-dimension-input="${CSS.escape(customLabelDimensionEditState.fileId)}"]`);
-          input?.focus();
-          input?.select();
-        });
-      });
-      body.querySelectorAll("[data-custom-label-dimension-save]").forEach(button => {
-        button.addEventListener("click", () => customLabelSaveDimensionEdit(button.dataset.customLabelDimensionSave));
-      });
-      body.querySelectorAll("[data-custom-label-dimension-cancel]").forEach(button => {
-        button.addEventListener("click", () => {
-          customLabelDimensionEditState.fileId = "";
-          renderCustomLabelsTable();
-        });
-      });
-      body.querySelectorAll("[data-custom-label-dimension-input]").forEach(input => {
-        input.addEventListener("input", () => {
-          input.removeAttribute("aria-invalid");
-          input.removeAttribute("title");
-        });
-        input.addEventListener("keydown", event => {
-          if (event.key === "Enter") {
-            event.preventDefault();
-            customLabelSaveDimensionEdit(input.dataset.customLabelDimensionInput);
-          }
-          if (event.key === "Escape") {
-            event.preventDefault();
-            customLabelDimensionEditState.fileId = "";
-            renderCustomLabelsTable();
-          }
-        });
-      });
-      body.querySelectorAll("[data-custom-label-delete]").forEach(button => {
-        button.addEventListener("click", () => openCustomLabelDeleteModal(button.dataset.customLabelDelete));
-      });
-    }
-
     function customLabelIsSupportedFile(file) {
       return Boolean(file?.name && /\.(xlsx|xls)$/i.test(file.name));
     }
@@ -29970,132 +28859,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (bytes < 1024) return `${bytes} B`;
       if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
       return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-    }
-
-    function customLabelSetUploadError(message = "") {
-      const error = document.getElementById("customLabelUploadError");
-      if (!error) return;
-      error.textContent = message;
-      error.hidden = !message;
-    }
-
-    function customLabelSetDimensionError(message = "") {
-      const error = document.getElementById("customLabelUploadDimensionError");
-      const input = document.getElementById("customLabelUploadDimension");
-      if (!error || !input) return;
-      error.textContent = message;
-      error.hidden = !message;
-      input.setAttribute("aria-invalid", String(Boolean(message)));
-    }
-
-    function customLabelUploadValidation() {
-      const instance = document.getElementById("customLabelUploadInstance")?.value || "4kmilesyaheetechus";
-      const nameInput = document.getElementById("customLabelUploadDimension");
-      const validation = customLabelValidateName(instance, nameInput?.value, true);
-      return { instance, validation };
-    }
-
-    function customLabelUpdateUploadAction() {
-      const uploadButton = document.getElementById("customLabelUploadOnly");
-      const applyButton = document.getElementById("customLabelUploadApply");
-      if (!uploadButton && !applyButton) return;
-
-      if (customLabelUploadState.phase === "uploading") {
-        [uploadButton, applyButton].forEach(button => {
-          if (!button) return;
-          button.textContent = "上传中...";
-          button.disabled = true;
-        });
-        return;
-      }
-
-      const { validation } = customLabelUploadValidation();
-      const disabled = !(
-        customLabelUploadState.phase === "selected" &&
-        customLabelUploadState.file &&
-        !validation.error
-      );
-      if (uploadButton) {
-        uploadButton.textContent = "上传";
-        uploadButton.disabled = disabled;
-      }
-      if (applyButton) {
-        applyButton.textContent = "上传并应用";
-        applyButton.disabled = disabled;
-      }
-    }
-
-    function customLabelRenderSelectedFile() {
-      const fileList = document.getElementById("customLabelUploadFileList");
-      const fileName = document.getElementById("customLabelUploadFileName");
-      const fileSize = document.getElementById("customLabelUploadFileSize");
-      const fileState = document.getElementById("customLabelUploadFileState");
-      const spinner = document.getElementById("customLabelUploadFileSpinner");
-      const deleteButton = document.getElementById("customLabelUploadFileDelete");
-      const failureDownload = document.getElementById("customLabelFailureDownload");
-      const fileInput = document.getElementById("customLabelUploadFile");
-      const picker = document.querySelector(".custom-label-file-picker");
-      if (!fileList || !fileName || !fileSize || !fileState || !spinner || !deleteButton || !failureDownload) return;
-
-      const file = customLabelUploadState.file;
-      const hasFile = Boolean(file);
-      fileList.hidden = !hasFile;
-      if (!hasFile) {
-        fileList.classList.remove("is-uploading", "is-failed", "is-empty");
-        if (fileInput) fileInput.disabled = false;
-        picker?.classList.remove("is-uploading");
-        return;
-      }
-
-      let stateText = "已选择";
-      if (customLabelUploadState.phase === "uploading") stateText = "上传中...";
-      if (customLabelUploadState.phase === "failed") stateText = "上传失败";
-      if (customLabelUploadState.phase === "empty") stateText = "上传失败：内容不得为空";
-
-      fileName.textContent = file.name;
-      fileName.title = file.name;
-      fileSize.textContent = customLabelFormatFileSize(file.size);
-      fileState.textContent = stateText;
-      spinner.hidden = customLabelUploadState.phase !== "uploading";
-      failureDownload.hidden = !customLabelUploadState.failureRows;
-      deleteButton.disabled = customLabelUploadState.phase === "uploading";
-      fileList.classList.toggle("is-uploading", customLabelUploadState.phase === "uploading");
-      fileList.classList.toggle("is-failed", customLabelUploadState.phase === "failed" || customLabelUploadState.phase === "empty");
-      fileList.classList.toggle("is-empty", customLabelUploadState.phase === "empty");
-      if (fileInput) fileInput.disabled = customLabelUploadState.phase === "uploading";
-      picker?.classList.toggle("is-uploading", customLabelUploadState.phase === "uploading");
-    }
-
-    function customLabelClearSelectedFile() {
-      customLabelUploadState.phase = "idle";
-      customLabelUploadState.file = null;
-      customLabelUploadState.rows = [];
-      customLabelUploadState.rawRows = [];
-      customLabelUploadState.errorCount = 0;
-      customLabelUploadState.failureRows = null;
-      customLabelUploadState.requestId += 1;
-      const fileInput = document.getElementById("customLabelUploadFile");
-      if (fileInput) fileInput.value = "";
-      customLabelSetUploadError("");
-      customLabelSetDimensionError("");
-      customLabelRenderSelectedFile();
-      customLabelUpdateUploadAction();
-    }
-
-    function customLabelResetUploadState() {
-      customLabelUploadState.phase = "idle";
-      customLabelUploadState.file = null;
-      customLabelUploadState.rows = [];
-      customLabelUploadState.rawRows = [];
-      customLabelUploadState.errorCount = 0;
-      customLabelUploadState.failureRows = null;
-      customLabelUploadState.dimension = "";
-      customLabelUploadState.requestId += 1;
-
-      customLabelSetUploadError("");
-      customLabelSetDimensionError("");
-      customLabelRenderSelectedFile();
-      customLabelUpdateUploadAction();
     }
 
     function customLabelReadArrayBuffer(file) {
@@ -30126,285 +28889,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
     }
 
-    function customLabelValidateRows(rawRows, dimension) {
-      const sourceRows = Array.isArray(rawRows) ? rawRows : [];
-      const header = Array.isArray(sourceRows[0]) ? sourceRows[0] : [];
-      const firstHeader = String(header[0] ?? "").trim().toLocaleUpperCase();
-      const secondHeader = String(header[1] ?? "").trim().toLocaleUpperCase();
-      const headerErrorMessage = firstHeader !== "ASIN"
-        ? "首列ASIN缺失"
-        : (secondHeader !== "ASIN GROUP NAME" ? "第二列ASIN GROUP NAME缺失" : "");
-
-      if (headerErrorMessage) {
-        const rows = sourceRows.slice(1).map((sourceRow, index) => {
-          const values = (Array.isArray(sourceRow) ? sourceRow : []).map(value => String(value ?? "").trim());
-          if (!values.some(Boolean)) return null;
-          return {
-            rowNumber: index + 2,
-            asin: values[0] || "",
-            label: values[1] || "",
-            errors: [headerErrorMessage],
-            dimension
-          };
-        }).filter(Boolean);
-        return {
-          headerError: true,
-          headerErrorMessage,
-          empty: false,
-          rows,
-          errorCount: rows.length || 1
-        };
-      }
-
-      const hasData = sourceRows.slice(1).some(sourceRow => (
-        (Array.isArray(sourceRow) ? sourceRow : []).some(value => String(value ?? "").trim())
-      ));
-      if (!hasData) {
-        return { headerError: false, headerErrorMessage: "", empty: true, rows: [], errorCount: 0 };
-      }
-
-      const rows = [];
-      sourceRows.slice(1).forEach((sourceRow, index) => {
-        const row = Array.isArray(sourceRow) ? sourceRow : [];
-        const values = row.map(value => String(value ?? "").trim());
-        if (!values.some(Boolean)) return;
-
-        const asin = values[0] || "";
-        const label = values[1] || "";
-        const errors = [];
-        if (!asin) {
-          errors.push("ASIN缺失");
-        } else if (!/^(?:[A-Z0-9]{10}|[A-Z0-9]{3}\*{4}[A-Z0-9]{3})$/i.test(asin)) {
-          errors.push("ASIN格式错误");
-        }
-        if (asin && !label) errors.push("ASIN GROUP NAME缺失");
-
-        rows.push({
-          rowNumber: index + 2,
-          asin,
-          label,
-          errors,
-          dimension
-        });
-      });
-
-      return {
-        headerError: false,
-        headerErrorMessage: "",
-        empty: false,
-        rows,
-        errorCount: rows.filter(row => row.errors.length > 0).length
-      };
-    }
-
-    function customLabelBuildFailureRows(rawRows, result) {
-      const sourceRows = Array.isArray(rawRows) ? rawRows : [];
-      const widestRow = Math.max(2, ...sourceRows.map(row => Array.isArray(row) ? row.length : 0));
-      const normalizeRow = row => Array.from({ length: widestRow }, (_, index) => String((Array.isArray(row) ? row[index] : "") ?? ""));
-      const header = normalizeRow(sourceRows[0] || []);
-      header[0] = customLabelTemplateHeaders[0];
-      header[1] = customLabelTemplateHeaders[1];
-      const errorsByRow = new Map(result.rows.map(row => [row.rowNumber, row.errors.join("；")]));
-
-      return [
-        [...header, "错误提示"],
-        ...sourceRows.slice(1).map((sourceRow, index) => {
-          const values = normalizeRow(sourceRow);
-          const hasValue = values.some(value => value.trim());
-          const error = result.headerError
-            ? (hasValue ? (result.headerErrorMessage || "首列ASIN缺失") : "")
-            : (errorsByRow.get(index + 2) || "");
-          return [...values, error];
-        })
-      ];
-    }
-
-    function customLabelFailureFileName() {
-      const filename = customLabelUploadState.file?.name || "自定义标签.xlsx";
-      return `失败原因-${filename}`;
-    }
-
-    function customLabelDownloadFailureFile() {
-      if (!window.XLSX || !customLabelUploadState.failureRows?.length) return;
-      const workbook = XLSX.utils.book_new();
-      const worksheet = XLSX.utils.aoa_to_sheet(customLabelUploadState.failureRows);
-      XLSX.utils.book_append_sheet(workbook, worksheet, "失败数据");
-
-      const filename = customLabelFailureFileName();
-      const bookType = /\.xls$/i.test(filename) ? "biff8" : "xlsx";
-      const binary = XLSX.write(workbook, { bookType, type: "array" });
-      const blob = new Blob([binary], {
-        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-      });
-      const link = document.createElement("a");
-      const url = URL.createObjectURL(blob);
-      link.href = url;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.setTimeout(() => URL.revokeObjectURL(url), 0);
-    }
-
-    function customLabelHandleFile(file) {
-      const fileInput = document.getElementById("customLabelUploadFile");
-      const { validation } = customLabelUploadValidation();
-
-      customLabelUploadState.requestId += 1;
-      customLabelUploadState.phase = "idle";
-      customLabelUploadState.file = null;
-      customLabelUploadState.rows = [];
-      customLabelUploadState.rawRows = [];
-      customLabelUploadState.errorCount = 0;
-      customLabelUploadState.failureRows = null;
-      customLabelUploadState.dimension = validation.name;
-      customLabelSetUploadError("");
-      customLabelSetDimensionError(validation.error);
-
-      if (!file) {
-        customLabelRenderSelectedFile();
-        customLabelUpdateUploadAction();
-        return;
-      }
-
-      if (!customLabelIsSupportedFile(file)) {
-        if (fileInput) fileInput.value = "";
-        customLabelSetUploadError("仅支持上传 .xlsx 或 .xls 格式的 Excel 文件");
-        customLabelRenderSelectedFile();
-        customLabelUpdateUploadAction();
-        return;
-      }
-
-      customLabelUploadState.phase = "selected";
-      customLabelUploadState.file = file;
-      customLabelRenderSelectedFile();
-      customLabelUpdateUploadAction();
-    }
-
-    function openCustomLabelModal(source = "management") {
-      const modal = document.getElementById("customLabelModal");
-      const fileInput = document.getElementById("customLabelUploadFile");
-      const nameInput = document.getElementById("customLabelUploadDimension");
-      const applyButton = document.getElementById("customLabelUploadApply");
-      if (!modal) return;
-      customLabelUploadState.source = source;
-      renderCustomLabelUploadInstances();
-      if (source === "report") {
-        const currentInstance = frameLabelCurrentInstance();
-        const uploadInstance = document.getElementById("customLabelUploadInstance");
-        if (uploadInstance && Array.from(uploadInstance.options).some(option => option.value === currentInstance)) {
-          uploadInstance.value = currentInstance;
-        }
-      }
-      customLabelResetUploadState();
-      if (fileInput) fileInput.value = "";
-      if (nameInput) nameInput.value = "";
-      if (applyButton) applyButton.hidden = source !== "report";
-      modal.hidden = false;
-      window.setTimeout(() => nameInput?.focus(), 0);
-    }
-
-    function closeCustomLabelModal() {
-      const modal = document.getElementById("customLabelModal");
-      if (modal) modal.hidden = true;
-      customLabelResetUploadState();
-    }
-
     function customLabelNowText() {
       const date = new Date();
       const pad = value => String(value).padStart(2, "0");
       return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
     }
-
-    async function customLabelConfirmUpload(applyAfterUpload = false) {
-      const { instance, validation } = customLabelUploadValidation();
-      const dimension = validation.name;
-      if (validation.error) {
-        customLabelSetDimensionError(validation.error);
-        document.getElementById("customLabelUploadDimension")?.focus();
-        return;
-      }
-      if (!customLabelUploadState.file) {
-        frameLabelToast("请先选择 .xlsx 或 .xls 格式的 Excel 文件");
-        return;
-      }
-      if (customLabelUploadState.phase !== "selected") {
-        return;
-      }
-
-      const requestId = ++customLabelUploadState.requestId;
-      customLabelUploadState.phase = "uploading";
-      customLabelUploadState.dimension = dimension;
-      customLabelUploadState.rows = [];
-      customLabelUploadState.rawRows = [];
-      customLabelUploadState.errorCount = 0;
-      customLabelUploadState.failureRows = null;
-      customLabelSetUploadError("");
-      customLabelSetDimensionError("");
-      customLabelRenderSelectedFile();
-      customLabelUpdateUploadAction();
-
-      try {
-        const [rawRows] = await Promise.all([
-          customLabelReadWorkbook(customLabelUploadState.file),
-          new Promise(resolve => window.setTimeout(resolve, 600))
-        ]);
-        if (requestId !== customLabelUploadState.requestId) return;
-
-        const result = customLabelValidateRows(rawRows, dimension);
-        customLabelUploadState.rawRows = rawRows;
-        customLabelUploadState.rows = result.rows;
-        customLabelUploadState.errorCount = result.errorCount;
-
-        if (result.empty) {
-          customLabelUploadState.phase = "empty";
-          customLabelRenderSelectedFile();
-          customLabelUpdateUploadAction();
-          return;
-        }
-
-        if (result.headerError || result.errorCount > 0) {
-          customLabelUploadState.phase = "failed";
-          customLabelUploadState.failureRows = customLabelBuildFailureRows(rawRows, result);
-          customLabelRenderSelectedFile();
-          customLabelUpdateUploadAction();
-          return;
-        }
-
-        const values = {};
-        result.rows.forEach(row => {
-          if (row.asin && row.label) values[row.asin] = row.label;
-        });
-        const id = `custom-${Date.now()}`;
-        const filename = customLabelUploadState.file.name;
-        frameLabelState.files.unshift({
-          id,
-          instance,
-          operation: "上传",
-          filename,
-          status: "成功",
-          dimension,
-          creator: "Demo.CrossBorder@outlook.com",
-          uploadedAt: customLabelNowText(),
-          values
-        });
-        if (applyAfterUpload && customLabelUploadState.source === "report") {
-          frameLabelState.selectedKey = id;
-        }
-        closeCustomLabelModal();
-        renderCustomLabelFilterOptions();
-        frameLabelRefreshReport();
-        frameLabelToast("上传成功");
-      } catch (error) {
-        if (requestId !== customLabelUploadState.requestId) return;
-        customLabelUploadState.phase = "failed";
-        customLabelUploadState.failureRows = null;
-        customLabelRenderSelectedFile();
-        customLabelUpdateUploadAction();
-        customLabelSetUploadError("文件解析失败，请检查文件后重新上传");
-      }
-    }
-
     function frameLabelRefreshReport() {
       frameLabelSyncSelection();
       frameLabelRenderToolbar();
@@ -30816,14 +29305,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule4RenderChart41(records) {
-      const showRhythmSummary = frameModule4State.showRhythmSummary !== false;
-      const chartElement = document.getElementById("frameModule41Chart");
-      const rhythmToggle = document.getElementById("frameModule41RhythmToggle");
-      chartElement?.classList.toggle("is-rhythm-summary-hidden", !showRhythmSummary);
-      if (rhythmToggle) {
-        rhythmToggle.textContent = showRhythmSummary ? "隐藏购买节奏" : "显示购买节奏";
-        rhythmToggle.setAttribute("aria-pressed", String(showRhythmSummary));
-      }
       const chart = frameModule3GetChart("frameModule41Chart");
       if (!chart) return;
       chart.resize();
@@ -30840,10 +29321,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const yMax = Math.pow(10, Math.ceil(Math.log10(Math.max(...records.map(record => Number(record.crossUsers || 0)), 10))));
       const { stats } = frameModule4Stats(records);
       const totalUsers = rhythmOrder.reduce((sum, rhythm) => sum + Number(stats[rhythm].users || 0), 0);
-      const matrixGrid = { left: 82, right: 26, top: showRhythmSummary ? 116 : 48, bottom: 74 };
-      const rhythmGrid = showRhythmSummary
-        ? { left: matrixGrid.left, right: matrixGrid.right, top: 46, height: 30 }
-        : { left: matrixGrid.left, right: matrixGrid.right, top: 0, height: 0 };
+      const matrixGrid = { left: 82, right: 26, top: 116, bottom: 74 };
+      const rhythmGrid = { left: matrixGrid.left, right: matrixGrid.right, top: 46, height: 30 };
       const symbolSize = value => {
         const score = Number(value?.[2] || minScore);
         const ratio = maxScore === minScore ? 0.58 : (score - minScore) / Math.max(0.0001, maxScore - minScore);
@@ -30966,7 +29445,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         color: rhythmOrder.map(rhythm => frameModule4Colors[rhythm]),
         grid: [rhythmGrid, matrixGrid],
         legend: {
-          show: showRhythmSummary,
+          show: true,
           top: 10,
           left: "center",
           itemWidth: 10,
@@ -31055,7 +29534,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             minorSplitLine: { show: false }
           }
         ],
-        series: showRhythmSummary ? [...rhythmSeries, ...scatterSeries] : scatterSeries
+        series: [...rhythmSeries, ...scatterSeries]
       }, true);
       chart.off("click");
       chart.on("click", params => {
@@ -31235,7 +29714,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const selectedRecord = frameModule4SelectedRecord(records);
       frameModule4ApplyStaticPanels();
       frameModule4RenderKpis(records, baseRecords.length);
-      frameModule4RenderRhythmChart(records);
       frameModule4RenderChart41(records);
       frameModule4RenderPairLists(records);
       if (frameModule4LayoutStyle() === "style1") {
@@ -31281,10 +29759,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         renderFrameModule4();
       });
       frameBindEmptyFilterClear("frameModule42DetailRhythmSelect", "frameModule42DetailRhythmClear");
-      document.getElementById("frameModule41RhythmToggle")?.addEventListener("click", () => {
-        frameModule4State.showRhythmSummary = !frameModule4State.showRhythmSummary;
-        renderFrameModule4();
-      });
       frameModule4ApplyStaticPanels();
       const focusGrid = document.querySelector(".amc-module4-focus-grid");
       if (focusGrid && typeof ResizeObserver === "function") {
@@ -35061,7 +33535,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (!options) return;
       const selectedAsin = frameModule2State.selectedAsin;
       const visibleChoices = frameFlowAsinPickerState.choices.filter(item =>
-        fuzzyMatch(item.asin, frameFlowAsinPickerState.query)
+        frameAsinSearchMatches(item.asin, frameFlowAsinPickerState.query)
       );
       options.innerHTML = visibleChoices.length
         ? visibleChoices.map(item => {
@@ -35071,7 +33545,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               ${frameLabelAsinThenTagMarkup(item.asin)}
             </button>`;
         }).join("")
-        : `<div class="amc-flow-asin-empty">暂无匹配 ASIN</div>`;
+        : `<div class="amc-flow-asin-empty">暂无匹配 ASIN 或标签</div>`;
     }
 
     function renderFrameFlowAsinPicker(choices, selectedAsin) {
@@ -36535,3 +35009,4 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
   </script>
 </body>
 </html>
+
