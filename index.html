@@ -12365,6 +12365,27 @@
       color: #315cff;
     }
 
+    .tooltip.frame-label-tooltip {
+      width: min(480px, calc(100vw - 36px));
+      max-width: none;
+      padding: 12px 14px;
+      line-height: 1.7;
+    }
+
+    .tooltip .frame-label-tooltip-paragraph {
+      color: #102346;
+    }
+
+    .tooltip .frame-label-tooltip-warning {
+      display: block;
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-left: 3px solid #e45a50;
+      border-radius: 2px;
+      background: #fff6f5;
+      color: #d92d20;
+    }
+
     .amc-chart-tooltip-asin {
       display: inline;
       max-width: 100%;
@@ -13053,6 +13074,11 @@
       background: var(--amc-blue-soft);
       color: #6077cf;
       font-size: 10px;
+    }
+
+    body[data-page="amcFrame"].product-view-on .amc-frame-module-tab-index,
+    body[data-page="amcFrame"].product-view-on .amc-overview-index {
+      display: none;
     }
 
     body[data-page="amcFrame"] .amc-overview-module-head h4,
@@ -15175,6 +15201,11 @@
       line-height: 1.5;
     }
 
+    .custom-mapping-page-notice .custom-mapping-notice-emphasis {
+      color: #315cff;
+      font-weight: 700;
+    }
+
     .custom-mapping-presentation-switcher {
       flex: 0 0 auto;
       display: none;
@@ -15753,6 +15784,10 @@
       border: 0;
       background: transparent;
       box-sizing: border-box;
+    }
+
+    .custom-mapping-detail-panel.is-empty-presentation .custom-mapping-detail-context {
+      display: none;
     }
 
     .custom-mapping-detail-context-item {
@@ -19435,7 +19470,7 @@
             <button type="button" role="tab" aria-selected="false" data-custom-mapping-presentation="empty">无数据</button>
           </div>
         </div>
-        <button class="section-notes-toggle" id="sectionNotesToggle" type="button" aria-pressed="false" aria-label="显示板块标记" title="显示板块标记">
+        <button class="section-notes-toggle" id="sectionNotesToggle" type="button" aria-pressed="false" aria-label="打开产品视图" title="打开产品视图">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M12 3 3 8l9 5 9-5-9-5Z"></path>
             <path d="M3 12l9 5 9-5"></path>
@@ -21350,7 +21385,7 @@
         <div class="custom-labels-page-shell">
           <div class="custom-mapping-page-top">
             <div class="custom-mapping-page-notice" role="note" aria-label="自定义映射使用说明">
-              自定义标签用于“购物篮关联购买分析模型”：1）创建报告选择自定义映射后，即可按自定义映射维度聚合输出报告；2）创建报告选择不提供映射，报告页面支持按照自定义映射维度给ASIN打标签，仅用于展示，辅助ASIN识别。
+              自定义映射用于“<span class="custom-mapping-notice-emphasis">购物篮关联购买分析模型</span>”：1）创建报告选择“自定义映射”，即可按映射维度<span class="custom-mapping-notice-emphasis">聚合输出报告</span>；2）创建报告选择“不提供映射”，则映射仅作为<span class="custom-mapping-notice-emphasis">标签展示</span>，用于辅助 ASIN 识别，不参与聚合也不重新计算任何指标。
             </div>
           </div>
           <div class="custom-mapping-workbench">
@@ -22711,7 +22746,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function showTooltip(event, html, tooltipClass = "") {
-      tooltip.classList.remove("frame-rsi-refresh-tooltip");
+      tooltip.classList.remove("frame-rsi-refresh-tooltip", "frame-label-tooltip");
       if (tooltipClass) tooltip.classList.add(tooltipClass);
       tooltip.innerHTML = frameLabelFormatTooltipHtml(html);
       positionTooltip(event.clientX, event.clientY);
@@ -22724,7 +22759,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function hideTooltip() {
       tooltip.style.opacity = 0;
-      tooltip.classList.remove("frame-rsi-refresh-tooltip");
+      tooltip.classList.remove("frame-rsi-refresh-tooltip", "frame-label-tooltip");
     }
 
     function createSvg(tag, attrs = {}) {
@@ -24340,6 +24375,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const toggle = document.getElementById("sectionNotesToggle");
       if (!toggle) return;
       toggle.addEventListener("click", () => {
+        if (document.body.dataset.page === "amcFrame") {
+          const isOn = !document.body.classList.contains("product-view-on");
+          document.body.classList.toggle("product-view-on", isOn);
+          toggle.setAttribute("aria-pressed", String(isOn));
+          toggle.setAttribute("aria-label", isOn ? "关闭产品视图" : "打开产品视图");
+          toggle.title = isOn ? "关闭产品视图" : "打开产品视图";
+          return;
+        }
         const isOn = !document.body.classList.contains("section-notes-on");
         document.body.classList.toggle("section-notes-on", isOn);
         toggle.setAttribute("aria-pressed", String(isOn));
@@ -24358,6 +24401,15 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         systemMappings: "systemMappingsPage"
       };
       document.body.dataset.page = page;
+      const sectionNotesToggle = document.getElementById("sectionNotesToggle");
+      document.body.classList.toggle("product-view-on", page === "amcFrame");
+      if (sectionNotesToggle) {
+        const isProductViewOn = page === "amcFrame" && document.body.classList.contains("product-view-on");
+        const isSectionNotesOn = document.body.classList.contains("section-notes-on");
+        sectionNotesToggle.setAttribute("aria-pressed", String(page === "amcFrame" ? isProductViewOn : isSectionNotesOn));
+        sectionNotesToggle.setAttribute("aria-label", page === "amcFrame" ? (isProductViewOn ? "关闭产品视图" : "打开产品视图") : (isSectionNotesOn ? "隐藏板块标记" : "显示板块标记"));
+        sectionNotesToggle.title = page === "amcFrame" ? (isProductViewOn ? "关闭产品视图" : "打开产品视图") : (isSectionNotesOn ? "隐藏板块标记" : "显示板块标记");
+      }
       Object.entries(pageMap).forEach(([key, id]) => {
         document.getElementById(id)?.classList.toggle("active", key === page);
       });
@@ -27066,6 +27118,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function refreshCustomMappingPresentation() {
+      document.querySelector(".custom-mapping-detail-panel")?.classList.toggle(
+        "is-empty-presentation",
+        customMappingUsesEmptyPresentation()
+      );
       renderCustomMappingPresentationTabs();
       renderCustomMappingFilesTable();
       renderCustomMappingsTable();
@@ -27371,7 +27427,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           <td>${customMappingFileDimensionMarkup(file.dimension)}</td>
         </tr>
       `).join("") : `
-        <tr class="custom-mapping-file-empty-row"><td class="custom-mapping-no-file" colspan="2"><div class="custom-mapping-file-empty-message">暂无符合条件的映射文件</div></td></tr>
+        <tr class="custom-mapping-file-empty-row"><td class="custom-mapping-no-file" colspan="2"><div class="custom-mapping-file-empty-message">${isEmptyPresentation ? "暂无数据" : "暂无符合条件的映射文件"}</div></td></tr>
       `;
       body.querySelectorAll("[data-custom-mapping-file-row]").forEach(row => {
         const selectFile = () => customMappingSetSelectedFile(row.dataset.customMappingFileRow || "");
@@ -27475,9 +27531,21 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       worksheet["!cols"] = [{ wch: 18 }, { wch: 24 }];
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "ASIN映射");
-      const filename = `${customMappingCurrentInstance()}-ASIN映射模板.xlsx`;
+      const filename = "自定义映射表.xlsx";
       XLSX.writeFile(workbook, filename);
       frameLabelToast(`已下载模板：${filename}`);
+    }
+
+    function customMappingDownloadDateAndRandom() {
+      const date = new Date();
+      const pad = value => String(value).padStart(2, "0");
+      const dateCode = `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}`;
+      const randomCode = String(Math.floor(Math.random() * 1000000)).padStart(6, "0");
+      return `${dateCode}${randomCode}`;
+    }
+
+    function customMappingDownloadSite(instance) {
+      return String(customMappingInstanceLabel(instance) || "US").trim().split(/\s+/)[0] || "US";
     }
 
     function customMappingDownloadData() {
@@ -27498,7 +27566,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       worksheet["!cols"] = [{ wch: 18 }, { wch: 28 }];
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "ASIN映射数据");
-      XLSX.writeFile(workbook, `${String(selectedFile.filename || "ASIN映射数据").replace(/\.xlsx?$/i, "")}-数据.xlsx`);
+      const instance = selectedFile.instance || customMappingCurrentInstance();
+      const site = customMappingDownloadSite(instance);
+      const dimension = String(selectedFile.dimension || "自定义映射").trim() || "自定义映射";
+      const filename = `${site}-${instance}-自定义映射表-${dimension}-${customMappingDownloadDateAndRandom()}.xlsx`;
+      XLSX.writeFile(workbook, filename);
       frameLabelToast("映射数据已下载");
     }
 
@@ -28576,13 +28648,16 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
     }
 
-    const frameLabelTooltipHtml = "标签仅用于“购物篮关联购买分析”模型，辅助识别ASIN，不聚合也不重新计算任何指标数据。<br><br>当创建报告选择\"不提供映射(ASIN维度)\"时，可按RSI标签、系统映射产品线或自定义映射维度辅助识别ASIN。";
+    const frameLabelTooltipHtml = `
+      <div class="frame-label-tooltip-paragraph">本报告按 <span class="frame-label-tooltip-emphasis">ASIN 维度</span> 输出。映射仅作为标签展示，用于辅助 ASIN 识别，不参与聚合也不重新计算任何指标。可在“Mapping Upload-系统映射\\自定义映射”查看和上传映射。</div>
+      <span class="frame-label-tooltip-warning">若需要按照 映射\\GROUP 聚合输出报告，可前往AMC Reports页面，设置“系统映射（产品线）\\自定义映射”重新创建报告。</span>
+    `;
 
     function frameLabelBindTooltip() {
       const help = document.getElementById("frameLabelHelp");
       if (!help || help.dataset.tooltipBound === "true") return;
       help.dataset.tooltipBound = "true";
-      help.addEventListener("mouseenter", event => showTooltip(event, frameLabelTooltipHtml));
+      help.addEventListener("mouseenter", event => showTooltip(event, frameLabelTooltipHtml, "frame-label-tooltip"));
       help.addEventListener("mousemove", moveTooltip);
       help.addEventListener("mouseleave", hideTooltip);
       help.addEventListener("focus", () => {
@@ -28590,7 +28665,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         showTooltip({
           clientX: rect.left + rect.width / 2,
           clientY: rect.bottom
-        }, frameLabelTooltipHtml);
+        }, frameLabelTooltipHtml, "frame-label-tooltip");
       });
       help.addEventListener("blur", hideTooltip);
       help.addEventListener("click", hideTooltip);
@@ -31094,7 +31169,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         { label: "二购用户", value: frameModule6FormatNumber(entry.repurchaseUsers), note: "完成至少一次二购的去重用户数", color: "#324d7d" },
         { label: "跨品承接占比", value: frameModule6FormatPercent(entry.crossShare), note: "跨品二购人次 / 总二购人次", color: "#2f6fe0" },
         { label: "二购销售额", value: frameModule6FormatCompactMoney(entry.secondSales), note: "二购 ASIN 销售额", color: "#0e8b93" },
-        { label: "二购率", value: frameModule6FormatPercent(entry.repurchaseRate), note: "二购用户 / 入口新客", color: "#6d5cc7" },
+        { label: "二购率", value: frameModule6FormatPercent(entry.repurchaseRate), note: "二购用户 / 入口新客", color: "#ef8d21" },
         { label: "二购销售占比", value: frameModule6FormatPercent(entry.valueShare), note: "二购销售额 / 首购销售额", color: "#c45f83" }
       ];
       frameModule6SetHtml("frameModule61Kpis", metrics.map(metric => `
