@@ -201,7 +201,7 @@
       min-width: 0;
       display: none;
       position: relative;
-      margin-left: auto;
+      margin-left: 8px;
       border: 1px solid #d7dff7;
       border-radius: 3px;
       background: #e4e9fa;
@@ -209,6 +209,36 @@
 
     body[data-page="customMappings"] .custom-mapping-instance-filter {
       display: block;
+    }
+
+    .custom-mapping-log-button {
+      min-width: 88px;
+      height: 32px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 0 13px;
+      border: 1px solid #d8dfec;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #40516b;
+      font-family: inherit;
+      font-size: 13px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    body[data-page="customMappings"] .custom-mapping-log-button {
+      display: inline-flex;
+    }
+
+    .custom-mapping-log-button:hover,
+    .custom-mapping-log-button:focus-visible {
+      border-color: #9eace0;
+      background: #f7f9fc;
+      color: #315cff;
+      outline: none;
     }
 
     .custom-mapping-instance-trigger {
@@ -6047,18 +6077,6 @@
       outline-offset: 1px;
     }
 
-    .amc-module3-multi-select-controls button[data-frame-module3-multi-confirm] {
-      border-color: #4e6ddb;
-      background: #526fd8;
-      color: #ffffff;
-    }
-
-    .amc-module3-multi-select-controls button[data-frame-module3-multi-confirm]:hover:not(:disabled) {
-      border-color: #3f5fc9;
-      background: #4765ce;
-      color: #ffffff;
-    }
-
     .amc-module3-multi-select-controls button:disabled {
       border-color: #e2e8f2;
       background: #f6f8fb;
@@ -6177,30 +6195,6 @@
       font-weight: 600;
     }
 
-    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm] {
-      border-color: #9cadde;
-      background: #eef2ff;
-      color: #3754c1;
-    }
-
-    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm]:hover:not(:disabled) {
-      border-color: #7f93e6;
-      background: #e5ebff;
-      color: #3153c4;
-    }
-
-    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm]:disabled {
-      border-color: #d9e1f4;
-      background: #f7f9fd;
-      color: #a0adbf;
-    }
-
-    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm]:not(:disabled):active {
-      border-color: #6f84df;
-      background: #dce4ff;
-      color: #2848b7;
-    }
-
     .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-cancel] {
       border-color: rgba(82, 111, 216, 0.26);
       color: #52637b;
@@ -6218,7 +6212,6 @@
       color: #3754c1;
     }
 
-    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm]:focus-visible,
     .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-cancel]:focus-visible,
     .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-enter]:focus-visible {
       outline-color: rgba(82, 111, 216, 0.18);
@@ -9985,6 +9978,39 @@
       font-weight: 800;
     }
 
+    .amc-module6-view-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .amc-module6-view-switch .amc-segmented-control {
+      padding: 2px;
+      border-radius: 7px;
+    }
+
+    .amc-module6-view-btn {
+      width: 30px;
+      min-width: 30px;
+      height: 26px;
+      min-height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .amc-module6-view-btn svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .amc-module6-select select {
       width: 118px;
       height: 30px;
@@ -10027,10 +10053,452 @@
       padding: 0 8px 10px;
     }
 
+    .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-grid {
+      padding: 8px 8px 4px;
+    }
+
     .amc-module6-donut-card {
       display: grid;
       grid-template-rows: minmax(0, 1fr) auto;
       min-height: 0;
+    }
+
+    .amc-module6-donut-card-content {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .amc-module6-donut-chart-pane,
+    .amc-module6-donut-table-pane {
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-card-content {
+      position: relative;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      align-items: center;
+      --module6-style2-label-offset: clamp(56px, 12%, 84px);
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-chart-donut {
+      height: 246px;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-legend {
+      display: none;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-card {
+      grid-template-rows: minmax(0, 1fr);
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-card-content {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-chart-pane {
+      display: none;
+    }
+
+    .amc-module6-donut-table-pane[hidden] {
+      display: none;
+    }
+
+    .amc-module6-donut-table-pane {
+      align-self: stretch;
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-height: 286px;
+      padding: 0 4px 10px 0;
+      scrollbar-color: #cbd7ea transparent;
+      scrollbar-width: thin;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-table-pane {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      overflow: hidden;
+      max-height: 342px;
+      padding: 0 12px 4px;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-table-pane {
+      align-self: center;
+      position: absolute;
+      inset: 0;
+      max-height: none;
+      overflow: visible;
+      height: 246px;
+      padding: 0 14px;
+      pointer-events: none;
+    }
+
+    .amc-module6-donut-table-pane::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    .amc-module6-donut-table-pane::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background: #cbd7ea;
+    }
+
+    .amc-module6-donut-table-scroll {
+      min-width: 0;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-top: 2px;
+      scrollbar-color: #cbd7ea transparent;
+      scrollbar-width: thin;
+    }
+
+    .amc-module6-donut-table-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    .amc-module6-donut-table-scroll::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background: #cbd7ea;
+    }
+
+    .amc-module6-donut-table-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .amc-module6-donut-table-stat {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 3px 8px;
+      padding: 7px 10px;
+      border: 1px solid #e2e8f2;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #fbfdff 0%, #f6f9fd 100%);
+      color: #27384f;
+      font-size: 11px;
+      line-height: 1.25;
+      box-shadow: inset 3px 0 0 var(--module6-stat-color, #5b8def);
+    }
+
+    .amc-module6-donut-table-stat.same {
+      --module6-stat-color: #34a853;
+    }
+
+    .amc-module6-donut-table-stat.cross {
+      --module6-stat-color: #1a73e8;
+    }
+
+    .amc-module6-donut-table-stat-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 0;
+      color: #40536d;
+      font-weight: 700;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-table-stats {
+      position: relative;
+      z-index: 4;
+      padding-bottom: 6px;
+      background: #ffffff;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-table-scroll {
+      padding-top: 0;
+    }
+
+    .amc-module6-donut-table-stat strong {
+      display: inline-block;
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+      color: #14233f;
+      font-size: 13px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .amc-module6-donut-table-stat small {
+      display: block;
+      grid-column: 1 / -1;
+      padding-left: 14px;
+      color: #60718a;
+      font-size: 11px;
+      line-height: 1.25;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }
+
+    .amc-module6-donut-style2-stats {
+      position: relative;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .amc-module6-donut-style2-label {
+      position: relative;
+      min-width: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 3px;
+      padding: 3px 0 3px 40px;
+      background: transparent;
+      color: #334155;
+      font-size: 10px;
+      line-height: 1.25;
+      --module6-label-connector-width: 26px;
+      --module6-label-line-y: 11px;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-style2-label {
+      position: absolute;
+      width: min(148px, 32%);
+      top: var(--module6-label-y, 50%);
+      transform: translateY(-50%);
+      z-index: 2;
+      pointer-events: auto;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-style2-label.cross {
+      left: var(--module6-style2-label-offset);
+      right: auto;
+      padding: 3px 40px 3px 0;
+      text-align: right;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-style2-label.same {
+      left: auto;
+      right: var(--module6-style2-label-offset);
+      text-align: left;
+    }
+
+    .amc-module6-donut-style2-label::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: var(--module6-label-line-y);
+      width: var(--module6-label-connector-width);
+      height: 1px;
+      background: var(--module6-label-color);
+      opacity: 0.72;
+      transform: translateY(-50%);
+    }
+
+    .amc-module6-donut-style2-label::after {
+      content: "";
+      position: absolute;
+      left: var(--module6-label-connector-width);
+      top: var(--module6-label-line-y);
+      width: 8px;
+      height: 8px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      background: var(--module6-label-color);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--module6-label-color) 55%, transparent);
+      transform: translateY(-50%);
+    }
+
+    .amc-module6-donut-style2-label.same {
+      --module6-label-color: #34a853;
+    }
+
+    .amc-module6-donut-style2-label.cross {
+      --module6-label-color: #1a73e8;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-style2-label.cross::before {
+      left: auto;
+      right: 0;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-style2-label.cross::after {
+      left: auto;
+      right: var(--module6-label-connector-width);
+    }
+
+    .amc-module6-donut-style2-label span {
+      min-width: 0;
+      color: #53657b;
+      font-size: 10px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .amc-module6-donut-style2-label strong {
+      color: #14233f;
+      font-size: 13px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .amc-module6-donut-style2-label small {
+      display: grid;
+      gap: 1px;
+      color: #7b89a2;
+      font-size: 10px;
+      line-height: 1.22;
+      white-space: normal;
+      overflow: visible;
+    }
+
+    .amc-module6-donut-style2-label small span {
+      display: block;
+      min-width: 0;
+      color: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-module6-donut-table {
+      width: 100%;
+      min-width: 0;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+      color: #263952;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .amc-module6-donut-table th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      padding: 8px 8px;
+      border-bottom: 1px solid #e3e9f2;
+      background: #f6f8fc;
+      color: #40536d;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: left;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-table th {
+      top: 0;
+    }
+
+    .amc-module6-donut-table td {
+      padding: 8px 7px;
+      border-bottom: 1px solid #edf1f6;
+      color: #263952;
+      font-weight: 400;
+      vertical-align: middle;
+      overflow: hidden;
+    }
+
+    .amc-module6-donut-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .amc-module6-donut-table .is-right {
+      text-align: right;
+      color: #162844;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .amc-module6-donut-table-share {
+      color: #40536d;
+      font-size: 11px;
+      line-height: 1.35;
+      text-align: right;
+      white-space: normal;
+    }
+
+    .amc-module6-donut-table-share-line {
+      display: grid;
+      justify-items: end;
+      gap: 3px;
+      max-width: 100%;
+      white-space: normal;
+    }
+
+    .amc-module6-donut-table-share-item {
+      display: inline-grid;
+      grid-template-columns: max-content max-content;
+      align-items: baseline;
+      justify-content: end;
+      column-gap: 5px;
+      max-width: 100%;
+      white-space: nowrap;
+    }
+
+    .amc-module6-donut-table-share-label {
+      color: #6b7b93;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .amc-module6-donut-table-share-value {
+      color: #162844;
+      font-size: 11px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .amc-module6-donut-table-asin {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .amc-module6-donut-table-asin .amc-module6-donut-swatch {
+      flex: none;
+      margin-top: 2px;
+    }
+
+    .amc-module6-donut-table-asin-text {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+      line-height: 1.32;
+    }
+
+    .amc-module6-donut-table-asin-value,
+    .amc-module6-donut-table-asin-label {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-module6-donut-table-asin-value {
+      color: #263952;
+      font-weight: 400;
+    }
+
+    .amc-module6-donut-table-asin-label {
+      color: #60718a;
+      font-size: 11px;
+      font-weight: 400;
     }
 
     .amc-module6-donut-card + .amc-module6-donut-card {
@@ -10075,6 +10543,14 @@
       scrollbar-width: thin;
     }
 
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-legend {
+      justify-content: center;
+      align-items: center;
+      gap: 8px 16px;
+      padding: 2px 14px 12px;
+      text-align: center;
+    }
+
     .amc-module6-donut-legend[hidden] {
       display: none;
     }
@@ -10100,13 +10576,75 @@
       column-gap: 10px;
       row-gap: 4px;
       padding: 1px 6px;
+      border: 1px solid transparent;
+      border-radius: 6px;
       background: transparent;
       color: #334155;
       font-weight: 400;
+      transition: background-color 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .amc-module6-donut-legend-item.is-active {
+      border-color: color-mix(in srgb, var(--legend-color, #5b8def) 42%, #dbe6f8);
+      background: color-mix(in srgb, var(--legend-color, #5b8def) 10%, #ffffff);
+      box-shadow: 0 4px 12px rgba(48, 70, 112, 0.10);
     }
 
     .amc-module6-donut-legend-item.has-dual-share {
       grid-template-columns: 12px max-content max-content minmax(0, max-content);
+    }
+
+    .amc-module6-donut-legend-stats {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .amc-module6-donut-legend-stat {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 2px 8px;
+      padding: 5px 7px;
+      border: 1px solid #e2e8f2;
+      border-radius: 6px;
+      background: #f8fbff;
+      color: #334155;
+      font-size: 10px;
+      line-height: 1.2;
+    }
+
+    .amc-module6-donut-legend-stat strong {
+      color: #14233f;
+      font-size: 12px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .amc-module6-donut-legend-stat small {
+      grid-column: 1 / -1;
+      color: #7b89a2;
+      font-size: 10px;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .amc-module6-donut-asin-legend-list {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px 16px;
+    }
+
+    .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-asin-legend-list {
+      justify-content: center;
     }
 
     .amc-module6-donut-swatch {
@@ -10158,8 +10696,10 @@
     .amc-module6-dot {
       width: 9px;
       height: 9px;
+      display: inline-block;
       border-radius: 50%;
       flex: none;
+      vertical-align: -1px;
     }
 
     .amc-module6-dot.same {
@@ -10204,6 +10744,10 @@
       .amc-module6-donut-card + .amc-module6-donut-card {
         border-top: 1px solid #edf1f6;
         border-left: 0;
+      }
+
+      .amc-module6-donut-analysis[data-donut-style="style2"] .amc-module6-donut-card-content {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -15519,6 +16063,7 @@
       flex: 0 0 auto;
       display: none;
       align-items: center;
+      margin-left: auto;
     }
 
     body[data-page="customMappings"] .custom-mapping-presentation-switcher {
@@ -15911,7 +16456,8 @@
     }
 
     .custom-mapping-file-select {
-      width: 100%;
+      min-width: 0;
+      flex: 1 1 auto;
       display: block;
       overflow: hidden;
       padding: 0;
@@ -15924,6 +16470,39 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       cursor: pointer;
+    }
+
+    .custom-mapping-file-name {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .custom-mapping-file-status {
+      min-width: 0;
+      height: 20px;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 6px;
+      border-radius: 3px;
+      background: #edf9f2;
+      color: #079263;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .custom-mapping-file-status.is-failed {
+      background: #fff1f0;
+      color: #d94444;
+    }
+
+    .custom-mapping-file-status.is-pending {
+      background: #fff8e8;
+      color: #bd7a08;
     }
 
     .custom-mapping-file-select:hover,
@@ -19779,6 +20358,12 @@
           </button>
           <button class="system-mapping-header-action" type="button">操作日志</button>
         </div>
+        <div class="custom-mapping-presentation-switcher" aria-label="页面样式切换">
+          <div class="custom-mapping-presentation-tabs" id="customMappingPresentationTabs" role="tablist" aria-label="自定义映射页面样式" tabindex="0" title="样式切换，不展示在实际报告中">
+            <button class="is-active" type="button" role="tab" aria-selected="true" data-custom-mapping-presentation="populated">有数据</button>
+            <button type="button" role="tab" aria-selected="false" data-custom-mapping-presentation="empty">无数据</button>
+          </div>
+        </div>
         <div class="custom-mapping-instance-filter" aria-label="Instance 筛选">
           <button class="custom-mapping-instance-trigger" id="customMappingTopInstanceFilter" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="按 Instance 筛选">
             <span class="custom-mapping-instance-dot" aria-hidden="true"></span>
@@ -19790,12 +20375,7 @@
           <div class="custom-mapping-instance-menu" id="customMappingTopInstanceMenu" role="listbox" aria-label="Instance 选项">
           </div>
         </div>
-        <div class="custom-mapping-presentation-switcher" aria-label="页面样式切换">
-          <div class="custom-mapping-presentation-tabs" id="customMappingPresentationTabs" role="tablist" aria-label="自定义映射页面样式" tabindex="0" title="样式切换，不展示在实际报告中">
-            <button class="is-active" type="button" role="tab" aria-selected="true" data-custom-mapping-presentation="populated">有数据</button>
-            <button type="button" role="tab" aria-selected="false" data-custom-mapping-presentation="empty">无数据</button>
-          </div>
-        </div>
+        <button class="custom-mapping-log-button" type="button">操作日志</button>
         <button class="section-notes-toggle" id="sectionNotesToggle" type="button" aria-pressed="false" aria-label="打开产品视图" title="打开产品视图">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M12 3 3 8l9 5 9-5-9-5Z"></path>
@@ -20012,7 +20592,7 @@
                     </span>
                   </div>
                   <button class="frame-label-rsi-refresh" id="frameRsiRefreshBtn" type="button" hidden>
-                    <span>获取RSI产品名</span>
+                    <span>获取ARP产品名</span>
                   </button>
                 </div>
               </div>
@@ -21032,7 +21612,6 @@
                         <span class="amc-module3-multi-select-drag-handle" data-frame-module3-multi-drag-handle role="button" tabindex="0" aria-label="拖动多选框"></span>
                         <button type="button" data-frame-module3-multi-enter aria-pressed="false">多选</button>
                         <span class="amc-module3-multi-select-count" data-frame-module3-multi-count hidden></span>
-                        <button type="button" data-frame-module3-multi-confirm hidden>确定</button>
                         <button type="button" data-frame-module3-multi-cancel hidden>取消多选</button>
                       </div>
                     </div>
@@ -21073,7 +21652,6 @@
                         <div class="amc-module3-multi-select-controls" data-frame-module3-multi-controls aria-label="多选关联组合">
                           <button type="button" data-frame-module3-multi-enter aria-pressed="false">多选</button>
                           <span class="amc-module3-multi-select-count" data-frame-module3-multi-count hidden></span>
-                          <button type="button" data-frame-module3-multi-confirm hidden>确定</button>
                           <button type="button" data-frame-module3-multi-cancel hidden>取消多选</button>
                         </div>
                         <div class="amc-segmented-control amc-module3-quality-tabs" role="tablist" aria-label="关联质量图表">
@@ -21529,17 +22107,51 @@
                         <option value="15">TOP 15</option>
                       </select>
                     </label>
+                    <div class="amc-module6-view-switch" id="frameModule64ViewSwitch" aria-label="6.4 图表表格切换">
+                      <div class="amc-segmented-control" role="tablist" aria-label="6.4 图表表格切换">
+                        <button class="amc-segment-btn amc-module6-view-btn is-active" type="button" data-module6-donut-view="chart" role="tab" aria-selected="true" aria-label="图表视图" title="图表视图">
+                          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M4 19V5"></path>
+                            <path d="M4 19h16"></path>
+                            <path d="M8 16v-5"></path>
+                            <path d="M12 16V8"></path>
+                            <path d="M16 16v-3"></path>
+                          </svg>
+                          <span class="sr-only">图表视图</span>
+                        </button>
+                        <button class="amc-segment-btn amc-module6-view-btn" type="button" data-module6-donut-view="table" role="tab" aria-selected="false" aria-label="表格视图" title="表格视图">
+                          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M4 6h16"></path>
+                            <path d="M4 12h16"></path>
+                            <path d="M4 18h16"></path>
+                            <path d="M9 6v12"></path>
+                            <path d="M15 6v12"></path>
+                          </svg>
+                          <span class="sr-only">表格视图</span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 <div class="amc-module6-donut-grid">
                   <section class="amc-module6-donut-card" aria-label="二购 ASIN 购买人次结构">
-                    <div class="amc-module6-chart amc-module6-chart-donut" id="frameModule64Chart" role="img" aria-label="二购ASIN人次结构"></div>
+                    <div class="amc-module6-donut-card-content">
+                      <div class="amc-module6-donut-chart-pane">
+                        <div class="amc-module6-chart amc-module6-chart-donut" id="frameModule64Chart" role="img" aria-label="二购ASIN人次结构"></div>
+                      </div>
+                      <div class="amc-module6-donut-table-pane" id="frameModule64ListWrap" aria-label="二购 ASIN 购买人次列表" hidden></div>
+                    </div>
                     <div class="amc-module6-donut-legend" id="frameModule64Legend" aria-label="二购 ASIN 人次结构图例" hidden></div>
                   </section>
 
                   <section class="amc-module6-donut-card" aria-label="二购 ASIN 销售额结构">
-                    <div class="amc-module6-chart amc-module6-chart-donut" id="frameModule65Chart" role="img" aria-label="二购ASIN销售额结构"></div>
+                    <div class="amc-module6-donut-card-content">
+                      <div class="amc-module6-donut-chart-pane">
+                        <div class="amc-module6-chart amc-module6-chart-donut" id="frameModule65Chart" role="img" aria-label="二购ASIN销售额结构"></div>
+                      </div>
+                      <div class="amc-module6-donut-table-pane" id="frameModule65ListWrap" aria-label="二购 ASIN 销售额列表" hidden></div>
+                    </div>
                     <div class="amc-module6-donut-legend" id="frameModule65Legend" aria-label="二购 ASIN 销售额结构图例" hidden></div>
                   </section>
                 </div>
@@ -25636,9 +26248,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule3DetailFilteredRecords(records) {
       const pricePath = frameModule3State.detailPricePath;
-      const multiSelectedPairKeys = frameModule3State.view === "quality" && frameModule3State.multiSelectionApplied
-        ? new Set(frameModule3State.multiSelectedPairKeys)
-        : null;
+      const multiSelectedPairKeys = frameModule3ActiveMultiPairKeySet();
       return records.filter(record => {
         if (pricePath && record.pricePath !== pricePath) return false;
         if (multiSelectedPairKeys && !multiSelectedPairKeys.has(record.pairKey)) return false;
@@ -25668,6 +26278,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule3SelectedPairKeys() {
       return [...new Set((frameModule3State.multiSelectedPairKeys || []).filter(Boolean))];
+    }
+
+    function frameModule3ActiveMultiPairKeySet() {
+      const selectedKeys = frameModule3SelectedPairKeys();
+      return frameModule3State.view === "quality" && frameModule3State.multiSelectionApplied && selectedKeys.length
+        ? new Set(selectedKeys)
+        : null;
+    }
+
+    function frameModule3ApplyMultiPairFilter(records) {
+      const selectedKeys = frameModule3ActiveMultiPairKeySet();
+      return selectedKeys
+        ? records.filter(record => selectedKeys.has(record.pairKey))
+        : records;
     }
 
     function frameModule3IsPairSelected(pairKey) {
@@ -25707,13 +26331,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         selected.add(pairKey);
       }
       frameModule3State.multiSelectedPairKeys = [...selected];
-      frameModule3RenderAll();
-    }
-
-    function frameModule3ConfirmMultiSelection() {
-      if (!frameModule3State.multiSelectMode || !frameModule3SelectedPairKeys().length) return;
-      frameModule3State.multiSelectMode = false;
-      frameModule3State.multiSelectionApplied = true;
+      frameModule3State.multiSelectionApplied = selected.size > 0;
       frameModule3State.selectedPairKey = null;
       frameModule3RenderAll();
     }
@@ -25769,8 +26387,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const pricePathLabel = frameModule3State.detailPricePath
           ? `；价格路径：${frameModule3PricePathLabel(frameModule3State.detailPricePath)}`
           : "";
+        const multiSelectedCount = frameModule3ActiveMultiPairKeySet()?.size || 0;
+        const multiSelectLabel = multiSelectedCount
+          ? `；已按多选组合筛选 ${frameModule2FormatNumber(multiSelectedCount)} 项，可在当前明细表查看`
+          : "";
         subtitle.textContent = isQuality
-          ? `质量视角：继承交叉购买人数筛选 ${sampleLabel}，按修正关联指数排序${pricePathLabel}。`
+          ? `质量视角：继承交叉购买人数筛选 ${sampleLabel}，按修正关联指数排序${pricePathLabel}${multiSelectLabel}。`
           : `规模视角：继承全局筛选，按交叉购买人数排序${pricePathLabel}。`;
       }
       frameModule3RenderDetailControls();
@@ -25912,7 +26534,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       document.querySelectorAll("[data-frame-module3-multi-controls]").forEach(controls => {
         const enter = controls.querySelector("[data-frame-module3-multi-enter]");
         const count = controls.querySelector("[data-frame-module3-multi-count]");
-        const confirm = controls.querySelector("[data-frame-module3-multi-confirm]");
         const cancel = controls.querySelector("[data-frame-module3-multi-cancel]");
         controls.classList.toggle("is-selecting", isSelecting);
         controls.classList.toggle("is-applied", isApplied);
@@ -25923,14 +26544,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         if (count) {
           count.hidden = !isSelecting && !isApplied;
           count.textContent = isApplied
-            ? `已筛选 ${selectedCount} 项`
+            ? `已选 ${selectedCount} 项，可在明细表查看`
             : selectedCount
               ? `已选 ${selectedCount} 项`
-              : "单击色块选择";
-        }
-        if (confirm) {
-          confirm.hidden = !isSelecting;
-          confirm.disabled = selectedCount === 0;
+              : "单击色块选择，在下方查看明细";
         }
         if (cancel) cancel.hidden = !isSelecting && !isApplied;
       });
@@ -26243,7 +26860,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = params.data?.record;
             if (!record) return "";
-            return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>${params.seriesName}：${frameModule2FormatNumber(record.crossUsers)}<br>交叉购买组合数：${frameModule2FormatNumber(params.seriesName === leftLabel ? leftPairCount : rightPairCount)}个<br>平均间隔：${record.avgInterval.toFixed(1)} 天<br>价格倍数：${record.priceMultiple.toFixed(2)}x`;
+            return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>价格路径：${params.seriesName}<br>交叉购买人数：${frameModule2FormatNumber(record.crossUsers)}<br>交叉购买组合数：${frameModule2FormatNumber(params.seriesName === leftLabel ? leftPairCount : rightPairCount)}个<br>平均间隔：${record.avgInterval.toFixed(1)} 天<br>Lead ASIN 单价：${frameModule3FormatMoney(record.leadPrice)}<br>Follow ASIN 单价：${frameModule3FormatMoney(record.followPrice)}<br>价格倍数：${record.priceMultiple.toFixed(2)}x`;
           }
         },
         xAxis: {
@@ -26496,9 +27113,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           extraCssText: "box-shadow:0 8px 18px rgba(30,53,101,0.10);border-radius:6px;",
           formatter: params => {
             const record = params.data?.record;
-            return record
-              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>${metric.label}：${frameModule3FormatMetric(frameModule3MetricValue(record, frameModule3State.matrixMetric), metric.type)}<br>交叉购买人次：${frameModule2FormatNumber(record.crossUsers)}<br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")}<br>吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}`
+            if (!record) return "";
+            const detailHint = frameModule3UseMultiPairSelection() && frameModule3IsPairSelected(record.pairKey)
+              ? `<br><span style="color:#3153c4;font-weight:600;">可在下方明细表查看详情</span>`
               : "";
+            return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>${metric.label}：${frameModule3FormatMetric(frameModule3MetricValue(record, frameModule3State.matrixMetric), metric.type)}<br>交叉购买人次：${frameModule2FormatNumber(record.crossUsers)}<br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")}<br>吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}${detailHint}`;
           }
         },
         visualMap: {
@@ -27408,9 +28027,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       document.querySelectorAll("[data-frame-module3-multi-enter]").forEach(button => {
         button.addEventListener("click", frameModule3EnterMultiSelectMode);
       });
-      document.querySelectorAll("[data-frame-module3-multi-confirm]").forEach(button => {
-        button.addEventListener("click", frameModule3ConfirmMultiSelection);
-      });
       document.querySelectorAll("[data-frame-module3-multi-cancel]").forEach(button => {
         button.addEventListener("click", frameModule3CancelMultiSelection);
       });
@@ -27979,6 +28595,24 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       ));
     }
 
+    function customMappingSyncVisibleFileSelection(files) {
+      const visibleFiles = Array.isArray(files) ? files : [];
+      const selectedFile = visibleFiles.find(file => file.id === customMappingState.selectedFileId)
+        || visibleFiles[0]
+        || null;
+      customMappingState.selectedFileId = selectedFile?.id || "";
+      customMappingState.records = Array.isArray(selectedFile?.records) ? selectedFile.records : [];
+      return selectedFile;
+    }
+
+    function customMappingRefreshFileFilters() {
+      customMappingState.detailPage = 1;
+      renderCustomMappingFilesTable();
+      renderCustomMappingsTable();
+      renderFrameCreateAggregationState();
+      frameLabelRefreshReport();
+    }
+
     function customMappingFileDimensionMarkup(dimension) {
       const label = String(dimension || "").trim() || "-";
       return `
@@ -28088,15 +28722,27 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       customMappingSyncFilterClears();
       const isEmptyPresentation = customMappingUsesEmptyPresentation();
       const files = isEmptyPresentation ? [] : customMappingFilteredFiles();
-      const selectedFile = isEmptyPresentation ? null : customMappingSelectedFile();
+      const selectedFile = isEmptyPresentation ? null : customMappingSyncVisibleFileSelection(files);
       body.closest(".custom-mapping-file-table")?.classList.toggle("is-empty", !files.length);
       total.textContent = `共 ${files.length} 条`;
-      body.innerHTML = files.length ? files.map(file => `
+      body.innerHTML = files.length ? files.map(file => {
+        const status = String(file.status || "成功").trim() || "成功";
+        const statusClass = status === "失败"
+          ? " is-failed"
+          : ["上传中", "处理中"].includes(status)
+            ? " is-pending"
+            : "";
+        return `
         <tr class="${file.id === selectedFile?.id ? "is-selected" : ""}" data-custom-mapping-file-row="${escapeHtml(file.id)}" tabindex="0" aria-label="选择映射文件：${escapeHtml(file.filename)}">
-          <td><button class="custom-mapping-file-select" type="button" title="${escapeHtml(file.filename)}" data-custom-mapping-file-id="${escapeHtml(file.id)}">${escapeHtml(file.filename)}</button></td>
+          <td>
+            <span class="custom-mapping-file-name">
+              <button class="custom-mapping-file-select" type="button" title="${escapeHtml(file.filename)}" data-custom-mapping-file-id="${escapeHtml(file.id)}">${escapeHtml(file.filename)}</button>
+              <span class="custom-mapping-file-status${statusClass}" title="上传状态：${escapeHtml(status)}">${escapeHtml(status)}</span>
+            </span>
+          </td>
           <td>${customMappingFileDimensionMarkup(file.dimension)}</td>
-        </tr>
-      `).join("") : `
+        </tr>`;
+      }).join("") : `
         <tr class="custom-mapping-file-empty-row"><td class="custom-mapping-no-file" colspan="2"><div class="custom-mapping-file-empty-message">${isEmptyPresentation ? "暂无数据" : "暂无符合条件的映射文件"}</div></td></tr>
       `;
       body.querySelectorAll("[data-custom-mapping-file-row]").forEach(row => {
@@ -28136,7 +28782,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (!body || !total) return;
       const selectedFile = customMappingUsesEmptyPresentation()
         ? null
-        : customMappingSyncSelectedRecords();
+        : customMappingSyncVisibleFileSelection(customMappingFilteredFiles());
       const records = selectedFile ? customMappingFilteredRecords() : [];
       customMappingSyncFilterClears();
       total.textContent = `共 ${records.length} 条`;
@@ -29063,7 +29709,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameLabelCategories() {
       return [
-        { value: "rsi", label: "RSI标签" },
+        { value: "rsi", label: "ARP产品名" },
         { value: "system", label: "系统映射" },
         { value: "custom", label: "自定义映射" }
       ];
@@ -29167,7 +29813,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const options = [
         { value: "none", label: "不显示标签", category: "none" }
       ];
-      if (frameLabelCanUseRsi()) options.push({ value: "system", label: "RSI标签", category: "rsi" });
+      if (frameLabelCanUseRsi()) options.push({ value: "system", label: "ARP产品名", category: "rsi" });
       if (frameLabelCanUseSystemProductLine()) {
         options.push({ value: "system-product-line", label: "产品线", category: "system" });
       }
@@ -29355,7 +30001,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       help.addEventListener("click", hideTooltip);
     }
 
-    const frameRsiRefreshTooltipHtml = "点击获取RSI产品名，可应用于报告页面辅助识别ASIN，仅展示不影响数据统计口径；获取后可切换“RSI产品名标签”是否展示。";
+    const frameRsiRefreshTooltipHtml = "点击获取ARP产品名，可应用于报告页面辅助识别ASIN，仅展示不影响数据统计口径；获取后可切换“ARP产品名”是否展示。";
 
     function frameRsiBindRefreshTooltip() {
       const button = document.getElementById("frameRsiRefreshBtn");
@@ -29431,16 +30077,16 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         refreshButton.classList.toggle("is-rsi-locked", isRsiLocked);
         refreshButton.setAttribute("aria-busy", String(isRefreshing));
         refreshButton.setAttribute("aria-label", isRsiLocked
-          ? "暂无权限，RSI为付费数据源。"
+          ? "暂无权限，ARP为付费数据源。"
           : isRefreshing
             ? "获取中"
-            : "获取RSI产品名");
+            : "获取ARP产品名");
         if (isRsiLocked) {
-          refreshButton.title = "暂无权限，RSI为付费数据源。";
+          refreshButton.title = "暂无权限，ARP为付费数据源。";
         } else {
           refreshButton.removeAttribute("title");
         }
-        if (refreshLabel) refreshLabel.textContent = isRefreshing ? "获取中" : "获取RSI产品名";
+        if (refreshLabel) refreshLabel.textContent = isRefreshing ? "获取中" : "获取ARP产品名";
       }
       switcher?.classList.toggle("is-empty", !options.length);
     }
@@ -29463,7 +30109,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       return new Promise((resolve, reject) => {
         window.setTimeout(() => {
           if (window.__amcRsiRefreshShouldFail === true) {
-            reject(new Error("RSI 产品信息刷新失败"));
+            reject(new Error("ARP 产品信息刷新失败"));
             return;
           }
           resolve();
@@ -29475,18 +30121,18 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (phase === "success") {
         return {
           status: "获取成功",
-          message: "RSI产品名获取成功，可点击“应用”按钮直接应用或在标签筛选切换RSI标签应用"
+          message: "ARP产品名获取成功，可点击“应用”按钮直接应用或在标签筛选切换ARP产品名应用"
         };
       }
       if (phase === "failure") {
         return {
           status: "获取失败",
-          message: "RSI产品名获取失败，请稍后重试~"
+          message: "ARP产品名获取失败，请稍后重试~"
         };
       }
       return {
         status: "获取中",
-        message: "获取RSI产品名可能需要几分钟，期间可正常查看报告！"
+        message: "获取ARP产品名可能需要几分钟，期间可正常查看报告！"
       };
     }
 
@@ -29550,7 +30196,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       frameRsiRefreshState.phase = "idle";
       frameRsiCloseFetchPopover();
       frameLabelRefreshReport();
-      frameLabelToast("RSI产品名已应用。");
+      frameLabelToast("ARP产品名已应用。");
     }
 
     function frameRsiStartPopoverDrag(event) {
@@ -29848,15 +30494,15 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         if (filename) filename.value = "";
         if (dimension) dimension.value = "";
         customMappingSyncFilterClears();
-        renderCustomMappingFilesTable();
+        customMappingRefreshFileFilters();
       });
       document.getElementById("customMappingFileFilterName")?.addEventListener("input", () => {
         customMappingSyncFilterClear("customMappingFileFilterName");
-        renderCustomMappingFilesTable();
+        customMappingRefreshFileFilters();
       });
       document.getElementById("customMappingFileFilterDimension")?.addEventListener("change", () => {
         customMappingSyncFilterClear("customMappingFileFilterDimension");
-        renderCustomMappingFilesTable();
+        customMappingRefreshFileFilters();
       });
 
       document.getElementById("customMappingDetailResetBtn")?.addEventListener("click", () => {
@@ -31609,7 +32255,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     const frameModule6State = {
       selectedAsin: null,
       topN: 5,
-      selectedBucket: null
+      selectedBucket: null,
+      donutStyle: "style3",
+      donutView: "chart"
     };
     const frameModule6AsinPickerState = {
       open: false,
@@ -32221,9 +32869,241 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }).join("");
     }
 
-    function frameModule6RenderDonutCard(entry, chartId, metricKey, legendId) {
+    function frameModule6RenderDonutAsinLegend(legendId, items, metricKey, totalVisible, totalAll, topNLabel = "TOP N") {
+      const legend = document.getElementById(legendId);
+      if (!legend) return;
+      if (!items.length || !totalVisible) {
+        frameModule6ClearDonutLegend(legendId);
+        return;
+      }
+      legend.hidden = false;
+      const itemsHtml = items.map(item => {
+        const nameText = frameLabelFormatAsin(item.name);
+        const valueText = frameModule6DonutMetricText(item.value, metricKey);
+        const topShareText = frameModule6FormatPercent(item.topNShare);
+        const fullShareText = frameModule6FormatPercent(item.fullShare);
+        const title = `${nameText} · ${frameModule6DonutMetricLabel(metricKey)} ${valueText} · 占比${topNLabel} ${topShareText} · 占比全量 ${fullShareText}`;
+        return `
+          <span class="amc-module6-donut-legend-item has-dual-share" data-module6-donut-asin="${escapeHtml(item.name)}" style="--legend-color:${escapeHtml(item.color)}" title="${escapeHtml(title)}">
+            <i class="amc-module6-donut-swatch" aria-hidden="true"></i>
+            <span class="amc-module6-donut-name">${escapeHtml(nameText)}</span>
+            <span class="amc-module6-donut-count">${escapeHtml(valueText)}</span>
+            <span class="amc-module6-donut-share">
+              <span class="amc-module6-donut-share-part">占比${escapeHtml(topNLabel)}：${escapeHtml(topShareText)}</span>
+              <span class="amc-module6-donut-share-part">占比全量：${escapeHtml(fullShareText)}</span>
+            </span>
+          </span>`;
+      }).join("");
+      legend.innerHTML = `<div class="amc-module6-donut-asin-legend-list">${itemsHtml}</div>`;
+    }
+
+    function frameModule6SyncDonutLegendHover(legendId, asin) {
+      const legend = document.getElementById(legendId);
+      if (!legend) return;
+      let activeItem = null;
+      legend.querySelectorAll("[data-module6-donut-asin]").forEach(item => {
+        const active = Boolean(asin) && item.dataset.module6DonutAsin === asin;
+        item.classList.toggle("is-active", active);
+        if (active) activeItem = item;
+      });
+      if (activeItem) {
+        activeItem.scrollIntoView({ block: "nearest", inline: "nearest" });
+      }
+    }
+
+    function frameModule6DonutGroupLabelPositions(items, totalVisible) {
+      const stats = {
+        same: { x: 0, y: 0, value: 0 },
+        cross: { x: 0, y: 0, value: 0 }
+      };
+      let currentAngle = 90;
+      items.forEach(item => {
+        const value = Number(item.value || 0);
+        if (!value || !totalVisible) return;
+        const span = value / totalVisible * 360;
+        const midAngle = currentAngle - span / 2;
+        const radians = midAngle * Math.PI / 180;
+        const key = item.same ? "same" : "cross";
+        stats[key].x += Math.cos(radians) * value;
+        stats[key].y += Math.sin(radians) * value;
+        stats[key].value += value;
+        currentAngle -= span;
+      });
+      const positions = {};
+      Object.entries(stats).forEach(([key, stat]) => {
+        if (!stat.value) return;
+        const yVector = stat.y / stat.value;
+        positions[key] = Math.min(82, Math.max(18, 50 - yVector * 34));
+      });
+      if (positions.same != null && positions.cross != null && Math.abs(positions.same - positions.cross) < 28) {
+        const sameAbove = positions.same <= positions.cross;
+        positions.same = sameAbove ? 34 : 66;
+        positions.cross = sameAbove ? 66 : 34;
+      }
+      return positions;
+    }
+
+    function frameModule6RenderDonutSideStats(tableId, items, metricKey, totalVisible, totalAll, topNLabel = "TOP N") {
+      const tableWrap = document.getElementById(tableId);
+      if (!tableWrap) return;
+      const labelPositions = frameModule6DonutGroupLabelPositions(items, totalVisible);
+      const groups = [
+        {
+          name: "同品二购",
+          className: "same",
+          value: items.filter(item => item.same).reduce((sum, item) => sum + Number(item.value || 0), 0)
+        },
+        {
+          name: "跨品二购",
+          className: "cross",
+          value: items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.value || 0), 0)
+        }
+      ].filter(item => Number(item.value || 0) > 0);
+      tableWrap.innerHTML = groups.length
+        ? `<div class="amc-module6-donut-style2-stats">${groups.map(group => {
+          const topShare = Number(group.value || 0) / Math.max(1, totalVisible);
+          const fullShare = totalAll ? Number(group.value || 0) / Math.max(1, totalAll) : 0;
+          const top = labelPositions[group.className] ?? 50;
+          return `<div class="amc-module6-donut-style2-label ${escapeHtml(group.className)}" style="--module6-label-y:${top.toFixed(1)}%">
+            <span>${escapeHtml(group.name)}</span>
+            <strong>${escapeHtml(frameModule6DonutMetricText(group.value, metricKey))}</strong>
+            <small title="占比${escapeHtml(topNLabel)} ${frameModule6FormatPercent(topShare)} / 占比全量 ${frameModule6FormatPercent(fullShare)}">
+              <span>占比${escapeHtml(topNLabel)} ${frameModule6FormatPercent(topShare)}</span>
+              <span>占比全量 ${frameModule6FormatPercent(fullShare)}</span>
+            </small>
+          </div>`;
+        }).join("")}</div>`
+        : `<div class="amc-module6-empty"><span class="amc-list-empty">暂无同品 / 跨品数据</span></div>`;
+    }
+
+    function frameModule6DonutMetricLabel(metricKey) {
+      return metricKey === "salesAmount" ? "销售额" : "购买人次";
+    }
+
+    function frameModule6DonutMetricText(value, metricKey) {
+      return metricKey === "salesAmount"
+        ? frameModule6FormatCompactMoney(value)
+        : `${frameModule6FormatNumber(value)}人次`;
+    }
+
+    function frameModule6RenderDonutTable(tableId, items, metricKey, totalVisible, totalAll, topNLabel = "TOP N", showStats = false, compactShareHeader = false) {
+      const tableWrap = document.getElementById(tableId);
+      if (!tableWrap) return;
+      if (!items.length || !totalVisible) {
+        tableWrap.innerHTML = `<div class="amc-module6-empty"><span class="amc-list-empty">暂无二购 ASIN 数据</span></div>`;
+        return;
+      }
+      const groups = [
+        {
+          name: "同品二购",
+          className: "same",
+          value: items.filter(item => item.same).reduce((sum, item) => sum + Number(item.value || 0), 0)
+        },
+        {
+          name: "跨品二购",
+          className: "cross",
+          value: items.filter(item => !item.same).reduce((sum, item) => sum + Number(item.value || 0), 0)
+        }
+      ].filter(item => Number(item.value || 0) > 0);
+      const statsHtml = showStats && groups.length
+        ? `<div class="amc-module6-donut-table-stats">${groups.map(group => {
+          const topShare = Number(group.value || 0) / Math.max(1, totalVisible);
+          const fullShare = totalAll ? Number(group.value || 0) / Math.max(1, totalAll) : 0;
+          return `<div class="amc-module6-donut-table-stat ${escapeHtml(group.className)}">
+            <span class="amc-module6-donut-table-stat-label"><i class="amc-module6-dot ${escapeHtml(group.className)}" aria-hidden="true"></i> ${escapeHtml(group.name)}</span>
+            <strong>${escapeHtml(frameModule6DonutMetricText(group.value, metricKey))}</strong>
+            <small title="占比${escapeHtml(topNLabel)} ${frameModule6FormatPercent(topShare)} / 占比全量 ${frameModule6FormatPercent(fullShare)}">${escapeHtml(topNLabel)} ${frameModule6FormatPercent(topShare)} | 全量 ${frameModule6FormatPercent(fullShare)}</small>
+          </div>`;
+        }).join("")}</div>`
+        : "";
+      const metricLabel = frameModule6DonutMetricLabel(metricKey);
+      const rowsHtml = items.map(item => {
+        const asinParts = frameLabelDisplayParts(item.name);
+        const hasTag = frameLabelHasTag(asinParts);
+        const asinTitle = hasTag ? `${asinParts.raw} · ${asinParts.label}` : asinParts.raw;
+        const topShareText = frameModule6FormatPercent(item.topNShare);
+        const fullShareText = frameModule6FormatPercent(item.fullShare);
+        const shareTitle = `占比${item.topNLabel || topNLabel} ${topShareText} / 占比全量 ${fullShareText}`;
+        return `
+        <tr>
+          <td>
+            <span class="amc-module6-donut-table-asin" title="${escapeHtml(asinTitle)}">
+              <i class="amc-module6-donut-swatch" style="--legend-color:${escapeHtml(item.color)}" aria-hidden="true"></i>
+              <span class="amc-module6-donut-table-asin-text">
+                <span class="amc-module6-donut-table-asin-value">${escapeHtml(asinParts.raw)}</span>
+                ${hasTag ? `<span class="amc-module6-donut-table-asin-label">${escapeHtml(asinParts.label)}</span>` : ""}
+              </span>
+            </span>
+          </td>
+          <td class="is-right">${escapeHtml(frameModule6DonutMetricText(item.value, metricKey))}</td>
+          <td class="amc-module6-donut-table-share" title="${escapeHtml(shareTitle)}">
+            <span class="amc-module6-donut-table-share-line">
+              <span class="amc-module6-donut-table-share-item">
+                <span class="amc-module6-donut-table-share-label">${escapeHtml(item.topNLabel || topNLabel)}</span>
+                <span class="amc-module6-donut-table-share-value">${escapeHtml(topShareText)}</span>
+              </span>
+              <span class="amc-module6-donut-table-share-item">
+                <span class="amc-module6-donut-table-share-label">全量</span>
+                <span class="amc-module6-donut-table-share-value">${escapeHtml(fullShareText)}</span>
+              </span>
+            </span>
+          </td>
+        </tr>`;
+      }).join("");
+      tableWrap.innerHTML = `${statsHtml}
+        <div class="amc-module6-donut-table-scroll">
+          <table class="amc-module6-donut-table">
+            <colgroup>
+              <col style="width:38%">
+              <col style="width:17%">
+              <col style="width:45%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>ASIN</th>
+                <th class="is-right">${escapeHtml(metricLabel)}</th>
+                <th class="is-right">占比</th>
+              </tr>
+            </thead>
+            <tbody>${rowsHtml}</tbody>
+          </table>
+        </div>`;
+    }
+
+    function frameModule6SyncDonutPresentation() {
+      const panel = document.querySelector(".amc-module6-donut-analysis");
+      const style = frameModule6State.donutStyle || "style3";
+      const view = style === "style3" ? (frameModule6State.donutView || "chart") : "chart";
+      if (panel) {
+        panel.dataset.donutStyle = style;
+        panel.dataset.donutView = view;
+      }
+      document.querySelectorAll("[data-module6-donut-style]").forEach(button => {
+        const active = button.dataset.module6DonutStyle === style;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      const viewSwitch = document.getElementById("frameModule64ViewSwitch");
+      if (viewSwitch) viewSwitch.hidden = style !== "style3";
+      document.querySelectorAll("[data-module6-donut-view]").forEach(button => {
+        const active = button.dataset.module6DonutView === view;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    }
+
+    function frameModule6RenderDonutCard(entry, chartId, metricKey, legendId, tableId) {
       const chart = frameModule6GetChart(chartId);
       if (!chart) return;
+      const style = frameModule6State.donutStyle || "style3";
+      const view = style === "style3" ? (frameModule6State.donutView || "chart") : "chart";
+      const showTable = style === "style3" && view === "table";
+      const showSideStats = style === "style2";
+      const showStats = style === "style3" && view === "table";
+      const showLegend = style === "style1" || style === "style2" || (style === "style3" && view === "chart");
+      const showSliceLabels = style === "style1";
+      const tableWrap = document.getElementById(tableId);
+      if (tableWrap) tableWrap.hidden = !(showTable || showSideStats);
       const topN = Math.max(1, Number(frameModule6State.topN || 5));
       const sorted = entry.followItems
         .slice()
@@ -32236,12 +33116,18 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (!slices.length) {
         frameModule6SetEmptyChart(chart, metricKey === "salesAmount" ? "暂无足够二购 ASIN 销售额数据" : "暂无足够二购 ASIN 数据");
         frameModule6ClearDonutLegend(legendId);
+        if (tableWrap) {
+          tableWrap.innerHTML = `<div class="amc-module6-empty"><span class="amc-list-empty">暂无二购 ASIN 数据</span></div>`;
+        }
         return;
       }
       const totalVisible = slices.reduce((sum, item) => sum + Number(item[metricKey] || 0), 0);
       if (totalVisible <= 0) {
         frameModule6SetEmptyChart(chart, metricKey === "salesAmount" ? "暂无足够二购 ASIN 销售额数据" : "暂无足够二购 ASIN 数据");
         frameModule6ClearDonutLegend(legendId);
+        if (tableWrap) {
+          tableWrap.innerHTML = `<div class="amc-module6-empty"><span class="amc-list-empty">暂无二购 ASIN 数据</span></div>`;
+        }
         return;
       }
       const topNLabel = `TOP ${topN}`;
@@ -32255,6 +33141,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           name: item.asin,
           value,
           personTimes: Number(item.personTimes || 0),
+          salesAmount: Number(item.salesAmount || 0),
           same: Boolean(item.same),
           color,
           topNShare: value / Math.max(1, totalVisible),
@@ -32271,7 +33158,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const centerValue = metricKey === "salesAmount"
         ? frameModule6FormatCompactMoney(totalVisible)
         : `${frameModule6FormatNumber(totalVisible)}人次`;
-      frameModule6RenderDonutLegend(legendId, data, metricKey, totalVisible, totalAll, topNLabel);
+      if (showLegend) {
+        if (style === "style2") {
+          frameModule6RenderDonutAsinLegend(legendId, data, metricKey, totalVisible, totalAll, topNLabel);
+        } else {
+          frameModule6RenderDonutLegend(legendId, data, metricKey, totalVisible, totalAll, topNLabel);
+        }
+      } else {
+        frameModule6ClearDonutLegend(legendId);
+      }
+      if (showSideStats) {
+        frameModule6RenderDonutSideStats(tableId, data, metricKey, totalVisible, totalAll, topNLabel);
+      } else if (showTable) {
+        frameModule6RenderDonutTable(tableId, data, metricKey, totalVisible, totalAll, topNLabel, showStats, style === "style2");
+      }
       chart.setOption({
         animation: false,
         graphic: [
@@ -32335,10 +33235,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const item = params.data;
             if (!item) return "";
-            const metricMarkup = metricKey === "salesAmount"
-              ? `销售额：${frameModule6FormatMoney(item.value)}`
-              : `购买人数：${frameModule6FormatNumber(item.value)}`;
-            return `<strong>${escapeHtml(frameLabelFormatAsin(item.name))}</strong><br>${metricMarkup}<br>占比${escapeHtml(item.topNLabel || "TOP N")}：${frameModule6FormatPercent(item.topNShare)}<br>占比全量：${frameModule6FormatPercent(item.fullShare)}`;
+            const personTimes = Number(item.personTimes || 0);
+            const salesAmount = Number(item.salesAmount || (metricKey === "salesAmount" ? item.value : 0));
+            const avo = personTimes ? salesAmount / personTimes : 0;
+            const salesMarkup = metricKey === "salesAmount"
+              ? `<br>销售额：${frameModule6FormatMoney(salesAmount)}`
+              : "";
+            return `<strong>${escapeHtml(frameLabelFormatAsin(item.name))}</strong><br>购买人次：${frameModule6FormatNumber(personTimes)}<br>AVO：${frameModule6FormatMoney(avo)}${salesMarkup}<br>占比${escapeHtml(item.topNLabel || "TOP N")}：${frameModule6FormatPercent(item.topNShare)}<br>占比全量：${frameModule6FormatPercent(item.fullShare)}`;
           }
         },
         series: [
@@ -32350,7 +33253,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             avoidLabelOverlap: true,
             selectedMode: false,
             label: {
-              show: true,
+              show: showSliceLabels,
               color: "#4b5d74",
               fontSize: 12,
               lineHeight: 16,
@@ -32362,6 +33265,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               }
             },
             labelLine: {
+              show: showSliceLabels,
               length: 14,
               length2: 10,
               lineStyle: { color: "#c8d4e2" }
@@ -32372,6 +33276,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           }
         ]
       }, true);
+      chart.off("mouseover");
+      chart.off("mouseout");
+      chart.off("globalout");
+      chart.on("mouseover", params => {
+        if (style !== "style2" || params?.seriesType !== "pie") return;
+        frameModule6SyncDonutLegendHover(legendId, params.data?.name || "");
+      });
+      chart.on("mouseout", params => {
+        if (style !== "style2" || params?.seriesType !== "pie") return;
+        frameModule6SyncDonutLegendHover(legendId, "");
+      });
+      chart.on("globalout", () => {
+        frameModule6SyncDonutLegendHover(legendId, "");
+      });
       chart.off("click");
     }
 
@@ -32489,17 +33407,26 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         });
         frameModule6ClearDonutLegend("frameModule64Legend");
         frameModule6ClearDonutLegend("frameModule65Legend");
+        frameModule6SetHtml("frameModule64ListWrap", "");
+        frameModule6SetHtml("frameModule65ListWrap", "");
         frameModule6SyncSelectorHeight();
         return;
       }
       const topNSelect = document.getElementById("frameModule6TopN");
       if (topNSelect) topNSelect.value = String(frameModule6State.topN || 5);
+      frameModule6SyncDonutPresentation();
       frameModule6RenderOverview(entry);
       frameModule6RenderSelector(entry);
       frameModule6RenderChart63(entry);
-      frameModule6RenderDonutCard(entry, "frameModule64Chart", "personTimes", "frameModule64Legend");
-      frameModule6RenderDonutCard(entry, "frameModule65Chart", "salesAmount", "frameModule65Legend");
+      frameModule6RenderDonutCard(entry, "frameModule64Chart", "personTimes", "frameModule64Legend", "frameModule64ListWrap");
+      frameModule6RenderDonutCard(entry, "frameModule65Chart", "salesAmount", "frameModule65Legend", "frameModule65ListWrap");
       frameModule6RenderChart66(entry);
+      window.requestAnimationFrame?.(() => {
+        ["frameModule64Chart", "frameModule65Chart"].forEach(id => {
+          const element = document.getElementById(id);
+          window.echarts?.getInstanceByDom(element)?.resize();
+        });
+      });
       frameModule6SyncSelectorHeight();
     }
 
@@ -32576,6 +33503,25 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       document.getElementById("frameModule6TopN")?.addEventListener("change", event => {
         frameModule6State.topN = Number(event.target.value || 5);
         renderFrameModule6();
+      });
+      document.querySelectorAll("[data-module6-donut-style]").forEach(button => {
+        if (button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+        button.addEventListener("click", () => {
+          const nextStyle = button.dataset.module6DonutStyle || "style1";
+          frameModule6State.donutStyle = nextStyle;
+          if (nextStyle !== "style3") frameModule6State.donutView = "chart";
+          renderFrameModule6();
+        });
+      });
+      document.querySelectorAll("[data-module6-donut-view]").forEach(button => {
+        if (button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+        button.addEventListener("click", () => {
+          frameModule6State.donutStyle = "style3";
+          frameModule6State.donutView = button.dataset.module6DonutView || "chart";
+          renderFrameModule6();
+        });
       });
       window.addEventListener("resize", () => {
         ["frameModule63Chart", "frameModule64Chart", "frameModule65Chart", "frameModule66Chart"].forEach(id => {
@@ -34230,7 +35176,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
       if (roleFilter) {
         roleFilter.innerHTML = roleOptions.map(option =>
-          `<option value="${escapeHtml(option.value)}">${escapeHtml(option.label)}</option>`
+          `<option value="${escapeHtml(option.value)}"${option.value ? "" : " hidden"}>${escapeHtml(option.label)}</option>`
         ).join("");
         roleFilter.value = frameModule2State.detailRoleFilter;
         frameSyncEmptyFilterPlaceholder(roleFilter);
