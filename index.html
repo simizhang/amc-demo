@@ -3332,8 +3332,18 @@
       font-size: 11px;
       line-height: 1.35;
       text-overflow: ellipsis;
-      white-space: nowrap;
+      white-space: normal;
     }
+
+    .amc-kpi-note-value {
+      color: #5b73f2;
+      font-weight: 800;
+    }
+
+    .amc-kpi-card:nth-child(2) .amc-kpi-note-value { color: #159889; }
+    .amc-kpi-card:nth-child(3) .amc-kpi-note-value { color: #0b8f63; }
+    .amc-kpi-card:nth-child(4) .amc-kpi-note-value { color: #b56b08; }
+    .amc-kpi-card:nth-child(5) .amc-kpi-note-value { color: #6757d8; }
 
     .amc-overview-grid {
       display: grid;
@@ -4990,6 +5000,10 @@
       fill: #e29a16;
       font-size: 11px;
       font-weight: 700;
+      paint-order: stroke;
+      stroke: #ffffff;
+      stroke-linejoin: round;
+      stroke-width: 3px;
     }
 
     .amc-role-quadrant-bg {
@@ -6002,6 +6016,220 @@
       flex: 0 0 auto;
     }
 
+    .amc-module3-multi-select-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 28px;
+      white-space: nowrap;
+    }
+
+    .amc-module3-multi-select-controls button {
+      min-height: 28px;
+      padding: 0 9px;
+      border: 1px solid #d5deef;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #52637b;
+      font: inherit;
+      font-size: 12px;
+      line-height: 26px;
+      cursor: pointer;
+    }
+
+    .amc-module3-multi-select-controls button:hover:not(:disabled) {
+      border-color: #9cadde;
+      color: #3153c4;
+    }
+
+    .amc-module3-multi-select-controls button:focus-visible {
+      outline: 2px solid rgba(82, 111, 220, 0.24);
+      outline-offset: 1px;
+    }
+
+    .amc-module3-multi-select-controls button[data-frame-module3-multi-confirm] {
+      border-color: #4e6ddb;
+      background: #526fd8;
+      color: #ffffff;
+    }
+
+    .amc-module3-multi-select-controls button[data-frame-module3-multi-confirm]:hover:not(:disabled) {
+      border-color: #3f5fc9;
+      background: #4765ce;
+      color: #ffffff;
+    }
+
+    .amc-module3-multi-select-controls button:disabled {
+      border-color: #e2e8f2;
+      background: #f6f8fb;
+      color: #a0adbf;
+      cursor: default;
+    }
+
+    .amc-module3-multi-select-count {
+      color: #526fd8;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .amc-module3-heatmap-floating-controls {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      pointer-events: none;
+      touch-action: none;
+    }
+
+    .amc-module3-heatmap-floating-controls .amc-module3-multi-select-controls {
+      pointer-events: auto;
+    }
+
+    .amc-module3-heatmap-floating-controls.is-dragging {
+      z-index: 7;
+    }
+
+    .amc-module3-multi-select-controls.is-floating {
+      min-height: 32px;
+      gap: 6px;
+      padding: 4px;
+      border: 1px solid rgba(82, 111, 216, 0.34);
+      border-radius: 7px;
+      background: rgba(250, 252, 255, 0.94);
+      box-shadow: 0 6px 14px rgba(51, 77, 164, 0.08);
+      backdrop-filter: blur(6px);
+      cursor: grab;
+      user-select: none;
+    }
+
+    .amc-module3-multi-select-controls.is-floating.is-selecting,
+    .amc-module3-multi-select-controls.is-floating.is-applied {
+      border-color: rgba(82, 111, 216, 0.52);
+      background: rgba(246, 248, 255, 0.96);
+      box-shadow: 0 0 0 1px rgba(82, 111, 216, 0.10), 0 8px 18px rgba(51, 77, 164, 0.12);
+    }
+
+    .amc-module3-heatmap-floating-controls.is-dragging .amc-module3-multi-select-controls.is-floating {
+      cursor: grabbing;
+      box-shadow: 0 0 0 1px rgba(82, 111, 216, 0.14), 0 10px 22px rgba(51, 77, 164, 0.16);
+    }
+
+    .amc-module3-multi-select-drag-handle {
+      width: 22px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      border-radius: 5px;
+      background: rgba(82, 111, 216, 0.08);
+      color: #6c7fd3;
+      cursor: grab;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .amc-module3-multi-select-drag-handle::before {
+      content: "⋮⋮";
+      letter-spacing: -2px;
+      transform: translateX(-1px);
+    }
+
+    .amc-module3-multi-select-drag-handle:focus-visible {
+      outline: 2px solid rgba(82, 111, 216, 0.34);
+      outline-offset: 1px;
+    }
+
+    .amc-module3-heatmap-floating-controls.is-dragging .amc-module3-multi-select-drag-handle {
+      cursor: grabbing;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button {
+      min-height: 28px;
+      padding: 0 9px;
+      line-height: 26px;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-enter] {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 10px 0 8px;
+      border-color: #c7d1f8;
+      background: #f5f7ff;
+      color: #4d61c6;
+      font-weight: 500;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-enter]::before {
+      content: "☑";
+      color: #657be4;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .amc-module3-multi-select-controls.is-floating .amc-module3-multi-select-count {
+      padding: 0 2px 0 4px;
+      color: #3754c1;
+      font-weight: 600;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm] {
+      border-color: #9cadde;
+      background: #eef2ff;
+      color: #3754c1;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm]:hover:not(:disabled) {
+      border-color: #7f93e6;
+      background: #e5ebff;
+      color: #3153c4;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm]:disabled {
+      border-color: #d9e1f4;
+      background: #f7f9fd;
+      color: #a0adbf;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm]:not(:disabled):active {
+      border-color: #6f84df;
+      background: #dce4ff;
+      color: #2848b7;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-cancel] {
+      border-color: rgba(82, 111, 216, 0.26);
+      color: #52637b;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-cancel]:hover:not(:disabled) {
+      border-color: rgba(82, 111, 216, 0.44);
+      background: #f7f9ff;
+      color: #3754c1;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-enter]:hover:not(:disabled) {
+      border-color: #aebcf2;
+      background: #eef2ff;
+      color: #3754c1;
+    }
+
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-confirm]:focus-visible,
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-cancel]:focus-visible,
+    .amc-module3-multi-select-controls.is-floating button[data-frame-module3-multi-enter]:focus-visible {
+      outline-color: rgba(82, 111, 216, 0.18);
+    }
+
+    .amc-module3-quality-layout[data-multi-select-mode="true"] [data-frame-module3-chart-id="3.4"],
+    .amc-module3-quality-layout[data-multi-select-mode="true"] [data-frame-module3-chart-id="3.5"] {
+      border-color: #aab9ea;
+      box-shadow: 0 0 0 2px rgba(82, 111, 216, 0.08), 0 8px 18px rgba(48, 70, 112, 0.05);
+    }
+
     .amc-module3-quality-tabs .amc-segment-btn {
       min-width: 76px;
       font-size: 12px;
@@ -6066,13 +6294,13 @@
 
     .amc-module3-detail-filter {
       position: relative;
-      width: 168px;
+      width: 184px;
     }
 
     .amc-module3-detail-filter select {
       width: 100%;
       height: 32px;
-      padding: 0 56px 0 12px;
+      padding: 0 48px 0 12px;
       border: 1px solid #dce3ed;
       border-radius: 5px;
       background: #fff;
@@ -6117,9 +6345,9 @@
     .amc-module3-detail-filter-clear {
       position: absolute;
       top: 50%;
-      right: 28px;
-      width: 18px;
-      height: 18px;
+      right: 25px;
+      width: 16px;
+      height: 16px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -6801,6 +7029,7 @@
     }
 
     .amc-module3-heatmap-layout {
+      position: relative;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       align-items: start;
@@ -7080,7 +7309,7 @@
 
     .amc-module4-filter-bar {
       display: grid;
-      grid-template-columns: minmax(150px, 176px) minmax(138px, 166px) minmax(138px, 166px) minmax(0, 1fr);
+      grid-template-columns: minmax(150px, 176px) minmax(138px, 166px) minmax(156px, 196px) minmax(0, 1fr);
       align-items: center;
       gap: 10px 16px;
       min-width: 0;
@@ -7100,6 +7329,11 @@
       color: #60718d;
       font-size: 12px;
       white-space: nowrap;
+    }
+
+    .amc-module4-filter-select-wrap {
+      position: relative;
+      min-width: 0;
     }
 
     .amc-module4-select-field select {
@@ -7396,7 +7630,7 @@
     }
 
     .amc-module4-rhythm-select {
-      min-width: 142px;
+      min-width: 158px;
     }
 
     .amc-module4-rhythm-select select {
@@ -7421,17 +7655,18 @@
     }
 
     .amc-module4-rhythm-select select[data-amc-clear-button],
+    .amc-module4-filter-select-wrap select[data-amc-clear-button],
     .amc-module5-tool-select select[data-amc-clear-button] {
-      padding-right: 51px;
+      padding-right: 42px;
     }
 
     .amc-module-detail-filter-clear {
       position: absolute;
       top: 50%;
-      right: 25px;
+      right: 22px;
       z-index: 2;
-      width: 17px;
-      height: 17px;
+      width: 16px;
+      height: 16px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -8571,7 +8806,7 @@
 
     .amc-module5-tool-select {
       display: block;
-      width: 124px;
+      width: 142px;
       min-width: 0;
     }
 
@@ -8580,7 +8815,7 @@
     }
 
     .amc-module5-tool-select--strategy {
-      width: 148px;
+      width: 172px;
     }
 
     .amc-module5-tool-select select {
@@ -9823,18 +10058,19 @@
     }
 
     .amc-module6-donut-legend {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      align-items: start;
-      justify-items: stretch;
-      gap: 7px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px 20px;
       max-height: 112px;
       overflow: auto;
-      padding: 0 10px 12px;
+      padding: 0 12px 12px;
       color: #334155;
       font-size: 11px;
       font-weight: 400;
       line-height: 1.35;
+      text-align: center;
       scrollbar-color: #cbd7ea transparent;
       scrollbar-width: thin;
     }
@@ -9855,21 +10091,22 @@
 
     .amc-module6-donut-legend-item {
       min-width: 0;
-      width: 100%;
+      width: auto;
       max-width: 100%;
       display: grid;
-      grid-template-columns: 12px minmax(56px, 70px) minmax(58px, 84px) minmax(0, 1fr);
+      grid-template-columns: 12px max-content max-content minmax(0, max-content);
       align-items: center;
-      justify-content: start;
-      column-gap: 6px;
-      padding: 1px 0;
+      justify-content: center;
+      column-gap: 10px;
+      row-gap: 4px;
+      padding: 1px 6px;
       background: transparent;
       color: #334155;
       font-weight: 400;
     }
 
     .amc-module6-donut-legend-item.has-dual-share {
-      grid-template-columns: 12px minmax(56px, 70px) minmax(58px, 84px) minmax(0, 1fr);
+      grid-template-columns: 12px max-content max-content minmax(0, max-content);
     }
 
     .amc-module6-donut-swatch {
@@ -9899,7 +10136,11 @@
 
     .amc-module6-donut-share {
       min-width: 0;
-      justify-self: stretch;
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-self: start;
+      justify-content: flex-start;
+      gap: 4px 18px;
       color: #334155;
       font-weight: 400;
       font-variant-numeric: tabular-nums;
@@ -9910,7 +10151,7 @@
 
     .amc-module6-donut-share-part {
       display: inline-block;
-      margin-right: 8px;
+      margin-right: 0;
       white-space: nowrap;
     }
 
@@ -13129,9 +13370,24 @@
       font-size: 10px;
     }
 
-    body[data-page="amcFrame"].product-view-on .amc-frame-module-tab-index,
     body[data-page="amcFrame"].product-view-on .amc-overview-index {
       display: none;
+    }
+
+    body[data-page="amcFrame"].product-view-on .amc-frame-module-nav[data-nav-style="timeline"] .amc-frame-module-tab-index {
+      width: auto;
+      min-width: 42px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 0;
+      white-space: nowrap;
+    }
+
+    body[data-page="amcFrame"].product-view-on .amc-frame-module-nav[data-nav-style="timeline"] .amc-frame-module-tab-index::after {
+      content: attr(data-product-label);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
     }
 
     body[data-page="amcFrame"] .amc-overview-module-head h4,
@@ -17336,6 +17592,17 @@
       white-space: nowrap;
     }
 
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-custom-asin-display.is-plain-asin .amc-custom-asin-value,
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-custom-asin-display.is-asin-blue-tag-muted .amc-custom-asin-value,
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-label-plain-product a,
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-module4-product-asin-link,
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-role-detail-asin-link,
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-chart-tooltip-asin-value,
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-module6-entry-asin,
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-module6-asin-display-value {
+      color: #1558c0;
+    }
+
     .amc-custom-asin-display.is-inline {
       display: inline-flex;
       align-items: baseline;
@@ -17537,6 +17804,12 @@
     body[data-page="amcFrame"] .amc-role-ranking-chart .amc-role-bar-label-tag.is-tag-muted {
       fill: #1f6fd6;
       font-size: 10px;
+      font-weight: 400;
+    }
+
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-role-ranking-chart .amc-role-bar-label-asin.is-asin-blue,
+    body[data-page="amcFrame"][data-asin-label-presentation="plain"] .amc-role-flow-chart .amc-role-flow-label-asin.is-plain-asin {
+      fill: #1558c0;
       font-weight: 400;
     }
 
@@ -20195,7 +20468,7 @@
             <div class="amc-frame-section">
               <div class="reports-section-head">
                 <h3>图表索引</h3>
-                <span class="status-pill">模块 1-5 / 已生成</span>
+                <span class="status-pill">模块 1-6 / 已生成</span>
               </div>
               <div class="amc-frame-grid">
                 <article class="amc-frame-block">
@@ -20208,21 +20481,14 @@
                 <article class="amc-frame-block">
                   <div>
                     <h3>全景概览（Overview）</h3>
-                    <p>二级模块 1.1：关联购买平均间隔分布</p>
+                    <p>二级模块 1.1：TOP 10 交叉购买组合</p>
                   </div>
                   <span class="amc-frame-state">已生成</span>
                 </article>
                 <article class="amc-frame-block">
                   <div>
                     <h3>全景概览（Overview）</h3>
-                    <p>二级模块 1.2：TOP 10 交叉购买组合</p>
-                  </div>
-                  <span class="amc-frame-state">已生成</span>
-                </article>
-                <article class="amc-frame-block">
-                  <div>
-                    <h3>全景概览（Overview）</h3>
-                    <p>二级模块 1.3：高价值路径人次构成</p>
+                    <p>二级模块 1.2：关联购买平均间隔分布</p>
                   </div>
                   <span class="amc-frame-state">已生成</span>
                 </article>
@@ -20257,35 +20523,28 @@
                 <article class="amc-frame-block">
                   <div>
                     <h3>关联组合深度分析</h3>
-                    <p>二级模块 3.2：平价流转 TOP 5</p>
+                    <p>二级模块 3.2：升级与降级路径规模对比</p>
                   </div>
                   <span class="amc-frame-state">已生成</span>
                 </article>
                 <article class="amc-frame-block">
                   <div>
                     <h3>关联组合深度分析</h3>
-                    <p>二级模块 3.3：升级与降级路径规模对比</p>
+                    <p>二级模块 3.3：关联质量图表（ASIN x ASIN 关联热力矩阵 / 双向关联机制气泡矩阵）</p>
                   </div>
                   <span class="amc-frame-state">已生成</span>
                 </article>
                 <article class="amc-frame-block">
                   <div>
                     <h3>关联组合深度分析</h3>
-                    <p>二级模块 3.4：ASIN x ASIN 关联热力矩阵</p>
+                    <p>二级模块 3.4：修正关联指数 TOP 15</p>
                   </div>
                   <span class="amc-frame-state">已生成</span>
                 </article>
                 <article class="amc-frame-block">
                   <div>
                     <h3>关联组合深度分析</h3>
-                    <p>二级模块 3.5：双向关联机制气泡矩阵</p>
-                  </div>
-                  <span class="amc-frame-state">已生成</span>
-                </article>
-                <article class="amc-frame-block">
-                  <div>
-                    <h3>关联组合深度分析</h3>
-                    <p>二级模块 3.6：修正关联指数 TOP 15</p>
+                    <p>二级模块 3.5：关联组合明细表</p>
                   </div>
                   <span class="amc-frame-state">已生成</span>
                 </article>
@@ -20299,7 +20558,7 @@
                 <article class="amc-frame-block">
                   <div>
                     <h3>高价值组合购买节奏分析</h3>
-                    <p>二级模块 4.2：购买节奏 TOP 10 切换榜</p>
+                    <p>二级模块 4.2：高价值组合明细表</p>
                   </div>
                   <span class="amc-frame-state">已生成</span>
                 </article>
@@ -20338,6 +20597,41 @@
                    </div>
                    <span class="amc-frame-state">已生成</span>
                  </article>
+                 <article class="amc-frame-block">
+                   <div>
+                     <h3>新客二购分析</h3>
+                     <p>二级模块 6.1：入口 ASIN 选择（TOP 50）</p>
+                   </div>
+                   <span class="amc-frame-state">已生成</span>
+                 </article>
+                 <article class="amc-frame-block">
+                   <div>
+                     <h3>新客二购分析</h3>
+                     <p>二级模块 6.2：新客二购 KPI</p>
+                   </div>
+                   <span class="amc-frame-state">已生成</span>
+                 </article>
+                 <article class="amc-frame-block">
+                   <div>
+                     <h3>新客二购分析</h3>
+                     <p>二级模块 6.3：入口 ASIN 及其二购分布</p>
+                   </div>
+                   <span class="amc-frame-state">已生成</span>
+                 </article>
+                 <article class="amc-frame-block">
+                   <div>
+                     <h3>新客二购分析</h3>
+                     <p>二级模块 6.4：二购 ASIN 结构分析</p>
+                   </div>
+                   <span class="amc-frame-state">已生成</span>
+                 </article>
+                 <article class="amc-frame-block">
+                   <div>
+                     <h3>新客二购分析</h3>
+                     <p>二级模块 6.5：二购转化时长分布</p>
+                   </div>
+                   <span class="amc-frame-state">已生成</span>
+                 </article>
                </div>
             </div>
           </section>
@@ -20347,30 +20641,30 @@
               <div class="amc-frame-module-nav-group" data-nav-group="global">
                 <span class="amc-frame-module-nav-group-label">全局分析</span>
                 <button class="amc-frame-module-tab is-active" type="button" data-frame-module-target="frameOverviewSection" data-frame-module-group="global" aria-pressed="true">
-                  <span class="amc-frame-module-tab-index">1</span>
+                  <span class="amc-frame-module-tab-index" data-product-label="概览">1</span>
                   <strong>全景概览</strong>
                 </button>
                 <button class="amc-frame-module-tab" type="button" data-frame-module-target="frameRoleAnalysisSection" data-frame-module-group="global" aria-pressed="false">
-                  <span class="amc-frame-module-tab-index">2</span>
+                  <span class="amc-frame-module-tab-index" data-product-label="角色">2</span>
                   <strong>ASIN 角色分析</strong>
                 </button>
                 <button class="amc-frame-module-tab" type="button" data-frame-module-target="frameModule3Section" data-frame-module-group="global" aria-pressed="false">
-                  <span class="amc-frame-module-tab-index">3</span>
+                  <span class="amc-frame-module-tab-index" data-product-label="组合">3</span>
                   <strong>关联组合深度分析</strong>
                 </button>
                 <button class="amc-frame-module-tab" type="button" data-frame-module-target="frameModule4Section" data-frame-module-group="global" aria-pressed="false">
-                  <span class="amc-frame-module-tab-index">4</span>
+                  <span class="amc-frame-module-tab-index" data-product-label="节奏">4</span>
                   <strong>高价值组合购买节奏分析</strong>
                 </button>
                 <button class="amc-frame-module-tab" type="button" data-frame-module-target="frameModule5Section" data-frame-module-group="global" aria-pressed="false">
-                  <span class="amc-frame-module-tab-index">5</span>
+                  <span class="amc-frame-module-tab-index" data-product-label="策略">5</span>
                   <strong>产品组合策略</strong>
                 </button>
               </div>
               <div class="amc-frame-module-nav-group" data-nav-group="repurchase">
                 <span class="amc-frame-module-nav-group-label">二购分析</span>
                 <button class="amc-frame-module-tab" type="button" data-frame-module-target="frameModule6Section" data-frame-module-group="repurchase" aria-pressed="false">
-                  <span class="amc-frame-module-tab-index">6</span>
+                  <span class="amc-frame-module-tab-index" data-product-label="二购">6</span>
                   <strong>新客二购分析</strong>
                 </button>
               </div>
@@ -20392,17 +20686,17 @@
                   <article class="amc-kpi-card">
                     <div class="amc-kpi-label">交叉购买渗透率 <span class="amc-kpi-help" title="交叉购买用户数 / 品牌总购买用户数">?</span></div>
                     <div class="amc-kpi-value">27%</div>
-                    <div class="amc-kpi-note">每 100 个买家约 27 人购买第二个产品</div>
+                    <div class="amc-kpi-note"><span class="amc-kpi-note-value">25,060</span> / <span class="amc-kpi-note-value">92,815</span> 人</div>
                   </article>
                   <article class="amc-kpi-card">
                     <div class="amc-kpi-label">关联购买平均间隔 <span class="amc-kpi-help" title="各组合平均间隔按交叉购买人数加权均值">?</span></div>
                     <div class="amc-kpi-value">159.3 天</div>
-                    <div class="amc-kpi-note">组合平均间隔按交叉购买人次加权</div>
+                    <div class="amc-kpi-note">平均最短关联间隔 <span class="amc-kpi-note-value">135.6</span> 天</div>
                   </article>
                   <article class="amc-kpi-card">
                     <div class="amc-kpi-label">交叉购买销售额 <span class="amc-kpi-help" title="交叉购买用户全部购买记录销售额">?</span></div>
                     <div class="amc-kpi-value">$7.56M</div>
-                    <div class="amc-kpi-note">含首次购买与后续购买的全部销售额</div>
+                    <div class="amc-kpi-note">交叉购买用户销售额，占品牌销售额 <span class="amc-kpi-note-value">31.0%</span></div>
                   </article>
                   <article class="amc-kpi-card">
                     <div class="amc-kpi-label">平均价格提升倍数 <span class="amc-kpi-help" title="各组合 Follow / Lead 单价按交叉购买人数加权均值">?</span></div>
@@ -20412,7 +20706,7 @@
                   <article class="amc-kpi-card">
                     <div class="amc-kpi-label">Lead vs Follow ASIN <span class="amc-kpi-help" title="品牌内作为入口的产品数 vs 作为后续产品的产品数">?</span></div>
                     <div class="amc-kpi-value">79 vs 80</div>
-                    <div class="amc-kpi-note">两者接近，整体呈<span class="amc-kpi-tag amc-kpi-tag-structure">网状生态结构</span></div>
+                    <div class="amc-kpi-note">两者接近，整体呈<span class="amc-kpi-tag amc-kpi-tag-structure">网状结构</span></div>
                   </article>
                 </div>
               </section>
@@ -20422,7 +20716,7 @@
                   <section class="amc-overview-panel top-pairs-panel amc-top-pairs-compact" aria-labelledby="frameTopPairsTitle">
                     <div class="amc-overview-module-head">
                       <div class="amc-overview-module-title">
-                        <span class="amc-overview-index">1.2</span>
+                        <span class="amc-overview-index">1.1</span>
                         <div>
                           <h4 id="frameTopPairsTitle">TOP 10 交叉购买组合</h4>
                         </div>
@@ -20460,7 +20754,7 @@
                   <section class="amc-overview-panel interval-panel" aria-labelledby="frameIntervalTitle">
                     <div class="amc-overview-module-head">
                       <div class="amc-overview-module-title">
-                        <span class="amc-overview-index">1.1</span>
+                        <span class="amc-overview-index">1.2</span>
                         <div>
                           <h4 id="frameIntervalTitle">关联购买平均间隔分布</h4>
                           <p>Lead → Follow 组合的关联购买平均间隔分布（按组合平均间隔分桶，按交叉购买人次加权）</p>
@@ -20528,6 +20822,7 @@
                     <span class="amc-overview-index">2.2</span>
                     <div>
                       <h4 id="frameRoleRankingTitle">TOP 15 Lead ASIN</h4>
+                      <p id="frameRoleRankingSubtitle">点击Lead ASIN，可同步查看该ASIN的流向。</p>
                     </div>
                   </div>
                   <div class="amc-role-ranking-tools">
@@ -20547,7 +20842,7 @@
                     <span class="amc-overview-index">2.3</span>
                     <div>
                       <h4 id="frameRoleFlowTitle">Lead ASIN TOP 10 流向</h4>
-                      <p id="frameRoleFlowSubtitle">默认展示交叉购买规模最高的 Lead ASIN 及其 TOP 10 Follow ASIN</p>
+                      <p id="frameRoleFlowSubtitle">选中 “—”，展示它带动的 TOP 10 Follow ASIN。</p>
                     </div>
                   </div>
                   <div class="amc-flow-controls">
@@ -20657,7 +20952,7 @@
                 <section class="amc-module3-panel amc-module3-scale-updown-panel" data-frame-module3-chart-id="3.3" aria-labelledby="frameModule33Title">
                   <div class="amc-module3-panel-head">
                     <div class="amc-overview-module-title">
-                      <span class="amc-overview-index">3.3</span>
+                      <span class="amc-overview-index">3.2</span>
                       <div>
                         <h4 id="frameModule33Title">升级与降级路径TOP 10规模对比</h4>
                         <p id="frameModule33Subtitle">左侧为TOP10降级/配件购买组合，右侧为TOP10升级购买组合；条形长度代表交叉购买人数。</p>
@@ -20690,7 +20985,7 @@
                 <section class="amc-module3-panel amc-module3-panel-wide" data-frame-module3-chart-id="3.4" aria-labelledby="frameModule34Title">
                   <div class="amc-module3-panel-head">
                     <div class="amc-overview-module-title">
-                      <span class="amc-overview-index">3.4</span>
+                      <span class="amc-overview-index">3.3</span>
                       <div>
                         <h4 id="frameModule34Title">ASIN x ASIN 关联热力矩阵</h4>
                         <p id="frameModule34Subtitle">行=Lead ASIN，列=Follow ASIN；展示指标可切换。</p>
@@ -20732,6 +21027,15 @@
                     </div>
                   </div>
                   <div class="amc-module3-heatmap-layout">
+                    <div class="amc-module3-heatmap-floating-controls" aria-label="热力图多选工具">
+                      <div class="amc-module3-multi-select-controls is-floating" data-frame-module3-multi-controls aria-label="多选关联组合">
+                        <span class="amc-module3-multi-select-drag-handle" data-frame-module3-multi-drag-handle role="button" tabindex="0" aria-label="拖动多选框"></span>
+                        <button type="button" data-frame-module3-multi-enter aria-pressed="false">多选</button>
+                        <span class="amc-module3-multi-select-count" data-frame-module3-multi-count hidden></span>
+                        <button type="button" data-frame-module3-multi-confirm hidden>确定</button>
+                        <button type="button" data-frame-module3-multi-cancel hidden>取消多选</button>
+                      </div>
+                    </div>
                     <div class="amc-module3-chart amc-module3-chart-heatmap" id="frameModule34Chart" role="img" aria-label="ASIN x ASIN 关联热力矩阵"></div>
                     <div class="amc-heatmap-legend" id="frameModule34Legend" aria-label="热力矩阵色阶图例">
                       <div class="amc-heatmap-legend-body">
@@ -20749,7 +21053,7 @@
                 <section class="amc-module3-panel amc-module3-panel-wide" data-frame-module3-chart-id="3.5" aria-labelledby="frameModule35Title">
                   <div class="amc-module3-panel-head">
                     <div class="amc-overview-module-title">
-                      <span class="amc-overview-index">3.5</span>
+                      <span class="amc-overview-index">3.3</span>
                       <div>
                         <h4 id="frameModule35Title">双向关联机制气泡矩阵</h4>
                         <p>X=转化率，Y=吸引率，气泡大小=交叉购买人数，颜色=修正关联指数。</p>
@@ -20766,6 +21070,12 @@
                             <option value="0">不限</option>
                           </select>
                         </label>
+                        <div class="amc-module3-multi-select-controls" data-frame-module3-multi-controls aria-label="多选关联组合">
+                          <button type="button" data-frame-module3-multi-enter aria-pressed="false">多选</button>
+                          <span class="amc-module3-multi-select-count" data-frame-module3-multi-count hidden></span>
+                          <button type="button" data-frame-module3-multi-confirm hidden>确定</button>
+                          <button type="button" data-frame-module3-multi-cancel hidden>取消多选</button>
+                        </div>
                         <div class="amc-segmented-control amc-module3-quality-tabs" role="tablist" aria-label="关联质量图表">
                           <button class="amc-segment-btn is-active" type="button" data-frame-module3-quality-tab="heatmap" role="tab" aria-selected="true">关联热力图</button>
                           <button class="amc-segment-btn" type="button" data-frame-module3-quality-tab="mechanism" role="tab" aria-selected="false">关联机制</button>
@@ -20791,7 +21101,7 @@
                 <section class="amc-module3-panel amc-module3-panel-wide" data-frame-module3-chart-id="3.6" aria-labelledby="frameModule36Title">
                   <div class="amc-module3-panel-head">
                     <div class="amc-overview-module-title">
-                      <span class="amc-overview-index">3.6</span>
+                      <span class="amc-overview-index">3.4</span>
                       <div>
                         <h4 id="frameModule36Title">修正关联指数 TOP 15</h4>
                       </div>
@@ -20805,7 +21115,7 @@
               <section class="amc-module3-panel amc-module3-panel-wide amc-module3-detail-panel" aria-labelledby="frameModule37Title">
                 <div class="amc-module3-panel-head">
                   <div class="amc-overview-module-title">
-                    <span class="amc-overview-index">3.7</span>
+                    <span class="amc-overview-index">3.5</span>
                     <div>
                       <h4 id="frameModule37Title">关联组合明细表</h4>
                       <p id="frameModule37Subtitle">继承当前模块视角与筛选条件，按当前视角排序展示。</p>
@@ -20822,7 +21132,7 @@
                     <div class="amc-module3-detail-filter" id="frameModule37PricePathFilterWrap">
                       <label class="sr-only" for="frameModule37PricePath">价格路径筛选</label>
                       <select id="frameModule37PricePath" aria-label="价格路径筛选">
-                        <option value="" selected>价格路径</option>
+                        <option value="" selected hidden>价格路径</option>
                         <option value="upgrade">升级购买</option>
                         <option value="flat">平价流转</option>
                         <option value="downgrade">降级/配件购买</option>
@@ -20869,15 +21179,20 @@
                     <option value="100">不限</option>
                   </select>
                 </label>
-                <label class="amc-module4-select-field">
+                <div class="amc-module4-select-field">
                   <span>价格路径:</span>
-                  <select id="frameModule4PricePath" data-amc-empty-filter aria-label="价格路径筛选">
-                    <option value="" selected>价格路径</option>
-                    <option value="upgrade">升级购买</option>
-                    <option value="flat">平价流转</option>
-                    <option value="downgrade">降级/配件购买</option>
-                  </select>
-                </label>
+                  <span class="amc-module4-filter-select-wrap">
+                    <select id="frameModule4PricePath" data-amc-empty-filter data-amc-clear-button="frameModule4PricePathClear" aria-label="价格路径筛选">
+                      <option value="" selected hidden>价格路径</option>
+                      <option value="upgrade">升级购买</option>
+                      <option value="flat">平价流转</option>
+                      <option value="downgrade">降级/配件购买</option>
+                    </select>
+                    <button class="amc-module-detail-filter-clear" id="frameModule4PricePathClear" type="button" aria-label="清空价格路径筛选" title="清空筛选" hidden>
+                      <svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3 3l6 6M9 3L3 9"></path></svg>
+                    </button>
+                  </span>
+                </div>
                 <span class="amc-module4-filter-note" id="frameModule4FilterNote">当前纳入 0 个组合，排除 0 个组合</span>
               </div>
 
@@ -20941,7 +21256,7 @@
                       <div class="amc-compact-select amc-module4-rhythm-select" id="frameModule42DetailRhythmSelectWrap">
                         <label class="sr-only" for="frameModule42DetailRhythmSelect">购买节奏</label>
                         <select id="frameModule42DetailRhythmSelect" data-amc-empty-filter data-amc-clear-button="frameModule42DetailRhythmClear" aria-label="4.2 明细表购买节奏筛选">
-                          <option value="" selected>购买节奏</option>
+                          <option value="" selected hidden>购买节奏</option>
                           <option value="quick">快速放量</option>
                           <option value="long">长尾关联</option>
                           <option value="stable">稳定培育</option>
@@ -21036,7 +21351,7 @@
                     <span class="amc-overview-index">5.2</span>
                     <div>
                       <h4 id="frameModule52Title">策略组合机会散点图</h4>
-                      <p>用购买间隔和价格差定位六类策略，气泡大小代表交叉购买人次。</p>
+                      <p>基于购买节奏和价格路径定位六大策略，识别适合配件推荐、Virtual Bundle、升级引导和长期培育的ASIN组合。</p>
                     </div>
                   </div>
                   <span class="status-pill">机会分布</span>
@@ -21066,7 +21381,7 @@
                     <div class="amc-module5-tool-select amc-module5-detail-filter" data-frame-module5-detail-filter hidden>
                       <label class="sr-only" for="frameModule53PricePath">明细价格路径筛选</label>
                       <select id="frameModule53PricePath" data-amc-empty-filter data-amc-clear-button="frameModule53PricePathClear" aria-label="核心组合明细价格路径筛选">
-                        <option value="" selected>价格路径</option>
+                        <option value="" selected hidden>价格路径</option>
                         <option value="upgrade">升级购买</option>
                         <option value="flat">平价流转</option>
                         <option value="downgrade">降级/配件购买</option>
@@ -21078,7 +21393,7 @@
                     <div class="amc-module5-tool-select amc-module5-detail-filter" data-frame-module5-detail-filter hidden>
                       <label class="sr-only" for="frameModule53Rhythm">明细购买节奏筛选</label>
                       <select id="frameModule53Rhythm" data-amc-empty-filter data-amc-clear-button="frameModule53RhythmClear" aria-label="核心组合明细购买节奏筛选">
-                        <option value="" selected>购买节奏</option>
+                        <option value="" selected hidden>购买节奏</option>
                         <option value="quick">快速关联</option>
                         <option value="stable">稳定培育</option>
                         <option value="long">长尾关联</option>
@@ -21090,7 +21405,7 @@
                     <div class="amc-module5-tool-select amc-module5-tool-select--strategy amc-module5-detail-filter" data-frame-module5-detail-filter hidden>
                       <label class="sr-only" for="frameModule53Strategy">明细策略筛选</label>
                       <select id="frameModule53Strategy" data-amc-empty-filter data-amc-clear-button="frameModule53StrategyClear" aria-label="核心组合策略筛选">
-                        <option value="" selected>策略</option>
+                        <option value="" selected hidden>策略</option>
                       </select>
                       <button class="amc-module-detail-filter-clear" id="frameModule53StrategyClear" type="button" aria-label="清空策略筛选" title="清空筛选" hidden>
                         <svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3 3l6 6M9 3L3 9"></path></svg>
@@ -21126,7 +21441,7 @@
             <section class="amc-module6-selector-card" aria-labelledby="frameModule62Title">
               <div class="amc-module6-panel-head amc-overview-module-head amc-module6-selector-panel-head">
                 <div class="amc-overview-module-title">
-                  <span class="amc-overview-index">6.2</span>
+                  <span class="amc-overview-index">6.1</span>
                   <div>
                     <h4 id="frameModule62Title">入口 ASIN 选择（TOP 50）</h4>
                   </div>
@@ -21173,7 +21488,7 @@
               <section class="amc-module6-overview-card" aria-labelledby="frameModule61Title">
                 <div class="amc-module6-overview-head amc-overview-module-head">
                   <div class="amc-overview-module-title">
-                    <span class="amc-overview-index">6.1</span>
+                    <span class="amc-overview-index">6.2</span>
                     <div>
                       <h4 id="frameModule61Title"><span class="amc-module6-entry-asin">{ASIN}</span><span class="amc-module6-entry-title-suffix">新客二购表现</span></h4>
                       <p id="frameModule61Subtitle">{ASIN}引入新客后，二购买什么？</p>
@@ -21203,7 +21518,7 @@
                     <span class="amc-overview-index">6.4</span>
                     <div>
                       <h4 id="frameModule64Title">二购 ASIN 结构分析</h4>
-                      <p>查看当前Entry ASIN的二购分布。</p>
+                      <p>查看当前入口ASIN的二购分布。</p>
                     </div>
                   </div>
                   <div class="amc-module6-toolbar">
@@ -21475,7 +21790,7 @@
                     </svg>
                   </span>
                   <select id="customMappingFileFilterDimension" aria-label="筛选映射维度" data-custom-mapping-clear-button="customMappingFileFilterDimensionClear">
-                    <option value="">全部映射维度</option>
+                    <option value="" selected hidden>映射维度</option>
                   </select>
                   <button class="custom-mapping-filter-clear" id="customMappingFileFilterDimensionClear" type="button" aria-label="清空映射维度筛选" title="清空筛选" data-custom-mapping-clear-target="customMappingFileFilterDimension" hidden>
                     <svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3 3l6 6M9 3L3 9"></path></svg>
@@ -24707,7 +25022,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       scale3PricePath: "upgrade",
       detailPricePath: "",
       detailAsinQuery: "",
-      selectedPairKey: null
+      selectedPairKey: null,
+      multiSelectMode: false,
+      multiSelectionApplied: false,
+      multiSelectedPairKeys: [],
+      heatmapFloatingPosition: null
     };
 
     const frameModule3HeatmapPickerState = {
@@ -25206,8 +25525,100 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               }
             }
           });
+          frameModule3ApplyHeatmapFloatingPosition();
         });
       });
+    }
+
+    function frameModule3ApplyHeatmapFloatingPosition() {
+      const floating = document.querySelector(".amc-module3-heatmap-floating-controls");
+      const layout = floating?.closest(".amc-module3-heatmap-layout");
+      const panel = floating?.closest("[data-frame-module3-chart-id='3.4']");
+      if (!floating || !layout || !panel) return;
+      const layoutRect = layout.getBoundingClientRect();
+      const panelRect = panel.getBoundingClientRect();
+      const margin = 8;
+      const minLeft = panelRect.left - layoutRect.left + margin;
+      const minTop = panelRect.top - layoutRect.top + margin;
+      const areaWidth = panel.clientWidth;
+      const areaHeight = panel.clientHeight;
+      const floatingWidth = floating.offsetWidth;
+      const floatingHeight = floating.offsetHeight;
+      if (!areaWidth || !areaHeight || !floatingWidth || !floatingHeight) return;
+      const fallbackLeft = minLeft;
+      const fallbackTop = Math.max(minTop, minTop + areaHeight - floatingHeight - 10);
+      const saved = frameModule3State.heatmapFloatingPosition || {};
+      const maxLeft = Math.max(minLeft, minLeft + areaWidth - floatingWidth - margin);
+      const maxTop = Math.max(minTop, minTop + areaHeight - floatingHeight - margin);
+      const nextLeft = clamp(Number.isFinite(saved.left) ? saved.left : fallbackLeft, minLeft, maxLeft);
+      const nextTop = clamp(Number.isFinite(saved.top) ? saved.top : fallbackTop, minTop, maxTop);
+      frameModule3State.heatmapFloatingPosition = { left: nextLeft, top: nextTop };
+      floating.style.left = `${nextLeft}px`;
+      floating.style.top = `${nextTop}px`;
+      floating.style.right = "auto";
+    }
+
+    function setupFrameModule3HeatmapFloatingDrag() {
+      const floating = document.querySelector(".amc-module3-heatmap-floating-controls");
+      if (!floating || floating.dataset.dragBound === "true") return;
+      const helpText = "点击进入多选状态后，可点击色块选中多个ASIN，对比查看明细数据。";
+      const showHelp = event => showTooltip(event, helpText);
+      const draggableSelector = "[data-frame-module3-multi-drag-handle], .amc-module3-multi-select-controls.is-floating";
+      const interactiveSelector = "button, select, input, textarea, a";
+      const startDrag = event => {
+        if (event.button !== undefined && event.button !== 0) return;
+        const dragTarget = event.target.closest(draggableSelector);
+        if (!dragTarget || !floating.contains(dragTarget)) return;
+        if (!event.target.closest("[data-frame-module3-multi-drag-handle]") && event.target.closest(interactiveSelector)) return;
+        const layout = floating.closest(".amc-module3-heatmap-layout");
+        const panel = floating.closest("[data-frame-module3-chart-id='3.4']");
+        if (!layout || !panel) return;
+        frameModule3ApplyHeatmapFloatingPosition();
+        const layoutRect = layout.getBoundingClientRect();
+        const panelRect = panel.getBoundingClientRect();
+        const floatingRect = floating.getBoundingClientRect();
+        const offsetX = event.clientX - floatingRect.left;
+        const offsetY = event.clientY - floatingRect.top;
+        const margin = 8;
+        const moveFloating = moveEvent => {
+          moveEvent.preventDefault();
+          const width = floating.offsetWidth;
+          const height = floating.offsetHeight;
+          const minLeft = panelRect.left - layoutRect.left + margin;
+          const minTop = panelRect.top - layoutRect.top + margin;
+          const maxLeft = Math.max(minLeft, minLeft + panel.clientWidth - width - margin);
+          const maxTop = Math.max(minTop, minTop + panel.clientHeight - height - margin);
+          const left = clamp(moveEvent.clientX - layoutRect.left - offsetX, minLeft, maxLeft);
+          const top = clamp(moveEvent.clientY - layoutRect.top - offsetY, minTop, maxTop);
+          frameModule3State.heatmapFloatingPosition = { left, top };
+          floating.style.left = `${left}px`;
+          floating.style.top = `${top}px`;
+          floating.style.right = "auto";
+        };
+        const stopDrag = () => {
+          floating.classList.remove("is-dragging");
+          document.removeEventListener("pointermove", moveFloating);
+          document.removeEventListener("pointerup", stopDrag);
+          document.removeEventListener("pointercancel", stopDrag);
+        };
+        event.preventDefault();
+        hideTooltip();
+        floating.classList.add("is-dragging");
+        document.addEventListener("pointermove", moveFloating);
+        document.addEventListener("pointerup", stopDrag);
+        document.addEventListener("pointercancel", stopDrag);
+      };
+      floating.addEventListener("mouseenter", showHelp);
+      floating.addEventListener("mousemove", moveTooltip);
+      floating.addEventListener("mouseleave", hideTooltip);
+      floating.addEventListener("focusin", event => {
+        const rect = floating.getBoundingClientRect();
+        showHelp({ clientX: rect.left + rect.width / 2, clientY: rect.top + rect.height + 8 });
+      });
+      floating.addEventListener("focusout", hideTooltip);
+      floating.addEventListener("pointerdown", startDrag);
+      floating.dataset.dragBound = "true";
+      frameModule3ApplyHeatmapFloatingPosition();
     }
 
     function frameModule3DetailRecords(records, qualityRecords) {
@@ -25225,8 +25636,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule3DetailFilteredRecords(records) {
       const pricePath = frameModule3State.detailPricePath;
+      const multiSelectedPairKeys = frameModule3State.view === "quality" && frameModule3State.multiSelectionApplied
+        ? new Set(frameModule3State.multiSelectedPairKeys)
+        : null;
       return records.filter(record => {
         if (pricePath && record.pricePath !== pricePath) return false;
+        if (multiSelectedPairKeys && !multiSelectedPairKeys.has(record.pairKey)) return false;
         return framePairAsinSearchMatches(record, frameModule3State.detailAsinQuery);
       });
     }
@@ -25246,8 +25661,81 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       );
     }
 
-    function frameModule3SelectPair(pairKey) {
+    function frameModule3UseMultiPairSelection() {
+      return frameModule3State.view === "quality"
+        && (frameModule3State.multiSelectMode || frameModule3State.multiSelectionApplied);
+    }
+
+    function frameModule3SelectedPairKeys() {
+      return [...new Set((frameModule3State.multiSelectedPairKeys || []).filter(Boolean))];
+    }
+
+    function frameModule3IsPairSelected(pairKey) {
+      if (!pairKey) return false;
+      return frameModule3UseMultiPairSelection()
+        ? frameModule3SelectedPairKeys().includes(pairKey)
+        : frameModule3State.selectedPairKey === pairKey;
+    }
+
+    function frameModule3HasSelectedPairs() {
+      return frameModule3UseMultiPairSelection()
+        ? frameModule3SelectedPairKeys().length > 0
+        : Boolean(frameModule3State.selectedPairKey);
+    }
+
+    function frameModule3ClearMultiSelection() {
+      frameModule3State.multiSelectMode = false;
+      frameModule3State.multiSelectionApplied = false;
+      frameModule3State.multiSelectedPairKeys = [];
+    }
+
+    function frameModule3EnterMultiSelectMode() {
+      if (frameModule3State.view !== "quality") return;
+      frameModule3State.multiSelectMode = true;
+      frameModule3State.multiSelectionApplied = false;
+      frameModule3State.multiSelectedPairKeys = [];
+      frameModule3State.selectedPairKey = null;
+      frameModule3RenderAll();
+    }
+
+    function frameModule3ToggleMultiSelectedPair(pairKey) {
+      if (!pairKey || !frameModule3State.multiSelectMode) return;
+      const selected = new Set(frameModule3SelectedPairKeys());
+      if (selected.has(pairKey)) {
+        selected.delete(pairKey);
+      } else {
+        selected.add(pairKey);
+      }
+      frameModule3State.multiSelectedPairKeys = [...selected];
+      frameModule3RenderAll();
+    }
+
+    function frameModule3ConfirmMultiSelection() {
+      if (!frameModule3State.multiSelectMode || !frameModule3SelectedPairKeys().length) return;
+      frameModule3State.multiSelectMode = false;
+      frameModule3State.multiSelectionApplied = true;
+      frameModule3State.selectedPairKey = null;
+      frameModule3RenderAll();
+    }
+
+    function frameModule3CancelMultiSelection() {
+      frameModule3ClearMultiSelection();
+      frameModule3State.selectedPairKey = null;
+      frameModule3RenderAll();
+    }
+
+    function frameModule3HandleQualityChartPairClick(pairKey) {
       if (!pairKey) return;
+      if (frameModule3State.multiSelectMode) {
+        frameModule3ToggleMultiSelectedPair(pairKey);
+        return;
+      }
+      if (frameModule3State.multiSelectionApplied) return;
+      frameModule3SelectPair(pairKey);
+    }
+
+    function frameModule3SelectPair(pairKey) {
+      if (!pairKey || frameModule3UseMultiPairSelection()) return;
       frameModule3State.selectedPairKey = pairKey;
       frameModule3RenderAll();
       renderFrameModule4();
@@ -25310,8 +25798,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       };
       const pathCell = record => frameModule5PathTag(record);
       const bodyHtml = records.length
-        ? records.map((record, index) => `
-            <tr>
+        ? records.map(record => {
+            const selected = frameModule3IsPairSelected(record.pairKey);
+            return `
+            <tr class="${selected ? "is-selected" : ""}" role="button" tabindex="0" aria-pressed="${selected ? "true" : "false"}" data-module3-detail-pair="${escapeHtml(record.pairKey)}">
               <td title="${escapeHtml(record.pairLabel)}">${pairCell(record)}</td>
               <td class="is-right is-score-col">${scoreCell(record.scaleAdjustedScore, "scale", maxScaleAdjustedScore)}</td>
               <td class="is-right is-score-col">${scoreCell(record.associationScore, "raw", maxAssociationScore)}</td>
@@ -25320,7 +25810,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <td class="is-right">${frameDetailUsersProgressCell(record.crossUsers, "amc-module3-detail-number", maxCrossUsers)}</td>
               <td class="is-right"><span class="amc-module3-detail-number">${frameModule2FormatNumber(record.crossPurchaseComboCount)}</span></td>
               <td class="amc-module3-price-path-col">${pathCell(record)}</td>
-            </tr>`).join("")
+            </tr>`;
+          }).join("")
         : `<tr><td colspan="8" class="amc-list-empty-cell is-center"><span class="amc-list-empty">暂无满足当前筛选条件的关联组合</span></td></tr>`;
 
       wrap.innerHTML = `
@@ -25349,6 +25840,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           </thead>
           <tbody>${bodyHtml}</tbody>
         </table>`;
+      wrap.querySelectorAll("[data-module3-detail-pair]").forEach(row => {
+        const selectPair = () => frameModule3SelectPair(row.dataset.module3DetailPair);
+        row.addEventListener("click", selectPair);
+        row.addEventListener("keydown", event => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          selectPair();
+        });
+      });
+      wrap.querySelectorAll(".amc-module4-product-asin-link").forEach(link => {
+        link.addEventListener("pointerdown", event => event.stopPropagation());
+        link.addEventListener("click", event => event.stopPropagation());
+        link.addEventListener("keydown", event => event.stopPropagation());
+      });
     }
 
     function frameModule3RenderVisibility() {
@@ -25368,6 +25873,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         if (layout.dataset.frameModule3ViewLayout === "quality") {
           layout.dataset.qualityLayoutStyle = "style2";
           layout.dataset.qualityActiveTab = frameModule3State.qualityTab;
+          layout.dataset.multiSelectMode = String(frameModule3State.multiSelectMode);
+          layout.dataset.multiSelectionApplied = String(frameModule3State.multiSelectionApplied);
         }
       });
       document.querySelectorAll("[data-frame-module3-chart-id]").forEach(panel => {
@@ -25393,8 +25900,40 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       document.querySelectorAll("select[data-frame-module3-min-sample]").forEach(select => {
         select.value = String(frameModule3State.qualityMinSample);
       });
+      frameModule3RenderMultiSelectControls();
       const empty = document.getElementById("frameModule3Empty");
       if (empty) empty.hidden = visible.size > 0;
+    }
+
+    function frameModule3RenderMultiSelectControls() {
+      const selectedCount = frameModule3SelectedPairKeys().length;
+      const isSelecting = frameModule3State.multiSelectMode;
+      const isApplied = frameModule3State.multiSelectionApplied;
+      document.querySelectorAll("[data-frame-module3-multi-controls]").forEach(controls => {
+        const enter = controls.querySelector("[data-frame-module3-multi-enter]");
+        const count = controls.querySelector("[data-frame-module3-multi-count]");
+        const confirm = controls.querySelector("[data-frame-module3-multi-confirm]");
+        const cancel = controls.querySelector("[data-frame-module3-multi-cancel]");
+        controls.classList.toggle("is-selecting", isSelecting);
+        controls.classList.toggle("is-applied", isApplied);
+        if (enter) {
+          enter.hidden = isSelecting || isApplied;
+          enter.setAttribute("aria-pressed", "false");
+        }
+        if (count) {
+          count.hidden = !isSelecting && !isApplied;
+          count.textContent = isApplied
+            ? `已筛选 ${selectedCount} 项`
+            : selectedCount
+              ? `已选 ${selectedCount} 项`
+              : "单击色块选择";
+        }
+        if (confirm) {
+          confirm.hidden = !isSelecting;
+          confirm.disabled = selectedCount === 0;
+        }
+        if (cancel) cancel.hidden = !isSelecting && !isApplied;
+      });
     }
 
     function frameModule3RenderChart31Stats(records) {
@@ -25902,23 +26441,29 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         followAsins.map((followAsin, followPosition) => [followPosition, leadPosition, 0])
       ));
       const recordMap = new Map(records.map(record => [`${record.leadAsin}||${record.followAsin}`, record]));
+      const hasSelectedPair = frameModule3HasSelectedPairs();
       const heatData = leadAsins.flatMap((leadAsin, leadPosition) => (
         followAsins.map((followAsin, followPosition) => {
           const record = recordMap.get(`${leadAsin}||${followAsin}`);
           const value = record ? frameModule3MetricValue(record, frameModule3State.matrixMetric) : 0;
-          const selected = record && frameModule3State.selectedPairKey === record.pairKey;
+          const selected = record && frameModule3IsPairSelected(record.pairKey);
           return {
             value: [followPosition, leadPosition, value],
             pairKey: record?.pairKey,
             record,
             itemStyle: selected
               ? {
-                  borderColor: "#3f54c9",
-                  borderWidth: 2.5
+                  borderColor: "#2848b7",
+                  borderWidth: 3,
+                  shadowBlur: 7,
+                  shadowColor: "rgba(40, 72, 183, 0.24)",
+                  shadowOffsetY: 1,
+                  opacity: 1
                 }
               : {
                   borderColor: "#ffffff",
-                  borderWidth: 1.3
+                  borderWidth: 1.3,
+                  opacity: hasSelectedPair ? 0.72 : 1
                 }
           };
         })
@@ -25928,7 +26473,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         backgroundColor: "#ffffff",
         grid: { left: gridLeft, right: gridRight, top: gridTop, bottom: gridBottom },
         tooltip: {
-          position: "top",
+          position: (point, params, dom, rect, size) => {
+            const viewWidth = size?.viewSize?.[0] || chartElement.clientWidth || 0;
+            const viewHeight = size?.viewSize?.[1] || chartElement.clientHeight || chartHeight;
+            const contentWidth = size?.contentSize?.[0] || 0;
+            const contentHeight = size?.contentSize?.[1] || 0;
+            const sourceRect = rect || null;
+            const anchorX = sourceRect ? sourceRect.x + sourceRect.width / 2 : point[0];
+            const belowY = sourceRect ? sourceRect.y + sourceRect.height + 10 : point[1] + 12;
+            const aboveY = sourceRect ? sourceRect.y - contentHeight - 10 : point[1] - contentHeight - 12;
+            const x = Math.max(8, Math.min(anchorX - contentWidth / 2, viewWidth - contentWidth - 8));
+            const preferredY = belowY + contentHeight <= viewHeight - 8 ? belowY : aboveY;
+            const y = Math.max(8, Math.min(preferredY, viewHeight - contentHeight - 8));
+            return [x, y];
+          },
           confine: true,
           backgroundColor: "#ffffff",
           borderColor: "#e1e8f2",
@@ -26018,8 +26576,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             emphasis: {
               focus: "none",
               itemStyle: {
-                borderColor: "#3f54c9",
-                borderWidth: 2.5
+                borderColor: "#2848b7",
+                borderWidth: 3
               }
             }
           }
@@ -26027,7 +26585,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }, true);
       chart.off("click");
       chart.on("click", params => {
-        frameModule3SelectPair(params.data?.pairKey);
+        frameModule3HandleQualityChartPairClick(params.data?.pairKey);
       });
     }
 
@@ -26062,14 +26620,29 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         if (maxNode) maxNode.textContent = frameModule3FormatMetric(maxScore, "index");
         if (metricNode) metricNode.textContent = frameModule3MetricConfig.scaleAdjustedScore.label;
       }
-      const scatterData = records.map(record => ({
-        value: [record.conversionRate, record.attractionRate, record.crossUsers, record.scaleAdjustedScore],
-        pairKey: record.pairKey,
-        record,
-        itemStyle: frameModule3State.selectedPairKey === record.pairKey
-          ? { borderColor: "#147c71", borderWidth: 2.5, shadowBlur: 8, shadowColor: "rgba(20, 124, 113, 0.24)" }
-          : { borderColor: "#ffffff", borderWidth: 1.2 }
-      }));
+      const hasSelectedPair = frameModule3HasSelectedPairs();
+      const scatterData = records.map(record => {
+        const selected = frameModule3IsPairSelected(record.pairKey);
+        return {
+          value: [record.conversionRate, record.attractionRate, record.crossUsers, record.scaleAdjustedScore, selected ? 1 : 0],
+          pairKey: record.pairKey,
+          record,
+          itemStyle: selected
+            ? {
+                borderColor: "#2848b7",
+                borderWidth: 3,
+                shadowBlur: 9,
+                shadowColor: "rgba(40, 72, 183, 0.24)",
+                shadowOffsetY: 1,
+                opacity: 1
+              }
+            : {
+                borderColor: "#ffffff",
+                borderWidth: 1.2,
+                opacity: hasSelectedPair ? 0.72 : 0.94
+              }
+        };
+      });
       const chartElement = chart.getDom();
       const compact = chartElement.clientWidth < 560;
       const axisFontSize = compact ? 10 : 11;
@@ -26123,13 +26696,16 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         series: [{
           type: "scatter",
           data: scatterData,
-          symbolSize: value => Math.min(48, Math.max(9, 6 + Math.sqrt(Number(value[2] || 0)) * 1.35)),
+          symbolSize: value => {
+            const baseSize = Math.min(48, Math.max(9, 6 + Math.sqrt(Number(value[2] || 0)) * 1.35));
+            return Number(value[4]) ? Math.min(54, baseSize + 6) : baseSize;
+          },
           emphasis: { focus: "self", scale: 1.15 }
         }]
       }, true);
       chart.off("click");
       chart.on("click", params => {
-        frameModule3SelectPair(params.data?.pairKey);
+        frameModule3HandleQualityChartPairClick(params.data?.pairKey);
       });
     }
 
@@ -26148,6 +26724,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         return;
       }
       const maxScore = Math.max(...rows.map(record => Number(record.scaleAdjustedScore || 0)), 0.0001);
+      const hasSelectedPair = frameModule3HasSelectedPairs();
       const labelWidth = compact ? 110 : 204;
       const pairLabel = record => frameModule3PairAxisLabel(record, compact ? 7 : 9);
       const qualityLayout = chartElement.closest(".amc-module3-quality-layout");
@@ -26171,11 +26748,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         animation: false,
         grid: { left: compact ? 124 : 222, right: compact ? 14 : 24, top: gridTop, bottom: gridBottom },
         tooltip: {
-          trigger: "axis",
-          axisPointer: { type: "shadow" },
+          trigger: "item",
           confine: true,
+          position: (point, _params, _dom, rect, size) => {
+            const [viewWidth, viewHeight] = size.viewSize;
+            const [contentWidth, contentHeight] = size.contentSize;
+            const anchorX = rect ? rect.x + rect.width / 2 : point[0];
+            const anchorY = rect ? rect.y + rect.height + 12 : point[1] + 12;
+            return [
+              Math.max(8, Math.min(anchorX - contentWidth / 2, viewWidth - contentWidth - 8)),
+              Math.max(8, Math.min(anchorY, viewHeight - contentHeight - 8))
+            ];
+          },
           formatter: params => {
-            const record = rows[params[0]?.dataIndex];
+            const record = rows[params.dataIndex];
             return record
               ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>修正关联指数：${frameModule3FormatMetric(record.scaleAdjustedScore, "index")}<br>原始关联指数：${frameModule3FormatMetric(record.associationScore, "index")}<br>交叉购买人数：${frameModule2FormatNumber(record.crossUsers)}人<br>转化率 / 吸引率：${frameModule3FormatMetric(record.conversionRate, "percent")} / ${frameModule3FormatMetric(record.attractionRate, "percent")}`
               : "";
@@ -26219,9 +26805,22 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             value: record.scaleAdjustedScore,
             pairKey: record.pairKey,
             record,
-            itemStyle: frameModule3State.selectedPairKey === record.pairKey
-              ? { color: "#4e6fe7", borderColor: "#3f60d8", borderWidth: 1 }
-              : { color: "#7891ef", borderRadius: [0, 4, 4, 0] }
+            itemStyle: frameModule3IsPairSelected(record.pairKey)
+              ? {
+                  color: "#5a75df",
+                  borderRadius: [0, 4, 4, 0],
+                  shadowBlur: 8,
+                  shadowColor: "rgba(39, 73, 182, 0.20)",
+                  shadowOffsetY: 1
+                }
+              : {
+                  color: "#8498eb",
+                  borderRadius: [0, 4, 4, 0],
+                  opacity: hasSelectedPair ? 0.72 : 1
+                },
+            label: frameModule3IsPairSelected(record.pairKey)
+              ? { color: "#26469e", fontWeight: 700 }
+              : undefined
           })),
           label: {
             show: true,
@@ -26626,9 +27225,17 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule3RenderAll() {
-      frameModule3RenderVisibility();
       const records = frameModule3FilteredRecords();
       const qualityRecords = frameModule3QualityRecords(records);
+      if (frameModule3UseMultiPairSelection()) {
+        const availablePairKeys = new Set(qualityRecords.map(record => record.pairKey));
+        frameModule3State.multiSelectedPairKeys = frameModule3SelectedPairKeys()
+          .filter(pairKey => availablePairKeys.has(pairKey));
+        if (frameModule3State.multiSelectionApplied && !frameModule3State.multiSelectedPairKeys.length) {
+          frameModule3ClearMultiSelection();
+        }
+      }
+      frameModule3RenderVisibility();
       frameModule3RenderSummary(records, qualityRecords);
       const sortedDetailRecords = frameModule3DetailRecords(records, qualityRecords);
       const detailRecords = frameModule3DetailFilteredRecords(sortedDetailRecords);
@@ -26661,6 +27268,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function setupFrameModule3() {
+      setupFrameModule3HeatmapFloatingDrag();
       document.querySelectorAll("[data-frame-module3-view]").forEach(button => {
         button.addEventListener("click", () => frameModule3SetView(button.dataset.frameModule3View));
       });
@@ -26796,6 +27404,15 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           frameModule3State.selectedPairKey = null;
           frameModule3RenderAll();
         });
+      });
+      document.querySelectorAll("[data-frame-module3-multi-enter]").forEach(button => {
+        button.addEventListener("click", frameModule3EnterMultiSelectMode);
+      });
+      document.querySelectorAll("[data-frame-module3-multi-confirm]").forEach(button => {
+        button.addEventListener("click", frameModule3ConfirmMultiSelection);
+      });
+      document.querySelectorAll("[data-frame-module3-multi-cancel]").forEach(button => {
+        button.addEventListener("click", frameModule3CancelMultiSelection);
       });
       scaleCompareLeft?.addEventListener("change", event => {
         frameModule3SetScaleComparePath("left", event.target.value);
@@ -27347,7 +27964,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             .filter(Boolean)
         )).sort((a, b) => a.localeCompare(b, "zh-CN"));
       select.innerHTML = `
-        <option value="">全部映射维度</option>
+        <option value="" selected hidden>映射维度</option>
         ${dimensions.map(dimension => `<option value="${escapeHtml(dimension)}">${escapeHtml(dimension)}</option>`).join("")}
       `;
       select.value = dimensions.includes(selectedValue) ? selectedValue : "";
@@ -28190,7 +28807,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameLabelAsinMarkup(asin, options = {}) {
       const parts = frameLabelDisplayParts(asin, options);
-      if (!frameLabelHasTag(parts)) return escapeHtml(parts.raw);
+      if (!frameLabelHasTag(parts)) {
+        const variantClass = options.inline ? " is-inline" : "";
+        return `<span class="amc-custom-asin-display${variantClass} is-plain-asin" title="${escapeHtml(parts.raw)}">
+          <span class="amc-custom-asin-value">${escapeHtml(parts.raw)}</span>
+        </span>`;
+      }
       if (parts.isRsi) {
         const variantClass = options.inline
           ? " is-inline is-asin-first is-rsi"
@@ -28325,7 +28947,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameLabelAsinThenTagMarkup(asin, options = {}) {
       const parts = frameLabelDisplayParts(asin, options);
-      if (!frameLabelHasTag(parts)) return escapeHtml(parts.raw);
+      if (!frameLabelHasTag(parts)) {
+        const variantClass = options.inline ? " is-inline" : "";
+        return `<span class="amc-custom-asin-display${variantClass} is-plain-asin" title="${escapeHtml(parts.raw)}">
+          <span class="amc-custom-asin-value">${escapeHtml(parts.raw)}</span>
+        </span>`;
+      }
       const variantClass = `${options.inline ? " is-inline" : ""} is-asin-first${parts.isRsi && !options.inline ? " is-stacked is-rsi" : parts.isRsi ? " is-rsi" : ""}`;
       return `<span class="amc-custom-asin-display${variantClass}" title="${escapeHtml(`${parts.raw} · ${parts.label}`)}">
         <span class="amc-custom-asin-value">${escapeHtml(parts.raw)}</span>
@@ -28335,7 +28962,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameLabelAsinThenTagStackedMarkup(asin, options = {}) {
       const parts = frameLabelDisplayParts(asin, options);
-      if (!frameLabelHasTag(parts)) return escapeHtml(parts.raw);
+      if (!frameLabelHasTag(parts)) {
+        return `<span class="amc-custom-asin-display is-stacked is-plain-asin" title="${escapeHtml(parts.raw)}">
+          <span class="amc-custom-asin-value">${escapeHtml(parts.raw)}</span>
+        </span>`;
+      }
       return `<span class="amc-custom-asin-display is-asin-first is-stacked${parts.isRsi ? " is-rsi" : ""}" title="${escapeHtml(`${parts.raw} · ${parts.label}`)}">
         <span class="amc-custom-asin-value">${escapeHtml(parts.raw)}</span>
         <span class="amc-custom-asin-label">${escapeHtml(parts.label)}</span>
@@ -28385,7 +29016,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function frameLabelAsinThenTagSvgTspans(asin, x, y, classPrefix) {
       const parts = frameLabelDisplayParts(asin);
       if (!frameLabelHasTag(parts)) {
-        return `<tspan x="${x}" y="${y}">${escapeHtml(parts.raw)}</tspan>`;
+        return `<tspan class="${classPrefix}-asin is-plain-asin" x="${x}" y="${y}">${escapeHtml(parts.raw)}</tspan>`;
       }
       return `<tspan class="${classPrefix}-asin" x="${x}" y="${y - 6}">${escapeHtml(parts.raw)}</tspan>
         <tspan class="${classPrefix}-tag" x="${x}" dy="13">${escapeHtml(parts.isRsi ? frameLabelTruncateText(parts.label) : parts.label)}</tspan>`;
@@ -29435,12 +30066,17 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function frameModule4RenderChart41(records) {
       const chart = frameModule3GetChart("frameModule41Chart");
       if (!chart) return;
+      const chartDom = chart.getDom();
       chart.resize();
       if (!records.length) {
         frameModule3SetEmptyChart(chart, "暂无满足高价值条件的组合");
         return;
       }
       const rhythmOrder = ["quick", "stable", "long"];
+      const legendNames = rhythmOrder.map(rhythm => frameModule4RhythmLabels[rhythm]);
+      const legendSelected = chartDom.__frameModule4RhythmLegendSelected || Object.fromEntries(
+        legendNames.map(name => [name, true])
+      );
       const scoreValues = records.map(record => Number(record.scaleScore || 0));
       const minScore = Math.min(...scoreValues);
       const maxScore = Math.max(...scoreValues);
@@ -29558,7 +30194,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             }
           },
           emphasis: {
-            focus: "series",
+            focus: "none",
             itemStyle: {
               opacity: 1,
               borderColor: "#ffffff",
@@ -29584,6 +30220,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             const rhythm = rhythmOrder.find(item => frameModule4RhythmLabels[item] === name);
             return rhythm ? `{name|${name}} {range|${frameModule4RhythmIntervals[rhythm]}}` : name;
           },
+          selected: legendSelected,
           textStyle: {
             color: "#34445f",
             fontSize: 12,
@@ -29593,7 +30230,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               range: { color: "#34445f", fontSize: 11, fontWeight: 400, padding: [0, 0, 0, 2] }
             }
           },
-          data: rhythmOrder.map(rhythm => frameModule4RhythmLabels[rhythm])
+          data: legendNames
         },
         tooltip: {
           trigger: "item",
@@ -29665,6 +30302,22 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         series: [...rhythmSeries, ...scatterSeries]
       }, true);
       chart.off("click");
+      chart.off("legendselectchanged");
+      chart.on("legendselectchanged", params => {
+        const nextSelected = {
+          ...Object.fromEntries(legendNames.map(name => [name, true])),
+          ...(params.selected || {})
+        };
+        const hasVisibleSeries = legendNames.some(name => nextSelected[name] !== false);
+        if (!hasVisibleSeries) {
+          nextSelected[params.name] = true;
+          chartDom.__frameModule4RhythmLegendSelected = nextSelected;
+          chart.dispatchAction({ type: "legendSelect", name: params.name });
+          return;
+        }
+        chartDom.__frameModule4RhythmLegendSelected = nextSelected;
+        chart.setOption({ legend: { selected: nextSelected } });
+      });
       chart.on("click", params => {
         const record = params.data?.record;
         if (record) {
@@ -29866,6 +30519,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       bindSelect("frameModule4MinUsers", "minUsers", value => Number(value || 20));
       bindSelect("frameModule4Strength", "strengthTop", value => Number(value || 30));
       bindSelect("frameModule4PricePath", "pricePath");
+      frameBindEmptyFilterClear("frameModule4PricePath", "frameModule4PricePathClear");
       const rhythmSelect = document.getElementById("frameModule42RhythmSelect");
       rhythmSelect?.addEventListener("change", event => {
         const nextRhythm = event.target.value;
@@ -30298,6 +30952,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         series
       }, true);
       chart.off("click");
+      chart.off("legendselectchanged");
+      chart.on("legendselectchanged", params => {
+        const legendNames = baseSeries.map(item => item.name);
+        const hasVisibleSeries = legendNames.some(name => params.selected?.[name] !== false);
+        if (!hasVisibleSeries) {
+          chart.dispatchAction({ type: "legendSelect", name: params.name });
+        }
+      });
       chart.on("click", params => {
         const record = params.data?.record;
         if (!record) return;
@@ -30508,7 +31170,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const select = document.getElementById("frameModule53Strategy");
       if (!select) return;
       const options = [
-        `<option value="">策略</option>`,
+        `<option value="" hidden>策略</option>`,
         ...frameModule5StrategyConfig.map(item => `<option value="${escapeHtml(item.key)}">${escapeHtml(item.label)}</option>`)
       ];
       select.innerHTML = options.join("");
@@ -30757,6 +31419,36 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         frameModule2State.selectedAsin = frameModule2DefaultAsin(view);
         frameModule2State.selectedAsinExplicit = false;
       }
+    }
+
+    function frameModule2UpdateRankingText(view = frameModule2State.analysisView) {
+      const title = document.getElementById("frameRoleRankingTitle");
+      const subtitle = document.getElementById("frameRoleRankingSubtitle");
+      const isLead = view === "lead";
+      if (title) title.textContent = isLead ? "TOP 15 Lead ASIN" : "TOP 15 Follow ASIN";
+      if (subtitle) {
+        subtitle.textContent = isLead
+          ? "点击Lead ASIN，可同步查看该ASIN的流向。"
+          : "点击Follow ASIN，可同步查看该ASIN的来源。";
+      }
+    }
+
+    function frameModule2FlowSubtitleText(view = frameModule2State.analysisView, asin = frameModule2State.selectedAsin) {
+      const asinText = frameLabelFormatAsin(asin) || "—";
+      return view === "lead"
+        ? `选中 “${asinText}”，展示它带动的 TOP 10 Follow ASIN。`
+        : `选中 “${asinText}”，展示带动它的 TOP 10 Lead ASIN。`;
+    }
+
+    function frameModule2UpdateFlowText(view = frameModule2State.analysisView, asin = frameModule2State.selectedAsin) {
+      const title = document.getElementById("frameRoleFlowTitle");
+      const subtitle = document.getElementById("frameRoleFlowSubtitle");
+      if (title) {
+        title.textContent = view === "lead"
+          ? "Lead ASIN TOP 10 流向"
+          : "Follow ASIN TOP 10 来源";
+      }
+      if (subtitle) subtitle.textContent = frameModule2FlowSubtitleText(view, asin);
     }
 
     function frameModule2SyncAnalysisSwitch() {
@@ -31226,10 +31918,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const metrics = [
         { label: "入口新客", value: frameModule6FormatNumber(entry.ntbUsers), note: "New-to-Brand 新客总人数", color: "#20385d" },
         { label: "二购用户", value: frameModule6FormatNumber(entry.repurchaseUsers), note: "完成至少一次二购的去重用户数", color: "#324d7d" },
-        { label: "跨品承接占比", value: frameModule6FormatPercent(entry.crossShare), note: "跨品二购人次 / 总二购人次", color: "#2f6fe0" },
-        { label: "二购销售额", value: frameModule6FormatCompactMoney(entry.secondSales), note: "二购 ASIN 销售额", color: "#0e8b93" },
         { label: "二购率", value: frameModule6FormatPercent(entry.repurchaseRate), note: "二购用户 / 入口新客", color: "#ef8d21" },
-        { label: "二购销售占比", value: frameModule6FormatPercent(entry.valueShare), note: "二购销售额 / 首购销售额", color: "#c45f83" }
+        { label: "二购销售额", value: frameModule6FormatCompactMoney(entry.secondSales), note: "二购 ASIN 销售额", color: "#0e8b93" },
+        { label: "二购销售额占比", value: frameModule6FormatPercent(entry.valueShare), note: "二购销售额 / 首购销售额", color: "#c45f83" },
+        { label: "跨品承接占比", value: frameModule6FormatPercent(entry.crossShare), note: "跨品二购人次 / 总二购人次", color: "#2f6fe0" }
       ];
       frameModule6SetHtml("frameModule61Kpis", metrics.map(metric => `
         <article class="amc-module6-kpi" style="--accent:${metric.color}">
@@ -31287,7 +31979,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const hasTaggedLabels = frameLabelPresentation() !== "plain";
       chart.setOption({
         animation: false,
-        color: ["#d8dee8", "#4b78e1", "#ef8d21"],
+        color: ["#b9c9f3", "#4b78e1", "#ef8d21"],
         grid: { left: 66, right: 52, top: 72, bottom: hasTaggedLabels ? 118 : 92, containLabel: false },
         legend: {
           top: 12,
@@ -31406,11 +32098,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             stack: "new",
             barMaxWidth: 24,
             barGap: "20%",
-            itemStyle: { color: "#d8dee8", borderColor: "#ffffff", borderWidth: 1 },
+            itemStyle: { color: "#b9c9f3", borderColor: "#ffffff", borderWidth: 1 },
             emphasis: {
               focus: "none",
               scale: false,
-              itemStyle: { color: "#d8dee8", borderColor: "#ffffff", borderWidth: 1, shadowBlur: 0 }
+              itemStyle: { color: "#b9c9f3", borderColor: "#ffffff", borderWidth: 1, shadowBlur: 0 }
             },
             data: items.map(item => ({
               value: item.ntbUsers - item.repurchaseUsers
@@ -31452,6 +32144,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ]
       }, true);
       chart.off("click");
+      chart.off("legendselectchanged");
+      chart.on("legendselectchanged", params => {
+        const legendNames = ["尚未二购新客", "已二购新客", "二购率"];
+        const hasVisibleSeries = legendNames.some(name => params.selected?.[name] !== false);
+        if (!hasVisibleSeries) {
+          chart.dispatchAction({ type: "legendSelect", name: params.name });
+        }
+      });
       chart.on("click", params => {
         const asin = xAxisData[params.dataIndex];
         if (!asin) return;
@@ -32350,7 +33050,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const isLead = view === "lead";
       const xKey = isLead ? "totalUsers" : "sourceLeadCount";
       const yKey = isLead ? "crossRate" : "captureRate";
-      const sizeKey = isLead ? "crossUsers" : "capturedUsers";
+      const sizeKey = isLead ? "associatedCombos" : "sourceLeadCount";
       const xLabel = isLead ? "Lead ASIN购买总人数" : "来源 Lead ASIN数量";
       const yLabel = "交叉购买率";
       const roleTitle = isLead ? "Lead 视角：Lead ASIN购买总人数与交叉购买率" : "Follow 视角：来源 Lead ASIN数量与交叉购买率";
@@ -32384,7 +33084,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             <span class="amc-role-legend-chip"><span class="amc-role-legend-swatch band-mid"></span>中价（$100-$200）</span>
             <span class="amc-role-legend-chip"><span class="amc-role-legend-swatch band-high"></span>高价（&gt;$200）</span>
           </div>
-          <span>气泡大小：交叉购买人数</span>`;
+          <span>气泡颜色：单价区间；气泡大小：${isLead ? "带动 Follow 数" : "来源 Lead 数"}</span>`;
       }
 
       const height = 500;
@@ -32428,6 +33128,19 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const xMidPosition = xScale(xMid);
       const yMidPosition = yScale(yMid);
       const radiusScale = value => 5 + Math.sqrt(Math.max(0, Number(value || 0) - minSize) / Math.max(1, maxSize - minSize)) * 15;
+      const baselineSuffix = frameModule2State.matrixBaseline === "mean" ? "Avg." : "Med.";
+      const xBaselineLabel = `购买人数 ${frameModule2FormatNumber(Math.round(Number(xMid || 0)))} (${baselineSuffix})`;
+      const yBaselineLabel = `购买率 ${frameModule2FormatPercent(yMid)} (${baselineSuffix})`;
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+      const estimatedBaselineTextWidth = value => Array.from(String(value || ""))
+        .reduce((sum, char) => sum + (/[\u4e00-\u9fff]/.test(char) ? 11 : 6), 0);
+      const xBaselineHalfWidth = Math.min(
+        Math.max(54, estimatedBaselineTextWidth(xBaselineLabel) / 2 + 8),
+        Math.max(54, plotWidth / 2 - 6)
+      );
+      const xBaselineLabelX = clamp(xMidPosition, padding.left + xBaselineHalfWidth, padding.left + plotWidth - xBaselineHalfWidth);
+      const yBaselineLabelX = padding.left + 8;
+      const yBaselineLabelY = clamp(yMidPosition - 7, padding.top + 12, padding.top + plotHeight - 8);
 
       const xTicks = isLead
         ? [10, 100, 1000, 10000, 100000].filter(value => value >= xDomainMin && value <= xDomainMax)
@@ -32501,8 +33214,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ${bubbles}
         <text class="amc-role-axis-label" x="${padding.left + plotWidth / 2}" y="${padding.top + plotHeight + 28}" text-anchor="middle">${xLabel}</text>
         <text class="amc-role-axis-label" x="14" y="${padding.top + plotHeight / 2}" text-anchor="middle" transform="rotate(-90 14 ${padding.top + plotHeight / 2})">${yLabel}</text>
-        <text class="amc-role-baseline-label" x="${xMidPosition}" y="${padding.top - 9}" text-anchor="middle">${isLead ? "人数" : "来源数"} ${formatBaseline(xMid)}</text>
-        <text class="amc-role-baseline-label" x="${padding.left + plotWidth + 10}" y="${yMidPosition + 4}" text-anchor="end">率 ${frameModule2FormatPercent(yMid)}</text>
+        <text class="amc-role-baseline-label" x="${xBaselineLabelX}" y="${padding.top - 9}" text-anchor="middle">${xBaselineLabel}</text>
+        <text class="amc-role-baseline-label" x="${yBaselineLabelX}" y="${yBaselineLabelY}" text-anchor="start">${yBaselineLabel}</text>
       `;
 
       svg.querySelectorAll("[data-role-asin]").forEach(group => {
@@ -32566,8 +33279,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         select.value = frameModule2State.rankingMetric;
       }
       const metric = options.find(option => option.key === frameModule2State.rankingMetric) || options[0];
-      const rankingTitle = document.getElementById("frameRoleRankingTitle");
-      if (rankingTitle) rankingTitle.textContent = view === "lead" ? "TOP 15 Lead ASIN" : "TOP 15 Follow ASIN";
+      frameModule2UpdateRankingText(view);
       const items = frameModule2RoleFilteredItems(view)
         .slice()
         .sort((a, b) => Number(b[metric.key] || 0) - Number(a[metric.key] || 0))
@@ -32728,10 +33440,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const metricLabel = metric?.label || "";
       const isLinkedLayout = frameModule2LinkLayoutStyle() === "style2";
       const selectedAsin = frameModule2State.selectedAsin;
-      const rankingTitle = document.getElementById("frameRoleRankingTitle");
-      if (rankingTitle) {
-        rankingTitle.textContent = view === "lead" ? "TOP 15 Lead ASIN" : "TOP 15 Follow ASIN";
-      }
+      frameModule2UpdateRankingText(view);
 
       const items = frameModule2RoleFilteredItems(view)
         .slice()
@@ -32871,7 +33580,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               }),
               rich: {
                 asinBlue: {
-                  color: "#7f8fa6",
+                  color: frameLabelPresentation() === "plain" ? "#1558c0" : "#7f8fa6",
                   fontWeight: 400
                 },
                 tagMuted: {
@@ -33036,16 +33745,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       renderFrameRoleLinkContext(direction, selectedAsin, links);
       const selectedProduct = items.find(item => item.asin === selectedAsin);
-      if (flowTitle) {
-        flowTitle.textContent = direction === "lead"
-          ? "Lead ASIN TOP 10 流向"
-          : "Follow ASIN TOP 10 来源";
-      }
-      if (subtitle) {
-        subtitle.textContent = direction === "lead"
-          ? `选中 Lead ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示其 TOP 10 Follow ASIN`
-          : `选中 Follow ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示带动它的 TOP 10 Lead ASIN`;
-      }
+      frameModule2UpdateFlowText(direction, selectedAsin);
 
       const current = window.echarts?.getInstanceByDom(chartDom);
       if (!selectedAsin || !selectedProduct || links.length < 1 || !window.echarts) {
@@ -33832,16 +34532,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           .slice(0, 10);
 
       const selectedProduct = items.find(item => item.asin === selectedAsin);
-      if (flowTitle) {
-        flowTitle.textContent = direction === "lead"
-          ? "Lead ASIN TOP 10 流向"
-          : "Follow ASIN TOP 10 来源";
-      }
-      if (subtitle) {
-        subtitle.textContent = direction === "lead"
-          ? `选中 Lead ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示其 TOP 10 Follow ASIN`
-          : `选中 Follow ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示带动它的 TOP 10 Lead ASIN`;
-      }
+      frameModule2UpdateFlowText(direction, selectedAsin);
 
       if (!selectedAsin || !selectedProduct || links.length < 1) {
         setEmptyState();
@@ -34133,14 +34824,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       renderFrameRoleLinkContext(direction, selectedAsin, links);
       const selectedProduct = items.find(item => item.asin === selectedAsin);
-      if (flowTitle) {
-        flowTitle.textContent = direction === "lead" ? "Lead ASIN TOP 10 流向" : "Follow ASIN TOP 10 来源";
-      }
-      if (subtitle) {
-        subtitle.textContent = direction === "lead"
-          ? `选中 Lead ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示其 TOP 10 Follow ASIN`
-          : `选中 Follow ASIN“${frameLabelFormatAsinThenTag(selectedAsin) || "—"}”，展示带动它的 TOP 10 Lead ASIN`;
-      }
+      frameModule2UpdateFlowText(direction, selectedAsin);
 
       const height = 360;
       const renderedWidth = svg.clientWidth || 1120;
@@ -35029,6 +35713,17 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               axis.axisLabel = {
                 ...(axis.axisLabel || {}),
                 formatter: value => frameLabelAxisText(value)
+              };
+            }
+            if (
+              frameLabelPresentation() === "plain" &&
+              axis.type === "category" &&
+              hasAsinCategory
+            ) {
+              axis.axisLabel = {
+                ...(axis.axisLabel || {}),
+                color: "#1558c0",
+                fontWeight: 400
               };
             }
             if (typeof axis.name !== "string" || axis.name.includes("{amcMetricAxisName|")) return;
