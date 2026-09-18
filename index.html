@@ -10179,9 +10179,10 @@
     .amc-module6-donut-table-stat {
       min-width: 0;
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
       align-items: center;
-      gap: 3px 8px;
+      gap: 2px 8px;
       padding: 7px 10px;
       border: 1px solid #e2e8f2;
       border-radius: 6px;
@@ -10202,11 +10203,20 @@
 
     .amc-module6-donut-table-stat-label {
       display: inline-flex;
+      grid-column: 1;
+      grid-row: 1 / -1;
+      align-self: center;
       align-items: center;
       gap: 5px;
       min-width: 0;
       color: #40536d;
       font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .amc-module6-donut-table-stat-metric {
+      color: inherit;
+      font: inherit;
     }
 
     .amc-module6-donut-analysis[data-donut-style="style3"][data-donut-view="table"] .amc-module6-donut-table-stats {
@@ -10234,12 +10244,15 @@
 
     .amc-module6-donut-table-stat small {
       display: block;
-      grid-column: 1 / -1;
-      padding-left: 14px;
+      grid-column: 2;
+      grid-row: 2;
+      justify-self: end;
+      padding: 0;
       color: #60718a;
       font-size: 11px;
       line-height: 1.25;
-      white-space: normal;
+      text-align: right;
+      white-space: nowrap;
       overflow: visible;
       text-overflow: clip;
     }
@@ -20327,7 +20340,7 @@
       <div class="top-tabs" role="navigation" aria-label="产品页签">
         <button class="product-tab" type="button" data-page-target="reports">AMC Reports ×</button>
         <button class="product-tab" type="button" data-page-target="basket">01 购物篮分析模型 ×</button>
-        <button class="product-tab active" type="button" data-page-target="amcFrame">02 购物篮关联购买分析模型 ×</button>
+        <button class="product-tab active" type="button" data-page-target="amcFrame">02 购物篮交叉购买分析模型 ×</button>
         <button class="product-tab" type="button" data-page-target="systemMappings">系统映射 ×</button>
         <button class="product-tab" type="button" data-page-target="customMappings">自定义映射 ×</button>
       </div>
@@ -20453,11 +20466,11 @@
             <article class="template-card featured" id="basketTemplateCard">
               <div class="template-visual more"></div>
               <div class="template-body">
-                <h3>更多模型</h3>
-                <p class="template-desc">扩展更多高频业务分析模型，支持快速创建并进入配置流程。</p>
+                <h3>营销洞察</h3>
+                <p class="template-desc">洞察消费者行为与营销效果，识别增长机会和解析转化贡献,为营销决策提供数据依据。</p>
                 <ul class="template-models">
                   <li>01 购物篮分析模型</li>
-                  <li>02 购物篮关联购买分析模型</li>
+                  <li>02 购物篮交叉购买分析模型</li>
                 </ul>
                 <div class="template-quick-actions">
                   <button class="quick-create-btn" type="button" id="quickCreateBasket">快速创建</button>
@@ -20545,13 +20558,13 @@
         <div class="amc-frame-layout">
           <section class="intro-panel amc-frame-intro-panel" aria-labelledby="framePageTitle" data-frame-model-source="触达后28天内转化数据" data-frame-model-mapping="不提供映射（ASIN维度）">
             <div class="intro-copy">
-              <h1 id="framePageTitle">02 购物篮关联购买分析模型</h1>
+              <h1 id="framePageTitle">02 购物篮交叉购买分析模型</h1>
               <p>
                 用于识别 Lead ASIN 与 Follow ASIN 的关联购买路径，评估交叉购买人数、购买间隔和连带销售机会。当前已覆盖模块 1 至模块 6 的可视化分析。
               </p>
               <div class="amc-frame-intro-metrics" aria-label="模型指标说明">
                 <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">数据源</span><strong id="frameIntroDataSource">触达后28天内转化数据</strong></span>
-                <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">数据聚合方式</span><strong id="frameIntroMapping">不提供映射（ASIN维度）</strong></span>
+                <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">映射配置</span><strong id="frameIntroMapping">不提供映射（ASIN维度）</strong></span>
                 <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">涉及ASIN</span><strong id="frameIntroAsinCount">80个</strong></span>
                 <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">有效关联组合数</span><strong id="frameIntroComboCount">2,104个</strong></span>
               </div>
@@ -21344,7 +21357,6 @@
                         <span class="status-pill">加权均值 159.3 天</span>
                       </div>
                     </div>
-                    <div class="amc-overview-rhythm-legend amc-overview-inline-rhythm-legend" id="frameOverviewIntervalRhythmLegend" data-frame-overview-rhythm-legend aria-label="购买节奏图例"></div>
                     <svg class="amc-interval-chart" id="frameIntervalChart" viewBox="0 0 760 370" role="img" aria-label="关联购买平均间隔分布柱状图"></svg>
                   </section>
                 </div>
@@ -22209,7 +22221,7 @@
               <h2>已选模型</h2>
               <button class="download-btn" type="button">+ 选择模型</button>
             </div>
-            <div class="selected-template-title">更多模型</div>
+            <div class="selected-template-title">营销洞察</div>
             <div class="selected-model-grid">
               <article class="selected-model-card">
                 <div class="selected-model-visual">
@@ -22303,7 +22315,7 @@
                   <span class="model-visual-base" aria-hidden="true"></span>
                 </div>
                 <div class="selected-model-body">
-                  <h3>02 购物篮关联购买分析模型</h3>
+                  <h3>02 购物篮交叉购买分析模型</h3>
                   <div class="form-field">
                     <label><span class="required">*</span>数据源<span class="field-help" aria-hidden="true">?</span></label>
                     <select id="createFrameDataSelect" aria-label="02模型数据源">
@@ -22365,7 +22377,7 @@
         <div class="custom-labels-page-shell">
           <div class="custom-mapping-page-top">
             <div class="custom-mapping-page-notice" role="note" aria-label="自定义映射使用说明">
-              自定义映射用于“<span class="custom-mapping-notice-emphasis">购物篮关联购买分析模型</span>”：1）创建报告选择“自定义映射”，即可按映射维度<span class="custom-mapping-notice-emphasis">聚合输出报告</span>；2）创建报告选择“不提供映射”，则映射仅作为<span class="custom-mapping-notice-emphasis">标签展示</span>，用于辅助 ASIN 识别，不参与聚合也不重新计算任何指标。
+              自定义映射用于“<span class="custom-mapping-notice-emphasis">购物篮交叉购买分析模型</span>”：1）创建报告选择“自定义映射”，即可按映射维度<span class="custom-mapping-notice-emphasis">聚合输出报告</span>；2）创建报告选择“不提供映射”，则映射仅作为<span class="custom-mapping-notice-emphasis">标签展示</span>，用于辅助 ASIN 识别，不参与聚合也不重新计算任何指标。
             </div>
           </div>
           <div class="custom-mapping-workbench">
@@ -25400,7 +25412,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (breadcrumb) {
         const isMappingUpload = page === "customMappings" || page === "systemMappings";
         const rootLabel = isMappingUpload ? "Mapping Upload" : "AMC报告";
-        const current = page === "basket" ? "01 购物篮分析模型" : page === "create" ? "创建报告" : page === "amcFrame" ? "02 购物篮关联购买分析模型" : page === "customMappings" ? "自定义映射" : page === "systemMappings" ? "系统映射" : "";
+        const current = page === "basket" ? "01 购物篮分析模型" : page === "create" ? "创建报告" : page === "amcFrame" ? "02 购物篮交叉购买分析模型" : page === "customMappings" ? "自定义映射" : page === "systemMappings" ? "系统映射" : "";
         breadcrumb.innerHTML = `
           <svg class="breadcrumb-home" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M3 11.5 12 4l9 7.5"></path>
@@ -25486,16 +25498,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     const frameOverviewMeanIntervalDays = 159.3;
 
-    const frameOverviewRhythmColors = {
-      quick: "#66d1c8",
-      stable: "#7b86ef",
-      long: "#fabe62"
-    };
-
     const frameOverviewState = {
       activePairKey: null,
       sortKey: "crossUsers",
-      activeRhythm: null,
       activeIntervalIndex: null
     };
 
@@ -25506,35 +25511,16 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function frameOverviewSetLayoutStyle() {
       const chartRow = document.querySelector(".amc-overview-chart-row[data-overview-layout]");
       if (chartRow) chartRow.dataset.overviewLayout = "style1";
-      renderFrameOverviewRhythmLegend();
       window.requestAnimationFrame(() => {
-        renderFrameOverviewRhythmChart();
         renderFrameIntervalChart();
       });
     }
 
-    function frameOverviewBucketRhythm(bucket) {
-      if (!bucket) return null;
-      if (bucket.maxDay !== null && Number(bucket.maxDay) <= 90) return "quick";
-      if (Number(bucket.minDay || 0) <= 180) return "stable";
-      return "long";
-    }
-
-    function frameOverviewSetRhythmSelection(rhythm, intervalIndex = null) {
-      if (!["quick", "stable", "long"].includes(rhythm)) return;
+    function frameOverviewSetIntervalSelection(intervalIndex = null) {
       const normalizedIndex = Number.isInteger(intervalIndex) ? intervalIndex : null;
-      const sameSelection = frameOverviewState.activeRhythm === rhythm &&
-        frameOverviewState.activeIntervalIndex === normalizedIndex;
-      frameOverviewState.activeRhythm = sameSelection ? null : rhythm;
+      const sameSelection = frameOverviewState.activeIntervalIndex === normalizedIndex;
       frameOverviewState.activeIntervalIndex = sameSelection ? null : normalizedIndex;
-      frameOverviewState.activePairKey = null;
       hideTooltip();
-      if (frameOverviewLayoutStyle() === "style1") {
-        renderFrameOverviewRhythmChart();
-      } else {
-        renderFrameOverviewRhythmLegend();
-      }
-      renderFrameTopPairs();
       renderFrameIntervalChart();
     }
 
@@ -30731,8 +30717,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const yMax = Math.pow(10, Math.ceil(Math.log10(Math.max(...records.map(record => Number(record.crossUsers || 0)), 10))));
       const { stats } = frameModule4Stats(records);
       const totalUsers = rhythmOrder.reduce((sum, rhythm) => sum + Number(stats[rhythm].users || 0), 0);
-      const matrixGrid = { left: 82, right: 26, top: 116, bottom: 74 };
-      const rhythmGrid = { left: matrixGrid.left, right: matrixGrid.right, top: 46, height: 30 };
+      const matrixGrid = { left: 82, right: 26, top: 124, bottom: 74 };
+      const rhythmGrid = { left: matrixGrid.left, right: matrixGrid.right, top: 54, height: 30 };
       const symbolSize = value => {
         const score = Number(value?.[2] || minScore);
         const ratio = maxScore === minScore ? 0.58 : (score - minScore) / Math.max(0.0001, maxScore - minScore);
@@ -30835,8 +30821,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             formatter: params => {
               const share = Number(params.data?.share || 0);
               return share >= 0.16
-                ? `${frameModule4RhythmLabels[rhythm]} · ${(share * 100).toFixed(1)}%`
-                : `${(share * 100).toFixed(1)}%`;
+                ? `${frameModule4RhythmLabels[rhythm]} · 路径人次占比 ${(share * 100).toFixed(1)}%`
+                : `路径人次占比 ${(share * 100).toFixed(1)}%`;
             }
           },
           emphasis: {
@@ -30853,6 +30839,21 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       chart.setOption({
         animation: false,
         color: rhythmOrder.map(rhythm => frameModule4Colors[rhythm]),
+        graphic: [
+          {
+            type: "text",
+            left: "center",
+            top: 34,
+            silent: true,
+            style: {
+              text: "气泡大小：修正关联指数",
+              fill: "#34445f",
+              fontSize: 11,
+              fontWeight: 400,
+              textAlign: "center"
+            }
+          }
+        ],
         grid: [rhythmGrid, matrixGrid],
         legend: {
           show: true,
@@ -30894,7 +30895,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             }
             const rhythm = params.data?.rhythm;
             return rhythm
-              ? `<strong>${frameModule4RhythmLabels[rhythm]} ${frameModule4RhythmIntervals[rhythm]}</strong><br>交叉购买人数：${frameModule2FormatNumber(params.data.value)}人<br>交叉购买组合数：${frameModule2FormatNumber(params.data.pairCount)}个<br>占比：${frameModule4FormatShare(params.data.share)}`
+              ? `<strong>${frameModule4RhythmLabels[rhythm]} ${frameModule4RhythmIntervals[rhythm]}</strong><br>交叉购买人数：${frameModule2FormatNumber(params.data.value)}人<br>交叉购买组合数：${frameModule2FormatNumber(params.data.pairCount)}个<br>路径人次占比：${frameModule4FormatShare(params.data.share)}<br><span style="color:#718099">当前节奏路径人次 / 当前筛选高价值组合总路径人次</span>`
               : "";
           }
         },
@@ -31543,7 +31544,22 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       chart.setOption({
         animation: false,
         color: ["#e75b64", "#e5b744", "#7faee4"],
-        grid: { left: 82, right: 24, top: 70, bottom: 72 },
+        graphic: [
+          {
+            type: "text",
+            right: 10,
+            top: 35,
+            silent: true,
+            style: {
+              text: "气泡大小：交叉购买人数",
+              fill: "#34445f",
+              fontSize: 11,
+              fontWeight: 400,
+              textAlign: "right"
+            }
+          }
+        ],
+        grid: { left: 82, right: 24, top: 78, bottom: 72 },
         legend: {
           top: 10,
           right: 10,
@@ -31609,8 +31625,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       chart.on("click", params => {
         const record = params.data?.record;
         if (!record) return;
-        frameModule5State.selectedStrategyKey = record.strategyKey;
-        frameModule5State.selectedPairKey = record.pairKey;
+        frameModule5State.selectedPairKey =
+          frameModule5State.selectedPairKey === record.pairKey ? null : record.pairKey;
         renderFrameModule5();
       });
     }
@@ -33009,8 +33025,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ? `<div class="amc-module6-donut-table-stats">${groups.map(group => {
           const topShare = Number(group.value || 0) / Math.max(1, totalVisible);
           const fullShare = totalAll ? Number(group.value || 0) / Math.max(1, totalAll) : 0;
+          const metricUnit = metricKey === "salesAmount" ? "销售额" : "人次";
           return `<div class="amc-module6-donut-table-stat ${escapeHtml(group.className)}">
-            <span class="amc-module6-donut-table-stat-label"><i class="amc-module6-dot ${escapeHtml(group.className)}" aria-hidden="true"></i> ${escapeHtml(group.name)}</span>
+            <span class="amc-module6-donut-table-stat-label"><i class="amc-module6-dot ${escapeHtml(group.className)}" aria-hidden="true"></i><span>${escapeHtml(group.name)}<span class="amc-module6-donut-table-stat-metric">${metricUnit}</span></span></span>
             <strong>${escapeHtml(frameModule6DonutMetricText(group.value, metricKey))}</strong>
             <small title="占比${escapeHtml(topNLabel)} ${frameModule6FormatPercent(topShare)} / 占比全量 ${frameModule6FormatPercent(fullShare)}">${escapeHtml(topNLabel)} ${frameModule6FormatPercent(topShare)} | 全量 ${frameModule6FormatPercent(fullShare)}</small>
           </div>`;
@@ -33606,7 +33623,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function renderFrameOverview() {
       renderFrameIntroMetrics();
-      renderFrameOverviewRhythmChart();
       renderFrameTopPairs();
       renderFrameIntervalChart();
       renderFrameModule2();
@@ -33633,9 +33649,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           Number(record.avgInterval || 0) > 0
         )
         .map(frameModule5DecorateRecord);
-      return frameOverviewState.activeRhythm
-        ? records.filter(record => record.rhythm === frameOverviewState.activeRhythm)
-        : records;
+      return records;
     }
 
     function frameOverviewRhythmTag(record) {
@@ -33646,119 +33660,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         <span class="amc-overview-rhythm-tag ${escapeHtml(rhythm)}" title="${escapeHtml(`${label} ${interval}`)}" aria-label="${escapeHtml(`${label} ${interval}`)}">
           ${escapeHtml(label)}
         </span>`;
-    }
-
-    function frameOverviewRhythmStats() {
-      const order = ["quick", "stable", "long"];
-      const stats = {};
-      order.forEach(rhythm => {
-        stats[rhythm] = { bucketCount: 0, users: 0, share: 0 };
-      });
-      frameOverviewIntervals.forEach(bucket => {
-        const value = Number(bucket.value || 0);
-        const rhythm = frameOverviewBucketRhythm(bucket);
-        stats[rhythm].bucketCount += 1;
-        stats[rhythm].users += value;
-      });
-      const totalUsers = order.reduce((sum, rhythm) => sum + stats[rhythm].users, 0);
-      order.forEach(rhythm => {
-        stats[rhythm].share = totalUsers ? stats[rhythm].users / totalUsers : 0;
-      });
-      return { totalUsers, stats };
-    }
-
-    function renderFrameOverviewRhythmLegend() {
-      const legends = Array.from(document.querySelectorAll("[data-frame-overview-rhythm-legend]"));
-      if (!legends.length) return;
-      const order = ["quick", "stable", "long"];
-      const activeRhythm = frameOverviewState.activeRhythm;
-      const markup = order.map(rhythm => `
-        <button class="amc-overview-rhythm-legend-item${activeRhythm === rhythm ? " is-active" : activeRhythm ? " is-muted" : ""}" type="button" data-overview-rhythm="${rhythm}" aria-pressed="${activeRhythm === rhythm ? "true" : "false"}">
-          <span class="amc-overview-rhythm-dot" style="--rhythm-color:${frameOverviewRhythmColors[rhythm]}"></span>
-          <span>${escapeHtml(frameModule4RhythmLabels[rhythm])} ${escapeHtml(frameModule4RhythmIntervals[rhythm])}</span>
-        </button>
-      `).join("");
-      legends.forEach(legend => {
-        legend.innerHTML = markup;
-        legend.querySelectorAll("[data-overview-rhythm]").forEach(item => {
-          item.addEventListener("click", () => {
-            frameOverviewSetRhythmSelection(item.dataset.overviewRhythm);
-          });
-        });
-      });
-    }
-
-    function renderFrameOverviewRhythmChart() {
-      renderFrameOverviewRhythmLegend();
-      const chart = frameModule3GetChart("frameOverviewRhythmChart");
-      if (!chart) return;
-      const { totalUsers, stats } = frameOverviewRhythmStats();
-      if (!totalUsers) {
-        frameModule3SetEmptyChart(chart, "暂无高价值路径人次构成");
-        return;
-      }
-      const order = ["quick", "stable", "long"];
-      const activeRhythm = frameOverviewState.activeRhythm;
-      const data = order.map(rhythm => ({
-        name: frameModule4RhythmLabels[rhythm],
-        value: stats[rhythm].users,
-        bucketCount: stats[rhythm].bucketCount,
-        rhythm,
-        itemStyle: {
-          color: frameOverviewRhythmColors[rhythm],
-          borderColor: "#ffffff",
-          borderWidth: activeRhythm === rhythm ? 3 : 2,
-          opacity: activeRhythm && activeRhythm !== rhythm ? 0.32 : 1,
-          shadowBlur: activeRhythm === rhythm ? 10 : 0,
-          shadowColor: activeRhythm === rhythm ? "rgba(48, 70, 112, 0.18)" : "transparent"
-        }
-      })).filter(item => item.value > 0);
-      chart.setOption({
-        animation: false,
-        color: order.map(rhythm => frameOverviewRhythmColors[rhythm]),
-        tooltip: {
-          trigger: "item",
-          confine: true,
-          backgroundColor: "#ffffff",
-          borderColor: "#e1e8f2",
-          borderWidth: 1,
-          padding: [8, 10],
-          textStyle: { color: "#1d2a3d", fontSize: 12, lineHeight: 18 },
-          extraCssText: "box-shadow:0 8px 18px rgba(30,53,101,0.10);border-radius:6px;",
-          formatter: params => `<strong>${params.name} ${frameModule4RhythmIntervals[params.data?.rhythm] || ""}</strong><br>交叉购买人数：${frameModule2FormatNumber(params.value)}人<br>时间桶数：${params.data?.bucketCount || 0}<br>占比：${Number(params.percent || 0).toFixed(1)}%`
-        },
-        legend: { show: false },
-        series: [{
-          type: "pie",
-          radius: ["46%", "70%"],
-          center: ["50%", "48%"],
-          startAngle: 90,
-          avoidLabelOverlap: true,
-          selectedMode: false,
-          minAngle: 6,
-          data,
-          label: {
-            show: true,
-            color: "#354d6d",
-            fontSize: 12,
-            lineHeight: 16,
-            formatter: params => `{type|${params.name}}\n{value|${frameModule2FormatNumber(params.value)}人}\n{share|${Number(params.percent || 0).toFixed(1)}%}`,
-            rich: {
-              type: { color: "#435572", fontSize: 12, fontWeight: 700, lineHeight: 17 },
-              value: { color: "#263a59", fontSize: 12, fontWeight: 700, lineHeight: 17 },
-              share: { color: "#607086", fontSize: 11, fontWeight: 400, lineHeight: 15 }
-            }
-          },
-          labelLine: { length: 12, length2: 8, lineStyle: { color: "#cdd8e8" } },
-          emphasis: { focus: "self", scale: true, scaleSize: 4 }
-        }]
-      }, true);
-      chart.off("click");
-      chart.on("click", params => {
-        const rhythm = params.data?.rhythm;
-        if (rhythm) frameOverviewSetRhythmSelection(rhythm);
-      });
-      chart.resize();
     }
 
     const frameOverviewTopPairSortConfig = {
@@ -35977,14 +35878,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const plotBottom = padding.top + plotHeight;
       const maxValue = 12000;
       const ticks = [0, 2000, 4000, 6000, 8000, 10000, 12000];
-      const isSegmentedLayout = frameOverviewLayoutStyle() === "style2";
-      const rhythmOrder = ["quick", "stable", "long"];
-      const rhythmGroups = rhythmOrder.map(rhythm => ({
-        rhythm,
-        indices: frameOverviewIntervals
-          .map((bucket, index) => frameOverviewBucketRhythm(bucket) === rhythm ? index : -1)
-          .filter(index => index >= 0)
-      }));
+      const isSegmentedLayout = false;
       const standardStep = plotWidth / frameOverviewIntervals.length;
       const intervalGeometry = frameOverviewIntervals.map((bucket, index) => {
         const width = isSegmentedLayout
@@ -36026,26 +35920,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           <text class="amc-interval-axis-label" x="${axisX}" y="${y + 4}" text-anchor="end">${label}</text>`;
       }).join("");
 
-      const rhythmZones = isSegmentedLayout ? rhythmGroups.map((group, index) => {
-        const firstIndex = group.indices[0];
-        const lastIndex = group.indices[group.indices.length - 1];
-        const x = firstIndex === 0
-          ? padding.left
-          : (centerForIndex(firstIndex - 1) + centerForIndex(firstIndex)) / 2;
-        const right = lastIndex === frameOverviewIntervals.length - 1
-          ? width - padding.right
-          : (centerForIndex(lastIndex) + centerForIndex(lastIndex + 1)) / 2;
-        const zoneWidth = right - x;
-        const label = `${frameModule4RhythmLabels[group.rhythm]} ${frameModule4RhythmIntervals[group.rhythm]}`;
-        const divider = index > 0
-          ? `<line class="amc-interval-rhythm-divider" x1="${x}" y1="${padding.top}" x2="${x}" y2="${plotBottom}" />`
-          : "";
-        return `
-          <rect class="amc-interval-rhythm-zone ${group.rhythm}" x="${x}" y="${padding.top}" width="${zoneWidth}" height="${plotHeight}" />
-          ${divider}
-          <text class="amc-interval-rhythm-zone-label" x="${x + zoneWidth / 2}" y="${padding.top + 13}">${label}</text>`;
-      }).join("") : "";
-
       const verticalGrid = isSegmentedLayout ? "" : frameOverviewIntervals.map((bucket, index) => {
         const x = padding.left + index * standardStep;
         return `<line class="amc-interval-tick-line" x1="${x}" y1="${padding.top}" x2="${x}" y2="${plotBottom}" />`;
@@ -36068,23 +35942,17 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const valueLabelX = useInsideValue ? center : labelX;
         const valueLabelAnchor = useInsideValue ? "middle" : labelAnchor;
         const shareLabel = formatIntervalShare(bucket.share);
-        const rhythm = frameOverviewBucketRhythm(bucket);
-        const activeRhythm = frameOverviewState.activeRhythm;
         const activeIntervalIndex = frameOverviewState.activeIntervalIndex;
-        const isRhythmActive = activeRhythm === rhythm;
         const isSelectedBucket = activeIntervalIndex === index;
-        const linkedClass = activeRhythm
-          ? (isRhythmActive ? " is-linked-active" : " is-linked-muted")
-          : "";
         const selectedClass = isSelectedBucket ? " is-linked-selected" : "";
-        const barMarkup = `<rect class="amc-interval-bar${linkedClass}${selectedClass}" x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" tabindex="0" data-interval-index="${index}" role="button" aria-pressed="${isSelectedBucket ? "true" : "false"}" aria-label="${bucket.label}，${frameModule4RhythmLabels[rhythm]}，交叉购买人数 ${bucket.value.toLocaleString()} 人，占比 ${shareLabel}"></rect>`;
+        const barMarkup = `<rect class="amc-interval-bar${selectedClass}" x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" tabindex="0" data-interval-index="${index}" role="button" aria-pressed="${isSelectedBucket ? "true" : "false"}" aria-label="${bucket.label}，交叉购买人数 ${bucket.value.toLocaleString()} 人，占比 ${shareLabel}"></rect>`;
         return `
           <g>
             ${barMarkup}
-            <text class="amc-interval-value-label${useInsideValue ? " is-inside-bar" : ""} amc-interval-linked-label${linkedClass}${selectedClass}" x="${valueLabelX}" y="${valueLabelY}" text-anchor="${valueLabelAnchor}">${bucket.value.toLocaleString()}人</text>
-            <text class="amc-interval-share-label amc-interval-linked-label${linkedClass}${selectedClass}" x="${labelX}" y="${shareLabelY}" text-anchor="${labelAnchor}">${shareLabel}</text>
+            <text class="amc-interval-value-label${useInsideValue ? " is-inside-bar" : ""} amc-interval-linked-label${selectedClass}" x="${valueLabelX}" y="${valueLabelY}" text-anchor="${valueLabelAnchor}">${bucket.value.toLocaleString()}人</text>
+            <text class="amc-interval-share-label amc-interval-linked-label${selectedClass}" x="${labelX}" y="${shareLabelY}" text-anchor="${labelAnchor}">${shareLabel}</text>
             <line class="amc-interval-axis-line" x1="${center}" y1="${plotBottom}" x2="${center}" y2="${plotBottom + 5}" />
-            <text class="amc-interval-category-label amc-interval-linked-label${linkedClass}${selectedClass}" x="${center}" y="${plotBottom + 28}" text-anchor="middle">${bucket.label}</text>
+            <text class="amc-interval-category-label amc-interval-linked-label${selectedClass}" x="${center}" y="${plotBottom + 28}" text-anchor="middle">${bucket.label}</text>
           </g>`;
       }).join("");
 
@@ -36096,7 +35964,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           </linearGradient>
         </defs>
         <text class="amc-interval-axis-title" x="14" y="${padding.top + plotHeight / 2}" text-anchor="middle" transform="rotate(-90 14 ${padding.top + plotHeight / 2})">交叉购买人数</text>
-        ${rhythmZones}
         ${gridLines}
         ${verticalGrid}
         <line class="amc-interval-axis-line" x1="${padding.left}" y1="${plotBottom}" x2="${width - padding.right}" y2="${plotBottom}" />
@@ -36109,9 +35976,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const intervalIndex = Number(bar.dataset.intervalIndex);
         const bucket = frameOverviewIntervals[intervalIndex];
         if (!bucket) return;
-        const rhythm = frameOverviewBucketRhythm(bucket);
-        const tooltipHtml = `<strong>${escapeHtml(bucket.label)} · ${escapeHtml(frameModule4RhythmLabels[rhythm] || "")}</strong>交叉购买人数：${bucket.value.toLocaleString()}人<br>占比：${formatIntervalShare(bucket.share)}`;
-        const selectBucket = () => frameOverviewSetRhythmSelection(rhythm, intervalIndex);
+        const tooltipHtml = `<strong>${escapeHtml(bucket.label)}</strong><br>交叉购买人数：${bucket.value.toLocaleString()}人<br>占比：${formatIntervalShare(bucket.share)}`;
+        const selectBucket = () => frameOverviewSetIntervalSelection(intervalIndex);
         bar.addEventListener("mouseenter", event => showTooltip(event, tooltipHtml));
         bar.addEventListener("mousemove", moveTooltip);
         bar.addEventListener("mouseleave", hideTooltip);
@@ -36393,7 +36259,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "购物篮关联购买分析模型_明细数据_demo.csv";
+      link.download = "购物篮交叉购买分析模型_明细数据_demo.csv";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
