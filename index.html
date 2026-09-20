@@ -5058,7 +5058,7 @@
     }
 
     .amc-role-bubble {
-      cursor: pointer;
+      cursor: default;
       opacity: 0.76;
       stroke: rgba(255, 255, 255, 0.94);
       stroke-width: 1.5;
@@ -6054,6 +6054,10 @@
       white-space: nowrap;
     }
 
+    .amc-module3-multi-select-controls [hidden] {
+      display: none !important;
+    }
+
     .amc-module3-multi-select-controls button {
       min-height: 28px;
       padding: 0 9px;
@@ -6217,8 +6221,7 @@
       outline-color: rgba(82, 111, 216, 0.18);
     }
 
-    .amc-module3-quality-layout[data-multi-select-mode="true"] [data-frame-module3-chart-id="3.4"],
-    .amc-module3-quality-layout[data-multi-select-mode="true"] [data-frame-module3-chart-id="3.5"] {
+    .amc-module3-quality-layout[data-multi-select-mode="true"] [data-frame-module3-chart-id="3.4"] {
       border-color: #aab9ea;
       box-shadow: 0 0 0 2px rgba(82, 111, 216, 0.08), 0 8px 18px rgba(48, 70, 112, 0.05);
     }
@@ -9653,84 +9656,87 @@
 
     .amc-module6-asin-picker {
       position: relative;
-      flex: 1 1 auto;
-      width: auto;
+      display: inline-flex;
+      flex: 0 1 208px;
+      width: 208px;
       min-width: 0;
+      max-width: 100%;
+      z-index: 20;
     }
 
-    .amc-module6-asin-search-field {
-      position: relative;
-      height: 32px;
-    }
-
-    .amc-module6-asin-search-field input {
+    .amc-module6-asin-trigger {
       width: 100%;
-      height: 32px;
-      padding: 0 32px 0 10px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      position: relative;
+      padding: 0 30px 0 10px;
       border: 1px solid #d5dfec;
       border-radius: 5px;
       background: #ffffff;
       color: #29415f;
       font-size: 12px;
-      font-weight: 500;
+      line-height: 1;
+      text-align: left;
       outline: none;
+      cursor: pointer;
     }
 
-    .amc-module6-asin-search-field input::placeholder {
-      color: #8a98aa;
-      font-weight: 400;
-    }
-
-    .amc-module6-asin-search-field input:hover,
-    .amc-module6-asin-picker.is-open .amc-module6-asin-search-field input,
-    .amc-module6-asin-search-field input:focus {
-      border-color: #8299e7;
+    .amc-module6-asin-trigger:hover,
+    .amc-module6-asin-trigger:focus-visible {
+      border-color: #91a5e9;
       box-shadow: 0 0 0 2px rgba(78, 103, 214, 0.08);
     }
 
-    .amc-module6-asin-picker-toggle {
+    .amc-module6-asin-trigger > #frameModule62AsinValue {
+      min-width: 0;
+      max-width: 100%;
+      flex: 1 1 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-module6-asin-trigger .amc-custom-asin-display {
+      width: 100%;
+    }
+
+    .amc-module6-asin-trigger .amc-custom-asin-value {
+      flex: 0 0 auto;
+    }
+
+    .amc-module6-asin-trigger .amc-custom-asin-label {
+      min-width: 0;
+      flex: 1 1 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .amc-module6-asin-trigger > svg {
       position: absolute;
-      top: 50%;
-      right: 4px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      padding: 0;
-      border: 0;
-      border-radius: 4px;
-      background: transparent;
+      right: 9px;
+      width: 16px;
+      height: 16px;
       color: #718198;
-      cursor: pointer;
-      transform: translateY(-50%);
-    }
-
-    .amc-module6-asin-picker-toggle:hover,
-    .amc-module6-asin-picker-toggle:focus-visible {
-      background: #eef3ff;
-      color: #3153c4;
-      outline: none;
-    }
-
-    .amc-module6-asin-picker-toggle svg {
-      width: 15px;
-      height: 15px;
       fill: none;
       stroke: currentColor;
       stroke-linecap: round;
       stroke-linejoin: round;
       stroke-width: 2;
-      transition: transform 160ms ease;
+      pointer-events: none;
+      transition: transform 0.15s ease;
     }
 
-    .amc-module6-asin-picker.is-open .amc-module6-asin-picker-toggle svg {
+    .amc-module6-asin-picker.is-open .amc-module6-asin-trigger > svg {
       transform: rotate(180deg);
     }
 
     .amc-module6-asin-picker-popover {
       position: absolute;
-      top: calc(100% + 5px);
+      top: calc(100% + 6px);
       right: 0;
       z-index: 20;
       display: none;
@@ -9747,61 +9753,82 @@
       display: block;
     }
 
+    .amc-module6-asin-search {
+      width: calc(100% - 24px);
+      height: 32px;
+      margin: 8px 12px 6px;
+      padding: 0 2px;
+      border: 0;
+      border-bottom: 1px solid #d5dfec;
+      background: #ffffff;
+      color: #29415f;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .amc-module6-asin-search:focus {
+      border-bottom-color: #91a5e9;
+    }
+
+    .amc-module6-asin-search::-webkit-search-cancel-button {
+      display: none;
+      -webkit-appearance: none;
+    }
+
     .amc-module6-asin-picker-options {
-      max-height: 280px;
+      max-height: 224px;
       overflow-y: auto;
-      padding: 4px;
+      padding: 0 6px 6px;
       overscroll-behavior: contain;
     }
 
     .amc-module6-asin-picker-option {
       width: 100%;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto 16px;
-      gap: 8px;
+      min-height: 31px;
+      display: flex;
       align-items: center;
-      min-height: 38px;
-      padding: 6px 8px;
+      gap: 8px;
+      padding: 4px 6px;
       border: 0;
       border-radius: 4px;
       background: transparent;
       color: #29415f;
+      font-size: 12px;
       text-align: left;
       cursor: pointer;
     }
 
     .amc-module6-asin-picker-option:hover,
-    .amc-module6-asin-picker-option.is-active {
-      background: #f2f6ff;
-    }
-
+    .amc-module6-asin-picker-option.is-active,
     .amc-module6-asin-picker-option.is-selected {
-      background: #eaf1ff;
-      color: #244fb8;
+      background: #eef3ff;
+      color: #3153c4;
     }
 
     .amc-module6-asin-picker-option-main {
+      min-width: 0;
+      flex: 1 1 auto;
       overflow: hidden;
-      font-size: 12px;
-      font-weight: 400;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .amc-module6-asin-picker-option-meta {
-      color: #74859b;
-      font-size: 11px;
-      white-space: nowrap;
+    .amc-module6-asin-picker-option-main .amc-custom-asin-display {
+      width: 100%;
     }
 
-    .amc-module6-asin-picker-option svg {
-      width: 15px;
-      height: 15px;
-      fill: none;
-      stroke: currentColor;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-width: 2;
+    .amc-module6-asin-picker-option-main .amc-custom-asin-value {
+      flex: 0 0 auto;
+    }
+
+    .amc-module6-asin-picker-option-main .amc-custom-asin-label {
+      min-width: 0;
+      flex: 1 1 auto;
+      overflow: hidden;
+      color: #65758c;
+      font-weight: 400;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .amc-module6-asin-picker-empty {
@@ -18257,7 +18284,18 @@
       padding-bottom: 5px;
     }
 
+    body[data-asin-label-presentation="custom"] .amc-module6-asin-picker-option {
+      min-height: 40px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
     body[data-asin-label-presentation="custom"] .amc-flow-asin-trigger #frameFlowAsinValue {
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    body[data-asin-label-presentation="custom"] .amc-module6-asin-trigger #frameModule62AsinValue {
       min-width: 0;
       overflow: hidden;
     }
@@ -18346,10 +18384,6 @@
       overflow: visible;
       text-overflow: clip;
       white-space: normal;
-    }
-
-    body[data-asin-label-presentation="custom"] .amc-module6-asin-search-field input {
-      font-size: 11px;
     }
 
     body[data-asin-label-presentation="custom"] .amc-role-bar-label-tag,
@@ -20560,7 +20594,7 @@
             <div class="intro-copy">
               <h1 id="framePageTitle">02 购物篮交叉购买分析模型</h1>
               <p>
-                用于识别 Lead ASIN 与 Follow ASIN 的关联购买路径，评估交叉购买人数、购买间隔和连带销售机会。当前已覆盖模块 1 至模块 6 的可视化分析。
+                用于识别 Lead ASIN 与 Follow ASIN 的关联购买路径，评估交叉购买用户数、购买间隔和连带销售机会。当前已覆盖模块 1 至模块 6 的可视化分析。
               </p>
               <div class="amc-frame-intro-metrics" aria-label="模型指标说明">
                 <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">数据源</span><strong id="frameIntroDataSource">触达后28天内转化数据</strong></span>
@@ -20768,7 +20802,7 @@
                       <td>The product purchased after the Lead ASIN, used to identify items that are frequently bought together.</td>
                     </tr>
                     <tr>
-                      <td>总交叉购买人数</td>
+                      <td>总交叉购买用户数</td>
                       <td>cross_purchased_users</td>
                       <td>统计周期内，同时购买过 Lead ASIN 和 Follow ASIN 的独立用户总人次，通常按去重用户数计。</td>
                       <td>COUNT(DISTINCT user_id)，筛选同时购买过 Lead 和 Follow 的用户。</td>
@@ -20784,7 +20818,7 @@
                       <td>交叉购买率</td>
                       <td>待补充</td>
                       <td>衡量 Lead ASIN 带动品牌内连带消费的能力。</td>
-                      <td>总交叉购买人次 / Lead ASIN 总购买人数 * 100%。</td>
+                      <td>总交叉购买人次 / Lead ASIN 总购买用户数 * 100%。</td>
                       <td>数值型</td>
                       <td>百分比</td>
                       <td>2</td>
@@ -20807,7 +20841,7 @@
                       <td>User categories based on purchase behavior, registration tenure, or membership tier for segmented analysis.</td>
                     </tr>
                     <tr>
-                      <td>Lead ASIN总购买人数</td>
+                      <td>Lead ASIN总购买用户数</td>
                       <td>lead_asin_total_purchase_user</td>
                       <td>统计周期内，购买过 Lead ASIN 的独立用户总数。</td>
                       <td>COUNT(DISTINCT user_id)，筛选 ASIN = Lead_ASIN。</td>
@@ -20872,7 +20906,7 @@
                       <td>The sales-weighted average unit price of the Lead ASIN.</td>
                     </tr>
                     <tr>
-                      <td>Follow ASIN总购买人数</td>
+                      <td>Follow ASIN总购买用户数</td>
                       <td>follow_up_asin_total_purchase_user</td>
                       <td>统计周期内，购买过 Follow ASIN 的独立用户总数。</td>
                       <td>COUNT(DISTINCT user_id)，筛选 ASIN = Follow_ASIN。</td>
@@ -20953,7 +20987,7 @@
                       <td>转化率</td>
                       <td>conversion_rate</td>
                       <td>买了 A 的人中，有多少比例随后买了 B。</td>
-                      <td>总交叉购买人次 / Lead ASIN 总购买人数 * 100%。</td>
+                      <td>总交叉购买人次 / Lead ASIN 总购买用户数 * 100%。</td>
                       <td>数值型</td>
                       <td>百分比</td>
                       <td>2</td>
@@ -20966,7 +21000,7 @@
                       <td>吸引率</td>
                       <td>attraction_rate</td>
                       <td>买了 B 的人中，有多少比例是从 A 带过来的。</td>
-                      <td>总交叉购买人次 / Follow ASIN 总购买人数 * 100%。</td>
+                      <td>总交叉购买人次 / Follow ASIN 总购买用户数 * 100%。</td>
                       <td>数值型</td>
                       <td>百分比</td>
                       <td>2</td>
@@ -20992,7 +21026,7 @@
                       <td>价格倍数</td>
                       <td>price_multiple</td>
                       <td>Follow 价格是 Lead 价格的多少倍。</td>
-                      <td>Follow ASIN 单价 / Lead ASIN 单价。</td>
+                      <td>Follow ASIN单价 / Lead ASIN单价。</td>
                       <td>数值型</td>
                       <td>倍数</td>
                       <td>2</td>
@@ -21018,7 +21052,7 @@
                       <td>交叉购买销售额</td>
                       <td>Cross-Sell Sales</td>
                       <td>所有交叉购买记录中 Follow ASIN 的销售额估算值。</td>
-                      <td>SUM(各组合交叉购买人数 * Follow ASIN 单价)。</td>
+                      <td>SUM(各组合交叉购买用户数 * Follow ASIN单价)。</td>
                       <td>数值型</td>
                       <td>金额</td>
                       <td>2</td>
@@ -21278,21 +21312,21 @@
                 <div class="amc-kpi-grid" id="frameKpiGrid">
                   <article class="amc-kpi-card">
                     <div class="amc-kpi-label">交叉购买渗透率 <span class="amc-kpi-help" title="交叉购买用户数 / 品牌总购买用户数">?</span></div>
-                    <div class="amc-kpi-value">27%</div>
+                    <div class="amc-kpi-value">27.00%</div>
                     <div class="amc-kpi-note"><span class="amc-kpi-note-value">25,060</span> / <span class="amc-kpi-note-value">92,815</span> 人</div>
                   </article>
                   <article class="amc-kpi-card">
-                    <div class="amc-kpi-label">关联购买平均间隔 <span class="amc-kpi-help" title="各组合平均间隔按交叉购买人数加权均值">?</span></div>
-                    <div class="amc-kpi-value">159.3 天</div>
-                    <div class="amc-kpi-note">平均最短关联间隔 <span class="amc-kpi-note-value">135.6</span> 天</div>
+                    <div class="amc-kpi-label">关联购买平均间隔 <span class="amc-kpi-help" title="各组合平均间隔按交叉购买用户数加权均值">?</span></div>
+                    <div class="amc-kpi-value">159.30 天</div>
+                    <div class="amc-kpi-note">平均最短关联间隔 <span class="amc-kpi-note-value">135.60</span> 天</div>
                   </article>
                   <article class="amc-kpi-card">
                     <div class="amc-kpi-label">交叉购买销售额 <span class="amc-kpi-help" title="交叉购买用户全部购买记录销售额">?</span></div>
                     <div class="amc-kpi-value">$7.56M</div>
-                    <div class="amc-kpi-note">交叉购买用户销售额，占品牌销售额 <span class="amc-kpi-note-value">31.0%</span></div>
+                    <div class="amc-kpi-note">交叉购买用户销售额，占品牌销售额 <span class="amc-kpi-note-value">31.00%</span></div>
                   </article>
                   <article class="amc-kpi-card">
-                    <div class="amc-kpi-label">平均价格提升倍数 <span class="amc-kpi-help" title="各组合 Follow / Lead 单价按交叉购买人数加权均值">?</span></div>
+                    <div class="amc-kpi-label">平均价格提升倍数 <span class="amc-kpi-help" title="各组合 Follow ASIN单价 / Lead ASIN单价按交叉购买用户数加权均值">?</span></div>
                     <div class="amc-kpi-value">1.19x</div>
                     <div class="amc-kpi-note">整体偏向<span class="amc-kpi-tag amc-kpi-tag-price">升级复购</span>路径</div>
                   </article>
@@ -21318,7 +21352,7 @@
                         <label class="amc-compact-select amc-top-pair-sort">
                           <span class="sr-only">TOP 10 组合排序指标</span>
                           <select id="frameTopPairsSort" aria-label="TOP 10 组合排序指标">
-                            <option value="crossUsers" selected>交叉购买人数</option>
+                            <option value="crossUsers" selected>交叉购买用户数</option>
                             <option value="conversionRate">交叉购买率</option>
                             <option value="avgInterval">关联购买平均间隔</option>
                           </select>
@@ -21336,7 +21370,7 @@
                           <tr>
                             <th scope="col"></th>
                             <th scope="col">Lead → Follow</th>
-                            <th scope="col" id="frameTopPairsMetricHeader">交叉购买人数</th>
+                            <th scope="col" id="frameTopPairsMetricHeader">交叉购买用户数</th>
                           </tr>
                         </thead>
                         <tbody id="frameTopPairsBody"></tbody>
@@ -21354,7 +21388,7 @@
                         </div>
                       </div>
                       <div class="amc-overview-interval-tools">
-                        <span class="status-pill">加权均值 159.3 天</span>
+                        <span class="status-pill">加权均值 159.30 天</span>
                       </div>
                     </div>
                     <svg class="amc-interval-chart" id="frameIntervalChart" viewBox="0 0 760 370" role="img" aria-label="关联购买平均间隔分布柱状图"></svg>
@@ -21389,7 +21423,7 @@
                     <span class="amc-overview-index">2.1</span>
                     <div>
                       <h4 id="frameRoleMatrixTitle">Lead ASIN流量矩阵</h4>
-                      <p id="frameRoleMatrixSubtitle">Lead 视角：Lead ASIN购买总人数与交叉购买率</p>
+                      <p id="frameRoleMatrixSubtitle">Lead 视角：Lead ASIN总购买用户数与交叉购买率</p>
                     </div>
                   </div>
                   <div class="amc-role-matrix-tools">
@@ -21514,7 +21548,7 @@
                 <article class="amc-module3-summary-card quality">
                   <span class="amc-module3-summary-label">质量门槛内组合</span>
                   <strong class="amc-module3-summary-value" id="frameModule3KpiQualityPairs">0</strong>
-                  <span class="amc-module3-summary-note" id="frameModule3KpiQualityNote">当前交叉购买人数 ≥ 20</span>
+                  <span class="amc-module3-summary-note" id="frameModule3KpiQualityNote">当前交叉购买用户数 ≥ 20</span>
                 </article>
                 <article class="amc-module3-summary-card overlap">
                   <span class="amc-module3-summary-label">两榜共同TOP组合</span>
@@ -21547,7 +21581,7 @@
                       <span class="amc-overview-index">3.2</span>
                       <div>
                         <h4 id="frameModule33Title">升级与降级路径TOP 10规模对比</h4>
-                        <p id="frameModule33Subtitle">左侧为TOP10降级/配件购买组合，右侧为TOP10升级购买组合；条形长度代表交叉购买人数。</p>
+                        <p id="frameModule33Subtitle">左侧为TOP10降级/配件购买组合，右侧为TOP10升级购买组合；条形长度代表交叉购买用户数。</p>
                       </div>
                     </div>
                     <div class="amc-module3-scale-compare-controls" id="frameModule33CompareControls" aria-label="价格路径对比选择" hidden>
@@ -21572,7 +21606,7 @@
               <div class="amc-module3-view-layout amc-module3-quality-layout" data-frame-module3-view-layout="quality" data-quality-layout-style="style2" data-quality-active-tab="heatmap">
                 <div class="amc-module3-formula-callout amc-module3-quality-formula-callout" role="note" aria-label="质量视角指标计算说明">
                   <span class="amc-module3-formula-callout-label">指标计算</span>
-                  <span class="amc-module3-formula-callout-text">修正关联指数 = 原始关联指数 x sqrt(交叉购买人数 / (交叉购买人数 + 20))。</span>
+                  <span class="amc-module3-formula-callout-text">修正关联指数 = 原始关联指数 x sqrt(交叉购买用户数 / (交叉购买用户数 + 20))。</span>
                 </div>
                 <section class="amc-module3-panel amc-module3-panel-wide" data-frame-module3-chart-id="3.4" aria-labelledby="frameModule34Title">
                   <div class="amc-module3-panel-head">
@@ -21585,8 +21619,8 @@
                     </div>
                     <div class="amc-module3-tools amc-module3-heatmap-tools" aria-label="热力矩阵筛选">
                       <label class="amc-module3-sample-filter">
-                        <span>交叉购买人数</span>
-                        <select data-frame-module3-min-sample aria-label="交叉购买人数筛选">
+                        <span>交叉购买用户数</span>
+                        <select data-frame-module3-min-sample aria-label="交叉购买用户数筛选">
                           <option value="20" selected>≥20人（默认）</option>
                           <option value="50">≥50人</option>
                           <option value="100">≥100人</option>
@@ -21609,7 +21643,7 @@
                           <option value="associationScore">原始关联指数</option>
                           <option value="conversionRate">转化率</option>
                           <option value="attractionRate">吸引率</option>
-                          <option value="crossUsers">交叉购买人数</option>
+                          <option value="crossUsers">交叉购买用户数</option>
                         </select>
                       </label>
                       <div class="amc-segmented-control amc-module3-quality-tabs" role="tablist" aria-label="关联质量图表">
@@ -21647,25 +21681,20 @@
                       <span class="amc-overview-index">3.3</span>
                       <div>
                         <h4 id="frameModule35Title">双向关联机制气泡矩阵</h4>
-                        <p>X=转化率，Y=吸引率，气泡大小=交叉购买人数，颜色=修正关联指数。</p>
+                        <p>X=转化率，Y=吸引率，气泡大小=交叉购买用户数，颜色=修正关联指数。</p>
                       </div>
                     </div>
                     <div class="amc-module3-tools" aria-label="质量视角筛选">
                       <div class="amc-module3-panel-quality-controls amc-module3-quality-inline-controls">
                         <label class="amc-module3-sample-filter">
-                          <span>交叉购买人数</span>
-                          <select data-frame-module3-min-sample aria-label="交叉购买人数筛选">
+                          <span>交叉购买用户数</span>
+                          <select data-frame-module3-min-sample aria-label="交叉购买用户数筛选">
                             <option value="20" selected>≥20人（默认）</option>
                             <option value="50">≥50人</option>
                             <option value="100">≥100人</option>
                             <option value="0">不限</option>
                           </select>
                         </label>
-                        <div class="amc-module3-multi-select-controls" data-frame-module3-multi-controls aria-label="多选关联组合">
-                          <button type="button" data-frame-module3-multi-enter aria-pressed="false">多选</button>
-                          <span class="amc-module3-multi-select-count" data-frame-module3-multi-count hidden></span>
-                          <button type="button" data-frame-module3-multi-cancel hidden>取消多选</button>
-                        </div>
                         <div class="amc-segmented-control amc-module3-quality-tabs" role="tablist" aria-label="关联质量图表">
                           <button class="amc-segment-btn is-active" type="button" data-frame-module3-quality-tab="heatmap" role="tab" aria-selected="true">关联热力图</button>
                           <button class="amc-segment-btn" type="button" data-frame-module3-quality-tab="mechanism" role="tab" aria-selected="false">关联机制</button>
@@ -21752,8 +21781,8 @@
             <div class="amc-module4-grid" data-module4-layout-style="style2">
               <div class="amc-module4-filter-bar" aria-label="高价值组合分析条件">
                 <label class="amc-module4-select-field">
-                  <span>交叉购买人数</span>
-                  <select id="frameModule4MinUsers" aria-label="交叉购买人数筛选">
+                  <span>交叉购买用户数</span>
+                  <select id="frameModule4MinUsers" aria-label="交叉购买用户数筛选">
                     <option value="20" selected>≥20人（默认）</option>
                     <option value="50">≥50人</option>
                     <option value="100">≥100人</option>
@@ -21795,17 +21824,17 @@
                 <article class="amc-module4-kpi quick" id="frameModule4KpiQuickCard">
                   <span class="amc-module4-kpi-label">快速关联</span>
                   <strong class="amc-module4-kpi-value" id="frameModule4KpiQuick">0</strong>
-                  <span class="amc-module4-kpi-note" id="frameModule4KpiQuickNote">≤90天 | 路径人次 <span class="amc-module4-kpi-share">0%</span></span>
+                  <span class="amc-module4-kpi-note" id="frameModule4KpiQuickNote">≤90天 | 路径人次 <span class="amc-module4-kpi-share">0.00%</span></span>
                 </article>
                 <article class="amc-module4-kpi stable" id="frameModule4KpiStableCard">
                   <span class="amc-module4-kpi-label">稳定培育</span>
                   <strong class="amc-module4-kpi-value" id="frameModule4KpiStable">0</strong>
-                  <span class="amc-module4-kpi-note" id="frameModule4KpiStableNote">91-180天 | 路径人次 <span class="amc-module4-kpi-share">0%</span></span>
+                  <span class="amc-module4-kpi-note" id="frameModule4KpiStableNote">91-180天 | 路径人次 <span class="amc-module4-kpi-share">0.00%</span></span>
                 </article>
                 <article class="amc-module4-kpi long" id="frameModule4KpiLongCard">
                   <span class="amc-module4-kpi-label">长尾关联</span>
                   <strong class="amc-module4-kpi-value" id="frameModule4KpiLong">0</strong>
-                  <span class="amc-module4-kpi-note" id="frameModule4KpiLongNote">>180天 | 路径人次 <span class="amc-module4-kpi-share">0%</span></span>
+                  <span class="amc-module4-kpi-note" id="frameModule4KpiLongNote">>180天 | 路径人次 <span class="amc-module4-kpi-share">0.00%</span></span>
                 </article>
               </div>
 
@@ -21815,7 +21844,7 @@
                     <span class="amc-overview-index">4.1</span>
                     <div>
                       <h4 id="frameModule41Title">组合规模 × 购买速度矩阵</h4>
-                      <p>横轴为关联购买平均间隔，Y轴为交叉购买人数（对数），气泡大小代表修正关联指数。交叉购买人数为路径人次，同一用户可能出现在多个组合中。</p>
+                      <p>横轴为关联购买平均间隔，Y轴为交叉购买用户数（对数），气泡大小代表修正关联指数。交叉购买用户数为路径人次，同一用户可能出现在多个组合中。</p>
                     </div>
                   </div>
                   <div class="amc-module4-panel-tools">
@@ -21869,7 +21898,7 @@
                         <span class="amc-overview-index">4.3</span>
                         <div>
                           <h4 id="frameModule43Title">高价值路径人次构成</h4>
-                          <p>各购买节奏的交叉购买人数之和占比，用于判断短期与长期机会结构。</p>
+                          <p>各购买节奏的交叉购买用户数之和占比，用于判断短期与长期机会结构。</p>
                         </div>
                       </div>
                     </div>
@@ -21908,8 +21937,8 @@
             <div class="amc-module5-grid">
               <div class="amc-module5-filter-bar" aria-label="产品组合策略分析条件">
                 <label class="amc-module5-select-field">
-                  <span>交叉购买人数</span>
-                  <select id="frameModule5MinUsers" aria-label="产品组合策略交叉购买人数筛选">
+                  <span>交叉购买用户数</span>
+                  <select id="frameModule5MinUsers" aria-label="产品组合策略交叉购买用户数筛选">
                     <option value="20" selected>≥20人（默认）</option>
                     <option value="50">≥50人</option>
                     <option value="100">≥100人</option>
@@ -22039,33 +22068,30 @@
               </div>
               <div class="amc-module6-selector-filter-row">
                 <div class="amc-module6-selector-tools">
-                  <label class="amc-module6-selector-filter-label" for="frameModule62AsinSearch">ASIN</label>
+                  <label class="amc-module6-selector-filter-label" for="frameModule62AsinToggle">ASIN</label>
                   <div class="amc-module6-asin-picker" id="frameModule62AsinPicker">
-                    <div class="amc-module6-asin-search-field">
-                      <input
-                        id="frameModule62AsinSearch"
-                        type="text"
-                        role="combobox"
-                        aria-autocomplete="list"
-                        aria-expanded="false"
-                        aria-controls="frameModule62AsinOptions"
-                        autocomplete="off"
-                        placeholder="搜索 TOP50 ASIN"
-                      />
-                      <button
-                        class="amc-module6-asin-picker-toggle"
-                        id="frameModule62AsinToggle"
-                        type="button"
-                        aria-label="展开入口 ASIN 选项"
-                        aria-expanded="false"
-                        aria-controls="frameModule62AsinOptions"
-                      >
-                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                          <path d="m7 9 5 5 5-5"></path>
-                        </svg>
-                      </button>
-                    </div>
+                    <button
+                      class="amc-module6-asin-trigger"
+                      id="frameModule62AsinToggle"
+                      type="button"
+                      aria-haspopup="listbox"
+                      aria-expanded="false"
+                      aria-controls="frameModule62AsinOptions"
+                    >
+                      <span id="frameModule62AsinValue">选择 ASIN</span>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
                     <div class="amc-module6-asin-picker-popover">
+                      <input
+                        class="amc-module6-asin-search"
+                        id="frameModule62AsinSearch"
+                        type="search"
+                        autocomplete="off"
+                        placeholder="搜索 ASIN 或标签"
+                        aria-label="搜索 ASIN 或标签"
+                      />
                       <div class="amc-module6-asin-picker-options" id="frameModule62AsinOptions" role="listbox" aria-label="入口 ASIN TOP50"></div>
                     </div>
                   </div>
@@ -25618,6 +25644,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       matrixSearchAsin: "",
       scale3HighlightedPath: "all",
       scale3PricePath: "upgrade",
+      scaleCompareHoverPath: "",
+      scaleComparePinnedPath: "",
       detailPricePath: "",
       detailAsinQuery: "",
       selectedPairKey: null,
@@ -25785,7 +25813,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule3FormatMetric(value, type) {
-      if (type === "percent") return `${(Number(value || 0) * 100).toFixed(1)}%`;
+      if (type === "percent") return `${(Number(value || 0) * 100).toFixed(2)}%`;
       if (type === "index") return (Number(value || 0) * 100).toFixed(2);
       if (type === "score") return Number(value || 0).toFixed(2);
       return frameModule2FormatNumber(value);
@@ -25877,7 +25905,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule3SummaryNote(minSample) {
-      return minSample ? `当前交叉购买人数 ≥ ${minSample}` : "当前交叉购买人数不限";
+      return minSample ? `当前交叉购买用户数 ≥ ${minSample}` : "当前交叉购买用户数不限";
     }
 
     function frameModule3RenderSummary(records, qualityRecords) {
@@ -25990,8 +26018,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (title) title.textContent = isStyle2 ? "价格路径TOP 10规模对比" : "升级与降级路径TOP 10规模对比";
       if (subtitle) {
         subtitle.textContent = isStyle2
-          ? "选择任意两组价格路径商品组合进行对比；条形长度代表交叉购买人数。"
-          : "左侧为TOP10降级/配件购买组合，右侧为TOP10升级购买组合；条形长度代表交叉购买人数。";
+          ? "选择任意两组价格路径商品组合进行对比；条形长度代表交叉购买用户数。"
+          : "左侧为TOP10降级/配件购买组合，右侧为TOP10升级购买组合；条形长度代表交叉购买用户数。";
       }
     }
 
@@ -26056,8 +26084,46 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         if (nextLeft === nextRight) nextLeft = previousRight;
       }
       frameModule3State.scaleComparePaths = [nextLeft, nextRight];
+      frameModule3State.scaleCompareHoverPath = "";
+      frameModule3State.scaleComparePinnedPath = "";
       frameModule3State.selectedPairKey = null;
       frameModule3RenderAll();
+    }
+
+    function frameModule3ScaleCompareActivePath() {
+      const [leftPath, rightPath] = frameModule3NormalizeScaleComparePaths();
+      const visiblePaths = new Set([leftPath, rightPath]);
+      if (!visiblePaths.has(frameModule3State.scaleCompareHoverPath)) {
+        frameModule3State.scaleCompareHoverPath = "";
+      }
+      if (!visiblePaths.has(frameModule3State.scaleComparePinnedPath)) {
+        frameModule3State.scaleComparePinnedPath = "";
+      }
+      return frameModule3State.scaleCompareHoverPath || frameModule3State.scaleComparePinnedPath || "";
+    }
+
+    function frameModule3RenderScaleCompareChart() {
+      if (!frameModule3VisibleChartIds().has("3.3")) return;
+      frameModule3RenderChart33(frameModule3FilteredRecords());
+    }
+
+    function frameModule3SetScaleCompareHoverPath(path) {
+      const [leftPath, rightPath] = frameModule3NormalizeScaleComparePaths();
+      const nextPath = [leftPath, rightPath].includes(path) ? path : "";
+      if (nextPath === frameModule3State.scaleCompareHoverPath) return;
+      frameModule3State.scaleCompareHoverPath = nextPath;
+      frameModule3RenderScaleCompareChart();
+    }
+
+    function frameModule3SetScaleComparePinnedPath(path) {
+      const [leftPath, rightPath] = frameModule3NormalizeScaleComparePaths();
+      if (![leftPath, rightPath].includes(path)) return;
+      const nextPath = frameModule3State.scaleComparePinnedPath === path ? "" : path;
+      if (nextPath === frameModule3State.scaleComparePinnedPath && !frameModule3State.scaleCompareHoverPath) return;
+      frameModule3State.scaleComparePinnedPath = nextPath;
+      frameModule3State.scaleCompareHoverPath = "";
+      frameModule3State.selectedPairKey = null;
+      frameModule3RenderScaleCompareChart();
     }
 
     function frameModule3VisibleChartIds() {
@@ -26259,6 +26325,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule3UseMultiPairSelection() {
       return frameModule3State.view === "quality"
+        && frameModule3State.qualityTab === "heatmap"
         && (frameModule3State.multiSelectMode || frameModule3State.multiSelectionApplied);
     }
 
@@ -26268,7 +26335,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule3ActiveMultiPairKeySet() {
       const selectedKeys = frameModule3SelectedPairKeys();
-      return frameModule3State.view === "quality" && frameModule3State.multiSelectionApplied && selectedKeys.length
+      return frameModule3UseMultiPairSelection() && frameModule3State.multiSelectionApplied && selectedKeys.length
         ? new Set(selectedKeys)
         : null;
     }
@@ -26300,7 +26367,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule3EnterMultiSelectMode() {
-      if (frameModule3State.view !== "quality") return;
+      if (frameModule3State.view !== "quality" || frameModule3State.qualityTab !== "heatmap") return;
       frameModule3State.multiSelectMode = true;
       frameModule3State.multiSelectionApplied = false;
       frameModule3State.multiSelectedPairKeys = [];
@@ -26354,7 +26421,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       return `
         <span class="amc-detail-users-progress">
           <span class="${escapeHtml(valueClass)}">${frameModule2FormatNumber(value)}</span>
-          <span class="amc-detail-users-progress-track" role="progressbar" aria-label="交叉购买人数相对当前明细最大值" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent.toFixed(1)}">
+          <span class="amc-detail-users-progress-track" role="progressbar" aria-label="交叉购买用户数相对当前明细最大值" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent.toFixed(1)}">
             <span class="amc-detail-users-progress-fill" style="width:${percent.toFixed(1)}%"></span>
           </span>
         </span>`;
@@ -26378,8 +26445,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           ? `；已按多选组合筛选 ${frameModule2FormatNumber(multiSelectedCount)} 项，可在当前明细表查看`
           : "";
         subtitle.textContent = isQuality
-          ? `质量视角：继承交叉购买人数筛选 ${sampleLabel}，按修正关联指数排序${pricePathLabel}${multiSelectLabel}。`
-          : `规模视角：继承全局筛选，按交叉购买人数排序${pricePathLabel}。`;
+          ? `质量视角：继承交叉购买用户数筛选 ${sampleLabel}，按修正关联指数排序${pricePathLabel}${multiSelectLabel}。`
+          : `规模视角：继承全局筛选，按交叉购买用户数排序${pricePathLabel}。`;
       }
       frameModule3RenderDetailControls();
       if (count) count.textContent = `当前 ${frameModule2FormatNumber(records.length)} 条`;
@@ -26441,7 +26508,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <th class="is-right is-score-col">原始关联指数</th>
               <th class="is-right">转化率</th>
               <th class="is-right">吸引率</th>
-              <th class="is-right">交叉购买人数</th>
+              <th class="is-right">交叉购买用户数</th>
               <th class="is-right">交叉购买组合数</th>
               <th class="amc-module3-price-path-col">价格路径</th>
             </tr>
@@ -26555,7 +26622,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           </div>
           <dl>
             <div>
-              <dt>交叉购买人数</dt>
+              <dt>交叉购买用户数</dt>
               <dd>${frameModule2FormatNumber(group.users)}</dd>
             </div>
             <div>
@@ -26605,7 +26672,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const legendLabel = name => {
         const group = grouped.find(item => item.label === name);
         if (!group) return name;
-        const percent = totalUsers ? `${(group.users / totalUsers * 100).toFixed(1)}%` : "0.0%";
+        const percent = totalUsers ? `${(group.users / totalUsers * 100).toFixed(2)}%` : "0.00%";
         return `{name|${name}} {value|${percent}} {count|${frameModule2FormatNumber(group.pairCount)}个}`;
       };
       chart.setOption({
@@ -26623,6 +26690,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         },
         legend: {
           show: !hideLegend,
+          selectedMode: false,
           orient: "horizontal",
           bottom: 4,
           left: "center",
@@ -26653,6 +26721,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             padAngle: 2,
             startAngle: 96,
             z: 2,
+            selectedMode: false,
             avoidLabelOverlap: true,
             data: grouped.map(group => ({
               ...group,
@@ -26665,7 +26734,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
                 borderRadius: 5
               },
               pathKey: group.path,
-              percentText: totalUsers ? `${(group.users / totalUsers * 100).toFixed(1)}%` : "0.0%"
+              percentText: totalUsers ? `${(group.users / totalUsers * 100).toFixed(2)}%` : "0.00%"
             })),
             label: {
               show: !isCompactPie,
@@ -26695,7 +26764,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const pairCount = records.filter(record => record.pricePath === targetPath).length;
       const subtitle = document.getElementById("frameModule32Subtitle");
       if (subtitle) {
-        subtitle.textContent = `交叉购买组合数：${frameModule2FormatNumber(pairCount)}个；按交叉购买人数展示${frameModule3PricePathLabel(targetPath)} TOP 5商品组合。`;
+        subtitle.textContent = `交叉购买组合数：${frameModule2FormatNumber(pairCount)}个；按交叉购买用户数展示${frameModule3PricePathLabel(targetPath)} TOP 5商品组合。`;
       }
       const rows = records
         .filter(record => record.pricePath === targetPath)
@@ -26715,7 +26784,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = rows[params[0]?.dataIndex];
             return record
-              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>交叉购买人次：${frameModule2FormatNumber(record.crossUsers)}<br>交叉购买组合数：${frameModule2FormatNumber(pairCount)}个<br>价格路径：${frameModule3PricePathLabel(record.pricePath)}<br>平均间隔：${record.avgInterval.toFixed(1)} 天`
+              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>交叉购买人次：${frameModule2FormatNumber(record.crossUsers)}<br>交叉购买组合数：${frameModule2FormatNumber(pairCount)}个<br>价格路径：${frameModule3PricePathLabel(record.pricePath)}<br>平均间隔：${record.avgInterval.toFixed(2)} 天`
               : "";
           }
         },
@@ -26766,18 +26835,22 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         : ["downgrade", "upgrade"];
       const leftLabel = frameModule3PricePathCompareLabel(leftPath);
       const rightLabel = frameModule3PricePathCompareLabel(rightPath);
+      const activePath = frameModule3ScaleCompareActivePath();
+      const showLeft = !activePath || activePath === leftPath;
+      const showRight = !activePath || activePath === rightPath;
       const leftPairCount = records.filter(record => record.pricePath === leftPath).length;
       const rightPairCount = records.filter(record => record.pricePath === rightPath).length;
       const subtitle = document.getElementById("frameModule33Subtitle");
       if (subtitle) {
-        subtitle.textContent = `交叉购买组合数（${leftLabel}）：${frameModule2FormatNumber(leftPairCount)}个；交叉购买组合数（${rightLabel}）：${frameModule2FormatNumber(rightPairCount)}个；条形长度代表交叉购买人数。`;
+        if (activePath) {
+          const activeLabel = activePath === leftPath ? leftLabel : rightLabel;
+          const activeCount = activePath === leftPath ? leftPairCount : rightPairCount;
+          subtitle.textContent = `当前展示：${activeLabel} TOP 10组合；交叉购买组合数：${frameModule2FormatNumber(activeCount)}个；条形长度代表交叉购买用户数。`;
+        } else {
+          subtitle.textContent = `交叉购买组合数（${leftLabel}）：${frameModule2FormatNumber(leftPairCount)}个；交叉购买组合数（${rightLabel}）：${frameModule2FormatNumber(rightPairCount)}个；条形长度代表交叉购买用户数。`;
+        }
       }
       const colors = frameModule3PathColors;
-      const activeColors = {
-        upgrade: { fill: "#e85c90", border: "#b94170" },
-        flat: { fill: "#35b8aa", border: "#147c71" },
-        downgrade: { fill: "#ef9c24", border: "#b76b00" }
-      };
       const topByPath = path => records
         .filter(record => record.pricePath === path)
         .sort((a, b) => Number(b.crossUsers || 0) - Number(a.crossUsers || 0))
@@ -26786,7 +26859,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const topRight = topByPath(rightPath);
       const maxRows = Math.max(topLeft.length, topRight.length);
       if (!maxRows) {
-        frameModule3SetEmptyChart(chart, `暂无${leftLabel}或${rightLabel}路径组合`);
+        const emptyLabel = activePath
+          ? frameModule3PricePathCompareLabel(activePath)
+          : `${leftLabel}或${rightLabel}`;
+        frameModule3SetEmptyChart(chart, `暂无${emptyLabel}路径组合`);
         return;
       }
       const rows = Array.from({ length: maxRows }, (_, index) => ({
@@ -26822,10 +26898,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ellipsis: "..."
       };
       const formatPairLabel = record => frameModule3PairAxisLabel(record, isNarrow ? 7 : 9);
-      const selectedItemStyle = (record, path, borderRadius) => {
-        if (record?.pairKey !== frameModule3State.selectedPairKey) return undefined;
-        const tone = activeColors[path] || { fill: colors[path], border: "#3153c4" };
-        return { color: tone.fill, borderColor: tone.border, borderWidth: 2, borderRadius };
+      const seriesPathFromName = name => {
+        if (name === leftLabel) return leftPath;
+        if (name === rightLabel) return rightPath;
+        return "";
       };
       chart.setOption({
         animation: false,
@@ -26846,7 +26922,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = params.data?.record;
             if (!record) return "";
-            return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>价格路径：${params.seriesName}<br>交叉购买人数：${frameModule2FormatNumber(record.crossUsers)}<br>交叉购买组合数：${frameModule2FormatNumber(params.seriesName === leftLabel ? leftPairCount : rightPairCount)}个<br>平均间隔：${record.avgInterval.toFixed(1)} 天<br>Lead ASIN 单价：${frameModule3FormatMoney(record.leadPrice)}<br>Follow ASIN 单价：${frameModule3FormatMoney(record.followPrice)}<br>价格倍数：${record.priceMultiple.toFixed(2)}x`;
+            return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>价格路径：${params.seriesName}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}<br>交叉购买组合数：${frameModule2FormatNumber(params.seriesName === leftLabel ? leftPairCount : rightPairCount)}个<br>平均间隔：${record.avgInterval.toFixed(2)} 天<br>Lead ASIN单价：${frameModule3FormatMoney(record.leadPrice)}<br>Follow ASIN单价：${frameModule3FormatMoney(record.followPrice)}<br>价格倍数：${record.priceMultiple.toFixed(2)}x`;
           }
         },
         xAxis: {
@@ -26881,10 +26957,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             barGap: "-100%",
             itemStyle: { color: colors[leftPath], borderRadius: [5, 0, 0, 5] },
             data: rows.map(row => ({
-              value: row.left ? -row.left.crossUsers : 0,
-              record: row.left,
-              pairKey: row.left?.pairKey,
-              itemStyle: selectedItemStyle(row.left, leftPath, [5, 0, 0, 5])
+              value: showLeft && row.left ? -row.left.crossUsers : null,
+              record: showLeft ? row.left : null,
+              pairKey: showLeft ? row.left?.pairKey : null,
+              pathKey: leftPath
             })),
             label: {
               show: true,
@@ -26905,10 +26981,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             barMaxWidth: 24,
             itemStyle: { color: colors[rightPath], borderRadius: [0, 5, 5, 0] },
             data: rows.map(row => ({
-              value: row.right ? row.right.crossUsers : 0,
-              record: row.right,
-              pairKey: row.right?.pairKey,
-              itemStyle: selectedItemStyle(row.right, rightPath, [0, 5, 5, 0])
+              value: showRight && row.right ? row.right.crossUsers : null,
+              record: showRight ? row.right : null,
+              pairKey: showRight ? row.right?.pairKey : null,
+              pathKey: rightPath
             })),
             label: {
               show: true,
@@ -26928,7 +27004,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const rawY = chart.convertToPixel({ yAxisIndex: 0 }, String(row.rank));
         const y = Array.isArray(rawY) ? rawY[1] : rawY;
         return [
-          row.left ? {
+          showLeft && row.left ? {
             id: `module33-left-label-${row.rank}`,
             type: "text",
             x: sideLabelInset,
@@ -26936,17 +27012,18 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             z: 20,
             silent: false,
             cursor: "pointer",
-            onclick: () => frameModule3SelectPair(row.left?.pairKey),
+            onclick: () => frameModule3SetScaleComparePinnedPath(leftPath),
+            onmouseover: () => frameModule3SetScaleCompareHoverPath(leftPath),
             style: {
               ...labelTextStyle,
               text: formatPairLabel(row.left),
               align: "left",
               verticalAlign: "middle",
-              fill: row.left.pairKey === frameModule3State.selectedPairKey ? "#2f3f58" : labelTextStyle.fill,
-              fontWeight: row.left.pairKey === frameModule3State.selectedPairKey ? 600 : 400
+              fill: labelTextStyle.fill,
+              fontWeight: 400
             }
           } : null,
-          row.right ? {
+          showRight && row.right ? {
             id: `module33-right-label-${row.rank}`,
             type: "text",
             x: chartWidth - sideLabelInset,
@@ -26954,22 +27031,36 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             z: 20,
             silent: false,
             cursor: "pointer",
-            onclick: () => frameModule3SelectPair(row.right?.pairKey),
+            onclick: () => frameModule3SetScaleComparePinnedPath(rightPath),
+            onmouseover: () => frameModule3SetScaleCompareHoverPath(rightPath),
             style: {
               ...labelTextStyle,
               text: formatPairLabel(row.right),
               align: "right",
               verticalAlign: "middle",
-              fill: row.right.pairKey === frameModule3State.selectedPairKey ? "#2f3f58" : labelTextStyle.fill,
-              fontWeight: row.right.pairKey === frameModule3State.selectedPairKey ? 600 : 400
+              fill: labelTextStyle.fill,
+              fontWeight: 400
             }
           } : null
         ].filter(Boolean);
       });
       chart.setOption({ graphic: rowLabels }, { replaceMerge: ["graphic"] });
+      chart.off("mouseover");
+      chart.off("mouseout");
+      chart.off("globalout");
       chart.off("click");
+      chart.on("mouseover", params => {
+        if (params.componentType !== "series" || !params.data?.record) return;
+        const path = seriesPathFromName(params.seriesName);
+        if (path) frameModule3SetScaleCompareHoverPath(path);
+      });
+      chart.on("globalout", () => {
+        frameModule3SetScaleCompareHoverPath("");
+      });
       chart.on("click", params => {
-        if (params.data?.pairKey) frameModule3SelectPair(params.data.pairKey);
+        if (params.componentType !== "series" || !params.data?.record) return;
+        const path = seriesPathFromName(params.seriesName);
+        if (path) frameModule3SetScaleComparePinnedPath(path);
       });
     }
 
@@ -27265,7 +27356,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = params.data?.record;
             return record
-              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")}<br>吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}<br>交叉购买人数：${frameModule2FormatNumber(record.crossUsers)}人<br>修正关联指数：${frameModule3FormatMetric(record.scaleAdjustedScore, "index")}`
+              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")}<br>吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}人<br>修正关联指数：${frameModule3FormatMetric(record.scaleAdjustedScore, "index")}`
               : "";
           }
         },
@@ -27283,7 +27374,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           nameGap: compact ? 24 : 26,
           min: 0,
           max: xMax,
-          axisLabel: { color: "#8a98aa", fontSize: axisFontSize, margin: 5, formatter: value => `${(value * 100).toFixed(0)}%` },
+          axisLabel: { color: "#8a98aa", fontSize: axisFontSize, margin: 5, formatter: value => `${(value * 100).toFixed(2)}%` },
           nameTextStyle: { color: "#63748d", fontSize: 12 },
           splitLine: { lineStyle: { color: "#e1f0ed", width: 1 } }
         },
@@ -27294,7 +27385,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           nameGap: compact ? 28 : 30,
           min: 0,
           max: yMax,
-          axisLabel: { color: "#8a98aa", fontSize: axisFontSize, margin: 5, formatter: value => `${(value * 100).toFixed(0)}%` },
+          axisLabel: { color: "#8a98aa", fontSize: axisFontSize, margin: 5, formatter: value => `${(value * 100).toFixed(2)}%` },
           nameTextStyle: { color: "#63748d", fontSize: 12 },
           splitLine: { lineStyle: { color: "#e1f0ed", width: 1 } }
         },
@@ -27310,7 +27401,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }, true);
       chart.off("click");
       chart.on("click", params => {
-        frameModule3HandleQualityChartPairClick(params.data?.pairKey);
+        frameModule3SelectPair(params.data?.pairKey);
       });
     }
 
@@ -27368,7 +27459,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = rows[params.dataIndex];
             return record
-              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>修正关联指数：${frameModule3FormatMetric(record.scaleAdjustedScore, "index")}<br>原始关联指数：${frameModule3FormatMetric(record.associationScore, "index")}<br>交叉购买人数：${frameModule2FormatNumber(record.crossUsers)}人<br>转化率 / 吸引率：${frameModule3FormatMetric(record.conversionRate, "percent")} / ${frameModule3FormatMetric(record.attractionRate, "percent")}`
+              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>修正关联指数：${frameModule3FormatMetric(record.scaleAdjustedScore, "index")}<br>原始关联指数：${frameModule3FormatMetric(record.associationScore, "index")}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}人<br>转化率 / 吸引率：${frameModule3FormatMetric(record.conversionRate, "percent")} / ${frameModule3FormatMetric(record.attractionRate, "percent")}`
               : "";
           }
         },
@@ -27448,7 +27539,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (!chart) return;
       const subtitle = document.getElementById("frameModule38Subtitle");
       if (subtitle) {
-        subtitle.textContent = `X=Lead ASIN单价，Y=Follow ASIN单价；气泡大小=交叉购买人数；交叉购买组合数：${frameModule2FormatNumber(records.length)}个。`;
+        subtitle.textContent = `X=Lead ASIN单价，Y=Follow ASIN单价；气泡大小=交叉购买用户数；交叉购买组合数：${frameModule2FormatNumber(records.length)}个。`;
       }
       if (!records.length) {
         frameModule3SetEmptyChart(chart, "暂无可用的价格关系组合");
@@ -27560,7 +27651,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = params.data?.record;
             return record
-              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>Lead ASIN单价：${frameModule3FormatMoney(record.leadPrice)}<br>Follow ASIN单价：${frameModule3FormatMoney(record.followPrice)}<br>交叉购买人数：${frameModule2FormatNumber(record.crossUsers)}人<br>交叉购买组合数：${frameModule2FormatNumber(records.length)}个<br>价格路径：${frameModule3PricePathLabel(record.pricePath)}`
+              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>Lead ASIN单价：${frameModule3FormatMoney(record.leadPrice)}<br>Follow ASIN单价：${frameModule3FormatMoney(record.followPrice)}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}人<br>交叉购买组合数：${frameModule2FormatNumber(records.length)}个<br>价格路径：${frameModule3PricePathLabel(record.pricePath)}`
               : "";
           }
         },
@@ -27701,8 +27792,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         if (percent <= 0) return "";
         const isNarrow = percent < 12;
         const displayValue = isNarrow
-          ? `${percent.toFixed(1)}%`
-          : `${frameModule2FormatNumber(group.users)}人 · ${percent.toFixed(1)}%`;
+          ? `${percent.toFixed(2)}%`
+          : `${frameModule2FormatNumber(group.users)}人 · ${percent.toFixed(2)}%`;
         const selected = selectedPath === group.path;
         return `
           <button class="amc-module3-scale3-path-summary-segment ${escapeHtml(group.path)}${isNarrow ? " is-narrow" : ""}${selected ? " is-selected" : ""}"
@@ -27710,7 +27801,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             data-frame-module3-scale3-path="${escapeHtml(group.path)}"
             aria-pressed="${selected}"
             style="width:${percent.toFixed(4)}%;--path-color:${frameModule3PathColors[group.path] || "#7891ef"};background:${frameModule3PathColors[group.path] || "#7891ef"}"
-            title="${escapeHtml(group.label)}：${frameModule2FormatNumber(group.users)}人，交叉购买组合数${frameModule2FormatNumber(group.pairCount)}个，占比${percent.toFixed(1)}%">
+            title="${escapeHtml(group.label)}：${frameModule2FormatNumber(group.users)}人，交叉购买组合数${frameModule2FormatNumber(group.pairCount)}个，占比${percent.toFixed(2)}%">
             <span class="path-segment-value">${escapeHtml(displayValue)}</span>
           </button>`;
       }).join("");
@@ -27730,7 +27821,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         : records.filter(record => record.pricePath === selectedPath);
       const subtitle = document.getElementById("frameModule39Subtitle");
       if (subtitle) {
-        subtitle.textContent = `交叉购买组合数：${frameModule2FormatNumber(sourceRecords.length)}个；展示按交叉购买人数排序的TOP 15商品组合。`;
+        subtitle.textContent = `交叉购买组合数：${frameModule2FormatNumber(sourceRecords.length)}个；展示按交叉购买用户数排序的TOP 15商品组合。`;
       }
       const rows = sourceRecords
         .slice()
@@ -27759,14 +27850,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = rows[params[0]?.dataIndex];
             return record
-              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>交叉购买人数：${frameModule2FormatNumber(record.crossUsers)}人<br>交叉购买组合数：${frameModule2FormatNumber(sourceRecords.length)}个<br>价格路径：${frameModule3PricePathLabel(record.pricePath)}<br>Lead ASIN单价：${frameModule3FormatMoney(record.leadPrice)}<br>Follow ASIN单价：${frameModule3FormatMoney(record.followPrice)}`
+              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}人<br>交叉购买组合数：${frameModule2FormatNumber(sourceRecords.length)}个<br>价格路径：${frameModule3PricePathLabel(record.pricePath)}<br>Lead ASIN单价：${frameModule3FormatMoney(record.leadPrice)}<br>Follow ASIN单价：${frameModule3FormatMoney(record.followPrice)}`
               : "";
           }
         },
         xAxis: {
           type: "value",
           max: maxUsers * 1.16,
-          name: "交叉购买人数",
+          name: "交叉购买用户数",
           nameLocation: "middle",
           nameGap: compact ? 34 : 38,
           nameTextStyle: { color: "#63748d", fontSize: compact ? 11 : 12, fontWeight: 500 },
@@ -28006,6 +28097,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           const nextTab = button.dataset.frameModule3QualityTab;
           if (nextTab === frameModule3State.qualityTab) return;
           frameModule3State.qualityTab = nextTab;
+          if (nextTab !== "heatmap") frameModule3ClearMultiSelection();
           frameModule3State.selectedPairKey = null;
           frameModule3RenderAll();
         });
@@ -28060,19 +28152,19 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       quick: {
         title: "快速放量TOP 10",
         listTitle: "快速关联 ≤90天",
-        hint: "按交叉购买人数降序。适合优先测试短周期 DSP 和购买后推荐。",
+        hint: "按交叉购买用户数降序。适合优先测试短周期 DSP 和购买后推荐。",
         empty: "暂无符合条件的快速放量组合"
       },
       long: {
         title: "长尾关联TOP 10",
         listTitle: "长尾关联 >180天",
-        hint: "按交叉购买人数降序。适合长期受众经营，不应仅按短期 ROAS 判断。",
+        hint: "按交叉购买用户数降序。适合长期受众经营，不应仅按短期 ROAS 判断。",
         empty: "暂无符合条件的长尾关联组合"
       },
       stable: {
         title: "稳定培育TOP 10",
         listTitle: "稳定培育 91-180天",
-        hint: "按交叉购买人数降序。适合中期培育窗口，并按购买后时间分段调整信息与出价。",
+        hint: "按交叉购买用户数降序。适合中期培育窗口，并按购买后时间分段调整信息与出价。",
         empty: "暂无符合条件的稳定培育组合"
       }
     };
@@ -28126,11 +28218,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule4FormatDays(value) {
-      return `${Number(value || 0).toFixed(1)}天`;
+      return `${Number(value || 0).toFixed(2)}天`;
     }
 
     function frameModule4FormatShare(value) {
-      return `${(Number(value || 0) * 100).toFixed(0)}%`;
+      return `${(Number(value || 0) * 100).toFixed(2)}%`;
     }
 
     function frameModule4SetText(id, value) {
@@ -29721,7 +29813,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const reportAsins = frameLabelAllAsins().map(normalize).filter(Boolean);
       const reportAsinSet = new Set(reportAsins);
       const total = reportAsinSet.size;
-      if (!total) return { covered: 0, total, text: "0%" };
+      if (!total) return { covered: 0, total, text: "0.00%" };
 
       const covered = new Set();
       if (option.value === "system") {
@@ -29746,11 +29838,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         });
       }
 
-      const percent = Math.round((covered.size / total) * 1000) / 10;
+      const percent = covered.size / total * 100;
       return {
         covered: covered.size,
         total,
-        text: `${Number.isInteger(percent) ? percent : percent.toFixed(1)}%`
+        text: `${percent.toFixed(2)}%`
       };
     }
 
@@ -29796,9 +29888,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameLabelOptions() {
-      const options = [
-        { value: "none", label: "不显示标签", category: "none" }
-      ];
+      const options = [];
       if (frameLabelCanUseRsi()) options.push({ value: "system", label: "ARP产品名", category: "rsi" });
       if (frameLabelCanUseSystemProductLine()) {
         options.push({ value: "system-product-line", label: "产品线", category: "system" });
@@ -29810,6 +29900,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           category: "custom"
         });
       });
+      options.push({ value: "none", label: "不显示标签", category: "none" });
       return options;
     }
 
@@ -29853,6 +29944,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const directOptions = options.filter(option => (
         option.category === "none" || option.category === "rsi"
       ));
+      const directLabelOptions = directOptions.filter(option => option.category !== "none");
+      const noneOptions = directOptions.filter(option => option.category === "none");
       const parentCategories = categories.filter(category => (
         category.value !== "rsi" &&
         options.some(option => option.category === category.value)
@@ -29877,7 +29970,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
 
       categoriesRoot.innerHTML = [
-        ...directOptions.map(option => frameLabelCategoryMarkup({
+        ...directLabelOptions.map(option => frameLabelCategoryMarkup({
           label: option.label,
           option,
           selectedValue
@@ -29887,6 +29980,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           category: category.value,
           isActive: category.value === frameLabelState.activeCategory,
           selectedValue
+        })),
+        ...noneOptions.map(option => frameLabelCategoryMarkup({
+          label: option.label,
+          option,
+          selectedValue
         }))
       ].join("");
 
@@ -29895,11 +29993,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           fuzzyMatch(`${frameLabelOptionDisplayLabel(option)} ${option.value}`, query)
         );
         const groups = [
-          { label: "显示设置", options: matchingOptions.filter(option => option.category === "none") },
           ...categories.map(category => ({
             label: category.label,
             options: matchingOptions.filter(option => option.category === category.value)
-          }))
+          })),
+          { label: "显示设置", options: matchingOptions.filter(option => option.category === "none") }
         ].filter(group => group.options.length);
         selectOptions.innerHTML = groups.length
           ? groups.map(group => `
@@ -30584,7 +30682,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         </div>
         <div class="amc-module4-detail-grid">
           <div class="amc-module4-detail-metric">
-            <span>交叉购买人数</span>
+            <span>交叉购买用户数</span>
             <strong>${frameModule2FormatNumber(record.crossUsers)}</strong>
           </div>
           <div class="amc-module4-detail-metric">
@@ -30785,7 +30883,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           position: "insideEndTop",
           color: "#5d687a",
           fontSize: 12,
-          formatter: params => params.name || `${Math.round(params.value || 0)}天`
+          formatter: params => params.name || `${Number(params.value || 0).toFixed(2)}天`
         },
         lineStyle: { color: "#cbd5e3", type: "dashed", width: 1.2 },
         data: [{ name: "90天", xAxis: 90 }, { name: "180天", xAxis: 180 }]
@@ -30821,8 +30919,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             formatter: params => {
               const share = Number(params.data?.share || 0);
               return share >= 0.16
-                ? `${frameModule4RhythmLabels[rhythm]} · 路径人次占比 ${(share * 100).toFixed(1)}%`
-                : `路径人次占比 ${(share * 100).toFixed(1)}%`;
+                ? `${frameModule4RhythmLabels[rhythm]} · 路径人次占比 ${(share * 100).toFixed(2)}%`
+                : `路径人次占比 ${(share * 100).toFixed(2)}%`;
             }
           },
           emphasis: {
@@ -30891,11 +30989,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = params.data?.record;
             if (record) {
-              return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>节奏：${frameModule4RhythmLabels[record.rhythm]}<br>交叉购买人数：${frameModule2FormatNumber(record.crossUsers)}人<br>平均间隔：${frameModule4FormatDays(record.avgInterval)}<br>修正关联指数：${Number(record.scaleScore || 0).toFixed(2)}<br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")} / 吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}`;
+              return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>节奏：${frameModule4RhythmLabels[record.rhythm]}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}人<br>平均间隔：${frameModule4FormatDays(record.avgInterval)}<br>修正关联指数：${Number(record.scaleScore || 0).toFixed(2)}<br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")} / 吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}`;
             }
             const rhythm = params.data?.rhythm;
             return rhythm
-              ? `<strong>${frameModule4RhythmLabels[rhythm]} ${frameModule4RhythmIntervals[rhythm]}</strong><br>交叉购买人数：${frameModule2FormatNumber(params.data.value)}人<br>交叉购买组合数：${frameModule2FormatNumber(params.data.pairCount)}个<br>路径人次占比：${frameModule4FormatShare(params.data.share)}<br><span style="color:#718099">当前节奏路径人次 / 当前筛选高价值组合总路径人次</span>`
+              ? `<strong>${frameModule4RhythmLabels[rhythm]} ${frameModule4RhythmIntervals[rhythm]}</strong><br>交叉购买用户数：${frameModule2FormatNumber(params.data.value)}人<br>交叉购买组合数：${frameModule2FormatNumber(params.data.pairCount)}个<br>路径人次占比：${frameModule4FormatShare(params.data.share)}<br><span style="color:#718099">当前节奏路径人次 / 当前筛选高价值组合总路径人次</span>`
               : "";
           }
         },
@@ -30935,7 +31033,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             logBase: 10,
             min: 10,
             max: Math.max(100, yMax),
-            name: "交叉购买人数（对数）",
+            name: "交叉购买用户数（对数）",
             nameLocation: "middle",
             nameGap: 56,
             nameTextStyle: { color: "#63748d", fontSize: 12, fontWeight: 500 },
@@ -31014,7 +31112,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           padding: [8, 10],
           textStyle: { color: "#1d2a3d", fontSize: 12, lineHeight: 18 },
           extraCssText: "box-shadow:0 8px 18px rgba(30,53,101,0.10);border-radius:6px;",
-          formatter: params => `${params.name}<br>路径人次：${frameModule2FormatNumber(params.value)}<br>组合数：${params.data?.pairCount || 0}<br>占比：${params.percent}%`
+          formatter: params => `${params.name}<br>路径人次：${frameModule2FormatNumber(params.value)}<br>组合数：${params.data?.pairCount || 0}<br>占比：${Number(params.percent || 0).toFixed(2)}%`
         },
         legend: {
           bottom: 0,
@@ -31038,7 +31136,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             color: "#354d6d",
             fontSize: 11,
             lineHeight: 14,
-            formatter: params => `${params.name}\n${params.percent}%`
+            formatter: params => `${params.name}\n${Number(params.percent || 0).toFixed(2)}%`
           },
           labelLine: { length: 9, length2: 5, lineStyle: { color: "#cdd8e8" } },
           emphasis: { focus: "self", scale: true, scaleSize: 2 }
@@ -31126,7 +31224,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             <tr>
               <th class="amc-module4-detail-rank-cell">排名</th>
               <th>Lead → Follow</th>
-              <th>交叉购买人数</th>
+              <th>交叉购买用户数</th>
               <th>关联购买平均间隔</th>
               <th>平均最短关联间隔</th>
               <th>购买节奏</th>
@@ -31365,7 +31463,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function frameModule5FormatMoney(value) {
       const number = Number(value || 0);
       const sign = number > 0 ? "+" : number < 0 ? "-" : "";
-      return `${sign}$${Math.abs(number).toFixed(0)}`;
+      return `${sign}$${Math.abs(number).toFixed(2)}`;
     }
 
     function frameModule5FormatSignedMoneyPrecise(value) {
@@ -31384,7 +31482,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule5FormatPriceAxis(value) {
       const number = Number(value || 0);
-      return `${number > 0 ? "+" : ""}${number.toFixed(0)}美元`;
+      return `${number > 0 ? "+" : ""}${number.toFixed(2)}美元`;
     }
 
     function frameModule5PathTag(record) {
@@ -31551,7 +31649,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             top: 35,
             silent: true,
             style: {
-              text: "气泡大小：交叉购买人数",
+              text: "气泡大小：交叉购买用户数",
               fill: "#34445f",
               fontSize: 11,
               fontWeight: 400,
@@ -31593,7 +31691,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           nameLocation: "middle",
           nameGap: 30,
           nameTextStyle: { color: "#63748d", fontSize: 12, fontWeight: 500 },
-          axisLabel: { color: "#8a98aa", fontSize: 12, margin: 8, formatter: value => `${Math.round(value)}天` },
+          axisLabel: { color: "#8a98aa", fontSize: 12, margin: 8, formatter: value => `${Number(value || 0).toFixed(2)}天` },
           axisLine: { lineStyle: { color: "#b6c0ce" } },
           axisTick: { lineStyle: { color: "#d6deea" } },
           splitLine: { lineStyle: { color: "#edf1f6" } }
@@ -31747,14 +31845,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <th class="amc-module5-detail-rank-cell is-center">排名</th>
               <th>Lead → Follow</th>
               <th>策略</th>
-              <th class="is-right">交叉购买人数</th>
+              <th class="is-right">交叉购买用户数</th>
               <th class="is-right">交叉购买组合数</th>
-              <th class="is-right">Lead购买人数</th>
-              <th class="is-right">Follow购买人数</th>
+              <th class="is-right">Lead ASIN购买用户数</th>
+              <th class="is-right">Follow ASIN购买用户数</th>
               <th class="is-right">关联购买平均间隔</th>
               <th class="is-right">平均最短关联间隔</th>
-              <th class="is-right">Lead单价</th>
-              <th class="is-right">Follow单价</th>
+              <th class="is-right">Lead ASIN单价</th>
+              <th class="is-right">Follow ASIN单价</th>
               <th class="is-right">价格倍数</th>
               <th class="is-right">价格差</th>
               <th class="amc-module5-price-path-col">价格路径</th>
@@ -31935,15 +32033,15 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     const frameModule2MetricConfig = {
       lead: [
-        { key: "crossUsers", label: "交叉购买人数", type: "number" },
+        { key: "crossUsers", label: "交叉购买用户数", type: "number" },
         { key: "crossRate", label: "交叉购买率", type: "percent" },
-        { key: "totalUsers", label: "总购买人数", type: "number" },
+        { key: "totalUsers", label: "总购买用户数", type: "number" },
         { key: "associatedCombos", label: "带动 Follow 数", type: "number" }
       ],
       follow: [
-        { key: "capturedUsers", label: "交叉购买人数", type: "number" },
-        { key: "captureRate", label: "交叉购买率", type: "percent" },
-        { key: "totalUsers", label: "总购买人数", type: "number" },
+        { key: "capturedUsers", label: "交叉购买用户数", type: "number" },
+        { key: "captureRate", label: "收割率", type: "percent" },
+        { key: "totalUsers", label: "总购买用户数", type: "number" },
         { key: "sourceLeadCount", label: "来源 Lead 数", type: "number" }
       ]
     };
@@ -31987,7 +32085,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule2FormatPercent(value) {
-      return `${(Number(value || 0) * 100).toFixed(1)}%`;
+      return `${(Number(value || 0) * 100).toFixed(2)}%`;
     }
 
     function frameModule2FormatMetric(value, type) {
@@ -32113,6 +32211,32 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (subtitle) subtitle.textContent = frameModule2FlowSubtitleText(view, asin);
     }
 
+    function frameModule2RankingContext(view = frameModule2State.analysisView) {
+      const options = frameModule2MetricConfig[view] || [];
+      if (!options.some(option => option.key === frameModule2State.rankingMetric)) {
+        frameModule2State.rankingMetric = options[0]?.key || "";
+      }
+      const metric = options.find(option => option.key === frameModule2State.rankingMetric) || options[0] || null;
+      const items = metric
+        ? frameModule2RoleFilteredItems(view)
+          .slice()
+          .sort((a, b) => Number(b[metric.key] || 0) - Number(a[metric.key] || 0))
+          .slice(0, 15)
+        : [];
+      return { options, metric, items };
+    }
+
+    function frameModule2SelectRankingTopAsin(view = frameModule2State.analysisView) {
+      const { items } = frameModule2RankingContext(view);
+      frameModule2State.selectedAsin = items[0]?.asin || null;
+      frameModule2State.selectedAsinCleared = false;
+      frameModule2State.selectedAsinExplicit = false;
+      frameModule2State.detailSelectedAsin = null;
+      frameModule2State.detailSelectedView = view === "follow" ? "follow" : "lead";
+      frameModule2State.detailScrollToSelection = false;
+      frameModule2State.selectedFlowPairKey = null;
+    }
+
     function frameModule2SyncAnalysisSwitch() {
       document.querySelectorAll("[data-frame-analysis-view]").forEach(item => {
         const active = item.dataset.frameAnalysisView === frameModule2State.analysisView;
@@ -32158,7 +32282,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         frameModule2State.matrixView = nextView;
         frameModule2State.rankingView = nextView;
         frameModule2State.flowDirection = nextView;
-        frameModule2State.rankingMetric = nextView === "lead" ? "crossRate" : "capturedUsers";
         frameModule2SyncAnalysisSwitch();
       }
       if (toggle) {
@@ -32178,13 +32301,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (toggle) renderFrameRoleDetailTable();
     }
 
-    function frameModule2SetMatrixDetailSelection(asin, view) {
+    function frameModule2SetRankingAsin(asin, view) {
       if (!asin) return;
       const nextView = view === "follow" ? "follow" : "lead";
-      frameModule2State.detailSelectedAsin = asin;
+      frameModule2State.detailSelectedAsin = null;
       frameModule2State.detailSelectedView = nextView;
-      frameModule2State.detailScrollToSelection = true;
-      frameModule2SetSelectedAsin(asin, nextView);
+      frameModule2State.detailScrollToSelection = false;
+      frameModule2SetSelectedAsin(asin, nextView, true, false);
       renderFrameRoleDetailTable();
     }
 
@@ -32295,7 +32418,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule6FormatPercent(value) {
-      return `${(frameModule6Num(value) * 100).toFixed(1)}%`;
+      return `${(frameModule6Num(value) * 100).toFixed(2)}%`;
     }
 
     function frameModule6FormatMoney(value) {
@@ -32306,12 +32429,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const number = frameModule6Num(value);
       const abs = Math.abs(number);
       if (abs >= 1000000) {
-        return `$${(number / 1000000).toFixed(abs >= 10000000 ? 0 : 1).replace(/\.0$/, "")}M`;
+        return `$${(number / 1000000).toFixed(2)}M`;
       }
       if (abs >= 1000) {
-        return `$${(number / 1000).toFixed(abs >= 10000 ? 0 : 1).replace(/\.0$/, "")}K`;
+        return `$${(number / 1000).toFixed(2)}K`;
       }
-      return `$${number.toFixed(0)}`;
+      return `$${number.toFixed(2)}`;
     }
 
     function frameModule6SyncSelectorHeight() {
@@ -32465,7 +32588,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule6FilteredAsinChoices() {
       return frameModule6Store.top50.filter(item =>
-        fuzzyMatch(item.leadAsin, frameModule6AsinPickerState.query)
+        frameAsinSearchMatches(item.leadAsin, frameModule6AsinPickerState.query)
       );
     }
 
@@ -32482,9 +32605,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           const active = index === frameModule6AsinPickerState.activeIndex;
           return `
             <button class="amc-module6-asin-picker-option${selected ? " is-selected" : ""}${active ? " is-active" : ""}" type="button" role="option" aria-selected="${selected}" data-module6-picker-asin="${escapeHtml(item.leadAsin)}">
-              <span class="amc-module6-asin-picker-option-main" title="${escapeHtml(frameLabelFormatAsin(item.leadAsin))}">${frameLabelAsinMarkup(item.leadAsin)}</span>
-              <span class="amc-module6-asin-picker-option-meta">${frameModule6FormatNumber(item.ntbUsers)} 新客</span>
-              ${selected ? `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 4.2 4.2L19 6.5"></path></svg>` : `<span aria-hidden="true"></span>`}
+              <span class="amc-module6-asin-picker-option-main" title="${escapeHtml(frameLabelFormatAsinThenTag(item.leadAsin))}">${frameLabelAsinThenTagMarkup(item.leadAsin)}</span>
             </button>`;
         }).join("")
         : `<div class="amc-module6-asin-picker-empty">暂无匹配的 TOP50 ASIN</div>`;
@@ -32497,16 +32618,19 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const picker = document.getElementById("frameModule62AsinPicker");
       const input = document.getElementById("frameModule62AsinSearch");
       const toggle = document.getElementById("frameModule62AsinToggle");
-      if (!picker || !input || !toggle) return;
+      const value = document.getElementById("frameModule62AsinValue");
+      if (!picker || !input || !toggle || !value) return;
       const hasChoices = frameModule6Store.top50.length > 0;
-      picker.classList.toggle("is-open", frameModule6AsinPickerState.open && hasChoices);
+      const isOpen = frameModule6AsinPickerState.open && hasChoices;
+      picker.classList.toggle("is-open", isOpen);
       input.disabled = !hasChoices;
       toggle.disabled = !hasChoices;
-      input.setAttribute("aria-expanded", String(frameModule6AsinPickerState.open && hasChoices));
-      toggle.setAttribute("aria-expanded", String(frameModule6AsinPickerState.open && hasChoices));
-      if (!frameModule6AsinPickerState.open) {
-        input.value = entry ? frameLabelFormatAsin(entry.leadAsin) : "";
-      }
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute("aria-label", entry ? `当前选择 ${frameLabelFormatAsinThenTag(entry.leadAsin)}` : "选择入口 ASIN");
+      input.value = frameModule6AsinPickerState.query;
+      value.innerHTML = entry
+        ? frameLabelAsinThenTagMarkup(entry.leadAsin, { inline: true })
+        : "选择 ASIN";
       frameModule6RenderAsinOptions();
     }
 
@@ -32726,7 +32850,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             position: "right",
             nameLocation: "middle",
             nameGap: 42,
-            axisLabel: { color: "#8a98aa", fontSize: 12, margin: 8, formatter: value => `${Number(value).toFixed(0)}%` },
+            axisLabel: { color: "#8a98aa", fontSize: 12, margin: 8, formatter: value => `${Number(value).toFixed(2)}%` },
             splitLine: { show: false }
           }
         ],
@@ -32803,7 +32927,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               lineStyle: { color: "#ef8d21", width: 2 },
               itemStyle: { color: "#ef8d21" }
             },
-            data: items.map(item => Number((item.repurchaseRate * 100).toFixed(1)))
+            data: items.map(item => Number((item.repurchaseRate * 100).toFixed(2)))
           }
         ]
       }, true);
@@ -33664,7 +33788,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     const frameOverviewTopPairSortConfig = {
       crossUsers: {
-        label: "交叉购买人数",
+        label: "交叉购买用户数",
         format: record => frameModule2FormatNumber(record.crossUsers),
         unit: "人"
       },
@@ -33778,7 +33902,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <span class="amc-top-pair-metric-value">${frameModule4FormatDays(record.avgInterval)}</span>
             </span>`;
         const rankSupportMetric = sortKey !== "crossUsers"
-          ? `<span class="amc-top-pair-metric is-users" title="交叉购买人数">
+          ? `<span class="amc-top-pair-metric is-users" title="交叉购买用户数">
               <span class="amc-top-pair-metric-label">人数</span>
               <span class="amc-top-pair-metric-value">${frameModule2FormatNumber(record.crossUsers)}人</span>
             </span>`
@@ -33898,9 +34022,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const xKey = isLead ? "totalUsers" : "sourceLeadCount";
       const yKey = isLead ? "crossRate" : "captureRate";
       const sizeKey = isLead ? "associatedCombos" : "sourceLeadCount";
-      const xLabel = isLead ? "Lead ASIN购买总人数" : "来源 Lead ASIN数量";
-      const yLabel = "交叉购买率";
-      const roleTitle = isLead ? "Lead 视角：Lead ASIN购买总人数与交叉购买率" : "Follow 视角：来源 Lead ASIN数量与交叉购买率";
+      const xLabel = isLead ? "Lead ASIN总购买用户数" : "来源 Lead ASIN数量";
+      const yLabel = isLead ? "交叉购买率" : "收割率";
+      const roleTitle = isLead ? "Lead 视角：Lead ASIN总购买用户数与交叉购买率" : "Follow 视角：来源 Lead ASIN数量与收割率";
       const asinRoleLabel = isLead ? "Lead ASIN" : "Follow ASIN";
       if (subtitle) subtitle.textContent = roleTitle;
       const matrixTitle = document.getElementById("frameRoleMatrixTitle");
@@ -33908,21 +34032,21 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       const quadrantConfig = isLead
         ? [
-          { key: "high-high", className: "engine", label: "连带引擎型", axis: "购买总人数高 · 交叉购买率高", desc: "超级入口，广告预算优先" },
-          { key: "high-low", className: "sleeper", label: "沉睡流量型", axis: "购买总人数高 · 交叉购买率低", desc: "流量大但转化低，重点激活" },
-          { key: "low-high", className: "efficient", label: "小众高效型", axis: "购买总人数低 · 交叉购买率高", desc: "流量小单转化高，精准投放" },
-          { key: "low-low", className: "low", label: "低连带型", axis: "购买总人数低 · 交叉购买率低", desc: "流量小转化低，暂不优先经营" }
+          { key: "high-high", className: "engine", label: "连带引擎型", axis: "总购买用户数高 · 交叉购买率高", desc: "超级入口，广告预算优先" },
+          { key: "high-low", className: "sleeper", label: "沉睡流量型", axis: "总购买用户数高 · 交叉购买率低", desc: "流量大但转化低，重点激活" },
+          { key: "low-high", className: "efficient", label: "小众高效型", axis: "总购买用户数低 · 交叉购买率高", desc: "流量小单转化高，精准投放" },
+          { key: "low-low", className: "low", label: "低连带型", axis: "总购买用户数低 · 交叉购买率低", desc: "流量小转化低，暂不优先经营" }
         ]
         : [
-          { key: "high-high", className: "engine", label: "通用收割型", axis: "来源 Lead ASIN 多 · 交叉购买率高", desc: "生态核心承接产品" },
-          { key: "high-low", className: "sleeper", label: "独立爆款", axis: "来源 Lead ASIN 多 · 交叉购买率低", desc: "产品本身有独立吸引力" },
-          { key: "low-high", className: "efficient", label: "集中收割型", axis: "来源 Lead ASIN 少 · 交叉购买率高", desc: "适合精准捆绑推荐" },
-          { key: "low-low", className: "low", label: "低承接型", axis: "来源 Lead ASIN 少 · 交叉购买率低", desc: "内部承接能力较弱" }
+          { key: "high-high", className: "engine", label: "通用收割型", axis: "来源 Lead ASIN 多 · 收割率高", desc: "生态核心承接产品" },
+          { key: "high-low", className: "sleeper", label: "独立爆款", axis: "来源 Lead ASIN 多 · 收割率低", desc: "产品本身有独立吸引力" },
+          { key: "low-high", className: "efficient", label: "集中收割型", axis: "来源 Lead ASIN 少 · 收割率高", desc: "适合精准捆绑推荐" },
+          { key: "low-low", className: "low", label: "低承接型", axis: "来源 Lead ASIN 少 · 收割率低", desc: "内部承接能力较弱" }
         ];
 
       const formatBaseline = value => Number(value || 0) >= 1000
         ? Math.round(Number(value)).toLocaleString("en-US")
-        : Number(value || 0).toFixed(1);
+        : Number(value || 0).toFixed(2);
 
       if (legend) {
         legend.innerHTML = `
@@ -33976,8 +34100,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const yMidPosition = yScale(yMid);
       const radiusScale = value => 5 + Math.sqrt(Math.max(0, Number(value || 0) - minSize) / Math.max(1, maxSize - minSize)) * 15;
       const baselineSuffix = frameModule2State.matrixBaseline === "mean" ? "Avg." : "Med.";
-      const xBaselineLabel = `购买人数 ${frameModule2FormatNumber(Math.round(Number(xMid || 0)))} (${baselineSuffix})`;
-      const yBaselineLabel = `购买率 ${frameModule2FormatPercent(yMid)} (${baselineSuffix})`;
+      const xBaselineLabel = `总购买用户数 ${frameModule2FormatNumber(Math.round(Number(xMid || 0)))} (${baselineSuffix})`;
+      const yBaselineLabel = `${yLabel} ${frameModule2FormatPercent(yMid)} (${baselineSuffix})`;
       const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
       const estimatedBaselineTextWidth = value => Array.from(String(value || ""))
         .reduce((sum, char) => sum + (/[\u4e00-\u9fff]/.test(char) ? 11 : 6), 0);
@@ -34042,11 +34166,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const selected = item.asin === frameModule2State.selectedAsin || detailLinked;
         const priceBand = frameModule2PriceBand(item);
         const tooltipHtml = isLead
-          ? `<strong>${escapeHtml(`${asinRoleLabel}：${frameLabelFormatAsin(item.asin)}`)}</strong>单价：$${Number(item.price || 0).toFixed(2)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}<br>交叉购买人数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>带动 Follow 数：${frameModule2FormatNumber(item.associatedCombos)}`
-          : `<strong>${escapeHtml(`${asinRoleLabel}：${frameLabelFormatAsin(item.asin)}`)}</strong>单价：$${Number(item.price || 0).toFixed(2)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}<br>交叉购买人数：${frameModule2FormatNumber(item.capturedUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.captureRate)}<br>来源 Lead 数：${frameModule2FormatNumber(item.sourceLeadCount)}`;
+          ? `<strong>${escapeHtml(`${asinRoleLabel}：${frameLabelFormatAsin(item.asin)}`)}</strong><br>${isLead ? "Lead ASIN单价" : "Follow ASIN单价"}：$${Number(item.price || 0).toFixed(2)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}<br>交叉购买用户数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>带动 Follow 数：${frameModule2FormatNumber(item.associatedCombos)}`
+          : `<strong>${escapeHtml(`${asinRoleLabel}：${frameLabelFormatAsin(item.asin)}`)}</strong><br>${isLead ? "Lead ASIN单价" : "Follow ASIN单价"}：$${Number(item.price || 0).toFixed(2)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}<br>交叉购买用户数：${frameModule2FormatNumber(item.capturedUsers)}<br>收割率：${frameModule2FormatPercent(item.captureRate)}<br>来源 Lead 数：${frameModule2FormatNumber(item.sourceLeadCount)}`;
         return `
           <g class="amc-role-bubble-group" data-role-asin="${escapeHtml(item.asin)}" data-role-view="${view}">
-            <circle class="amc-role-bubble band-${priceBand}${selected ? " is-selected" : ""}" cx="${x}" cy="${y}" r="${radius}" tabindex="0" role="button" aria-label="${escapeHtml(frameLabelFormatAsin(item.asin))}"></circle>
+            <circle class="amc-role-bubble band-${priceBand}${selected ? " is-selected" : ""}" cx="${x}" cy="${y}" r="${radius}" aria-label="${escapeHtml(frameLabelFormatAsin(item.asin))}"></circle>
           </g>`;
       }).join("");
 
@@ -34070,22 +34194,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         if (!item) return;
         const bubble = group.querySelector(".amc-role-bubble");
         const tooltipHtml = isLead
-          ? `<strong>${escapeHtml(`${asinRoleLabel}：${frameLabelFormatAsin(item.asin)}`)}</strong>单价：$${Number(item.price || 0).toFixed(2)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}<br>交叉购买人数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>带动 Follow 数：${frameModule2FormatNumber(item.associatedCombos)}`
-          : `<strong>${escapeHtml(`${asinRoleLabel}：${frameLabelFormatAsin(item.asin)}`)}</strong>单价：$${Number(item.price || 0).toFixed(2)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}<br>交叉购买人数：${frameModule2FormatNumber(item.capturedUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.captureRate)}<br>来源 Lead 数：${frameModule2FormatNumber(item.sourceLeadCount)}`;
+          ? `<strong>${escapeHtml(`${asinRoleLabel}：${frameLabelFormatAsin(item.asin)}`)}</strong><br>${isLead ? "Lead ASIN单价" : "Follow ASIN单价"}：$${Number(item.price || 0).toFixed(2)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}<br>交叉购买用户数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>带动 Follow 数：${frameModule2FormatNumber(item.associatedCombos)}`
+          : `<strong>${escapeHtml(`${asinRoleLabel}：${frameLabelFormatAsin(item.asin)}`)}</strong><br>${isLead ? "Lead ASIN单价" : "Follow ASIN单价"}：$${Number(item.price || 0).toFixed(2)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}<br>交叉购买用户数：${frameModule2FormatNumber(item.capturedUsers)}<br>收割率：${frameModule2FormatPercent(item.captureRate)}<br>来源 Lead 数：${frameModule2FormatNumber(item.sourceLeadCount)}`;
         group.addEventListener("mouseenter", event => showTooltip(event, tooltipHtml));
         group.addEventListener("mousemove", moveTooltip);
         group.addEventListener("mouseleave", hideTooltip);
-        group.addEventListener("focusin", () => {
-          const rect = bubble.getBoundingClientRect();
-          showTooltip({ clientX: rect.left + rect.width / 2, clientY: rect.top + 4 }, tooltipHtml);
-        });
-        group.addEventListener("focusout", hideTooltip);
-        group.addEventListener("click", () => frameModule2SetMatrixDetailSelection(item.asin, view));
-        group.addEventListener("keydown", event => {
-          if (event.key !== "Enter" && event.key !== " ") return;
-          event.preventDefault();
-          frameModule2SetMatrixDetailSelection(item.asin, view);
-        });
       });
     }
 
@@ -34117,20 +34230,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       svg.style.display = "block";
 
       const view = frameModule2State.analysisView;
-      const options = frameModule2MetricConfig[view];
-      if (!options.some(option => option.key === frameModule2State.rankingMetric)) {
-        frameModule2State.rankingMetric = options[0]?.key || "";
-      }
+      const { options, metric, items } = frameModule2RankingContext(view);
       if (select) {
         select.innerHTML = options.map(option => `<option value="${option.key}">${option.label}</option>`).join("");
         select.value = frameModule2State.rankingMetric;
       }
-      const metric = options.find(option => option.key === frameModule2State.rankingMetric) || options[0];
       frameModule2UpdateRankingText(view);
-      const items = frameModule2RoleFilteredItems(view)
-        .slice()
-        .sort((a, b) => Number(b[metric.key] || 0) - Number(a[metric.key] || 0))
-        .slice(0, 15);
       const metricLabel = metric?.label || "";
 
       const height = 560;
@@ -34172,8 +34277,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const value = Number(item[metric.key] || 0);
         const barWidth = valueToWidth(value);
         const tooltipHtml = view === "lead"
-          ? `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}`
-          : `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.capturedUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.captureRate)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}`;
+          ? `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买用户数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}`
+          : `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买用户数：${frameModule2FormatNumber(item.capturedUsers)}<br>收割率：${frameModule2FormatPercent(item.captureRate)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}`;
         const displayAsin = frameLabelFormatAsin(item.asin);
         return `
           <g data-ranking-asin="${escapeHtml(item.asin)}" data-ranking-view="${view}" tabindex="0" role="button" aria-label="${escapeHtml(displayAsin)}">
@@ -34196,8 +34301,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const item = items.find(candidate => candidate.asin === group.dataset.rankingAsin);
         if (!item) return;
         const tooltipHtml = view === "lead"
-          ? `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}<br>带动 Follow 数：${frameModule2FormatNumber(item.associatedCombos)}`
-          : `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.capturedUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.captureRate)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}<br>来源 Lead 数：${frameModule2FormatNumber(item.sourceLeadCount)}`;
+          ? `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买用户数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}<br>带动 Follow 数：${frameModule2FormatNumber(item.associatedCombos)}`
+          : `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买用户数：${frameModule2FormatNumber(item.capturedUsers)}<br>收割率：${frameModule2FormatPercent(item.captureRate)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}<br>来源 Lead 数：${frameModule2FormatNumber(item.sourceLeadCount)}`;
         group.addEventListener("mouseenter", event => showTooltip(event, tooltipHtml));
         group.addEventListener("mousemove", moveTooltip);
         group.addEventListener("mouseleave", hideTooltip);
@@ -34206,11 +34311,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           showTooltip({ clientX: rect.left + rect.width / 2, clientY: rect.top + 4 }, tooltipHtml);
         });
         group.addEventListener("focusout", hideTooltip);
-        group.addEventListener("click", () => frameModule2SetSelectedAsin(item.asin, view, true, true));
+        group.addEventListener("click", () => frameModule2SetRankingAsin(item.asin, view));
         group.addEventListener("keydown", event => {
           if (event.key !== "Enter" && event.key !== " ") return;
           event.preventDefault();
-          frameModule2SetSelectedAsin(item.asin, view, true, true);
+          frameModule2SetRankingAsin(item.asin, view);
         });
       });
     }
@@ -34258,7 +34363,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         </div>`;
 
       chartDom.querySelectorAll("[data-ranking-list-asin]").forEach(row => {
-        const selectItem = () => frameModule2SetSelectedAsin(row.dataset.rankingListAsin, view, true, true);
+        const selectItem = () => frameModule2SetRankingAsin(row.dataset.rankingListAsin, view);
         row.addEventListener("click", selectItem);
         row.addEventListener("keydown", event => {
           if (event.key !== "Enter" && event.key !== " ") return;
@@ -34274,25 +34379,16 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (!chartDom) return;
 
       const view = frameModule2State.analysisView;
-      const options = frameModule2MetricConfig[view];
-      if (!options.some(option => option.key === frameModule2State.rankingMetric)) {
-        frameModule2State.rankingMetric = options[0]?.key || "";
-      }
+      const { options, metric, items } = frameModule2RankingContext(view);
       if (select) {
         select.innerHTML = options.map(option => `<option value="${option.key}">${option.label}</option>`).join("");
         select.value = frameModule2State.rankingMetric;
       }
 
-      const metric = options.find(option => option.key === frameModule2State.rankingMetric) || options[0];
       const metricLabel = metric?.label || "";
       const isLinkedLayout = frameModule2LinkLayoutStyle() === "style2";
       const selectedAsin = frameModule2State.selectedAsin;
       frameModule2UpdateRankingText(view);
-
-      const items = frameModule2RoleFilteredItems(view)
-        .slice()
-        .sort((a, b) => Number(b[metric.key] || 0) - Number(a[metric.key] || 0))
-        .slice(0, 15);
 
       if (metric && items.length) {
         renderFrameRoleRankingList(chartDom, items, metric, view);
@@ -34319,8 +34415,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ? frameModule2FormatPercent(value)
         : frameModule2FormatNumber(value);
       const tooltipHtml = item => view === "lead"
-        ? `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}`
-        : `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.capturedUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.captureRate)}<br>总购买人数：${frameModule2FormatNumber(item.totalUsers)}`;
+        ? `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买用户数：${frameModule2FormatNumber(item.crossUsers)}<br>交叉购买率：${frameModule2FormatPercent(item.crossRate)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}`
+        : `<strong>${escapeHtml(frameLabelFormatAsin(item.asin))}</strong><br>交叉购买用户数：${frameModule2FormatNumber(item.capturedUsers)}<br>收割率：${frameModule2FormatPercent(item.captureRate)}<br>总购买用户数：${frameModule2FormatNumber(item.totalUsers)}`;
 
       const current = window.echarts.getInstanceByDom(chartDom);
       if (!current && (chartDom.querySelector("svg") || chartDom.querySelector(".amc-role-ranking-list"))) {
@@ -34485,7 +34581,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       chart.on("click", params => {
         if (params.componentType !== "series") return;
         const item = items[params.dataIndex];
-        if (item) frameModule2SetSelectedAsin(item.asin, view, true, true);
+        if (item) frameModule2SetRankingAsin(item.asin, view);
       });
 
       if (!chartDom.__frameRankingResizeBound) {
@@ -34531,7 +34627,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         flowSelection.innerHTML = `
           <span class="amc-role-link-role">${selectedRole === "Lead ASIN" ? "关联流向" : "关联来源"}</span>
           ${relationship}
-          <span class="amc-role-link-total">交叉购买人数 <strong>${frameModule2FormatNumber(totalUsers)}</strong></span>`;
+          <span class="amc-role-link-total">交叉购买用户数 <strong>${frameModule2FormatNumber(totalUsers)}</strong></span>`;
       }
     }
 
@@ -34865,11 +34961,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const formatFlowTooltip = params => {
         const item = params.data || {};
         if (item.kind === "link") {
-          return `<strong>${escapeHtml(`${frameLabelFormatAsinThenTag(item.sourceAsin)} → ${frameLabelFormatAsinThenTag(item.targetAsin)}`)}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.crossUsers)}<br>平均关联购买间隔：${item.avgInterval.toFixed(1)} 天`;
+          return `<strong>${escapeHtml(`${frameLabelFormatAsinThenTag(item.sourceAsin)} → ${frameLabelFormatAsinThenTag(item.targetAsin)}`)}</strong><br>交叉购买用户数：${frameModule2FormatNumber(item.crossUsers)}<br>平均关联购买间隔：${item.avgInterval.toFixed(2)} 天`;
         }
         const roleLabel = item.role || "ASIN";
         const display = frameLabelFormatAsinThenTag(item.asin || "");
-        return `<strong>${escapeHtml(`${roleLabel}：${display}`)}</strong><br>交叉购买人数：${frameModule2FormatNumber(item.value)}`;
+        return `<strong>${escapeHtml(`${roleLabel}：${display}`)}</strong><br>交叉购买用户数：${frameModule2FormatNumber(item.value)}`;
       };
 
       try {
@@ -34992,9 +35088,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           { key: "rank", label: "排名", width: "56px", align: "center" },
           { key: "asin", label: "Lead ASIN", width: "250px", align: "left" },
           { key: "price", label: "单价", info: "该 ASIN 的平均成交单价", width: "100px", align: "right", sortable: true },
-          { key: "totalUsers", label: "总购买人数", info: "购买该 ASIN 的去重用户数", width: "116px", align: "right", sortable: true },
-          { key: "crossUsers", label: "交叉购买人数", info: "购买该 Lead ASIN 后，至少购买一个不同 Follow ASIN 的去重用户数", width: "122px", align: "right", sortable: true },
-          { key: "crossRate", label: "交叉购买率", info: "去重交叉购买人数占总购买人数的比例", width: "114px", align: "right", sortable: true },
+          { key: "totalUsers", label: "总购买用户数", info: "购买该 ASIN 的去重用户数", width: "116px", align: "right", sortable: true },
+          { key: "crossUsers", label: "交叉购买用户数", info: "购买该 Lead ASIN 后，至少购买一个不同 Follow ASIN 的去重用户数", width: "122px", align: "right", sortable: true },
+          { key: "crossRate", label: "交叉购买率", info: "交叉购买用户数占总购买用户数的比例", width: "114px", align: "right", sortable: true },
           { key: "relatedCount", label: "带动 Follow 数", info: "该 Lead ASIN 带动购买的 Follow ASIN 数量", width: "112px", align: "right", sortable: true },
           { key: "avgInterval", label: "关联购买平均间隔（天）", info: "按交叉购买人次加权计算的平均关联购买间隔", width: "162px", align: "right", sortable: true },
           { key: "role", label: "产品角色", width: "110px", align: "center" }
@@ -35003,9 +35099,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           { key: "rank", label: "排名", width: "56px", align: "center" },
           { key: "asin", label: "Follow ASIN", width: "250px", align: "left" },
           { key: "price", label: "单价", info: "该 ASIN 的平均成交单价", width: "100px", align: "right", sortable: true },
-          { key: "totalUsers", label: "总购买人数", info: "购买该 ASIN 的去重用户数", width: "116px", align: "right", sortable: true },
-          { key: "capturedUsers", label: "交叉购买人数", info: "购买该 Follow ASIN 且此前购买过其他 Lead ASIN 的去重用户数", width: "122px", align: "right", sortable: true },
-          { key: "captureRate", label: "交叉购买率", info: "交叉购买人数占总购买人数的比例", width: "114px", align: "right", sortable: true },
+          { key: "totalUsers", label: "总购买用户数", info: "购买该 ASIN 的去重用户数", width: "116px", align: "right", sortable: true },
+          { key: "capturedUsers", label: "交叉购买用户数", info: "购买该 Follow ASIN 且此前购买过其他 Lead ASIN 的去重用户数", width: "122px", align: "right", sortable: true },
+          { key: "captureRate", label: "收割率", info: "Follow ASIN 交叉购买用户数 / Follow ASIN 总购买用户数", width: "114px", align: "right", sortable: true },
           { key: "relatedCount", label: "来源 Lead 数", info: "带动该 Follow ASIN 购买的 Lead ASIN 数量", width: "112px", align: "right", sortable: true },
           { key: "avgInterval", label: "关联购买平均间隔（天）", info: "按交叉购买人次加权计算的平均关联购买间隔", width: "162px", align: "right", sortable: true },
           { key: "role", label: "产品角色", width: "110px", align: "center" }
@@ -35156,7 +35252,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <td class="is-right">${frameDetailUsersProgressCell(item[crossUserKey], "amc-role-detail-number", maxCrossUsers)}</td>
               <td class="is-right">${frameModule2DetailRateCell(isLead ? item.crossRate : item.captureRate)}</td>
               <td class="is-right"><span class="amc-role-detail-number">${frameModule2FormatNumber(item.relatedCount)}</span></td>
-              <td class="is-right"><span class="amc-role-detail-number">${item.avgInterval ? item.avgInterval.toFixed(item.avgInterval >= 100 ? 0 : 1) : "0.0"}</span></td>
+              <td class="is-right"><span class="amc-role-detail-number">${item.avgInterval ? item.avgInterval.toFixed(2) : "0.00"}</span></td>
               <td class="is-center"><span class="amc-role-detail-role-pill ${item.detailRole.className}">${escapeHtml(item.detailRole.label)}</span></td>
             </tr>`;
         }).join("")
@@ -35487,11 +35583,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         if (params.dataType === "edge") {
           const sourceDisplay = frameLabelFormatAsinThenTag(data.sourceAsin);
           const targetDisplay = frameLabelFormatAsinThenTag(data.targetAsin);
-          return `<strong>${escapeHtml(`${sourceDisplay} → ${targetDisplay}`)}</strong><br>交叉购买人数：${frameModule2FormatNumber(data.crossUsers)}<br>平均关联购买间隔：${data.avgInterval.toFixed(1)} 天`;
+          return `<strong>${escapeHtml(`${sourceDisplay} → ${targetDisplay}`)}</strong><br>交叉购买用户数：${frameModule2FormatNumber(data.crossUsers)}<br>平均关联购买间隔：${data.avgInterval.toFixed(2)} 天`;
         }
         const roleLabel = data.roleLabel || "ASIN";
         const display = frameLabelFormatAsinThenTag(data.asin || data.name || "");
-        return `<strong>${escapeHtml(`${roleLabel}：${display}`)}</strong><br>交叉购买人数：${frameModule2FormatNumber(data.value)}`;
+        return `<strong>${escapeHtml(`${roleLabel}：${display}`)}</strong><br>交叉购买用户数：${frameModule2FormatNumber(data.value)}`;
       };
 
       try {
@@ -35801,7 +35897,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           : nodeMap.get(`right:${selectedAsin}`);
         if (!source || !target) return "";
         const path = pathForLink(link, source, target);
-        return `<path class="amc-role-flow-link" d="${path}" tabindex="0" data-flow-link="${escapeHtml(link.asin)}" role="img" aria-label="交叉购买人数 ${frameModule2FormatNumber(link.crossUsers)}"></path>`;
+        return `<path class="amc-role-flow-link" d="${path}" tabindex="0" data-flow-link="${escapeHtml(link.asin)}" role="img" aria-label="交叉购买用户数 ${frameModule2FormatNumber(link.crossUsers)}"></path>`;
       };
 
       svg.innerHTML = `
@@ -35823,7 +35919,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const node = [...leftNodes, ...rightNodes].find(candidate => candidate.asin === asin);
         if (!node) return;
         const roleLabel = group.dataset.flowNodeRole || (node.role === "lead" ? "Lead ASIN" : "Follow ASIN");
-        const tooltipHtml = `<strong>${escapeHtml(`${roleLabel}：${frameLabelFormatAsinThenTag(node.asin)}`)}</strong><br>交叉购买人数：${frameModule2FormatNumber(node.total)}`;
+        const tooltipHtml = `<strong>${escapeHtml(`${roleLabel}：${frameLabelFormatAsinThenTag(node.asin)}`)}</strong><br>交叉购买用户数：${frameModule2FormatNumber(node.total)}`;
         group.addEventListener("mouseenter", event => showTooltip(event, tooltipHtml));
         group.addEventListener("mousemove", moveTooltip);
         group.addEventListener("mouseleave", hideTooltip);
@@ -35837,7 +35933,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       svg.querySelectorAll("[data-flow-link]").forEach(path => {
         const link = links.find(candidate => candidate.asin === path.dataset.flowLink);
         if (!link) return;
-        const tooltipHtml = `<strong>${escapeHtml(direction === "lead" ? `${selectedAsin} → ${link.asin}` : `${link.asin} → ${selectedAsin}`)}</strong>交叉购买人数：${frameModule2FormatNumber(link.crossUsers)}<br>平均关联间隔：${Number(link.avgInterval || 0).toFixed(1)} 天`;
+        const tooltipHtml = `<strong>${escapeHtml(direction === "lead" ? `${selectedAsin} → ${link.asin}` : `${link.asin} → ${selectedAsin}`)}</strong>交叉购买用户数：${frameModule2FormatNumber(link.crossUsers)}<br>平均关联间隔：${Number(link.avgInterval || 0).toFixed(2)} 天`;
         path.addEventListener("mouseenter", event => showTooltip(event, tooltipHtml));
         path.addEventListener("mousemove", moveTooltip);
         path.addEventListener("mouseleave", hideTooltip);
@@ -35945,7 +36041,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const activeIntervalIndex = frameOverviewState.activeIntervalIndex;
         const isSelectedBucket = activeIntervalIndex === index;
         const selectedClass = isSelectedBucket ? " is-linked-selected" : "";
-        const barMarkup = `<rect class="amc-interval-bar${selectedClass}" x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" tabindex="0" data-interval-index="${index}" role="button" aria-pressed="${isSelectedBucket ? "true" : "false"}" aria-label="${bucket.label}，交叉购买人数 ${bucket.value.toLocaleString()} 人，占比 ${shareLabel}"></rect>`;
+        const barMarkup = `<rect class="amc-interval-bar${selectedClass}" x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" tabindex="0" data-interval-index="${index}" role="button" aria-pressed="${isSelectedBucket ? "true" : "false"}" aria-label="${bucket.label}，交叉购买用户数 ${bucket.value.toLocaleString()} 人，占比 ${shareLabel}"></rect>`;
         return `
           <g>
             ${barMarkup}
@@ -35963,20 +36059,20 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             <stop offset="100%" stop-color="#7793ee" />
           </linearGradient>
         </defs>
-        <text class="amc-interval-axis-title" x="14" y="${padding.top + plotHeight / 2}" text-anchor="middle" transform="rotate(-90 14 ${padding.top + plotHeight / 2})">交叉购买人数</text>
+        <text class="amc-interval-axis-title" x="14" y="${padding.top + plotHeight / 2}" text-anchor="middle" transform="rotate(-90 14 ${padding.top + plotHeight / 2})">交叉购买用户数</text>
         ${gridLines}
         ${verticalGrid}
         <line class="amc-interval-axis-line" x1="${padding.left}" y1="${plotBottom}" x2="${width - padding.right}" y2="${plotBottom}" />
         ${bars}
         <line class="amc-interval-mean-line" x1="${meanX}" y1="${meanLineTop}" x2="${meanX}" y2="${plotBottom}" />
-        <text class="amc-interval-mean-label" x="${meanLabelX}" y="${meanLabelY}" text-anchor="${meanLabelAnchor}">加权均值 ${frameOverviewMeanIntervalDays.toFixed(1)}天</text>
+        <text class="amc-interval-mean-label" x="${meanLabelX}" y="${meanLabelY}" text-anchor="${meanLabelAnchor}">加权均值 ${frameOverviewMeanIntervalDays.toFixed(2)}天</text>
       `;
 
       svg.querySelectorAll(".amc-interval-bar").forEach(bar => {
         const intervalIndex = Number(bar.dataset.intervalIndex);
         const bucket = frameOverviewIntervals[intervalIndex];
         if (!bucket) return;
-        const tooltipHtml = `<strong>${escapeHtml(bucket.label)}</strong><br>交叉购买人数：${bucket.value.toLocaleString()}人<br>占比：${formatIntervalShare(bucket.share)}`;
+        const tooltipHtml = `<strong>${escapeHtml(bucket.label)}</strong><br>交叉购买用户数：${bucket.value.toLocaleString()}人<br>占比：${formatIntervalShare(bucket.share)}`;
         const selectBucket = () => frameOverviewSetIntervalSelection(intervalIndex);
         bar.addEventListener("mouseenter", event => showTooltip(event, tooltipHtml));
         bar.addEventListener("mousemove", moveTooltip);
@@ -36239,7 +36335,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       document.getElementById("frameRankingMetric")?.addEventListener("change", event => {
         frameModule2State.rankingMetric = event.target.value;
+        frameModule2SelectRankingTopAsin(frameModule2State.analysisView);
+        renderFrameRoleMatrix();
         renderFrameRoleRanking();
+        renderFrameRoleFlow();
+        renderFrameRoleDetailTable();
       });
 
       frameBindDetailAsinSearch("frameRoleDetailAsinSearch", "frameRoleDetailAsinSearchClear", query => {
@@ -36312,22 +36412,23 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     const frameGlobalMetricDefinitions = [
       { labels: ["修正关联指数", "修正指数"], description: "在原始关联强度基础上，结合组合规模修正后的关联指标。" },
       { labels: ["原始关联指数"], description: "描述 Lead 与 Follow 双向购买关系的原始关联强度。" },
-      { labels: ["交叉购买人数", "交叉购买人次"], description: "购买该 Lead → Follow 组合的用户数量。" },
-      { labels: ["LeadASIN购买总人数", "购买总人数", "总购买人数"], description: "购买当前 ASIN 的去重用户数量。" },
-      { labels: ["Lead购买人数"], description: "购买 Lead ASIN 的去重用户数量。" },
-      { labels: ["Follow购买人数"], description: "购买 Follow ASIN 的去重用户数量。" },
+      { labels: ["交叉购买用户数", "交叉购买人次"], description: "购买该 Lead → Follow 组合的用户数量。" },
+      { labels: ["Lead ASIN总购买用户数", "总购买用户数"], description: "购买当前 ASIN 的去重用户数量。" },
+      { labels: ["Lead ASIN购买用户数"], description: "购买 Lead ASIN 的去重用户数量。" },
+      { labels: ["Follow ASIN购买用户数"], description: "购买 Follow ASIN 的去重用户数量。" },
       { labels: ["带动Follow数"], description: "该 Lead ASIN 带动购买的 Follow ASIN 数量。" },
       { labels: ["来源Lead数", "来源LeadASIN数量"], description: "带动当前 Follow ASIN 购买的 Lead ASIN 数量。" },
-      { labels: ["交叉购买率"], description: "去重交叉购买人数占总购买人数的比例。" },
+      { labels: ["交叉购买率"], description: "交叉购买用户数占总购买用户数的比例。" },
+      { labels: ["收割率"], description: "Follow ASIN 交叉购买用户数 / Follow ASIN 总购买用户数。" },
       { labels: ["二购率"], description: "完成二次购买的新客占入口 ASIN 新客人数的比例。" },
       { labels: ["转化率"], description: "购买 Lead ASIN 的用户中，完成 Follow ASIN 购买的比例。" },
       { labels: ["吸引率"], description: "购买 Follow ASIN 的用户中，来自指定 Lead ASIN 的比例。" },
       { labels: ["平均最短关联间隔"], description: "组合用户从 Lead 到 Follow 的最短购买间隔均值。" },
       { labels: ["关联购买平均间隔", "平均间隔"], description: "Lead 与 Follow 关联购买的加权平均间隔。" },
-      { labels: ["价格差"], description: "Follow ASIN 单价减去 Lead ASIN 单价。" },
-      { labels: ["价格倍数"], description: "Follow ASIN 单价与 Lead ASIN 单价的比值。" },
-      { labels: ["Lead单价"], description: "Lead ASIN 的平均成交单价。" },
-      { labels: ["Follow单价"], description: "Follow ASIN 的平均成交单价。" },
+      { labels: ["价格差"], description: "Follow ASIN单价减去 Lead ASIN单价。" },
+      { labels: ["价格倍数"], description: "Follow ASIN单价与 Lead ASIN单价的比值。" },
+      { labels: ["Lead ASIN单价"], description: "Lead ASIN 的平均成交单价。" },
+      { labels: ["Follow ASIN单价"], description: "Follow ASIN 的平均成交单价。" },
       { labels: ["单价"], description: "当前 ASIN 的平均成交单价。" },
       { labels: ["销售额"], description: "按当前图表或列表口径统计的销售金额。" },
       { labels: ["组合订单数"], description: "商品组合同时出现在同一订单中的订单数量。" },
