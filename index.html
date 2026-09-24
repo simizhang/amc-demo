@@ -5455,6 +5455,22 @@
       white-space: nowrap;
     }
 
+    .amc-module3-summary-value-line {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .amc-module3-summary-unit {
+      color: #43546b;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
     .amc-module3-summary-card.total .amc-module3-summary-value {
       color: #5068e8;
     }
@@ -7422,6 +7438,27 @@
       font-weight: 800;
       line-height: 1;
       white-space: nowrap;
+    }
+
+    .amc-module4-kpi-value-line {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .amc-module4-kpi-unit {
+      color: #43546b;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .amc-module4-kpi:focus-visible {
+      outline: 2px solid #8da4ee;
+      outline-offset: 2px;
     }
 
     .amc-module4-kpi.quick .amc-module4-kpi-value { color: #159d8f; }
@@ -13380,6 +13417,12 @@
       border-radius: 2px;
       background: #fff6f5;
       color: #d92d20;
+    }
+
+    .tooltip.frame-module4-kpi-tooltip {
+      width: min(360px, calc(100vw - 28px));
+      max-width: none;
+      line-height: 1.65;
     }
 
     .amc-chart-tooltip-asin {
@@ -21674,17 +21717,17 @@
               <div class="amc-module3-summary-grid" aria-label="关联组合概览">
                 <article class="amc-module3-summary-card total">
                   <span class="amc-module3-summary-label">交叉购买组合数</span>
-                  <strong class="amc-module3-summary-value" id="frameModule3KpiTotalPairs">0</strong>
+                  <div class="amc-module3-summary-value-line"><strong class="amc-module3-summary-value" id="frameModule3KpiTotalPairs">0</strong><span class="amc-module3-summary-unit">组</span></div>
                   <span class="amc-module3-summary-note" id="frameModule3KpiTotalNote">全量Lead → Follow路径</span>
                 </article>
                 <article class="amc-module3-summary-card quality">
                   <span class="amc-module3-summary-label">质量门槛内组合</span>
-                  <strong class="amc-module3-summary-value" id="frameModule3KpiQualityPairs">0</strong>
+                  <div class="amc-module3-summary-value-line"><strong class="amc-module3-summary-value" id="frameModule3KpiQualityPairs">0</strong><span class="amc-module3-summary-unit">组</span></div>
                   <span class="amc-module3-summary-note" id="frameModule3KpiQualityNote">当前交叉购买用户数 ≥ 20</span>
                 </article>
                 <article class="amc-module3-summary-card overlap">
                   <span class="amc-module3-summary-label">两榜共同TOP组合</span>
-                  <strong class="amc-module3-summary-value" id="frameModule3KpiOverlapPairs">0</strong>
+                  <div class="amc-module3-summary-value-line"><strong class="amc-module3-summary-value" id="frameModule3KpiOverlapPairs">0</strong><span class="amc-module3-summary-unit">组</span></div>
                   <span class="amc-module3-summary-note">规模TOP15 ∩ 质量TOP15</span>
                 </article>
               </div>
@@ -21947,24 +21990,24 @@
               </div>
 
               <div class="amc-module4-kpi-grid" id="frameModule4KpiGrid" data-module4-kpi-style="style1" aria-label="高价值组合节奏概览">
-                <article class="amc-module4-kpi total" id="frameModule4KpiTotalCard">
+                <article class="amc-module4-kpi total" id="frameModule4KpiTotalCard" data-module4-kpi-rhythm="total" tabindex="0">
                   <span class="amc-module4-kpi-label">纳入分析组合</span>
-                  <strong class="amc-module4-kpi-value" id="frameModule4KpiTotal">0</strong>
+                  <div class="amc-module4-kpi-value-line"><strong class="amc-module4-kpi-value" id="frameModule4KpiTotal">0</strong><span class="amc-module4-kpi-unit">组</span></div>
                   <span class="amc-module4-kpi-note">已通过规模与关联强度筛选</span>
                 </article>
-                <article class="amc-module4-kpi quick" id="frameModule4KpiQuickCard">
+                <article class="amc-module4-kpi quick" id="frameModule4KpiQuickCard" data-module4-kpi-rhythm="quick" tabindex="0">
                   <span class="amc-module4-kpi-label">快速关联</span>
-                  <strong class="amc-module4-kpi-value" id="frameModule4KpiQuick">0</strong>
+                  <div class="amc-module4-kpi-value-line"><strong class="amc-module4-kpi-value" id="frameModule4KpiQuick">0</strong><span class="amc-module4-kpi-unit">组</span></div>
                   <span class="amc-module4-kpi-note" id="frameModule4KpiQuickNote">≤90天 | 路径人次 <span class="amc-module4-kpi-share">0.00%</span></span>
                 </article>
-                <article class="amc-module4-kpi stable" id="frameModule4KpiStableCard">
+                <article class="amc-module4-kpi stable" id="frameModule4KpiStableCard" data-module4-kpi-rhythm="stable" tabindex="0">
                   <span class="amc-module4-kpi-label">稳定培育</span>
-                  <strong class="amc-module4-kpi-value" id="frameModule4KpiStable">0</strong>
+                  <div class="amc-module4-kpi-value-line"><strong class="amc-module4-kpi-value" id="frameModule4KpiStable">0</strong><span class="amc-module4-kpi-unit">组</span></div>
                   <span class="amc-module4-kpi-note" id="frameModule4KpiStableNote">91-180天 | 路径人次 <span class="amc-module4-kpi-share">0.00%</span></span>
                 </article>
-                <article class="amc-module4-kpi long" id="frameModule4KpiLongCard">
+                <article class="amc-module4-kpi long" id="frameModule4KpiLongCard" data-module4-kpi-rhythm="long" tabindex="0">
                   <span class="amc-module4-kpi-label">长尾关联</span>
-                  <strong class="amc-module4-kpi-value" id="frameModule4KpiLong">0</strong>
+                  <div class="amc-module4-kpi-value-line"><strong class="amc-module4-kpi-value" id="frameModule4KpiLong">0</strong><span class="amc-module4-kpi-unit">组</span></div>
                   <span class="amc-module4-kpi-note" id="frameModule4KpiLongNote">>180天 | 路径人次 <span class="amc-module4-kpi-share">0.00%</span></span>
                 </article>
               </div>
@@ -22486,13 +22529,13 @@
                       <div class="aggregation-menu" id="createFrameAggregationMenu">
                         <button class="aggregation-option frame-aggregation-option" type="button" role="radio" aria-checked="false" data-frame-aggregation-value="system">
                           <span class="aggregation-radio" aria-hidden="true"></span>
-                          <span class="aggregation-option-label">按产品线聚合（取系统 ASIN 映射）</span>
+                          <span class="aggregation-option-label">按产品线聚合</span>
                         </button>
                         <div class="frame-aggregation-option-wrap">
                           <div class="frame-create-custom-mapping-option-row">
                             <button class="aggregation-option frame-aggregation-option" type="button" role="radio" aria-checked="false" data-frame-aggregation-value="custom">
                               <span class="aggregation-radio" aria-hidden="true"></span>
-                              <span class="aggregation-option-label">按自定义维度聚合（取自定义映射）</span>
+                              <span class="aggregation-option-label">按自定义维度聚合</span>
                             </button>
                           </div>
                           <div class="frame-create-mapping-warning frame-create-custom-mapping-warning" id="frameCreateCustomMappingWarning" hidden role="alert">
@@ -22533,7 +22576,7 @@
         <div class="custom-labels-page-shell">
           <div class="custom-mapping-page-top">
             <div class="custom-mapping-page-notice" role="note" aria-label="自定义映射使用说明">
-              自定义映射用于“<span class="custom-mapping-notice-emphasis">购物篮交叉购买分析模型</span>”：1）创建报告选择“按自定义维度聚合（取自定义映射）”，即可按映射维度<span class="custom-mapping-notice-emphasis">聚合输出报告</span>；2）创建报告选择“按子ASIN维度聚合”，则映射仅作为<span class="custom-mapping-notice-emphasis">标签展示</span>，用于辅助 ASIN 识别，不参与聚合也不重新计算任何指标。
+              自定义映射用于“<span class="custom-mapping-notice-emphasis">购物篮交叉购买分析模型</span>”：1）创建报告选择“按自定义维度聚合”，即可按映射维度<span class="custom-mapping-notice-emphasis">聚合输出报告</span>；2）创建报告选择“按子ASIN维度聚合”，则映射仅作为<span class="custom-mapping-notice-emphasis">标签展示</span>，用于辅助 ASIN 识别，不参与聚合也不重新计算任何指标。
             </div>
           </div>
           <div class="custom-mapping-workbench">
@@ -23895,7 +23938,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function showTooltip(event, html, tooltipClass = "") {
-      tooltip.classList.remove("frame-rsi-refresh-tooltip", "frame-label-tooltip");
+      tooltip.classList.remove("frame-rsi-refresh-tooltip", "frame-label-tooltip", "frame-module4-kpi-tooltip");
       if (tooltipClass) tooltip.classList.add(tooltipClass);
       const tooltipHtml = frameLabelFormatTooltipHtml(html);
       tooltip.innerHTML = document.body.dataset.page === "amcFrame"
@@ -23911,7 +23954,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function hideTooltip() {
       tooltip.style.opacity = 0;
-      tooltip.classList.remove("frame-rsi-refresh-tooltip", "frame-label-tooltip");
+      tooltip.classList.remove("frame-rsi-refresh-tooltip", "frame-label-tooltip", "frame-module4-kpi-tooltip");
     }
 
     function createSvg(tag, attrs = {}) {
@@ -24371,11 +24414,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameCreateMappingLabel(selection) {
       const labels = {
-        system: "按产品线聚合（取系统 ASIN 映射）",
+        system: "按产品线聚合",
         none: "按子ASIN维度聚合"
       };
       if (selection === "custom") {
-        return "按自定义维度聚合（取自定义映射）";
+        return "按自定义维度聚合";
       }
       return labels[selection] || labels.none;
     }
@@ -28457,7 +28500,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       detailAsinQuery: "",
       selectedPairKey: null,
       selectedRhythm: null,
-      selectionCleared: false
+      selectionCleared: false,
+      kpiStats: {
+        quick: { count: 0, users: 0, share: 0 },
+        stable: { count: 0, users: 0, share: 0 },
+        long: { count: 0, users: 0, share: 0 }
+      },
+      kpiTotalUsers: 0,
+      kpiTotalCount: 0
     };
 
     function frameModule4ActiveTopRhythm() {
@@ -28553,6 +28603,45 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       return `${escapeHtml(label)} | 路径人次 <span class="amc-module4-kpi-share">${frameModule4FormatShare(share)}</span><span class="amc-module4-kpi-users"> · ${frameModule2FormatNumber(users)}人</span>`;
     }
 
+    function frameModule4KpiTooltipHtml(rhythm) {
+      const isTotal = rhythm === "total";
+      const stats = frameModule4State.kpiStats || {};
+      const stat = isTotal
+        ? {
+            count: Number(frameModule4State.kpiTotalCount || 0),
+            users: Number(frameModule4State.kpiTotalUsers || 0),
+            share: frameModule4State.kpiTotalCount > 0 ? 1 : 0
+          }
+        : stats[rhythm] || { count: 0, users: 0, share: 0 };
+      const label = isTotal ? "全部购买节奏" : frameModule4RhythmLabels[rhythm] || "";
+      const interval = isTotal ? "全部时间区间" : frameModule4RhythmIntervals[rhythm] || "";
+      return `<strong>${escapeHtml(label)} ${escapeHtml(interval)}</strong>
+        交叉购买组合数：${frameModule2FormatNumber(stat.count)}个<br>
+        交叉购买用户数：${frameModule2FormatNumber(stat.users)}人<br>
+        路径人次占比：${frameModule4FormatShare(stat.share)}`;
+    }
+
+    function frameModule4BindKpiTooltips() {
+      document.querySelectorAll("[data-module4-kpi-rhythm]").forEach(card => {
+        if (card.dataset.tooltipBound === "true") return;
+        card.dataset.tooltipBound = "true";
+        const showCardTooltip = event => {
+          showTooltip(event, frameModule4KpiTooltipHtml(card.dataset.module4KpiRhythm), "frame-module4-kpi-tooltip");
+        };
+        card.addEventListener("mouseenter", showCardTooltip);
+        card.addEventListener("mousemove", moveTooltip);
+        card.addEventListener("mouseleave", hideTooltip);
+        card.addEventListener("focus", () => {
+          const rect = card.getBoundingClientRect();
+          showTooltip({
+            clientX: rect.left + rect.width / 2,
+            clientY: rect.top
+          }, frameModule4KpiTooltipHtml(card.dataset.module4KpiRhythm), "frame-module4-kpi-tooltip");
+        });
+        card.addEventListener("blur", hideTooltip);
+      });
+    }
+
     function frameModule4Stats(records) {
       const order = ["quick", "stable", "long"];
       const totalUsers = records.reduce((sum, record) => sum + Number(record.crossUsers || 0), 0);
@@ -28566,11 +28655,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           share: totalUsers ? users / totalUsers : 0
         };
       });
-      return { stats };
+      return { stats, totalUsers };
     }
 
     function frameModule4RenderKpis(records, baseCount) {
-      const { stats } = frameModule4Stats(records);
+      const { stats, totalUsers } = frameModule4Stats(records);
+      frameModule4State.kpiStats = stats;
+      frameModule4State.kpiTotalUsers = totalUsers;
+      frameModule4State.kpiTotalCount = records.length;
       frameModule4SetText("frameModule4KpiTotal", frameModule2FormatNumber(records.length));
       frameModule4SetText("frameModule4KpiQuick", frameModule2FormatNumber(stats.quick.count));
       frameModule4SetText("frameModule4KpiStable", frameModule2FormatNumber(stats.stable.count));
@@ -30452,7 +30544,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     const frameLabelTooltipHtml = `
       <div class="frame-label-tooltip-paragraph">本报告按 <span class="frame-label-tooltip-emphasis">子ASIN维度</span> 输出。映射仅作为标签展示，用于辅助 ASIN 识别，不参与聚合也不重新计算任何指标。可在“Mapping Upload-系统映射\\自定义映射”查看和上传映射。</div>
-      <span class="frame-label-tooltip-warning">若需要按照 映射\\GROUP 聚合输出报告，可前往AMC Reports页面，设置“按产品线聚合（取系统 ASIN 映射）\\按自定义维度聚合（取自定义映射）”重新创建报告。</span>
+      <span class="frame-label-tooltip-warning">若需要按照 映射\\GROUP 聚合输出报告，可前往AMC Reports页面，设置“按产品线聚合\\按自定义维度聚合”重新创建报告。</span>
     `;
 
     function frameLabelBindTooltip() {
@@ -31184,10 +31276,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const maxInterval = Math.max(...records.map(record => Number(record.avgInterval || 0)), 180);
       const xMax = Math.max(240, Math.ceil(Math.max(maxInterval, 500) / 50) * 50);
       const yMax = Math.pow(10, Math.ceil(Math.log10(Math.max(...records.map(record => Number(record.crossUsers || 0)), 10))));
-      const { stats } = frameModule4Stats(records);
-      const totalUsers = rhythmOrder.reduce((sum, rhythm) => sum + Number(stats[rhythm].users || 0), 0);
-      const matrixGrid = { left: 82, right: 26, top: 124, bottom: 74 };
-      const rhythmGrid = { left: matrixGrid.left, right: matrixGrid.right, top: 54, height: 30 };
+      const matrixGrid = { left: 82, right: 26, top: 58, bottom: 74 };
       const symbolSize = value => {
         const score = Number(value?.[2] || minScore);
         const ratio = maxScore === minScore ? 0.58 : (score - minScore) / Math.max(0.0001, maxScore - minScore);
@@ -31196,8 +31285,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const scatterSeries = rhythmOrder.map((rhythm, index) => ({
         name: frameModule4RhythmLabels[rhythm],
         type: "scatter",
-        xAxisIndex: 1,
-        yAxisIndex: 1,
+        xAxisIndex: 0,
+        yAxisIndex: 0,
         data: records.filter(record => record.rhythm === rhythm).map(record => ({
           value: [Number(record.avgInterval || 0), Number(record.crossUsers || 0), Number(record.scaleScore || 0)],
           pairKey: record.pairKey,
@@ -31259,52 +31348,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         lineStyle: { color: "#cbd5e3", type: "dashed", width: 1.2 },
         data: [{ name: "90天", xAxis: 90 }, { name: "180天", xAxis: 180 }]
       };
-      const rhythmSeries = rhythmOrder.map(rhythm => {
-        const entry = stats[rhythm];
-        const isSelected = frameModule4State.selectedRhythm === rhythm;
-        return {
-          name: frameModule4RhythmLabels[rhythm],
-          type: "bar",
-          xAxisIndex: 0,
-          yAxisIndex: 0,
-          stack: "rhythm",
-          barWidth: 26,
-          data: [{
-            value: entry.users,
-            rhythm,
-            pairCount: entry.count,
-            share: entry.share,
-            itemStyle: {
-              color: frameModule4Colors[rhythm],
-              borderColor: "#ffffff",
-              borderWidth: isSelected ? 2 : 1
-            }
-          }],
-          label: {
-            show: entry.users > 0,
-            position: "inside",
-            color: rhythm === "long" ? "#5b420c" : "#ffffff",
-            fontSize: 11,
-            fontWeight: 700,
-            overflow: "truncate",
-            formatter: params => {
-              const share = Number(params.data?.share || 0);
-              return share >= 0.16
-                ? `${frameModule4RhythmLabels[rhythm]} · 路径人次占比 ${(share * 100).toFixed(2)}%`
-                : `路径人次占比 ${(share * 100).toFixed(2)}%`;
-            }
-          },
-          emphasis: {
-            focus: "none",
-            itemStyle: {
-              opacity: 1,
-              borderColor: "#ffffff",
-              borderWidth: 2
-            }
-          },
-          z: 2
-        };
-      });
       chart.setOption({
         animation: false,
         color: rhythmOrder.map(rhythm => frameModule4Colors[rhythm]),
@@ -31323,7 +31366,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             }
           }
         ],
-        grid: [rhythmGrid, matrixGrid],
+        grid: matrixGrid,
         legend: {
           show: true,
           top: 10,
@@ -31360,7 +31403,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = params.data?.record;
             if (record) {
-              return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>节奏：${frameModule4RhythmLabels[record.rhythm]}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}人<br>交叉购买平均间隔：${frameModule4FormatDays(record.avgInterval)}<br>修正关联指数：${Number(record.scaleScore || 0).toFixed(2)}<br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")}<br>吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}`;
+              return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>购买节奏：${frameModule4RhythmLabels[record.rhythm]}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}人<br>交叉购买平均间隔：${frameModule4FormatDays(record.avgInterval)}<br>修正关联指数：${Number(record.scaleScore || 0).toFixed(2)}<br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")}<br>吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}`;
             }
             const rhythm = params.data?.rhythm;
             return rhythm
@@ -31368,54 +31411,37 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               : "";
           }
         },
-        xAxis: [
-          {
-            type: "value",
-            gridIndex: 0,
-            min: 0,
-            max: Math.max(totalUsers, 1),
-            show: false
-          },
-          {
-            type: "value",
-            gridIndex: 1,
-            min: 0,
-            max: xMax,
-            name: "交叉购买平均间隔",
-            nameLocation: "middle",
-            nameGap: 28,
-            nameTextStyle: { color: "#63748d", fontSize: 12, fontWeight: 500 },
-            axisLabel: { color: "#8a98aa", fontSize: 12, margin: 8 },
-            axisLine: { lineStyle: { color: "#b6c0ce" } },
-            axisTick: { lineStyle: { color: "#d6deea" } },
-            splitLine: { lineStyle: { color: "#edf1f6" } }
-          }
-        ],
-        yAxis: [
-          {
-            type: "category",
-            gridIndex: 0,
-            data: ["购买节奏"],
-            show: false
-          },
-          {
-            type: "log",
-            gridIndex: 1,
-            logBase: 10,
-            min: 10,
-            max: Math.max(100, yMax),
-            name: "交叉购买用户数（对数）",
-            nameLocation: "middle",
-            nameGap: 56,
-            nameTextStyle: { color: "#63748d", fontSize: 12, fontWeight: 500 },
-            axisLabel: { color: "#8a98aa", fontSize: 12, margin: 10, formatter: value => frameModule2FormatNumber(value) },
-            axisLine: { lineStyle: { color: "#b6c0ce" } },
-            axisTick: { show: false },
-            splitLine: { lineStyle: { color: "#edf1f6" } },
-            minorSplitLine: { show: false }
-          }
-        ],
-        series: [...rhythmSeries, ...scatterSeries]
+        xAxis: {
+          type: "value",
+          gridIndex: 0,
+          min: 0,
+          max: xMax,
+          name: "交叉购买平均间隔",
+          nameLocation: "middle",
+          nameGap: 28,
+          nameTextStyle: { color: "#63748d", fontSize: 12, fontWeight: 500 },
+          axisLabel: { color: "#8a98aa", fontSize: 12, margin: 8 },
+          axisLine: { lineStyle: { color: "#b6c0ce" } },
+          axisTick: { lineStyle: { color: "#d6deea" } },
+          splitLine: { lineStyle: { color: "#edf1f6" } }
+        },
+        yAxis: {
+          type: "log",
+          gridIndex: 0,
+          logBase: 10,
+          min: 10,
+          max: Math.max(100, yMax),
+          name: "交叉购买用户数（对数）",
+          nameLocation: "middle",
+          nameGap: 56,
+          nameTextStyle: { color: "#63748d", fontSize: 12, fontWeight: 500 },
+          axisLabel: { color: "#8a98aa", fontSize: 12, margin: 10, formatter: value => frameModule2FormatNumber(value) },
+          axisLine: { lineStyle: { color: "#b6c0ce" } },
+          axisTick: { show: false },
+          splitLine: { lineStyle: { color: "#edf1f6" } },
+          minorSplitLine: { show: false }
+        },
+        series: scatterSeries
       }, true);
       chart.off("click");
       chart.off("legendselectchanged");
@@ -31661,6 +31687,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function setupFrameModule4() {
+      frameModule4BindKpiTooltips();
       const bindSelect = (id, key, transform) => {
         const select = document.getElementById(id);
         if (!select) return;
@@ -34451,16 +34478,16 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       const quadrantConfig = isLead
         ? [
-          { key: "high-high", className: "engine", label: "连带引擎型", axis: "总购买用户数高 · 交叉购买率高", desc: "超级入口，广告预算优先" },
-          { key: "high-low", className: "sleeper", label: "沉睡流量型", axis: "总购买用户数高 · 交叉购买率低", desc: "流量大但转化低，重点激活" },
-          { key: "low-high", className: "efficient", label: "小众高效型", axis: "总购买用户数低 · 交叉购买率高", desc: "流量小单转化高，精准投放" },
-          { key: "low-low", className: "low", label: "低连带型", axis: "总购买用户数低 · 交叉购买率低", desc: "流量小转化低，暂不优先经营" }
+          { key: "high-high", className: "engine", label: "核心带购型", axis: "总购买用户数高 · 交叉购买率高", desc: "超级入口，广告预算优先" },
+          { key: "high-low", className: "sleeper", label: "沉睡流量型", axis: "总购买用户数高 · 交叉购买率低", desc: "加强关联推荐和二次购买引导。" },
+          { key: "low-high", className: "efficient", label: "潜力带购型", axis: "总购买用户数低 · 交叉购买率高", desc: "增加流量来放大价值。" },
+          { key: "low-low", className: "low", label: "低连带型", axis: "总购买用户数低 · 交叉购买率低", desc: "不作为重点带购入口。" }
         ]
         : [
           { key: "high-high", className: "engine", label: "通用收割型", axis: "来源 Lead ASIN 多 · 收割率高", desc: "生态核心承接产品" },
           { key: "high-low", className: "sleeper", label: "独立爆款", axis: "来源 Lead ASIN 多 · 收割率低", desc: "产品本身有独立吸引力" },
           { key: "low-high", className: "efficient", label: "集中收割型", axis: "来源 Lead ASIN 少 · 收割率高", desc: "适合精准捆绑推荐" },
-          { key: "low-low", className: "low", label: "低承接型", axis: "来源 Lead ASIN 少 · 收割率低", desc: "内部承接能力较弱" }
+          { key: "low-low", className: "low", label: "低承接型", axis: "来源 Lead ASIN 少 · 收割率低", desc: "独立运营，谨慎投入。" }
         ];
 
       const formatBaseline = value => Number(value || 0) >= 1000
@@ -35487,9 +35514,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const key = `${xHigh ? "high" : "low"}-${yHigh ? "high" : "low"}`;
       const config = isLead
         ? {
-          "high-high": { label: "连带引擎型", className: "engine" },
+          "high-high": { label: "核心带购型", className: "engine" },
           "high-low": { label: "沉睡流量型", className: "sleeper" },
-          "low-high": { label: "小众高效型", className: "efficient" },
+          "low-high": { label: "潜力带购型", className: "efficient" },
           "low-low": { label: "低连带型", className: "low" }
         }
         : {
@@ -35549,9 +35576,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const isLead = view === "lead";
       return [
         { value: "", label: "产品角色" },
-        { value: "engine", label: isLead ? "连带引擎型" : "通用收割型" },
+        { value: "engine", label: isLead ? "核心带购型" : "通用收割型" },
         { value: "sleeper", label: isLead ? "沉睡流量型" : "独立爆款" },
-        { value: "efficient", label: isLead ? "小众高效型" : "集中收割型" },
+        { value: "efficient", label: isLead ? "潜力带购型" : "集中收割型" },
         { value: "low", label: isLead ? "低连带型" : "低承接型" }
       ];
     }
