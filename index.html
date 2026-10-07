@@ -6406,7 +6406,8 @@
 
     .amc-module3-detail-table-scroll {
       max-height: 430px;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: auto;
       scrollbar-color: #cbd7ea transparent;
       scrollbar-width: thin;
     }
@@ -6427,7 +6428,7 @@
 
     .amc-module3-detail-table {
       width: 100%;
-      min-width: 1728px;
+      min-width: 1320px;
       border-collapse: separate;
       border-spacing: 0;
       table-layout: fixed;
@@ -6438,7 +6439,8 @@
     .amc-module3-detail-table th,
     .amc-module3-detail-table td {
       text-align: left;
-      white-space: nowrap;
+      white-space: normal;
+      overflow-wrap: anywhere;
     }
 
     .amc-module3-detail-table th {
@@ -15837,6 +15839,74 @@
       text-align: center;
     }
 
+    body[data-page="amcFrame"] .amc-module3-detail-table :is(th, td) {
+      padding-right: 6px;
+      padding-left: 6px;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table th {
+      padding-right: 3px;
+      padding-left: 3px;
+      font-size: 12px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-global-metric-help {
+      width: 14px;
+      height: 14px;
+      margin-left: 4px;
+      font-size: 10px;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-global-metric-sort {
+      width: 10px;
+      height: 13px;
+      margin-left: 4px;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-global-metric-sort::before,
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-global-metric-sort::after {
+      left: 2px;
+      border-right-width: 3px;
+      border-left-width: 3px;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-global-metric-sort::before {
+      border-bottom-width: 4px;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-global-metric-sort::after {
+      border-top-width: 4px;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table td {
+      padding-right: 3px;
+      padding-left: 3px;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-module3-detail-pair-products {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 12px minmax(0, 1fr);
+      gap: 4px;
+      white-space: normal;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-module3-detail-pair-products .amc-module4-product {
+      width: 100%;
+      max-width: none;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-module3-detail-score {
+      min-width: 0;
+    }
+
+    body[data-page="amcFrame"] .amc-module3-detail-table .amc-module3-detail-score-track {
+      width: 100%;
+      max-width: 76px;
+    }
+
     body[data-page="amcFrame"] .amc-role-link-layout-switch .amc-segment-btn {
       min-width: 52px;
       padding-right: 8px;
@@ -20835,7 +20905,7 @@
                 <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">数据源</span><strong id="frameIntroDataSource">触达后28天内转化数据</strong></span>
                 <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">数据聚合方式</span><strong id="frameIntroMapping">按子ASIN维度聚合</strong></span>
                 <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">交叉购买 ASIN 数</span><strong id="frameIntroAsinCount">80个（占比100.00%）</strong></span>
-                <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">有效关联组合数</span><strong id="frameIntroComboCount">2,104个</strong></span>
+                <span class="amc-frame-intro-metric"><span class="amc-frame-intro-metric-label">交叉购买组合数</span><strong id="frameIntroComboCount">2,104个</strong></span>
               </div>
             </div>
             <div class="amc-frame-intro-actions">
@@ -21619,7 +21689,7 @@
                         <span class="amc-overview-index">1.2</span>
                         <div>
                           <h4 id="frameIntervalTitle">交叉购买平均间隔分布</h4>
-                          <p>Lead → Follow 组合的交叉购买平均间隔分布（按交叉购买平均间隔分桶，按交叉购买用户数加权）</p>
+                          <p>Lead → Follow 组合的交叉购买平均间隔分布（按交叉购买平均间隔分桶，按交叉购买用户数加权）。</p>
                         </div>
                       </div>
                       <div class="amc-overview-interval-tools">
@@ -21640,7 +21710,7 @@
                 <div class="amc-role-analysis-title-line">
                   <h3 id="frameRoleAnalysisTitle">角色分析</h3>
                 </div>
-                <p>通过 Lead/Follow 双视角切换，分析品牌内产品的流量入口效率和收割能力。Lead ASIN 关注“谁在带流量”，Follow ASIN 关注“谁在收割”。通过角色矩阵、新老客拆分和流向桑基图，全面识别产品的战略定位。</p>
+                <p>通过 Lead/Follow 双视角切换，分析品牌内产品的流量入口效率和收割能力。Lead ASIN 关注“谁在带流量”，Follow ASIN 关注“谁在收割”。通过角色矩阵和流向桑基图，全面识别产品的战略定位。</p>
               </div>
               <div class="amc-role-analysis-actions">
                 <div class="amc-segmented-control amc-role-global-switch" role="tablist" aria-label="ASIN 角色分析视角">
@@ -21658,7 +21728,7 @@
                     <span class="amc-overview-index">2.1</span>
                     <div>
                       <h4 id="frameRoleMatrixTitle">Lead ASIN流量矩阵</h4>
-                      <p id="frameRoleMatrixSubtitle">Lead 视角：Lead ASIN总购买用户数与交叉购买率</p>
+                      <p id="frameRoleMatrixSubtitle">Lead 视角：Lead ASIN总购买用户数与交叉购买率。</p>
                     </div>
                   </div>
                   <div class="amc-role-matrix-tools">
@@ -21734,7 +21804,6 @@
                   <span class="amc-overview-index">2.4</span>
                   <div>
                     <h4 id="frameRoleDetailTitle">Lead ASIN明细表</h4>
-                    <p id="frameRoleDetailSubtitle">按照当前分析视图展示 ASIN 明细，可按产品角色筛选并按指标排序</p>
                   </div>
                 </div>
                 <div class="amc-role-detail-actions">
@@ -21766,8 +21835,8 @@
               </div>
               <div class="amc-role-analysis-actions">
                 <div class="amc-segmented-control amc-module3-view-tabs" role="tablist" aria-label="关联组合分析视角">
-                  <button class="amc-segment-btn is-active" type="button" data-frame-module3-view="scale" role="tab" aria-selected="true">价格流转</button>
-                  <button class="amc-segment-btn" type="button" data-frame-module3-view="quality" role="tab" aria-selected="false">关联强度</button>
+                  <button class="amc-segment-btn" type="button" data-frame-module3-view="scale" role="tab" aria-selected="false">价格流转</button>
+                  <button class="amc-segment-btn is-active" type="button" data-frame-module3-view="quality" role="tab" aria-selected="true">关联强度</button>
                 </div>
                 <span class="status-pill">模块 3 / 已生成</span>
               </div>
@@ -21841,7 +21910,7 @@
               <div class="amc-module3-view-layout amc-module3-quality-layout" data-frame-module3-view-layout="quality" data-quality-layout-style="style2" data-quality-active-tab="heatmap">
                 <div class="amc-module3-formula-callout amc-module3-quality-formula-callout" role="note" aria-label="关联强度指标计算说明">
                   <span class="amc-module3-formula-callout-label">指标计算</span>
-                  <span class="amc-module3-formula-callout-text">修正关联指数 = 原始关联指数 x sqrt(交叉购买用户数 / (交叉购买用户数 + 20))。</span>
+                  <span class="amc-module3-formula-callout-text"><strong>原始关联指数</strong> = sqrt(转化率 × 吸引率)；<strong>修正关联指数</strong> = 原始关联指数 × sqrt(交叉购买用户数 / (交叉购买用户数 + 20))。</span>
                 </div>
                 <section class="amc-module3-panel amc-module3-panel-wide" data-frame-module3-chart-id="3.4" aria-labelledby="frameModule34Title">
                   <div class="amc-module3-panel-head">
@@ -21972,7 +22041,6 @@
                     <span class="amc-overview-index">3.5</span>
                     <div>
                       <h4 id="frameModule37Title">关联组合明细表</h4>
-                      <p id="frameModule37Subtitle">继承当前模块视角与筛选条件，按当前视角排序展示。</p>
                     </div>
                   </div>
                   <div class="amc-module3-detail-actions">
@@ -22095,7 +22163,6 @@
                       <span class="amc-overview-index">4.2</span>
                       <div>
                         <h4 id="frameModule42Title">高价值组合明细表</h4>
-                        <p id="frameModule42Subtitle">购买节奏：全部购买节奏，展示符合条件的高价值组合。</p>
                       </div>
                     </div>
                     <div class="amc-module4-panel-tools">
@@ -22161,7 +22228,7 @@
             <div class="card-head">
               <div class="amc-module5-heading">
                 <h3 id="frameModule5Title">产品组合策略（Strategy Output）</h3>
-                <p>将高价值组合按购买节奏和价格方向收敛为六类策略，输出可执行的组合推荐与广告动作。</p>
+                <p>将高价值组合按购买节奏和价格方向归纳为六类策略，明确每类的推荐商品组合与配套广告动作。</p>
               </div>
               <div class="amc-role-analysis-actions">
                 <span class="status-pill">模块 5 / 已生成</span>
@@ -22220,7 +22287,6 @@
                     <span class="amc-overview-index">5.3</span>
                     <div>
                       <h4 id="frameModule53Title">核心组合 TOP 10 与策略明细</h4>
-                      <p>把当前优先策略落到具体 Lead / Follow ASIN 组合和广告动作。</p>
                     </div>
                   </div>
                   <div class="amc-module5-tools">
@@ -22340,7 +22406,7 @@
                     <span class="amc-overview-index">6.2</span>
                     <div>
                       <h4 id="frameModule61Title"><span class="amc-module6-entry-asin">{ASIN}</span><span class="amc-module6-entry-title-suffix">新客二购表现</span></h4>
-                      <p id="frameModule61Subtitle">{ASIN}引入新客后，二购买什么？</p>
+                      <p id="frameModule61Subtitle">{ASIN}引入新客后的二购商品分析。</p>
                     </div>
                   </div>
                 </div>
@@ -22354,7 +22420,7 @@
                     <span class="amc-overview-index">6.3</span>
                     <div>
                       <h4 id="frameModule63Title">入口ASIN及其二购分布</h4>
-                      <p>哪些入口 ASIN 带来新客，其中多少完成二购？</p>
+                      <p>入口 ASIN 带来新客及完成二购的情况。</p>
                     </div>
                   </div>
                 </div>
@@ -25797,7 +25863,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     // Module 3 keeps its view-to-chart mapping in one configuration object so the
     // SOP can change the association without changing render logic.
     const frameModule3ViewConfig = {
-      defaultView: "scale",
+      defaultView: "quality",
       unassignedChartHandling: "hide",
       views: {
         scale: {
@@ -26199,6 +26265,29 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (type === "index") return (Number(value || 0) * 100).toFixed(2);
       if (type === "score") return Number(value || 0).toFixed(2);
       return frameModule2FormatNumber(value);
+    }
+
+    const frameModule3HeatmapTooltipMetricOrder = [
+      { key: "scaleAdjustedScore", label: "修正关联指数", type: "index" },
+      { key: "associationScore", label: "原始关联指数", type: "index" },
+      { key: "crossUsers", label: "交叉购买用户数", type: "number" },
+      { key: "conversionRate", label: "转化率", type: "percent" },
+      { key: "attractionRate", label: "吸引率", type: "percent" }
+    ];
+
+    function frameModule3HeatmapTooltipMetrics(record) {
+      const activeKey = frameModule3MetricConfig[frameModule3State.matrixMetric]
+        ? frameModule3State.matrixMetric
+        : "scaleAdjustedScore";
+      const orderedMetrics = [
+        ...frameModule3HeatmapTooltipMetricOrder.filter(metric => metric.key === activeKey),
+        ...frameModule3HeatmapTooltipMetricOrder.filter(metric => metric.key !== activeKey)
+      ];
+      return orderedMetrics
+        .map(metric =>
+          `${metric.label}：${frameModule3FormatMetric(frameModule3MetricValue(record, metric.key), metric.type)}`
+        )
+        .join("<br>");
     }
 
     function frameModule3FormatMoney(value) {
@@ -26815,25 +26904,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule3RenderDetailTable(records, maxSourceRecords = records) {
       const wrap = document.getElementById("frameModule37TableWrap");
-      const subtitle = document.getElementById("frameModule37Subtitle");
       const count = document.getElementById("frameModule37Count");
       if (!wrap) return;
       const isQuality = frameModule3State.view === "quality";
-      if (subtitle) {
-        const sampleLabel = frameModule3State.qualityMinSample
-          ? `≥${frameModule3State.qualityMinSample}人`
-          : "不限";
-        const pricePathLabel = frameModule3State.detailPricePath
-          ? `；价格路径：${frameModule3PricePathLabel(frameModule3State.detailPricePath)}`
-          : "";
-        const multiSelectedCount = frameModule3ActiveMultiPairKeySet()?.size || 0;
-        const multiSelectLabel = multiSelectedCount
-          ? `；已按多选组合筛选 ${frameModule2FormatNumber(multiSelectedCount)} 项，可在当前明细表查看`
-          : "";
-        subtitle.textContent = isQuality
-          ? `关联强度：继承交叉购买用户数筛选 ${sampleLabel}，按修正关联指数排序${pricePathLabel}${multiSelectLabel}。`
-          : `价格流转：继承全局筛选，按交叉购买用户数排序${pricePathLabel}。`;
-      }
       frameModule3RenderDetailControls();
       if (count) count.textContent = `当前 ${frameModule2FormatNumber(records.length)} 条`;
       const pagination = frameDetailPaginationSlice("module3", records);
@@ -26885,18 +26958,18 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         <div class="amc-module3-detail-table-scroll" data-detail-total-pages="${pagination.totalPages}">
         <table class="amc-module3-detail-table">
           <colgroup>
-            <col style="width:420px">
-            <col style="width:116px">
-            <col style="width:142px">
-            <col style="width:142px">
-            <col style="width:108px">
-            <col style="width:108px">
-            <col style="width:108px">
-            <col style="width:112px">
-            <col style="width:110px">
-            <col style="width:110px">
-            <col style="width:108px">
-            <col style="width:124px">
+            <col style="width:16%">
+            <col style="width:6%">
+            <col style="width:8.5%">
+            <col style="width:8.5%">
+            <col style="width:5%">
+            <col style="width:5%">
+            <col style="width:8.5%">
+            <col style="width:8.5%">
+            <col style="width:9%">
+            <col style="width:10%">
+            <col style="width:6%">
+            <col style="width:9%">
           </colgroup>
           <thead>
             <tr>
@@ -27589,7 +27662,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             const detailHint = frameModule3UseMultiPairSelection() && frameModule3IsPairSelected(record.pairKey)
               ? `<br><span style="color:#3153c4;font-weight:600;">可在下方明细表查看详情</span>`
               : "";
-            return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>${metric.label}：${frameModule3FormatMetric(frameModule3MetricValue(record, frameModule3State.matrixMetric), metric.type)}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}<br>转化率：${frameModule3FormatMetric(record.conversionRate, "percent")}<br>吸引率：${frameModule3FormatMetric(record.attractionRate, "percent")}${detailHint}`;
+            return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>${frameModule3HeatmapTooltipMetrics(record)}${detailHint}`;
           }
         },
         visualMap: {
@@ -28667,10 +28740,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function frameModule4ApplyStaticPanels() {
       const layoutStyle = frameModule4ApplyLayoutStyle();
       const showSupplementaryPanels = layoutStyle === "style1";
-      const subtitle = document.getElementById("frameModule42Subtitle");
-      if (subtitle) {
-        subtitle.textContent = "购买节奏：全部购买节奏，展示符合条件的高价值组合。";
-      }
       const rhythmPanel = document.querySelector('[aria-labelledby="frameModule43Title"]');
       if (rhythmPanel) rhythmPanel.hidden = !showSupplementaryPanels;
       const panel = document.getElementById("frameModule44Panel");
@@ -31299,19 +31368,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function frameModule4RenderPairLists(records) {
       const byUsers = (a, b) => b.crossUsers - a.crossUsers || b.scaleScore - a.scaleScore;
       const title = document.getElementById("frameModule42Title");
-      const subtitle = document.getElementById("frameModule42Subtitle");
       const detailRhythmSelectWrap = document.getElementById("frameModule42DetailRhythmSelectWrap");
       const detailRhythmSelect = document.getElementById("frameModule42DetailRhythmSelect");
       const detailView = document.getElementById("frameModule42DetailView");
       const topPanel = document.querySelector(".amc-module4-top-panel");
       if (topPanel) topPanel.classList.remove("is-top-view");
       if (title) title.textContent = "高价值组合明细表";
-      if (subtitle) {
-        const detailRhythmLabel = !frameModule4State.detailRhythm
-          ? "全部购买节奏"
-          : frameModule4RhythmLabels[frameModule4State.detailRhythm] || "全部购买节奏";
-        subtitle.textContent = `购买节奏：${detailRhythmLabel}，展示符合条件的高价值组合。`;
-      }
       if (detailView) detailView.hidden = false;
       if (detailRhythmSelectWrap) detailRhythmSelectWrap.hidden = false;
       if (detailRhythmSelect) {
@@ -33239,7 +33301,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const entryAsin = frameLabelDisplayParts(entry.leadAsin).raw;
       const entryLabel = frameLabelFormatAsin(entry.leadAsin);
       frameModule6SetHtml("frameModule61Title", frameModule6OverviewTitleMarkup(entryAsin));
-      frameModule6SetText("frameModule61Subtitle", `${entryLabel}引入新客后，二购买什么？`);
+      frameModule6SetText("frameModule61Subtitle", `${entryLabel}引入新客后的二购商品分析。`);
       const metrics = [
         { label: "入口新客", value: frameModule6FormatNumber(entry.ntbUsers), note: "New-to-Brand 新客总人数", color: "#20385d" },
         { label: "已二购新客", value: frameModule6FormatNumber(entry.repurchaseUsers), note: "完成至少一次二购的去重用户数", color: "#324d7d" },
@@ -34075,7 +34137,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const entry = frameModule6GetEntry();
       if (!entry) {
         frameModule6SetHtml("frameModule61Title", frameModule6OverviewTitleMarkup("--"));
-        frameModule6SetText("frameModule61Subtitle", "暂无足够数据");
+        frameModule6SetText("frameModule61Subtitle", "暂无足够数据。");
         frameModule6SetHtml("frameModule61Kpis", `<div class="amc-module6-empty">暂无足够数据</div>`);
         frameModule6SetHtml("frameModule62List", `<div class="amc-module6-empty"><span class="amc-list-empty">暂无入口 ASIN 数据</span></div>`);
         frameModule6RenderAsinPicker(null);
@@ -34561,7 +34623,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const sizeKey = isLead ? "associatedCombos" : "sourceLeadCount";
       const xLabel = isLead ? "Lead ASIN总购买用户数" : "来源 Lead ASIN数量";
       const yLabel = isLead ? "交叉购买率" : "收割率";
-      const roleTitle = isLead ? "Lead 视角：Lead ASIN总购买用户数与交叉购买率" : "Follow 视角：来源 Lead ASIN数量与收割率";
+      const roleTitle = isLead ? "Lead 视角：Lead ASIN总购买用户数与交叉购买率。" : "Follow 视角：来源 Lead ASIN数量与收割率。";
       const asinRoleLabel = isLead ? "Lead ASIN" : "Follow ASIN";
       if (subtitle) subtitle.textContent = roleTitle;
       const matrixTitle = document.getElementById("frameRoleMatrixTitle");
@@ -35716,7 +35778,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function renderFrameRoleDetailTable() {
       const wrap = document.getElementById("frameRoleDetailTableWrap");
       const title = document.getElementById("frameRoleDetailTitle");
-      const subtitle = document.getElementById("frameRoleDetailSubtitle");
       if (!wrap) return;
 
       const view = frameModule2State.analysisView;
@@ -35796,7 +35857,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const pageItems = pagination.records;
 
       if (title) title.textContent = isLead ? "Lead ASIN明细表" : "Follow ASIN明细表";
-      if (subtitle) subtitle.textContent = "按照当前分析视图展示 ASIN 明细，可按产品角色筛选并按指标排序";
 
       const bodyHtml = items.length
         ? pageItems.map((item, index) => {
