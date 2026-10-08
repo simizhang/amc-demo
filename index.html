@@ -21850,14 +21850,14 @@
                   <span class="amc-module3-summary-note" id="frameModule3KpiTotalNote">全量Lead → Follow路径</span>
                 </article>
                 <article class="amc-module3-summary-card quality">
-                  <span class="amc-module3-summary-label">质量门槛内组合</span>
+                  <span class="amc-module3-summary-label">有效门槛内组合</span>
                   <div class="amc-module3-summary-value-line"><strong class="amc-module3-summary-value" id="frameModule3KpiQualityPairs">0</strong><span class="amc-module3-summary-unit">组</span></div>
                   <span class="amc-module3-summary-note" id="frameModule3KpiQualityNote">当前交叉购买用户数 ≥ 20</span>
                 </article>
                 <article class="amc-module3-summary-card overlap">
                   <span class="amc-module3-summary-label">两榜共同TOP组合</span>
                   <div class="amc-module3-summary-value-line"><strong class="amc-module3-summary-value" id="frameModule3KpiOverlapPairs">0</strong><span class="amc-module3-summary-unit">组</span></div>
-                  <span class="amc-module3-summary-note">规模TOP15 ∩ 质量TOP15</span>
+                  <span class="amc-module3-summary-note">交叉购买人数TOP 15 ∩ 关联强度 TOP15</span>
                 </article>
               </div>
 
@@ -22228,7 +22228,7 @@
             <div class="card-head">
               <div class="amc-module5-heading">
                 <h3 id="frameModule5Title">产品组合策略（Strategy Output）</h3>
-                <p>将高价值组合按购买节奏和价格方向归纳为六类策略，明确每类的推荐商品组合与配套广告动作。</p>
+                <p>基于高价值组合（高关联强度 + 交叉购买人数），按购买节奏与价格方向归纳为六大核心策略，呈现该卖家客户群整体的购买模式。策略按路径人次从高到低排序。</p>
               </div>
               <div class="amc-role-analysis-actions">
                 <span class="status-pill">模块 5 / 已生成</span>
@@ -24661,7 +24661,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
       customAction.addEventListener("click", () => {
         if (customAction.dataset.mappingTarget === "custom") {
-          openCustomMappingModal();
+          openCustomMappingPageAndModal();
         }
       });
 
@@ -24670,9 +24670,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         renderFrameCreateAggregationState();
       });
 
-      customUploadButton.addEventListener("click", openCustomMappingModal);
+      customUploadButton.addEventListener("click", openCustomMappingPageAndModal);
 
       renderFrameCreateAggregationState();
+    }
+
+    function openCustomMappingPageAndModal() {
+      showAppPage("customMappings");
+      openCustomMappingModal();
     }
 
     function sortedUniqueValues(values) {
@@ -26068,8 +26073,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       matrixSearchAsin: "",
       scale3HighlightedPath: "all",
       scale3PricePath: "upgrade",
-      scaleCompareHoverPath: "",
-      scaleComparePinnedPath: "",
       detailPricePath: "",
       detailAsinQuery: "",
       selectedPairKey: null,
@@ -26555,46 +26558,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         if (nextLeft === nextRight) nextLeft = previousRight;
       }
       frameModule3State.scaleComparePaths = [nextLeft, nextRight];
-      frameModule3State.scaleCompareHoverPath = "";
-      frameModule3State.scaleComparePinnedPath = "";
       frameModule3State.selectedPairKey = null;
       frameModule3RenderAll();
-    }
-
-    function frameModule3ScaleCompareActivePath() {
-      const [leftPath, rightPath] = frameModule3NormalizeScaleComparePaths();
-      const visiblePaths = new Set([leftPath, rightPath]);
-      if (!visiblePaths.has(frameModule3State.scaleCompareHoverPath)) {
-        frameModule3State.scaleCompareHoverPath = "";
-      }
-      if (!visiblePaths.has(frameModule3State.scaleComparePinnedPath)) {
-        frameModule3State.scaleComparePinnedPath = "";
-      }
-      return frameModule3State.scaleCompareHoverPath || frameModule3State.scaleComparePinnedPath || "";
-    }
-
-    function frameModule3RenderScaleCompareChart() {
-      if (!frameModule3VisibleChartIds().has("3.3")) return;
-      frameModule3RenderChart33(frameModule3FilteredRecords());
-    }
-
-    function frameModule3SetScaleCompareHoverPath(path) {
-      const [leftPath, rightPath] = frameModule3NormalizeScaleComparePaths();
-      const nextPath = [leftPath, rightPath].includes(path) ? path : "";
-      if (nextPath === frameModule3State.scaleCompareHoverPath) return;
-      frameModule3State.scaleCompareHoverPath = nextPath;
-      frameModule3RenderScaleCompareChart();
-    }
-
-    function frameModule3SetScaleComparePinnedPath(path) {
-      const [leftPath, rightPath] = frameModule3NormalizeScaleComparePaths();
-      if (![leftPath, rightPath].includes(path)) return;
-      const nextPath = frameModule3State.scaleComparePinnedPath === path ? "" : path;
-      if (nextPath === frameModule3State.scaleComparePinnedPath && !frameModule3State.scaleCompareHoverPath) return;
-      frameModule3State.scaleComparePinnedPath = nextPath;
-      frameModule3State.scaleCompareHoverPath = "";
-      frameModule3State.selectedPairKey = null;
-      frameModule3RenderScaleCompareChart();
     }
 
     function frameModule3VisibleChartIds() {
@@ -27303,20 +27268,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         : ["downgrade", "upgrade"];
       const leftLabel = frameModule3PricePathCompareLabel(leftPath);
       const rightLabel = frameModule3PricePathCompareLabel(rightPath);
-      const activePath = frameModule3ScaleCompareActivePath();
-      const showLeft = !activePath || activePath === leftPath;
-      const showRight = !activePath || activePath === rightPath;
       const leftPairCount = records.filter(record => record.pricePath === leftPath).length;
       const rightPairCount = records.filter(record => record.pricePath === rightPath).length;
       const subtitle = document.getElementById("frameModule33Subtitle");
       if (subtitle) {
-        if (activePath) {
-          const activeLabel = activePath === leftPath ? leftLabel : rightLabel;
-          const activeCount = activePath === leftPath ? leftPairCount : rightPairCount;
-          subtitle.textContent = `当前展示：${activeLabel} TOP 10组合；交叉购买组合数：${frameModule2FormatNumber(activeCount)}个；条形长度代表交叉购买用户数。`;
-        } else {
-          subtitle.textContent = `交叉购买组合数（${leftLabel}）：${frameModule2FormatNumber(leftPairCount)}个；交叉购买组合数（${rightLabel}）：${frameModule2FormatNumber(rightPairCount)}个；条形长度代表交叉购买用户数。`;
-        }
+        subtitle.textContent = `交叉购买组合数（${leftLabel}）：${frameModule2FormatNumber(leftPairCount)}个；交叉购买组合数（${rightLabel}）：${frameModule2FormatNumber(rightPairCount)}个；条形长度代表交叉购买用户数。`;
       }
       const colors = frameModule3PathColors;
       const topByPath = path => records
@@ -27327,10 +27283,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const topRight = topByPath(rightPath);
       const maxRows = Math.max(topLeft.length, topRight.length);
       if (!maxRows) {
-        const emptyLabel = activePath
-          ? frameModule3PricePathCompareLabel(activePath)
-          : `${leftLabel}或${rightLabel}`;
-        frameModule3SetEmptyChart(chart, `暂无${emptyLabel}路径组合`);
+        frameModule3SetEmptyChart(chart, `暂无${leftLabel}或${rightLabel}路径组合`);
         return;
       }
       const rows = Array.from({ length: maxRows }, (_, index) => ({
@@ -27366,11 +27319,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ellipsis: "..."
       };
       const formatPairLabel = record => frameModule3PairAxisLabel(record, isNarrow ? 7 : 9);
-      const seriesPathFromName = name => {
-        if (name === leftLabel) return leftPath;
-        if (name === rightLabel) return rightPath;
-        return "";
-      };
       chart.setOption({
         animation: false,
         color: [colors[leftPath], colors[rightPath]],
@@ -27425,9 +27373,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             barGap: "-100%",
             itemStyle: { color: colors[leftPath], borderRadius: [5, 0, 0, 5] },
             data: rows.map(row => ({
-              value: showLeft && row.left ? -row.left.crossUsers : null,
-              record: showLeft ? row.left : null,
-              pairKey: showLeft ? row.left?.pairKey : null,
+              value: row.left ? -row.left.crossUsers : null,
+              record: row.left,
+              pairKey: row.left?.pairKey,
               pathKey: leftPath
             })),
             label: {
@@ -27441,7 +27389,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
                 return record ? frameModule2FormatNumber(record.crossUsers) : "";
               }
             },
-            emphasis: { focus: "series" }
+            emphasis: { focus: "none" }
           },
           {
             name: rightLabel,
@@ -27449,9 +27397,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             barMaxWidth: 24,
             itemStyle: { color: colors[rightPath], borderRadius: [0, 5, 5, 0] },
             data: rows.map(row => ({
-              value: showRight && row.right ? row.right.crossUsers : null,
-              record: showRight ? row.right : null,
-              pairKey: showRight ? row.right?.pairKey : null,
+              value: row.right ? row.right.crossUsers : null,
+              record: row.right,
+              pairKey: row.right?.pairKey,
               pathKey: rightPath
             })),
             label: {
@@ -27464,7 +27412,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
                 return record ? frameModule2FormatNumber(record.crossUsers) : "";
               }
             },
-            emphasis: { focus: "series" }
+            emphasis: { focus: "none" }
           }
         ]
       }, true);
@@ -27472,7 +27420,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         const rawY = chart.convertToPixel({ yAxisIndex: 0 }, String(row.rank));
         const y = Array.isArray(rawY) ? rawY[1] : rawY;
         return [
-          showLeft && row.left ? {
+          row.left ? {
             id: `module33-left-label-${row.rank}`,
             type: "text",
             x: sideLabelInset,
@@ -27480,8 +27428,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             z: 20,
             silent: false,
             cursor: "pointer",
-            onclick: () => frameModule3SetScaleComparePinnedPath(leftPath),
-            onmouseover: () => frameModule3SetScaleCompareHoverPath(leftPath),
+            onclick: () => frameModule3SelectPair(row.left?.pairKey),
             style: {
               ...labelTextStyle,
               text: formatPairLabel(row.left),
@@ -27491,7 +27438,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               fontWeight: 400
             }
           } : null,
-          showRight && row.right ? {
+          row.right ? {
             id: `module33-right-label-${row.rank}`,
             type: "text",
             x: chartWidth - sideLabelInset,
@@ -27499,8 +27446,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             z: 20,
             silent: false,
             cursor: "pointer",
-            onclick: () => frameModule3SetScaleComparePinnedPath(rightPath),
-            onmouseover: () => frameModule3SetScaleCompareHoverPath(rightPath),
+            onclick: () => frameModule3SelectPair(row.right?.pairKey),
             style: {
               ...labelTextStyle,
               text: formatPairLabel(row.right),
@@ -27513,22 +27459,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         ].filter(Boolean);
       });
       chart.setOption({ graphic: rowLabels }, { replaceMerge: ["graphic"] });
-      chart.off("mouseover");
-      chart.off("mouseout");
-      chart.off("globalout");
       chart.off("click");
-      chart.on("mouseover", params => {
-        if (params.componentType !== "series" || !params.data?.record) return;
-        const path = seriesPathFromName(params.seriesName);
-        if (path) frameModule3SetScaleCompareHoverPath(path);
-      });
-      chart.on("globalout", () => {
-        frameModule3SetScaleCompareHoverPath("");
-      });
       chart.on("click", params => {
-        if (params.componentType !== "series" || !params.data?.record) return;
-        const path = seriesPathFromName(params.seriesName);
-        if (path) frameModule3SetScaleComparePinnedPath(path);
+        if (params.componentType === "series" && params.data?.record) {
+          frameModule3SelectPair(params.data.pairKey);
+        }
       });
     }
 
