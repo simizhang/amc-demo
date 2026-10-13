@@ -1936,6 +1936,7 @@
     .selected-model-card {
       position: relative;
       display: flex;
+      min-width: 0;
       min-height: 440px;
       flex-direction: column;
       border: 1px solid #dfe7f4;
@@ -2160,7 +2161,21 @@
       grid-template-columns: 1fr;
       gap: 12px;
       align-content: start;
+      min-width: 0;
       background: #fff;
+    }
+
+    .selected-model-body > .form-field,
+    .selected-model-body .aggregation-select {
+      min-width: 0;
+    }
+
+    .selected-model-body .form-field > select,
+    .selected-model-body .frame-create-custom-mapping-picker select {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     .selected-model-body h3 {
@@ -22580,7 +22595,7 @@
                     <label><span class="required">*</span>数据源<span class="field-help" aria-hidden="true">?</span></label>
                     <select id="createDataSelect" aria-label="数据源">
                       <option selected>触达后28天内转化数据</option>
-                      <option>全量广告与自然转化数据（FSI）</option>
+                      <option>全量广告与自然转化数据（ASI&FSI)</option>
                       <option>5年零售数据（ARP）</option>
                     </select>
                   </div>
@@ -22645,7 +22660,7 @@
                     <label><span class="required">*</span>数据源<span class="field-help" aria-hidden="true">?</span></label>
                     <select id="createFrameDataSelect" aria-label="02模型数据源">
                       <option selected>触达后28天内转化数据</option>
-                      <option>全量广告与自然转化数据（FSI）</option>
+                      <option>全量广告与自然转化数据（ASI&FSI)</option>
                       <option>5年零售数据（ARP）</option>
                     </select>
                   </div>
@@ -24209,7 +24224,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       };
 
       const syncAggregationState = () => {
-        const shouldDisableParent = dataSelect.value === "触达后28天内转化数据" || dataSelect.value === "全量广告与自然转化数据（FSI）";
+         const shouldDisableParent = dataSelect.value === "触达后28天内转化数据" || dataSelect.value === "全量广告与自然转化数据（ASI&FSI)";
         const parentInput = parentAsinOption.querySelector("input[type='checkbox']");
         parentAsinOption.classList.toggle("is-disabled", shouldDisableParent);
         parentAsinOption.setAttribute("aria-disabled", String(shouldDisableParent));
@@ -33735,7 +33750,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             </colgroup>
             <thead>
               <tr>
-                <th>ASIN</th>
+                <th>二购Item</th>
                 <th class="is-right">${escapeHtml(metricLabel)}</th>
                 <th class="is-right">占比</th>
               </tr>
@@ -34008,7 +34023,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             });
             const same = readPoint(params.find(item => item.seriesName === "同品二购"));
             const cross = readPoint(params.find(item => item.seriesName === "跨品二购"));
-            return `<strong>${escapeHtml(params[0]?.axisValue || "")}</strong><br>同品二购：${frameModule6FormatNumber(same.users)}人次 / ${frameModule6FormatCompactMoney(same.sales)}<br>跨品二购：${frameModule6FormatNumber(cross.users)}人次 / ${frameModule6FormatCompactMoney(cross.sales)}`;
+            return `<strong>${escapeHtml(params[0]?.axisValue || "")}</strong><br>同品二购：${frameModule6FormatNumber(same.users)}人 / ${frameModule6FormatCompactMoney(same.sales)}<br>跨品二购：${frameModule6FormatNumber(cross.users)}人 / ${frameModule6FormatCompactMoney(cross.sales)}`;
           }
         },
         xAxis: {
@@ -34020,7 +34035,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         },
         yAxis: {
           type: "value",
-          name: "购买人次",
+          name: "购买人数",
           nameLocation: "middle",
           nameGap: 48,
           axisLabel: { color: "#8a98aa", fontSize: 12, margin: 8 },
@@ -34634,7 +34649,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const yMidPosition = yScale(yMid);
       const radiusScale = value => 5 + Math.sqrt(Math.max(0, Number(value || 0) - minSize) / Math.max(1, maxSize - minSize)) * 15;
       const baselineSuffix = frameModule2State.matrixBaseline === "mean" ? "Avg." : "Med.";
-      const xBaselineLabel = `总购买用户数 ${frameModule2FormatNumber(Math.round(Number(xMid || 0)))} (${baselineSuffix})`;
+      const xBaselineName = isLead ? "Lead Item总购买用户数" : "来源Lead Item数量";
+      const xBaselineLabel = `${xBaselineName} ${frameModule2FormatNumber(Math.round(Number(xMid || 0)))} (${baselineSuffix})`;
       const yBaselineLabel = `${yLabel} ${frameModule2FormatPercent(yMid)} (${baselineSuffix})`;
       const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
       const estimatedBaselineTextWidth = value => Array.from(String(value || ""))
