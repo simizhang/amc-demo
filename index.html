@@ -6007,10 +6007,14 @@
       padding-left: 25px;
     }
 
+    .amc-module3-quality-layout [data-frame-module3-chart-id="3.4"] > .amc-module3-panel-head {
+      flex-wrap: wrap;
+    }
+
     .amc-module3-quality-layout[data-quality-layout-style="style2"][data-quality-active-tab="heatmap"] [data-frame-module3-chart-id="3.4"] .amc-module3-heatmap-tools {
-      display: grid;
-      grid-template-columns: max-content 100px 146px max-content;
-      grid-template-areas: "sample top metric tabs";
+      display: flex;
+      max-width: 100%;
+      margin-left: auto;
       justify-content: end;
       align-items: center;
       column-gap: 8px;
@@ -6018,18 +6022,11 @@
     }
 
     .amc-module3-quality-layout[data-quality-layout-style="style2"][data-quality-active-tab="heatmap"] [data-frame-module3-chart-id="3.4"] .amc-module3-heatmap-tools > .amc-module3-sample-filter {
-      grid-area: sample;
       order: 1;
     }
 
-    .amc-module3-quality-layout[data-quality-layout-style="style2"][data-quality-active-tab="heatmap"] [data-frame-module3-chart-id="3.4"] .amc-module3-heatmap-tools > .amc-module3-heatmap-top-select {
-      grid-area: top;
+    .amc-module3-quality-layout[data-quality-layout-style="style2"][data-quality-active-tab="heatmap"] [data-frame-module3-chart-id="3.4"] .amc-module3-heatmap-tools > .amc-module3-heatmap-rank-filter {
       order: 2;
-    }
-
-    .amc-module3-quality-layout[data-quality-layout-style="style2"][data-quality-active-tab="heatmap"] [data-frame-module3-chart-id="3.4"] .amc-module3-heatmap-tools > .amc-module3-heatmap-metric-select {
-      grid-area: metric;
-      order: 3;
     }
 
     .amc-module3-quality-layout[data-quality-layout-style="style2"][data-quality-active-tab="heatmap"] [data-frame-module3-chart-id="3.4"] .amc-module3-heatmap-tools > .amc-module3-quality-tabs {
@@ -6856,12 +6853,49 @@
       padding-left: 26px;
     }
 
+    .amc-module3-heatmap-rank-filter {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      max-width: 100%;
+      border: 1px solid #d8e2f0;
+      border-radius: 5px;
+      background: #fff;
+    }
+
     .amc-module3-heatmap-tools .amc-module3-heatmap-metric-select {
-      min-width: 148px;
+      width: max-content;
+      min-width: 0;
+      flex: 0 0 auto;
     }
 
     .amc-module3-heatmap-tools .amc-module3-heatmap-top-select {
-      min-width: 86px;
+      width: 114px;
+      min-width: 0;
+      border-left: 1px solid #d8e2f0;
+    }
+
+    .amc-module3-heatmap-tools .amc-module3-heatmap-rank-filter .amc-compact-select select {
+      height: 30px;
+      border: 0;
+    }
+
+    .amc-module3-heatmap-tools #frameModule34Metric {
+      width: auto;
+      padding-right: 10px;
+      border-radius: 4px 0 0 4px;
+      background: #f7f9fc;
+      color: #7b89a2;
+      font-weight: 400;
+    }
+
+    .amc-module3-heatmap-tools #frameModule34TopN {
+      border-radius: 0 4px 4px 0;
+      background: #fff;
+    }
+
+    .amc-module3-heatmap-tools .amc-module3-heatmap-rank-filter .amc-compact-select select:focus-visible {
+      box-shadow: inset 0 0 0 2px #91a5e9;
     }
 
     .amc-module3-heatmap-tools .amc-compact-select select {
@@ -7267,6 +7301,8 @@
 
       .amc-module3-quality-layout[data-quality-layout-style="style2"][data-quality-active-tab="heatmap"] [data-frame-module3-chart-id="3.4"] .amc-module3-heatmap-tools {
         display: flex;
+        margin-left: 0;
+        justify-content: flex-start;
         gap: 8px;
       }
 
@@ -21946,25 +21982,26 @@
                           <option value="0">不限</option>
                         </select>
                       </label>
-                      <label class="amc-compact-select amc-module3-heatmap-top-select">
-                        <span class="sr-only">TOP值选择</span>
-                        <select id="frameModule34TopN" aria-label="TOP值选择">
-                          <option value="10">TOP 10</option>
-                          <option value="15">TOP 15</option>
-                          <option value="20" selected>TOP 20</option>
-                          <option value="30">TOP 30</option>
-                        </select>
-                      </label>
-                      <label class="amc-compact-select amc-module3-heatmap-metric-select">
-                        <span class="sr-only">排序指标</span>
-                        <select id="frameModule34Metric" aria-label="排序指标">
-                          <option value="scaleAdjustedScore">修正关联指数</option>
-                          <option value="associationScore">原始关联指数</option>
-                          <option value="conversionRate">转化率</option>
-                          <option value="attractionRate">吸引率</option>
-                          <option value="crossUsers">交叉购买用户数</option>
-                        </select>
-                      </label>
+                      <div class="amc-module3-heatmap-rank-filter" role="group" aria-label="按所选指标取TOP组合">
+                        <label class="amc-compact-select amc-module3-heatmap-metric-select">
+                          <span class="sr-only">排序指标</span>
+                          <select id="frameModule34Metric" aria-label="排序指标">
+                            <option value="scaleAdjustedScore">修正关联指数</option>
+                            <option value="associationScore">原始关联指数</option>
+                            <option value="conversionRate">转化率</option>
+                            <option value="attractionRate">吸引率</option>
+                            <option value="crossUsers">交叉购买用户数</option>
+                          </select>
+                        </label>
+                        <label class="amc-compact-select amc-module3-heatmap-top-select">
+                          <span class="sr-only">TOP值选择</span>
+                          <select id="frameModule34TopN" aria-label="TOP值选择">
+                            <option value="10">TOP 10</option>
+                            <option value="15">TOP 15</option>
+                            <option value="20" selected>TOP 20</option>
+                          </select>
+                        </label>
+                      </div>
                       <div class="amc-segmented-control amc-module3-quality-tabs" role="tablist" aria-label="关联质量图表">
                         <button class="amc-segment-btn is-active" type="button" data-frame-module3-quality-tab="heatmap" role="tab" aria-selected="true">关联热力图</button>
                         <button class="amc-segment-btn" type="button" data-frame-module3-quality-tab="mechanism" role="tab" aria-selected="false">关联机制</button>
@@ -26193,10 +26230,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     const frameModule3Data = frameModule3BuildData();
 
-    const frameModule3FullSummaryByMinSample = {
-      0: { totalPairs: 2104, qualityPairs: 2104, overlapPairs: 1 },
-      10: { totalPairs: 2104, qualityPairs: 649, overlapPairs: 4 },
-      20: { totalPairs: 2104, qualityPairs: 298, overlapPairs: 4 }
+    const frameModule3FullSummary = { totalPairs: 2104, overlapPairs: 4 };
+    const frameModule3FullQualityPairsByMinSample = {
+      0: 2104,
+      10: 649,
+      20: 298
     };
 
     function frameIntroSetText(id, value) {
@@ -26377,11 +26415,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function frameModule3BuildSummary(records, qualityRecords) {
       const uniquePairs = new Set(records.map(record => record.pairKey).filter(Boolean));
       const qualityPairs = new Set(qualityRecords.map(record => record.pairKey).filter(Boolean));
-      const scaleTop = new Set([...qualityRecords]
+      const scaleTop = new Set([...records]
         .sort(frameModule3RankByScale)
         .slice(0, 15)
         .map(record => record.pairKey));
-      const qualityTop = new Set([...qualityRecords]
+      const qualityTop = new Set([...records]
         .sort(frameModule3RankByQuality)
         .slice(0, 15)
         .map(record => record.pairKey));
@@ -26399,10 +26437,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
 
     function frameModule3RenderSummary(records, qualityRecords) {
       const minSample = Number(frameModule3State.qualityMinSample || 0);
-      const fullSummary = frameModule3FullSummaryByMinSample[minSample];
-      const summary = !frameModule3HasGlobalFilters() && fullSummary
-        ? fullSummary
-        : frameModule3BuildSummary(records, qualityRecords);
+      const summary = frameModule3BuildSummary(records, qualityRecords);
+      if (!frameModule3HasGlobalFilters()) {
+        summary.totalPairs = frameModule3FullSummary.totalPairs;
+        summary.overlapPairs = frameModule3FullSummary.overlapPairs;
+        summary.qualityPairs = frameModule3FullQualityPairsByMinSample[minSample] ?? summary.qualityPairs;
+      }
       frameIntroSetText("frameModule3KpiTotalPairs", frameModule2FormatNumber(summary.totalPairs));
       frameIntroSetText("frameModule3KpiQualityPairs", frameModule2FormatNumber(summary.qualityPairs));
       frameIntroSetText("frameModule3KpiOverlapPairs", frameModule2FormatNumber(summary.overlapPairs));
@@ -26925,14 +26965,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <td class="is-right"><span class="amc-module3-detail-percent">${frameModule3FormatMetric(record.conversionRate, "percent")}</span></td>
               <td class="is-right"><span class="amc-module3-detail-percent">${frameModule3FormatMetric(record.attractionRate, "percent")}</span></td>
               <td class="is-right">${frameDetailUsersProgressCell(record.crossUsers, "amc-module3-detail-number", maxCrossUsers)}</td>
-              <td class="is-right"><span class="amc-module3-detail-number">${frameModule2FormatNumber(record.crossPurchaseComboCount)}</span></td>
               <td class="is-right"><span class="amc-module3-detail-number">${frameModule3FormatMoney(record.leadPrice)}</span></td>
               <td class="is-right"><span class="amc-module3-detail-number">${frameModule3FormatMoney(record.followPrice)}</span></td>
               <td class="is-right"><span class="amc-module3-detail-number">${Number(record.priceMultiple || 0).toFixed(2)}x</span></td>
               <td class="is-right"><span class="amc-module3-detail-number">${frameModule4FormatDays(record.avgInterval)}</span></td>
             </tr>`;
           }).join("")
-        : `<tr><td colspan="12" class="amc-list-empty-cell is-center"><span class="amc-list-empty">暂无满足当前筛选条件的关联组合</span></td></tr>`;
+        : `<tr><td colspan="11" class="amc-list-empty-cell is-center"><span class="amc-list-empty">暂无满足当前筛选条件的关联组合</span></td></tr>`;
 
       wrap.innerHTML = `
         <div class="amc-module3-detail-table-scroll" data-detail-total-pages="${pagination.totalPages}">
@@ -26944,7 +26983,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             <col style="width:8.5%">
             <col style="width:5%">
             <col style="width:5%">
-            <col style="width:8.5%">
             <col style="width:8.5%">
             <col style="width:9%">
             <col style="width:10%">
@@ -26960,7 +26998,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <th class="is-right">转化率</th>
               <th class="is-right">吸引率</th>
               <th class="is-right">交叉购买用户数</th>
-              <th class="is-right">交叉购买组合数</th>
               <th class="is-right">Lead Item 单价</th>
               <th class="is-right">Follow Item 单价</th>
               <th class="is-right">价格倍数</th>
@@ -27209,10 +27246,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const chart = frameModule3GetChart("frameModule32Chart");
       if (!chart) return;
       const targetPath = "flat";
-      const pairCount = records.filter(record => record.pricePath === targetPath).length;
       const subtitle = document.getElementById("frameModule32Subtitle");
       if (subtitle) {
-        subtitle.textContent = `交叉购买组合数：${frameModule2FormatNumber(pairCount)}个；按交叉购买用户数展示${frameModule3PricePathLabel(targetPath)} TOP 5商品组合。`;
+        subtitle.textContent = `按交叉购买用户数展示${frameModule3PricePathLabel(targetPath)} TOP 5商品组合。`;
       }
       const rows = records
         .filter(record => record.pricePath === targetPath)
@@ -27232,7 +27268,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = rows[params[0]?.dataIndex];
             return record
-              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}<br>交叉购买组合数：${frameModule2FormatNumber(pairCount)}个<br>价格路径：${frameModule3PricePathLabel(record.pricePath)}<br>交叉购买平均间隔：${record.avgInterval.toFixed(2)} 天`
+              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}<br>价格路径：${frameModule3PricePathLabel(record.pricePath)}<br>交叉购买平均间隔：${record.avgInterval.toFixed(2)} 天`
               : "";
           }
         },
@@ -27283,11 +27319,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         : ["downgrade", "upgrade"];
       const leftLabel = frameModule3PricePathCompareLabel(leftPath);
       const rightLabel = frameModule3PricePathCompareLabel(rightPath);
-      const leftPairCount = records.filter(record => record.pricePath === leftPath).length;
-      const rightPairCount = records.filter(record => record.pricePath === rightPath).length;
       const subtitle = document.getElementById("frameModule33Subtitle");
       if (subtitle) {
-        subtitle.textContent = `交叉购买组合数（${leftLabel}）：${frameModule2FormatNumber(leftPairCount)}个；交叉购买组合数（${rightLabel}）：${frameModule2FormatNumber(rightPairCount)}个；条形长度代表交叉购买用户数。`;
+        subtitle.textContent = `左侧为${leftLabel}，右侧为${rightLabel}；条形长度代表交叉购买用户数。`;
       }
       const colors = frameModule3PathColors;
       const topByPath = path => records
@@ -27353,7 +27387,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = params.data?.record;
             if (!record) return "";
-            return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>价格路径：${params.seriesName}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}<br>交叉购买组合数：${frameModule2FormatNumber(params.seriesName === leftLabel ? leftPairCount : rightPairCount)}个<br>交叉购买平均间隔：${record.avgInterval.toFixed(2)} 天<br>Lead ASIN单价：${frameModule3FormatMoney(record.leadPrice)}<br>Follow ASIN单价：${frameModule3FormatMoney(record.followPrice)}<br>价格倍数：${record.priceMultiple.toFixed(2)}x`;
+            return `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>价格路径：${params.seriesName}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}<br>交叉购买平均间隔：${record.avgInterval.toFixed(2)} 天<br>Lead ASIN单价：${frameModule3FormatMoney(record.leadPrice)}<br>Follow ASIN单价：${frameModule3FormatMoney(record.followPrice)}<br>价格倍数：${record.priceMultiple.toFixed(2)}x`;
           }
         },
         xAxis: {
@@ -27552,16 +27586,17 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const baseData = leadAsins.flatMap((leadAsin, leadPosition) => (
         followAsins.map((followAsin, followPosition) => [followPosition, leadPosition, 0])
       ));
-      const recordMap = new Map(records.map(record => [`${record.leadAsin}||${record.followAsin}`, record]));
+      const recordMap = new Map(topRecords.map(record => [`${record.leadAsin}||${record.followAsin}`, record]));
       const hasSelectedPair = frameModule3HasSelectedPairs();
       const heatData = leadAsins.flatMap((leadAsin, leadPosition) => (
         followAsins.map((followAsin, followPosition) => {
           const record = recordMap.get(`${leadAsin}||${followAsin}`);
-          const value = record ? frameModule3MetricValue(record, frameModule3State.matrixMetric) : 0;
-          const selected = record && frameModule3IsPairSelected(record.pairKey);
+          if (!record) return null;
+          const value = frameModule3MetricValue(record, frameModule3State.matrixMetric);
+          const selected = frameModule3IsPairSelected(record.pairKey);
           return {
             value: [followPosition, leadPosition, value],
-            pairKey: record?.pairKey,
+            pairKey: record.pairKey,
             record,
             itemStyle: selected
               ? {
@@ -27578,7 +27613,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
                   opacity: hasSelectedPair ? 0.72 : 1
                 }
           };
-        })
+        }).filter(Boolean)
       ));
       chart.setOption({
         animation: false,
@@ -28407,7 +28442,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
       topNSelect?.addEventListener("change", event => {
         const nextTopN = Number(event.target.value);
-        if (![10, 15, 20, 30].includes(nextTopN) || nextTopN === Number(frameModule3State.matrixTopN)) return;
+        if (![10, 15, 20].includes(nextTopN) || nextTopN === Number(frameModule3State.matrixTopN)) return;
         frameModule3State.matrixTopN = nextTopN;
         frameModule3State.selectedPairKey = null;
         frameModule3RenderAll();
@@ -31710,12 +31745,11 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <td title="${escapeHtml(record.pairLabel)}">${pairCell(record)}</td>
               <td class="amc-module4-detail-rhythm-cell"><span class="amc-module4-rhythm-badge amc-module4-detail-rhythm-badge ${escapeHtml(record.rhythm)}">${escapeHtml(frameModule4RhythmLabels[record.rhythm] || "")}</span></td>
               <td class="is-right">${frameDetailUsersProgressCell(record.crossUsers, "amc-module4-detail-value", maxCrossUsers)}</td>
-              <td class="is-right"><span class="amc-module4-detail-value">${frameModule2FormatNumber(record.crossPurchaseComboCount)}</span></td>
               <td><span class="amc-module4-detail-value">${frameModule4FormatDays(record.avgInterval)}</span></td>
               <td><span class="amc-module4-detail-value">${frameModule4FormatDays(frameModule4MinInterval(record))}</span></td>
             </tr>`;
       }).join("");
-      const bodyHtml = rows || `<tr><td class="amc-list-empty-cell" colspan="7"><span class="amc-list-empty">暂无满足当前购买节奏的高价值组合</span></td></tr>`;
+      const bodyHtml = rows || `<tr><td class="amc-list-empty-cell" colspan="6"><span class="amc-list-empty">暂无满足当前购买节奏的高价值组合</span></td></tr>`;
       wrap.innerHTML = `
         <div class="amc-module4-detail-table-scroll" data-detail-total-pages="${pagination.totalPages}">
         <table class="amc-module4-detail-table">
@@ -31723,7 +31757,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             <col style="width:5%">
             <col style="width:30%">
             <col style="width:11%">
-            <col style="width:13%">
             <col style="width:13%">
             <col style="width:14%">
             <col style="width:14%">
@@ -31734,7 +31767,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <th>Lead → Follow</th>
               <th>购买节奏</th>
               <th>交叉购买用户数</th>
-              <th>交叉购买组合数</th>
               <th>交叉购买平均间隔</th>
               <th>平均最短关联间隔</th>
             </tr>
@@ -32208,7 +32240,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           formatter: params => {
             const record = params.data?.record;
             return record
-              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>策略：${escapeHtml(record.strategyLabel)}<br>价格路径：${escapeHtml(frameModule3PricePathLabel(record.pricePath))}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}人<br>交叉购买组合数：${frameModule2FormatNumber(record.crossPurchaseComboCount)}个<br>交叉购买平均间隔：${frameModule4FormatDays(record.avgInterval)}<br>价格差：${frameModule5FormatMoney(record.priceDiff)}<br>修正关联指数：${Number(record.scaleScore || 0).toFixed(2)}`
+              ? `<strong>${escapeHtml(frameLabelFormatText(record.pairLabel))}</strong><br>策略：${escapeHtml(record.strategyLabel)}<br>价格路径：${escapeHtml(frameModule3PricePathLabel(record.pricePath))}<br>交叉购买用户数：${frameModule2FormatNumber(record.crossUsers)}人<br>交叉购买平均间隔：${frameModule4FormatDays(record.avgInterval)}<br>价格差：${frameModule5FormatMoney(record.priceDiff)}<br>修正关联指数：${Number(record.scaleScore || 0).toFixed(2)}`
               : "";
           }
         },
@@ -32373,7 +32405,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
             <col style="width:460px">
             <col style="width:150px">
             <col style="width:144px">
-            <col style="width:122px">
             <col style="width:140px">
             <col style="width:144px">
             <col style="width:164px">
@@ -32395,7 +32426,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <th>Lead → Follow</th>
               <th>策略</th>
               <th class="is-right">交叉购买用户数</th>
-              <th class="is-right">交叉购买组合数</th>
               <th class="is-right">Lead ASIN 总购买用户数</th>
               <th class="is-right">Follow ASIN 总购买用户数</th>
               <th class="is-right">交叉购买平均间隔</th>
@@ -32421,7 +32451,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
                   <td title="${escapeHtml(record.pairLabel)}">${pairCell(record)}</td>
                   <td>${frameModule5StrategyTag(record, priorityKeys)}</td>
                   <td class="is-right"><span class="amc-module5-detail-value">${frameModule2FormatNumber(record.crossUsers)}</span></td>
-                  <td class="is-right"><span class="amc-module5-detail-value">${frameModule2FormatNumber(record.crossPurchaseComboCount)}</span></td>
                   <td class="is-right"><span class="amc-module5-detail-value">${frameModule2FormatNumber(record.leadUsers)}</span></td>
                   <td class="is-right"><span class="amc-module5-detail-value">${frameModule2FormatNumber(record.followUsers)}</span></td>
                   <td class="is-right"><span class="amc-module5-detail-value">${frameModule4FormatDays(record.avgInterval)}</span></td>
@@ -33822,7 +33851,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       }
       const topNLabel = `TOP ${topN}`;
       const totalAll = (entry.followItems || []).reduce((sum, item) => sum + Number(item[metricKey] || 0), 0);
-      const coverage = totalVisible / Math.max(1, totalAll);
       const data = slices.map((item, index) => {
         const palette = item.same ? frameModule6Palette.same : frameModule6Palette.cross;
         const color = palette[index % palette.length];
@@ -33894,19 +33922,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
                   fontSize: 17,
                   fontWeight: 700,
                   lineHeight: 20,
-                  textAlign: "center"
-                }
-              },
-              {
-                type: "text",
-                left: "center",
-                top: 21,
-                style: {
-                  text: `覆盖率：${frameModule6FormatPercent(coverage)}`,
-                  fill: "#7b89a2",
-                  fontSize: 11,
-                  fontWeight: 400,
-                  lineHeight: 16,
                   textAlign: "center"
                 }
               }
@@ -37010,7 +37025,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     const frameGlobalMetricSelectHelp = {
       frameTopPairsSort: "选择核心组合 TOP 表的排序指标。",
       frameRankingMetric: "选择 ASIN 排名图的展示指标。",
-      frameModule34Metric: "选择关联热力图的颜色编码指标。",
+      frameModule34Metric: "按所选指标降序取右侧 TOP 数量，并使用该指标进行颜色编码。",
       topSortMetric: "选择 TOP20 关联商品组合的排序指标。"
     };
 
