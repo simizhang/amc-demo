@@ -22858,7 +22858,7 @@
                     </svg>
                     <span>下载数据</span>
                   </button>
-                  <button class="custom-mapping-clear" id="customMappingClearBtn" type="button">
+                  <button class="custom-mapping-clear" id="customMappingClearBtn" type="button" aria-label="删除映射表">
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                       <path d="M4 7h16"></path>
                       <path d="M9 7V4.5h6V7"></path>
@@ -22866,7 +22866,7 @@
                       <path d="M10 11v5"></path>
                       <path d="M14 11v5"></path>
                     </svg>
-                    <span>清空映射表</span>
+                    <span>删除映射表</span>
                   </button>
                 </div>
               </header>
@@ -23308,17 +23308,17 @@
     </section>
   </div>
   <div class="custom-label-modal custom-mapping-clear-modal" id="customMappingClearModal" hidden>
-    <section class="custom-label-modal-dialog custom-mapping-clear-dialog" role="alertdialog" aria-modal="true" aria-labelledby="customMappingClearTitle">
+    <section class="custom-label-modal-dialog custom-mapping-clear-dialog" role="alertdialog" aria-modal="true" aria-labelledby="customMappingClearTitle" aria-describedby="customMappingClearDescription">
       <header class="custom-label-modal-head">
-        <h2 id="customMappingClearTitle">确认清空映射表</h2>
+        <h2 id="customMappingClearTitle">确认删除映射表</h2>
         <button class="custom-label-modal-close" id="customMappingClearClose" type="button" aria-label="关闭">×</button>
       </header>
       <div class="custom-mapping-clear-body">
-        <div class="custom-mapping-clear-warning">
+        <div class="custom-mapping-clear-warning" id="customMappingClearDescription">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 22 21H2L12 3Zm0 5.8v5.5m0 3.1v.1"></path></svg>
-          <span>清空后将删除当前映射文件及文件中的全部记录。</span>
+          <span>删除后将移除当前映射文件及文件中的全部记录。</span>
         </div>
-        <p class="custom-mapping-clear-note">当前范围：<strong id="customMappingClearFileName">-</strong>，共 <strong id="customMappingClearCount">0</strong> 条。清空前系统会自动备份，备份文件可在「操作记录」中下载。</p>
+        <p class="custom-mapping-clear-note">当前范围：<strong id="customMappingClearFileName">-</strong>，共 <strong id="customMappingClearCount">0</strong> 条。删除前系统会自动备份，备份文件可在「操作记录」中下载。</p>
         <ul class="custom-mapping-clear-list">
           <li>已生成的 AMC 报告不受影响。</li>
           <li>新的 AMC 报告暂无法创建基于当前<strong id="customMappingClearDimension">-</strong>维度的报告。</li>
@@ -23326,7 +23326,7 @@
         </ul>
         <label class="custom-mapping-clear-check" for="customMappingClearAcknowledged">
           <input id="customMappingClearAcknowledged" type="checkbox">
-          <span>我已确认清空范围，并了解该操作不可恢复</span>
+          <span>我已确认删除范围，并了解该操作不可恢复</span>
         </label>
       </div>
       <footer class="custom-label-modal-foot">
@@ -23339,7 +23339,7 @@
             <path d="M10 11v5"></path>
             <path d="M14 11v5"></path>
           </svg>
-          <span>确认清空</span>
+          <span>确认删除</span>
         </button>
       </footer>
     </section>
@@ -29905,7 +29905,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     function openCustomMappingClearModal() {
       const selectedFile = customMappingSelectedFile();
       if (!selectedFile || !(selectedFile.records || []).length) {
-        frameLabelToast("当前映射表暂无可清空数据");
+        frameLabelToast("当前映射表暂无可删除数据");
         return;
       }
       const modal = document.getElementById("customMappingClearModal");
