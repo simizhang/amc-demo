@@ -20415,6 +20415,51 @@
       outline: none;
     }
 
+    body[data-page="amcFrame"] .amc-module5-sort-header {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      text-align: right;
+      white-space: nowrap;
+      overflow: visible;
+      font-size: 11px;
+    }
+
+    body[data-page="amcFrame"] .amc-module5-sort-help {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 13px;
+      height: 13px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      font-size: 9px;
+      line-height: 1;
+      opacity: .95;
+      flex: 0 0 13px;
+    }
+
+    body[data-page="amcFrame"] .amc-module5-sort-arrow {
+      color: #7b89a2;
+      font-size: 12px;
+      line-height: 1;
+      flex: 0 0 auto;
+      display: inline-block;
+    }
+
+    body[data-page="amcFrame"] .amc-module5-sort-header:hover,
+    body[data-page="amcFrame"] .amc-module5-sort-header:focus-visible {
+      color: #4d66bd;
+      outline: none;
+    }
+
     body[data-page="amcFrame"] .amc-module5-detail-score-col {
       padding-right: 12px;
       padding-left: 8px;
@@ -21174,7 +21219,7 @@
                       <td>交叉购买率</td>
                       <td>待补充</td>
                       <td>衡量 Lead ASIN 带动品牌内连带消费的能力。</td>
-                      <td>总交叉购买用户数 / Lead ASIN 总购买用户数 * 100%。</td>
+                      <td>总交叉购买用户数 / Lead ASIN总购买用户数 * 100%。</td>
                       <td>数值型</td>
                       <td>百分比</td>
                       <td>2</td>
@@ -21343,7 +21388,7 @@
                       <td>转化率</td>
                       <td>conversion_rate</td>
                       <td>买了 A 的人中，有多少比例随后买了 B。</td>
-                      <td>总交叉购买用户数 / Lead ASIN 总购买用户数 * 100%。</td>
+                      <td>总交叉购买用户数 / Lead ASIN总购买用户数 * 100%。</td>
                       <td>数值型</td>
                       <td>百分比</td>
                       <td>2</td>
@@ -21356,7 +21401,7 @@
                       <td>吸引率</td>
                       <td>attraction_rate</td>
                       <td>买了 B 的人中，有多少比例是从 A 带过来的。</td>
-                      <td>总交叉购买用户数 / Follow ASIN 总购买用户数 * 100%。</td>
+                      <td>总交叉购买用户数 / Follow ASIN总购买用户数 * 100%。</td>
                       <td>数值型</td>
                       <td>百分比</td>
                       <td>2</td>
@@ -21420,7 +21465,7 @@
                     <tr>
                       <td>Lead ASIN数</td>
                       <td>Lead ASIN Count</td>
-                      <td>Lead ASIN 数量。</td>
+                      <td>Lead ASIN数量。</td>
                       <td>--</td>
                       <td>数值型</td>
                       <td>整数</td>
@@ -21433,7 +21478,7 @@
                     <tr>
                       <td>Follow ASIN数</td>
                       <td>Follow ASIN Count</td>
-                      <td>Follow ASIN 数量。</td>
+                      <td>Follow ASIN数量。</td>
                       <td>--</td>
                       <td>数值型</td>
                       <td>整数</td>
@@ -22178,17 +22223,17 @@
                 <article class="amc-module4-kpi quick" id="frameModule4KpiQuickCard" data-module4-kpi-rhythm="quick" tabindex="0">
                   <span class="amc-module4-kpi-label">快速关联</span>
                   <div class="amc-module4-kpi-value-line"><strong class="amc-module4-kpi-value" id="frameModule4KpiQuick">0</strong><span class="amc-module4-kpi-unit">组</span></div>
-                  <span class="amc-module4-kpi-note" id="frameModule4KpiQuickNote">≤90天 | 路径人次 <span class="amc-module4-kpi-share">0.00%</span></span>
+                  <span class="amc-module4-kpi-note" id="frameModule4KpiQuickNote">≤90天 | 路径人次占比 <span class="amc-module4-kpi-share">0.00%</span></span>
                 </article>
                 <article class="amc-module4-kpi stable" id="frameModule4KpiStableCard" data-module4-kpi-rhythm="stable" tabindex="0">
                   <span class="amc-module4-kpi-label">稳定培育</span>
                   <div class="amc-module4-kpi-value-line"><strong class="amc-module4-kpi-value" id="frameModule4KpiStable">0</strong><span class="amc-module4-kpi-unit">组</span></div>
-                  <span class="amc-module4-kpi-note" id="frameModule4KpiStableNote">91-180天 | 路径人次 <span class="amc-module4-kpi-share">0.00%</span></span>
+                  <span class="amc-module4-kpi-note" id="frameModule4KpiStableNote">91-180天 | 路径人次占比 <span class="amc-module4-kpi-share">0.00%</span></span>
                 </article>
                 <article class="amc-module4-kpi long" id="frameModule4KpiLongCard" data-module4-kpi-rhythm="long" tabindex="0">
                   <span class="amc-module4-kpi-label">长尾关联</span>
                   <div class="amc-module4-kpi-value-line"><strong class="amc-module4-kpi-value" id="frameModule4KpiLong">0</strong><span class="amc-module4-kpi-unit">组</span></div>
-                  <span class="amc-module4-kpi-note" id="frameModule4KpiLongNote">>180天 | 路径人次 <span class="amc-module4-kpi-share">0.00%</span></span>
+                  <span class="amc-module4-kpi-note" id="frameModule4KpiLongNote">>180天 | 路径人次占比 <span class="amc-module4-kpi-share">0.00%</span></span>
                 </article>
               </div>
 
@@ -26127,6 +26172,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       scale3PricePath: "upgrade",
       detailPricePath: "",
       detailAsinQuery: "",
+      detailSortKey: "scaleScore",
+      detailSortDir: "desc",
       selectedPairKey: null,
       multiSelectMode: false,
       multiSelectionApplied: false,
@@ -26998,8 +27045,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <th class="is-right">转化率</th>
               <th class="is-right">吸引率</th>
               <th class="is-right">交叉购买用户数</th>
-              <th class="is-right">Lead Item 单价</th>
-              <th class="is-right">Follow Item 单价</th>
+              <th class="is-right">Lead Item单价</th>
+              <th class="is-right">Follow Item单价</th>
               <th class="is-right">价格倍数</th>
               <th class="is-right">平均交叉购买间隔</th>
             </tr>
@@ -28733,7 +28780,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function frameModule4RenderKpiNote(label, share, users) {
-      return `${escapeHtml(label)} | 路径人次 <span class="amc-module4-kpi-share">${frameModule4FormatShare(share)}</span><span class="amc-module4-kpi-users"> · ${frameModule2FormatNumber(users)}人</span>`;
+      return `${escapeHtml(label)} | 路径人次占比 <span class="amc-module4-kpi-share">${frameModule4FormatShare(share)}</span><span class="amc-module4-kpi-users"> · ${frameModule2FormatNumber(users)}人</span>`;
     }
 
     function frameModule4KpiTooltipHtml(rhythm) {
@@ -32206,7 +32253,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         graphic: [
           {
             type: "text",
-            right: 10,
+            left: "center",
             top: 35,
             silent: true,
             style: {
@@ -32214,14 +32261,14 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               fill: "#34445f",
               fontSize: 11,
               fontWeight: 400,
-              textAlign: "right"
+              textAlign: "center"
             }
           }
         ],
         grid: { left: 82, right: 24, top: 78, bottom: 72 },
         legend: {
           top: 10,
-          right: 10,
+          left: "center",
           itemWidth: 10,
           itemHeight: 10,
           itemGap: 16,
@@ -32426,8 +32473,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
               <th>Lead → Follow</th>
               <th>策略</th>
               <th class="is-right">交叉购买用户数</th>
-              <th class="is-right">Lead ASIN 总购买用户数</th>
-              <th class="is-right">Follow ASIN 总购买用户数</th>
+              <th class="is-right"><button type="button" class="amc-module5-sort-header" data-frame-module5-sort="leadUsers" title="Lead Item总购买用户数：统计周期内购买过 Lead ASIN 的独立用户总数。"><span>Lead Item总购买用户数</span><span class="amc-module5-sort-help" aria-hidden="true">?</span><span class="amc-module5-sort-arrow" aria-hidden="true">↕</span></button></th>
+              <th class="is-right"><button type="button" class="amc-module5-sort-header" data-frame-module5-sort="followUsers" title="Follow Item总购买用户数：统计周期内购买过 Follow ASIN 的独立用户总数。"><span>Follow Item总购买用户数</span><span class="amc-module5-sort-help" aria-hidden="true">?</span><span class="amc-module5-sort-arrow" aria-hidden="true">↕</span></button></th>
               <th class="is-right">交叉购买平均间隔</th>
               <th class="is-right">平均最短关联间隔</th>
               <th class="is-right">Lead ASIN单价</th>
@@ -32477,6 +32524,19 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         link.addEventListener("keydown", event => event.stopPropagation());
       });
       frameBindDetailPagination(container, "module5", () => frameModule5RenderDetailTable(container, rows, priorityKeys));
+      container.querySelectorAll("[data-frame-module5-sort]").forEach(button => {
+        button.addEventListener("click", event => {
+          event.stopPropagation();
+          const key = button.dataset.frameModule5Sort;
+          if (frameModule5State.detailSortKey === key) {
+            frameModule5State.detailSortDir = frameModule5State.detailSortDir === "asc" ? "desc" : "asc";
+          } else {
+            frameModule5State.detailSortKey = key;
+            frameModule5State.detailSortDir = "desc";
+          }
+          renderFrameModule5();
+        });
+      });
     }
 
     function frameModule5RenderDetailFilterOptions() {
@@ -32522,7 +32582,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       if (title) title.textContent = "组合明细表";
       const source = activeStrategyKey ? records.filter(record => record.strategyKey === activeStrategyKey) : records.slice();
       const detailSource = frameModule5FilterDetailRecords(source);
-      const sortKey = "scaleScore";
+      const sortKey = frameModule5State.detailSortKey || "scaleScore";
       const priorityKeys = frameModule5StrategyPriorityKeys(stats);
       const detailSorted = detailSource
         .slice()
@@ -34586,9 +34646,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const xKey = isLead ? "totalUsers" : "sourceLeadCount";
       const yKey = isLead ? "crossRate" : "captureRate";
       const sizeKey = isLead ? "associatedCombos" : "sourceLeadCount";
-      const xLabel = isLead ? "Lead ASIN总购买用户数" : "来源 Lead ASIN数量";
+      const xLabel = isLead ? "Lead ASIN总购买用户数" : "来源Lead ASIN数量";
       const yLabel = isLead ? "交叉购买率" : "收割率";
-      const roleTitle = isLead ? "Lead 视角：Lead ASIN总购买用户数与交叉购买率。" : "Follow 视角：来源 Lead ASIN数量与收割率。";
+      const roleTitle = isLead ? "Lead 视角：Lead ASIN总购买用户数与交叉购买率。" : "Follow 视角：来源Lead ASIN数量与收割率。";
       const asinRoleLabel = isLead ? "Lead ASIN" : "Follow ASIN";
       if (subtitle) subtitle.textContent = roleTitle;
       const matrixTitle = document.getElementById("frameRoleMatrixTitle");
@@ -35677,7 +35737,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           { key: "totalUsers", label: "总购买用户数", info: "购买该 ASIN 的去重用户数", width: "132px", align: "right", sortable: true },
           { key: "crossUsers", label: "交叉购买用户数", info: "购买该 Lead ASIN 后，至少购买一个不同 Follow ASIN 的去重用户数", width: "140px", align: "right", sortable: true },
           { key: "crossRate", label: "交叉购买率", info: "交叉购买用户数占总购买用户数的比例", width: "126px", align: "right", sortable: true },
-          { key: "relatedCount", label: "带动 Follow 数", info: "该 Lead ASIN 带动购买的 Follow ASIN 数量", width: "124px", align: "right", sortable: true },
+          { key: "relatedCount", label: "带动 Follow 数", info: "该 Lead ASIN 带动购买的 Follow ASIN数量", width: "124px", align: "right", sortable: true },
           { key: "avgInterval", label: "交叉购买平均间隔", info: "按交叉购买用户数加权计算的交叉购买平均间隔", width: "176px", align: "right", sortable: true }
         ]
         : [
@@ -35687,8 +35747,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
           { key: "price", label: "单价", info: "该 ASIN 的平均成交单价", width: "104px", align: "right", sortable: true },
           { key: "totalUsers", label: "总购买用户数", info: "购买该 ASIN 的去重用户数", width: "132px", align: "right", sortable: true },
           { key: "capturedUsers", label: "交叉购买用户数", info: "购买该 Follow ASIN 且此前购买过其他 Lead ASIN 的去重用户数", width: "140px", align: "right", sortable: true },
-          { key: "captureRate", label: "收割率", info: "Follow ASIN 交叉购买用户数 / Follow ASIN 总购买用户数", width: "126px", align: "right", sortable: true },
-          { key: "relatedCount", label: "来源 Lead 数", info: "带动该 Follow ASIN 购买的 Lead ASIN 数量", width: "124px", align: "right", sortable: true },
+          { key: "captureRate", label: "收割率", info: "Follow ASIN 交叉购买用户数 / Follow ASIN总购买用户数", width: "126px", align: "right", sortable: true },
+          { key: "relatedCount", label: "来源 Lead 数", info: "带动该 Follow ASIN 购买的 Lead ASIN数量", width: "124px", align: "right", sortable: true },
           { key: "avgInterval", label: "交叉购买平均间隔", info: "按交叉购买用户数加权计算的交叉购买平均间隔", width: "176px", align: "right", sortable: true }
         ];
     }
@@ -36993,12 +37053,12 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       { labels: ["原始关联指数"], description: "描述 Lead 与 Follow 双向购买关系的原始关联强度。" },
       { labels: ["交叉购买用户数"], description: "购买该 Lead → Follow 组合的用户数量。" },
       { labels: ["Lead ASIN总购买用户数", "总购买用户数"], description: "购买当前 ASIN 的去重用户数量。" },
-      { labels: ["Lead ASIN 总购买用户数"], description: "购买 Lead ASIN 的去重用户数量。" },
-      { labels: ["Follow ASIN 总购买用户数"], description: "购买 Follow ASIN 的去重用户数量。" },
-      { labels: ["带动Follow数"], description: "该 Lead ASIN 带动购买的 Follow ASIN 数量。" },
-      { labels: ["来源Lead数", "来源LeadASIN数量"], description: "带动当前 Follow ASIN 购买的 Lead ASIN 数量。" },
+      { labels: ["Lead ASIN总购买用户数"], description: "购买 Lead ASIN 的去重用户数量。" },
+      { labels: ["Follow ASIN总购买用户数"], description: "购买 Follow ASIN 的去重用户数量。" },
+      { labels: ["带动Follow数"], description: "该 Lead ASIN 带动购买的 Follow ASIN数量。" },
+      { labels: ["来源Lead数", "来源LeadASIN数量"], description: "带动当前 Follow ASIN 购买的 Lead ASIN数量。" },
       { labels: ["交叉购买率"], description: "交叉购买用户数占总购买用户数的比例。" },
-      { labels: ["收割率"], description: "Follow ASIN 交叉购买用户数 / Follow ASIN 总购买用户数。" },
+      { labels: ["收割率"], description: "Follow ASIN 交叉购买用户数 / Follow ASIN总购买用户数。" },
       { labels: ["二购率"], description: "完成二次购买的新客占入口 ASIN 新客人数的比例。" },
       { labels: ["转化率"], description: "购买 Lead ASIN 的用户中，完成 Follow ASIN 购买的比例。" },
       { labels: ["吸引率"], description: "购买 Follow ASIN 的用户中，来自指定 Lead ASIN 的比例。" },
