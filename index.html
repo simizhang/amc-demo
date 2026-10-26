@@ -20724,6 +20724,157 @@
       }
     }
   </style>
+<style>
+#createReportPage .create-layout{grid-template-columns:350px minmax(0,1fr);align-items:start}
+#createReportPage{background:linear-gradient(135deg,#EDF8FF,#F4F1FF 52%,#F7FBFF);padding:16px 12px}
+#createReportPage .create-info-card,#createReportPage .create-models-card{border:1px solid #E1E8F2;border-radius:8px;background:#fff;padding:20px}
+#createReportPage .report-form{gap:18px}#createReportPage .form-field label{font-size:13px;font-weight:500}
+#createReportPage input,#createReportPage select{min-width:0;max-width:100%;height:34px;border:1px solid #CDD8E8;border-radius:5px;padding:6px 10px;color:#1D2A3D;background:#fff;font:inherit;font-size:12px}
+#createReportPage input:disabled{background:#F8FAFD;color:#8894a9}
+#createReportPage [hidden],#reportsPage [hidden],#basketPage [hidden]{display:none!important}
+#createReportPage .create-footer{position:sticky;bottom:0;z-index:20;background:#fff;border:1px solid #E1E8F2;border-radius:8px;padding:12px 16px;margin-top:12px}
+.sub-segments{display:flex;gap:4px;background:#F2F4F8;border-radius:6px;padding:4px}
+.sub-segments button{flex:1;border:1px solid transparent;background:transparent;border-radius:4px;height:32px;color:#6B7890;cursor:pointer;font:inherit;font-size:12px}
+.sub-segments button[aria-pressed=true]{background:#fff;border-color:#E1E8F2;color:#6D86E9;box-shadow:0 2px 5px #26386010}
+#subFrequency{background:#fff;padding:0;gap:8px}#subFrequency button{border-color:#E1E8F2;height:34px}#subFrequency button[aria-pressed=true]{border-color:#6D86E9;background:#EAF0FF}
+.sub-note{font-size:12px;line-height:1.65;color:#6D86E9;background:#F2F4FF;border:1px solid #DCE3FF;border-radius:5px;padding:10px 12px}
+.sub-muted{font-size:12px;line-height:1.6;color:#6B7890;margin:0}.sub-fields{display:grid;gap:18px}.sub-inline{display:flex;align-items:center;gap:8px}.sub-inline select{flex:1}
+.sub-end-choice{display:grid;gap:6px;border:1px solid #E1E8F2;border-radius:6px;padding:10px 12px}.sub-end-choice label{cursor:pointer}.sub-end-choice input[type=radio]{height:auto!important;accent-color:#6D86E9}.sub-end-choice p{margin-left:22px}
+.sub-preview{background:#F8FAFD;border:1px solid #E1E8F2;padding:12px;border-radius:6px;font-size:12px;line-height:1.7}.sub-preview strong{display:block;font-size:12px;margin-bottom:4px;color:#1D2A3D}
+.sub-badge{display:inline-flex;align-items:center;white-space:nowrap;padding:3px 8px;font-size:11px;line-height:18px;color:#6D86E9;background:#EAF0FF;border:1px solid #DBE4FF;border-radius:4px;font-weight:500}.sub-badge.single{background:#F8FAFD;border-color:#E1E8F2;color:#6B7890}
+#reportDetailMode{display:none}body[data-page=basket] #reportDetailMode{display:inline-flex}
+#subscriptionPeriodControl{display:none;align-items:center;gap:6px;font-size:12px;color:#6B7890}body[data-page=basket] #subscriptionPeriodControl.is-subscription{display:inline-flex}
+#subscriptionPeriodSelect{height:32px;padding:0 28px 0 10px;border:1px solid #CDD8E8;border-radius:5px;background:#fff;color:#1D2A3D;font:inherit;max-width:300px}
+.sub-detail-info{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;border:1px solid #E1E8F2;background:#fff;border-radius:8px;padding:12px 16px;color:#6B7890;font-size:12px;line-height:1.7}.sub-detail-info strong{color:#1D2A3D}.sub-demo-note{font-size:11px;color:#8995a8}.sub-waiting{background:#fff;border:1px solid #E1E8F2;border-radius:8px;min-height:300px;text-align:center;padding:80px 24px;color:#6B7890}.sub-waiting h3{color:#1D2A3D}
+#subFormError{color:#c63d53;background:#fff3f5;border:1px solid #f5ccd4;padding:10px;border-radius:5px;font-size:12px;line-height:1.6}
+#subToast{position:fixed;top:65px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #b8dfd2;box-shadow:0 8px 24px #26386022;padding:12px 20px;border-radius:6px;color:#238664;z-index:99999;font-size:13px}
+#createReportPage button:focus-visible,#createReportPage select:focus-visible,#createReportPage input:focus-visible,#subReportModeFilter:focus-visible,#subscriptionPeriodSelect:focus-visible{outline:2px solid #6D86E9;outline-offset:2px}
+.reports-table .sub-row-name{font-weight:600}.reports-table .sub-row-meta{font-size:11px;color:#8995a8;margin-top:4px}
+@media(max-width:1023px){#createReportPage .create-layout{grid-template-columns:310px minmax(0,1fr)}body[data-page=basket] .top-actions{flex-wrap:wrap}}
+@media(max-width:860px){#createReportPage .create-layout{grid-template-columns:minmax(0,1fr)}.sub-detail-info{align-items:flex-start;flex-direction:column}.reports-tools{flex-wrap:wrap}}
+</style>
+<style id="create-fixed-canvas">
+/* Fixed create canvas; both columns own their scroll position. */
+body[data-page="create"] {height:100dvh;min-height:0;overflow:hidden;overscroll-behavior:none;}
+body[data-page="create"] .app {height:100dvh;min-height:0;overflow:hidden;grid-template-rows:minmax(0,1fr);}
+body[data-page="create"] .workspace {height:100%;min-height:0;overflow:hidden;}
+body[data-page="create"] .top-tabs {flex:0 0 var(--top-nav-height);position:relative;}
+body[data-page="create"] .utility {flex:0 0 46px;min-height:46px;}
+body[data-page="create"] .sidebar {min-height:0;overflow:hidden;}
+body[data-page="create"] #createReportPage {flex:1 1 0;height:0;min-height:0;overflow:hidden;padding:12px;gap:12px;}
+body[data-page="create"] #createReportPage .create-layout {flex:1 1 0;height:0;min-height:0;overflow:hidden;align-items:stretch;grid-template-rows:minmax(0,1fr);gap:16px;}
+body[data-page="create"] #createReportPage .create-info-card,
+body[data-page="create"] #createReportPage .create-models-card {height:100%;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scroll-padding-block:72px 20px;scrollbar-width:thin;scrollbar-color:#C5CEE2 transparent;}
+body[data-page="create"] #createReportPage .create-info-card:hover,
+body[data-page="create"] #createReportPage .create-models-card:hover {scrollbar-color:#9DADD0 #F4F6FB;}
+body[data-page="create"] #createReportPage .create-info-card>h2,
+body[data-page="create"] #createReportPage .create-models-card>.reports-section-head {position:sticky;top:-20px;z-index:5;background:#fff;margin:-20px -20px 18px;padding:20px 20px 14px;border-bottom:1px solid #EDF1F6;}
+body[data-page="create"] #createReportPage .create-models-card>.reports-section-head h2 {margin:0;}
+body[data-page="create"] #createReportPage .create-footer {flex:0 0 auto;position:static;min-height:58px;margin:0;padding:12px 16px;background:#fff;box-shadow:0 -2px 8px rgba(48,70,112,.03);}
+body[data-page="create"] #createReportPage .create-info-card:focus-visible,
+body[data-page="create"] #createReportPage .create-models-card:focus-visible {outline:2px solid #6D86E9;outline-offset:-2px;}
+@media(max-width:860px){
+body[data-page="create"] .app {grid-template-rows:auto minmax(0,1fr);}
+body[data-page="create"] .workspace {height:100%;}
+body[data-page="create"] .sidebar {max-height:52px;}
+body[data-page="create"] .top-tabs {overflow-x:auto;overflow-y:hidden;}
+body[data-page="create"] #createReportPage .create-layout {grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:12px;}
+}
+</style>
+<style id="report-header-filters">
+/* Report header filters shared by basket models 01 and 02. */
+body:is([data-page="basket"],[data-page="amcFrame"]) #topPeriodLabel,
+body:is([data-page="basket"],[data-page="amcFrame"]) #subscriptionPeriodControl,
+body:is([data-page="basket"],[data-page="amcFrame"]) #reportDetailMode{display:none!important;}
+.report-period-picker{position:relative;display:none;flex-shrink:0;}
+body:is([data-page="basket"],[data-page="amcFrame"]) .report-period-picker{display:block;}
+.report-period-trigger{height:32px;display:flex;align-items:center;gap:10px;border:1px solid #E1E8F2;border-radius:5px;background:#F8FAFD;color:#64748B;padding:0 10px;font:inherit;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.report-period-trigger:hover,.report-period-trigger[aria-expanded="true"]{border-color:#B8C7EA;background:#F5F8FF;}
+.report-period-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 6px;background:#EAF0FF;border-radius:3px;color:#6D86E9;font-size:11px;line-height:18px;}
+.report-period-tag svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.7;}
+.report-period-caret{width:15px;height:15px;fill:none;stroke:#9DAABF;stroke-width:2;transition:transform .15s;}
+[aria-expanded="true"] .report-period-caret{transform:rotate(180deg);}
+.report-period-trigger:disabled{cursor:default;color:#97A3B7;background:#F8FAFD;}
+.report-period-menu{position:absolute;right:0;top:calc(100% + 5px);z-index:90;min-width:390px;max-width:calc(100vw - 24px);padding:6px;background:#fff;border:1px solid #E1E8F2;border-radius:6px;box-shadow:0 10px 24px rgba(48,70,112,.14);max-height:300px;overflow-y:auto;overscroll-behavior:contain;}
+.report-period-menu[hidden]{display:none!important;}
+.report-period-option{display:grid;grid-template-columns:minmax(84px,auto) 1fr;align-items:center;column-gap:20px;width:100%;border:0;border-radius:4px;padding:11px 10px;text-align:left;background:#fff;cursor:pointer;font:inherit;font-size:12px;line-height:1.5;white-space:nowrap;}
+.report-period-option:hover,.report-period-option:focus-visible{background:#F5F8FF;outline:none;}
+.report-period-option[aria-selected="true"] .report-period-name{color:#6D86E9;}
+.report-period-name{font-weight:600;color:#475569;}
+.report-period-range{font-size:11px;color:#8995A8;text-align:right;font-weight:500;}
+.report-period-trigger:focus-visible,.report-header-instance:focus-visible{outline:2px solid #6D86E9;outline-offset:2px;}
+@media(prefers-reduced-motion:reduce){.report-period-caret{transition:none;}}
+
+body:is([data-page="basket"],[data-page="amcFrame"]) .report-period-trigger{height:30px;border-color:var(--line-strong);border-radius:4px;background:#f7faff;color:#445678;font-weight:400;}
+.report-period-trigger[aria-expanded=true]{border-color:#6267FF!important;background:#fff!important;}
+.report-period-menu{border:0;border-radius:3px;box-shadow:0 3px 12px rgba(30,45,80,.17);padding:6px 0;}
+.report-period-option{border-radius:0;padding:10px 14px;}
+.report-period-option[aria-selected=true],.report-period-option:hover,.report-period-option:focus-visible{background:#F4F6FA;}
+.report-period-option[aria-selected=true] .report-period-name{color:#6267FF;}
+.report-period-picker:has([aria-expanded=true])::after{content:"";position:absolute;z-index:91;top:calc(100% + 1px);right:58px;width:9px;height:9px;background:#fff;transform:rotate(45deg);}
+</style>
+<style id="compact-subscription-and-calendar">#createReportPage .report-form,#createReportPage .sub-fields{gap:14px;}
+#createReportPage .sub-frequency-row{display:grid;grid-template-columns:112px minmax(0,1fr);gap:12px;align-items:start;}
+#createReportPage .sub-frequency-row .form-field{gap:6px;}
+#createReportPage .sub-frequency-row select{width:100%;}
+#createReportPage #subExecutionHint{grid-column:1/-1;font-size:11px;line-height:1.5;margin-top:-5px;}
+#createReportPage .sub-inline{gap:6px;}
+#createReportPage .sub-note{padding:8px 10px;font-size:11px;line-height:1.5;}
+#createReportPage .sub-end-choice{border:0;padding:0;gap:3px;}
+#createReportPage .sub-end-choice+.sub-end-choice{margin-top:5px;}
+#createReportPage .sub-end-choice p{font-size:11px;line-height:1.5;}
+#createReportPage .sub-end-choice input[type=radio]{margin:0 4px 0 0;}
+#createReportPage .sub-date-input{cursor:pointer;background:#fff!important;padding-left:33px!important;font-variant-numeric:tabular-nums;}
+#createReportPage .sub-date-input:focus,#createReportPage .sub-date-input[aria-expanded=true]{outline:none;border-color:#6267FF;box-shadow:none;}
+.sub-date-field{position:relative;display:grid;min-width:0;}.sub-date-field[hidden]{display:none!important;}
+.sub-date-icon{position:absolute;left:10px;top:10px;width:14px;height:14px;fill:none;stroke:#ABB5C9;stroke-width:1.4;pointer-events:none;}
+.amc-date-popover{position:fixed;z-index:10000;width:286px;background:#fff;border:1px solid #E1E8F2;border-radius:4px;box-shadow:0 5px 20px #20355824;padding:10px 12px;color:#53627D;font-size:12px;}
+.amc-date-popover[hidden]{display:none!important;}
+.amc-date-header{display:grid;grid-template-columns:28px 1fr 28px;align-items:center;height:32px;margin-bottom:6px;text-align:center;font-size:14px;}
+.amc-date-header button{border:0;background:#fff;color:#8390A5;font-size:18px;line-height:24px;border-radius:3px;}
+.amc-date-week,.amc-date-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));text-align:center;}
+.amc-date-week{border-bottom:1px solid #EDF1F6;height:30px;align-items:center;color:#6B7890;margin-bottom:4px;}
+.amc-date-grid button{height:32px;border:0;background:#fff;color:#53627D;font:inherit;position:relative;border-radius:3px;margin:1px;}
+.amc-date-grid button:hover:not(:disabled){background:#F3F5FA;}.amc-date-grid button[aria-selected=true]{background:#EAF0FF;color:#6065FF;font-weight:600;}.amc-date-grid button.is-today{color:#6065FF;font-weight:600;}
+.amc-date-grid button.is-outside{color:#BCC5D4;}.amc-date-grid button:disabled{color:#BCC5D4;background:#F5F6FA;cursor:not-allowed;}
+.amc-date-grid button:focus-visible,.amc-date-header button:focus-visible{outline:1px solid #6267FF;outline-offset:-1px;}
+</style>
+<style id="report-administration">/* Report settings and subscription lifecycle. */
+#reportsPage .reports-table td:first-child,#reportsPage .reports-table .admin-name,#reportsPage .sub-row-name{font-weight:400!important;}
+.report-period-menu{min-width:0;width:max-content;max-width:calc(100vw - 24px);}
+.report-period-option{grid-template-columns:max-content max-content;column-gap:16px;}
+#createReportPage #subModeHint{font-size:13px;line-height:1.6;}
+.admin-list-actions{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.admin-list-actions span{font-size:12px;color:#6B7890;}
+.admin-icon-button{width:28px;height:28px;padding:5px;display:inline-flex;align-items:center;justify-content:center;border:0;background:transparent;color:#64748B;border-radius:4px;cursor:pointer;}
+.admin-icon-button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;}
+.admin-icon-button:hover:not(:disabled){color:#6574DF;background:#EAF0FF;}.admin-icon-button:disabled{color:#C1CAD8;cursor:not-allowed;}
+.admin-operation-cell{display:flex;align-items:center;gap:4px;white-space:nowrap;}.admin-operation-cell .row-action{margin-right:4px;}
+.admin-check{width:14px;height:14px;accent-color:#6D86E9;cursor:pointer;}.admin-check:disabled{cursor:not-allowed;}
+.admin-status{display:inline-block;padding:3px 8px;border-radius:4px;background:#E9F8F2;color:#279678;font-size:11px;white-space:nowrap;}
+.admin-status.failure{background:#FFF0F2;color:#C9596D;}.admin-status.partial{background:#FFF7E8;color:#AC813D;}.admin-status.stopped{background:#F0F2F6;color:#8792A5;}
+#reportsPage .reports-tools{flex-wrap:wrap;gap:8px;}#reportsPage .reports-tools select{min-width:110px;}
+.admin-mode-placeholder{color:#94A0B5!important;}.admin-reset-filter{height:32px;padding:0 10px;border:1px solid #CDD8E8;border-radius:4px;background:#fff;color:#6B7890;font-size:12px;}
+.admin-modal-backdrop{position:fixed;inset:0;z-index:20000;background:rgba(29,42,61,.34);display:grid;place-items:center;padding:20px;}
+.admin-modal-backdrop[hidden]{display:none!important;}.admin-confirm-dialog{width:460px;max-width:100%;background:#fff;border:1px solid #E1E8F2;border-radius:8px;box-shadow:0 16px 34px #22345730;color:#1D2A3D;}
+.admin-confirm-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px;}.admin-confirm-head h2{font-size:16px;margin:0;}
+.admin-confirm-body{padding:0 20px 20px;font-size:13px;line-height:1.7;}.admin-confirm-summary{background:#F8FAFD;border:1px solid #E1E8F2;border-radius:5px;padding:10px 12px;margin:12px 0;max-height:150px;overflow:auto;}.admin-confirm-summary p{margin:3px 0;overflow-wrap:anywhere;}
+.admin-confirm-foot{display:flex;justify-content:flex-end;gap:10px;border-top:1px solid #EDF1F6;padding:12px 20px;}.admin-confirm-foot button{height:32px;min-width:90px;border-radius:4px;font-size:12px;}
+.admin-confirm-primary{border:1px solid #6D86E9;background:#6D86E9;color:#fff;}.admin-confirm-primary:disabled{background:#D7DDED;border-color:#D7DDED;color:#98A3B6;}
+.admin-inline-error{color:#C9596D;font-size:12px;}.admin-locked-models{pointer-events:none;}.admin-locked-models button{cursor:not-allowed;}
+#createReportPage input:disabled,#createReportPage select:disabled{background:#F5F7FA;color:#8D99AD;border-color:#E1E8F2;cursor:not-allowed;}
+.admin-edit-note{font-size:12px;line-height:1.6;color:#6B7890;background:#F8FAFD;border:1px solid #E1E8F2;border-radius:5px;padding:8px 10px;}
+.admin-batch:disabled{color:#A8B3C5;background:#F8FAFD;border-color:#E1E8F2;cursor:not-allowed;}
+#reportsPage .admin-list-actions{padding:10px 16px;margin:0;border-bottom:1px solid #E1E8F2;}
+#reportsPage .reports-table{table-layout:fixed;width:100%;min-width:1350px;}
+#reportsPage .reports-table th:nth-child(1){width:36px;}#reportsPage .reports-table th:nth-child(2){width:220px;}#reportsPage .reports-table th:nth-child(3){width:165px;}#reportsPage .reports-table th:nth-child(4){width:130px;}#reportsPage .reports-table th:nth-child(5){width:205px;}#reportsPage .reports-table th:nth-child(6){width:95px;}#reportsPage .reports-table th:nth-child(7){width:145px;}#reportsPage .reports-table th:nth-child(8){width:145px;}#reportsPage .reports-table th:nth-child(9){width:110px;}
+#reportsPage .reports-table td{overflow:hidden;text-overflow:ellipsis;}
+#reportsPage .reports-table td:nth-child(1),#reportsPage .reports-table th:nth-child(1){position:sticky;left:0;z-index:2;background:#fff;}
+#reportsPage .reports-table td:nth-child(2),#reportsPage .reports-table th:nth-child(2){position:sticky;left:36px;z-index:2;background:#fff;box-shadow:3px 0 6px #30467008;}
+#reportsPage .reports-table td:last-child,#reportsPage .reports-table th:last-child{position:sticky;right:0;z-index:2;background:#fff;box-shadow:-3px 0 6px #30467008;}
+#reportsPage .reports-table th:nth-child(1),#reportsPage .reports-table th:nth-child(2),#reportsPage .reports-table th:last-child{z-index:3;background:#F3F6FC;}
+#reportsPage .admin-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+</style>
 </head>
 <body data-page="amcFrame" data-customer-plan="paid">
   <div class="app">
@@ -20825,11 +20976,11 @@
             <path d="M3 16l9 5 9-5"></path>
           </svg>
         </button>
-        <span class="status" id="pageStatus">已生成</span>
+        <span class="status" id="pageStatus">已生成</span><span class="sub-badge" id="reportDetailMode"></span>
         <div class="top-actions" aria-label="报告筛选与下载">
           <span class="select-like">US 4kmiles</span>
           <span class="select-like">GMT-04</span>
-          <span class="select-like" id="topPeriodLabel">2024年Q2</span>
+          <span class="select-like" id="topPeriodLabel">2024年Q2</span><label id="subscriptionPeriodControl">报告周期<select id="subscriptionPeriodSelect" aria-label="报告周期"></select></label>
           <button class="download-btn" id="createReportEntry" type="button">创建报告</button>
           <button class="top-download-btn" id="globalDownloadBtn" type="button" aria-label="下载数据" title="下载数据">
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -20907,7 +21058,7 @@
           <div class="reports-list-head">
             <h2>报告列表</h2>
             <div class="reports-tools">
-              <input type="search" placeholder="查找报告" aria-label="查找报告">
+              <input type="search" id="subReportSearch" placeholder="查找报告" aria-label="查找报告"><select id="subReportModeFilter" aria-label="报告模式"><option value="all">全部报告模式</option><option value="single">单次查询</option><option value="subscription">订阅报告</option></select>
               <select aria-label="创建人"><option>创建人</option></select>
               <select aria-label="Instance"><option>Instance</option></select>
             </div>
@@ -21048,7 +21199,7 @@
             </div>
           </section>
 
-          <section class="create-models-card">
+          <section class="create-models-card" tabindex="0" aria-label="已选模型，可独立滚动">
               <div class="amc-frame-head">
                 <div>
                 <h2>模型固定信息与图表索引</h2>
@@ -21606,21 +21757,21 @@
                  </article>
                  <article class="amc-frame-block">
                    <div>
-                     <h3>产品组合策略（Strategy Output）</h3>
+                     <h3>产品组合策略</h3>
                      <p>二级模块 5.1：六类策略机会卡</p>
                    </div>
                    <span class="amc-frame-state">已生成</span>
                  </article>
                  <article class="amc-frame-block">
                    <div>
-                     <h3>产品组合策略（Strategy Output）</h3>
+                     <h3>产品组合策略</h3>
                      <p>二级模块 5.2：策略组合机会散点图</p>
                    </div>
                    <span class="amc-frame-state">已生成</span>
                  </article>
                  <article class="amc-frame-block">
                    <div>
-                     <h3>产品组合策略（Strategy Output）</h3>
+                     <h3>产品组合策略</h3>
                      <p>二级模块 5.3：核心组合 TOP 10 与策略明细</p>
                    </div>
                    <span class="amc-frame-state">已生成</span>
@@ -22324,7 +22475,7 @@
           <section class="chart-card full-card amc-frame-chart-card amc-module5-card" id="frameModule5Section" aria-labelledby="frameModule5Title">
             <div class="card-head">
               <div class="amc-module5-heading">
-                <h3 id="frameModule5Title">产品组合策略（Strategy Output）</h3>
+                <h3 id="frameModule5Title">产品组合策略</h3>
                 <p>基于高价值组合（高关联强度 + 交叉购买人数），按购买节奏与价格方向归纳为六大核心策略，呈现该卖家客户群整体的购买模式。策略按路径人次从高到低排序。</p>
               </div>
               <div class="amc-role-analysis-actions">
@@ -22444,7 +22595,7 @@
           <section class="chart-card full-card amc-frame-chart-card amc-module6-card" id="frameModule6Section" aria-labelledby="frameModule6Title">
         <div class="card-head">
           <div class="amc-module6-heading">
-            <h3 id="frameModule6Title">新客二购分析（NTB Second Purchase）</h3>
+            <h3 id="frameModule6Title">新客二购分析</h3>
             <p>分析购买新客首次及第二次的购买行为，识别带来新客的入口ASIN及其二购ASIN，指导商品和投放层面的承接与运营。</p>
           </div>
           <div class="amc-role-analysis-actions">
@@ -22597,7 +22748,7 @@
                     <span class="amc-overview-index">6.5</span>
                     <div>
                       <h4 id="frameModule66Title">二购转化时长分布</h4>
-                      <p>不同二购天数下同品二购与跨品二购人次对比。</p>
+                      <p>不同二购天数下同品二购与跨品二购人数对比。</p>
                     </div>
                   </div>
                 </div>
@@ -22612,30 +22763,21 @@
 
       <section class="app-page create-page" id="createReportPage">
         <div class="create-layout">
-          <section class="create-info-card">
+          <section class="create-info-card" tabindex="0" aria-label="报告信息设置，可独立滚动">
             <h2>报告信息</h2>
             <div class="report-form">
-              <div class="form-field">
-                <label><span class="required">*</span>报告名称</label>
-                <input id="newReportName" maxlength="100" aria-label="报告名称">
-              </div>
-              <div class="form-field">
-                <label><span class="required">*</span>Instance</label>
-                <select aria-label="Instance"><option>US 4kmilesyaheetechus</option></select>
-              </div>
-              <div class="form-field">
-                <label>时区</label>
-                <input value="GMT-04" disabled aria-label="时区">
-              </div>
-              <div class="form-field">
-                <label><span class="required">*</span>报告时间</label>
-                <div class="date-range">
-                  <input type="text" placeholder="开始时间" aria-label="开始时间">
-                  <span>至</span>
-                  <input type="text" placeholder="结束时间" aria-label="结束时间">
-                </div>
-              </div>
-            </div>
+<div class="form-field"><label for="newReportName"><span class="required">*</span>报告名称</label><input id="newReportName" maxlength="100" placeholder="请输入报告名称" aria-label="报告名称"></div>
+<div class="form-field"><label for="subInstance"><span class="required">*</span>Instance</label><select id="subInstance" aria-label="Instance"><option>US 4kmilesyaheetechus</option></select></div>
+<div class="form-field"><label for="subTimezone">时区</label><input id="subTimezone" value="GMT-04" disabled aria-label="时区"></div>
+<div class="form-field"><label>报告模式</label><div class="sub-segments" id="subReportMode" aria-label="报告模式"><button type="button" data-sub-mode="single" aria-pressed="true">单次查询</button><button type="button" data-sub-mode="subscription" aria-pressed="false">订阅报告</button></div></div>
+<div class="sub-note" id="subModeHint" hidden>订阅后系统将按设定频率自动生成报告，无需手动创建。</div>
+<div class="form-field" id="subSingleDates"><label><span class="required">*</span>报告时间</label><div class="date-range"><input id="subSingleStart" type="date" aria-label="开始时间"><span>至</span><input id="subSingleEnd" type="date" aria-label="结束时间"></div></div>
+<div class="sub-fields" id="subScheduleFields" hidden>
+<div class="sub-frequency-row"><div class="form-field"><label for="subFrequencySelect"><span class="required">*</span>订阅频率</label><select id="subFrequencySelect" aria-label="订阅频率"><option value="week">按周</option><option value="month" selected>按月</option><option value="quarter">按季度</option></select></div><div class="form-field"><label for="subExecutionDay"><span class="required">*</span>执行日</label><div class="sub-inline"><select id="subExecutionDay" aria-label="执行日"></select><span id="subExecutionUnit">日</span></div></div><p class="sub-muted" id="subExecutionHint"></p></div>
+<div class="form-field"><label for="subFirstRun"><span class="required">*</span>首次执行时间</label><input type="date" id="subFirstRun" aria-label="首次执行时间"></div>
+<div class="form-field"><label><span class="required">*</span>结束时间</label><div class="sub-end-choice"><label><input type="radio" name="subEndType" value="forever" checked>永久订阅</label><p class="sub-muted">持续生成报告，直到手动取消订阅</p></div><div class="sub-end-choice"><label><input type="radio" name="subEndType" value="date">指定结束日期</label><p class="sub-muted">到达结束日期后自动停止生成</p><input type="date" id="subEndDate" aria-label="订阅结束日期" hidden></div></div>
+</div>
+<div id="subFormError" role="alert" hidden></div></div>
           </section>
 
           <section class="create-models-card">
@@ -23695,7 +23837,7 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
     }
 
     function getRules() {
-      const profile = periodProfiles[state.period];
+      const profile = periodProfiles[state.period] || periodProfiles["2024年Q2"];
       return baseRules.map((rule, index) => {
         const supportShift = 1 + ((index % 5) - 2) * 0.015;
         const confShift = 1 + ((index % 4) - 1.5) * 0.012;
@@ -25823,6 +25965,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         systemMappings: "systemMappingsPage"
       };
       document.body.dataset.page = page;
+      window.scrollTo({top:0,behavior:"instant"});
+      document.getElementById("globalDownloadBtn").disabled = false;
       const sectionNotesToggle = document.getElementById("sectionNotesToggle");
       document.body.classList.toggle("product-view-on", page === "amcFrame");
       if (sectionNotesToggle) {
@@ -25859,7 +26003,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         pageStatus.style.display = page === "customMappings" || page === "systemMappings" ? "none" : "";
       }
       const topPeriodLabel = document.getElementById("topPeriodLabel");
-      if (topPeriodLabel) topPeriodLabel.textContent = page === "amcFrame" ? "2024-08-10~2026-08-10" : "2024年Q2";
+      if (topPeriodLabel) { topPeriodLabel.hidden = false; topPeriodLabel.style.display = ""; topPeriodLabel.textContent = page === "amcFrame" ? "2024-08-10~2026-08-10" : "2024年Q2"; }
+      subRenderDetail(page);
       const createEntry = document.getElementById("createReportEntry");
       if (createEntry) createEntry.style.display = page === "reports" ? "" : "none";
       const globalDownload = document.getElementById("globalDownloadBtn");
@@ -25871,7 +26016,6 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
         frameModuleNavSetActive(frameModuleNavActiveTarget, { resize: false });
       }
       if (page === "basket") {
-        renderAll();
         fitMultiSelectSummarySoon(document.getElementById("mainAsinFilter"));
         fitMultiSelectSummarySoon(document.getElementById("linkedAsinFilter"));
       }
@@ -31444,7 +31588,8 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       const maxInterval = Math.max(...records.map(record => Number(record.avgInterval || 0)), 180);
       const xMax = Math.max(240, Math.ceil(Math.max(maxInterval, 500) / 50) * 50);
       const yMax = Math.pow(10, Math.ceil(Math.log10(Math.max(...records.map(record => Number(record.crossUsers || 0)), 10))));
-      const matrixGrid = { left: 82, right: 26, top: 58, bottom: 74 };
+      // Reserve room for the rotated Y-axis title and metric help icon inside the canvas.
+      const matrixGrid = { left: 110, right: 26, top: 58, bottom: 74 };
       const selectedPairKey = frameModule4SelectedPairKey();
       const symbolSize = value => {
         const score = Number(value?.[2] || minScore);
@@ -37021,11 +37166,10 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       });
       document.getElementById("cancelCreateReport")?.addEventListener("click", () => showAppPage("reports"));
       document.getElementById("submitCreateReport")?.addEventListener("click", () => {
-        saveFrameReportCreationSettings();
-        showAppPage("reports");
+        subSubmitReport();
       });
       document.querySelectorAll("[data-open-basket]").forEach(item => {
-        item.addEventListener("click", () => showAppPage("basket"));
+        item.addEventListener("click", () => { subCurrentReport = subOriginalReport; showAppPage("basket"); });
       });
       document.querySelectorAll("[data-open-amc-frame]").forEach(item => {
         item.addEventListener("click", () => showAppPage("amcFrame"));
@@ -37357,6 +37501,322 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       scheduleRefresh();
     }
 
+
+const subFrequencyNames={week:"按周",month:"按月",quarter:"按季度"};
+let subMode="single",subFrequency="month";
+const subOriginalReport={name:"购物篮分析 0701-0714",mode:"single",periods:["2025-07-01 至 2025-07-14"],legacy:true};
+let subCurrentReport=subOriginalReport,subReports=[];
+function subToday(){return new Date(Date.now()-4*3600000).toISOString().slice(0,10);}
+function subDate(v){return new Date(v+"T12:00:00Z");}
+function subISO(d){return d.toISOString().slice(0,10);}
+function subDaysInMonth(y,m){return new Date(Date.UTC(y,m+1,0,12)).getUTCDate();}
+function subMatches(date,frequency,day){
+const d=subDate(date),m=d.getUTCMonth();
+if(frequency==="week")return (d.getUTCDay()||7)===day;
+return (frequency!=="quarter"||m%3===0)&&d.getUTCDate()===Math.min(day,subDaysInMonth(d.getUTCFullYear(),m));
+}
+function subNextRun(){
+const day=Number(document.getElementById("subExecutionDay").value),date=subDate(subToday());date.setUTCDate(date.getUTCDate()+1);
+for(let i=0;i<370;i++){if(subMatches(subISO(date),subFrequency,day))return subISO(date);date.setUTCDate(date.getUTCDate()+1);}
+}
+function subPreviousPeriod(run,frequency){
+const end=subDate(run),start=subDate(run);
+if(frequency==="week"){const offset=(end.getUTCDay()+6)%7;end.setUTCDate(end.getUTCDate()-offset-1);start.setTime(end.getTime());start.setUTCDate(start.getUTCDate()-6);}
+else{const m=frequency==="quarter"?Math.floor(end.getUTCMonth()/3)*3:end.getUTCMonth();end.setUTCMonth(m,0);start.setUTCFullYear(end.getUTCFullYear(),end.getUTCMonth()-(frequency==="quarter"?2:0),1);}
+return subISO(start)+" 至 "+subISO(end);
+}
+function subStore(){try{localStorage.setItem("amc-subscriptions-v1",JSON.stringify(subReports));}catch(e){}}
+function subRefreshSchedule(resetDate=false){
+const day=document.getElementById("subExecutionDay");
+if(resetDate||!day.options.length){day.innerHTML=Array.from({length:subFrequency==="week"?7:31},(_,i)=>`<option value="${i+1}">${subFrequency==="week"?["星期一","星期二","星期三","星期四","星期五","星期六","星期日"][i]:i+1}</option>`).join("");day.value=subFrequency==="week"?"1":"5";}
+document.getElementById("subExecutionUnit").textContent=subFrequency==="week"?"":"日";
+const n=Number(day.value),weekday=["星期一","星期二","星期三","星期四","星期五","星期六","星期日"][n-1];
+const hint=subFrequency==="week"?`每周${weekday.slice(2)}生成上一自然周报告（周一至周日）`:subFrequency==="month"?`每月${n}日生成上月报告；不足该日期的月份取月末日`:`每季度首月（1、4、7、10月）${n}日生成上一季度报告；不足该日期取月末日`;
+document.getElementById("subExecutionHint").textContent=hint;
+const first=document.getElementById("subFirstRun");first.min=subISO(new Date(subDate(subToday()).getTime()+86400000));
+if(resetDate||!first.value)first.value=subNextRun();
+const end=document.getElementById("subEndDate");end.min=first.value||subToday();
+const dated=document.querySelector('input[name="subEndType"]:checked').value==="date";end.hidden=!dated;
+document.getElementById("subFrequencySelect").value=subFrequency;
+}
+function subSetMode(mode){
+subMode=mode;const subscribed=mode==="subscription";
+document.querySelectorAll("[data-sub-mode]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.subMode===mode)));
+document.getElementById("subModeHint").hidden=!subscribed;document.getElementById("subScheduleFields").hidden=!subscribed;document.getElementById("subSingleDates").hidden=subscribed;
+document.getElementById("subFormError").hidden=true;document.getElementById("submitCreateReport").textContent=subscribed?"创建订阅":"创建报告";
+const model02=document.querySelectorAll("#createReportPage .selected-model-card")[1];if(model02)model02.hidden=subscribed;
+if(subscribed)subRefreshSchedule();
+}
+function subToast(message){
+let toast=document.getElementById("subToast");if(!toast){toast=document.createElement("div");toast.id="subToast";toast.setAttribute("role","status");document.body.append(toast);}
+toast.textContent=message;toast.hidden=false;clearTimeout(subToast.timer);subToast.timer=setTimeout(()=>toast.hidden=true,4000);
+}
+function subSubmitReport(){
+const error=document.getElementById("subFormError"),name=document.getElementById("newReportName").value.trim();
+const fail=(message,id)=>{error.textContent=message;error.hidden=false;if(id)document.getElementById(id).focus();};
+if(!name)return fail("请输入报告名称。","newReportName");
+const first=document.getElementById("subFirstRun").value,day=Number(document.getElementById("subExecutionDay").value),end=document.getElementById("subEndDate").value;
+const dated=document.querySelector('input[name="subEndType"]:checked').value==="date";
+const start=document.getElementById("subSingleStart").value,finish=document.getElementById("subSingleEnd").value;
+if(subMode==="subscription"){
+if(!first||first<=subToday())return fail("首次执行时间请选择 Instance 时区的未来日期。","subFirstRun");
+if(!subMatches(first,subFrequency,day))return fail("首次执行时间需符合所选执行日；按季度仅在季度首月执行。","subFirstRun");
+if(dated&&(!end||end<first))return fail("结束日期不得早于首次执行时间。","subEndDate");
+}else{
+if(!start||!finish)return fail("请选择完整的报告时间。",!start?"subSingleStart":"subSingleEnd");
+if(start>finish)return fail("结束时间不得早于开始时间。","subSingleEnd");
+if(finish>=subToday())return fail("请选择 Instance 时区已结束的日期。","subSingleEnd");
+}
+const report={id:"report-"+Date.now(),name,mode:subMode,frequency:subFrequency,day,first,end:dated?end:null,active:true,created:subToday(),periods:subMode==="single"?[start+" 至 "+finish]:[],source:document.getElementById("createDataSelect").value,aggregation:document.getElementById("createAggregationSelect").dataset.values||"子ASIN"};
+subReports.unshift(report);subStore();if(subMode==="single")saveFrameReportCreationSettings();
+error.hidden=true;subRenderList();showAppPage("reports");subToast(subMode==="subscription"?"订阅已创建，首期报告将在首次执行后生成（原型演示）":"报告已创建（原型演示）");
+}
+function subModeBadge(report){return `<span class="sub-badge ${report.mode==="single"?"single":""}">${report.mode==="single"?"单次查询":"订阅报告 · "+subFrequencyNames[report.frequency]}</span>`;}
+function subRenderList(){
+const tbody=document.querySelector("#reportsPage .reports-table tbody");tbody.querySelectorAll("[data-sub-record]").forEach(r=>r.remove());
+subReports.slice().reverse().forEach(report=>{
+const row=document.createElement("tr");row.className="report-row";row.dataset.subRecord=report.id;row.dataset.reportMode=report.mode;
+const period=report.periods[0]||"—",status=report.mode==="subscription"?(!report.active?"已取消订阅":report.periods.length?"订阅中":"待首次执行"):"已完成";
+row.innerHTML=`<td><div class="sub-row-name">${escapeHtml(report.name)}</div>${report.demo?'<div class="sub-row-meta">虚拟演示数据</div>':""}</td><td>${subModeBadge(report)}</td><td>4kmilesyaheetechus</td><td>${escapeHtml(period)}${report.mode==="subscription"&&!report.periods.length?'<div class="sub-row-meta">首次执行：'+escapeHtml(report.first)+"</div>":""}</td><td><span class="status-pill">${status}</span></td><td>Demo.User</td><td>${escapeHtml(report.created||"2026-10-23")}</td><td><button class="row-action" type="button">进入</button></td>`;
+row.addEventListener("click",()=>{subCurrentReport=report;showAppPage("basket");});tbody.prepend(row);
+});subFilterList();
+}
+function subFilterList(){
+const mode=document.getElementById("subReportModeFilter").value,query=document.getElementById("subReportSearch").value.trim().toLowerCase();let count=0;
+document.querySelectorAll("#reportsPage .reports-table tbody tr[data-report-mode]").forEach(row=>{row.hidden=(mode!=="all"&&row.dataset.reportMode!==mode)||!row.cells[0].textContent.toLowerCase().includes(query);if(!row.hidden)count++;});
+document.getElementById("subListEmpty").hidden=count>0;
+}
+function reportPeriodShortName(period, frequency){
+  const match=String(period).match(/(\d{4})-(\d{2})-(\d{2})/);if(!match)return String(period);
+  if(frequency==='month')return match[1]+'/'+match[2];
+  if(frequency==='quarter')return match[1]+'/Q'+Math.ceil(Number(match[2])/3);
+  if(frequency==='week')return match[1]+'/'+match[2]+'/'+match[3]+' 周报';
+  return '自定义周期';
+}
+function closeReportPeriodMenu(restoreFocus=false){
+  const trigger=document.getElementById('reportPeriodTrigger'),menu=document.getElementById('reportPeriodMenu');if(!trigger||!menu)return;
+  trigger.setAttribute('aria-expanded','false');menu.hidden=true;if(restoreFocus)trigger.focus();
+}
+function renderReportHeaderFilters(){
+  const trigger=document.getElementById('reportPeriodTrigger'),menu=document.getElementById('reportPeriodMenu');if(!trigger||!menu)return;
+  closeReportPeriodMenu();const page=document.body.dataset.page;if(page!=='basket'&&page!=='amcFrame')return;
+  const subscribed=page==='basket'&&subCurrentReport.mode==='subscription';
+  const periods=page==='basket'?subCurrentReport.periods:['2024-08-10 至 2026-08-10'];
+  const selected=page==='basket'?(subCurrentReport.selectedPeriod||periods[0]):periods[0];
+  const frequency=subscribed?subCurrentReport.frequency:null;
+  const bookmark='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h8v12l-4-3-4 3Z"/></svg>';
+  trigger.innerHTML=(subscribed?'<span class="report-period-tag">'+bookmark+'订阅</span>':'')+'<span class="report-period-current">'+escapeHtml(periods.length?(subscribed?reportPeriodShortName(selected,page==='basket'?(subCurrentReport.periodFrequencies?.[selected]||frequency):frequency):selected.replaceAll('-','/')):'暂无已生成周期')+'</span><svg class="report-period-caret" viewBox="0 0 16 16" aria-hidden="true"><path d="m3 6 5 5 5-5"/></svg>';
+  trigger.disabled=!periods.length;trigger.setAttribute('aria-label','报告周期：'+(selected||'暂无已生成周期'));
+  menu.innerHTML=periods.map((period,i)=>'<button type="button" class="report-period-option" role="option" aria-selected="'+String(period===selected)+'" data-period-index="'+i+'"><span class="report-period-name">'+escapeHtml(reportPeriodShortName(period,page==='basket'?(subCurrentReport.periodFrequencies?.[period]||frequency):frequency))+'</span><span class="report-period-range">'+escapeHtml(period)+'</span></button>').join('');
+  menu.querySelectorAll('button').forEach((button,index)=>button.addEventListener('click',()=>{
+    if(subscribed){const select=document.getElementById('subscriptionPeriodSelect');select.value=periods[index];select.dispatchEvent(new Event('change',{bubbles:true}));}
+    closeReportPeriodMenu(true);
+  }));
+}
+function setupReportHeaderFilters(){
+  const actions=document.querySelector('.top-actions');
+  const picker=document.createElement('div');picker.className='report-period-picker';picker.innerHTML='<button type="button" id="reportPeriodTrigger" class="report-period-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="reportPeriodMenu"></button><div id="reportPeriodMenu" class="report-period-menu" role="listbox" aria-label="报告周期选项" hidden></div>';
+  actions.insertBefore(picker,document.getElementById('globalDownloadBtn'));
+  const trigger=document.getElementById('reportPeriodTrigger'),menu=document.getElementById('reportPeriodMenu');
+  const open=()=>{renderReportHeaderFilters();trigger.setAttribute('aria-expanded','true');menu.hidden=false;};
+  trigger.addEventListener('click',()=>{if(trigger.getAttribute('aria-expanded')==='true')closeReportPeriodMenu();else open();});
+  trigger.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();open();const items=Array.from(menu.querySelectorAll('button'));(items.find(b=>b.getAttribute('aria-selected')==='true')||items[0])?.focus();}if(e.key==='Escape')closeReportPeriodMenu(true);});
+  menu.addEventListener('keydown',e=>{const items=Array.from(menu.querySelectorAll('button')),index=items.indexOf(document.activeElement);if(e.key==='Escape'){e.preventDefault();closeReportPeriodMenu(true);}if(['ArrowDown','ArrowUp','Home','End'].includes(e.key)){e.preventDefault();items[e.key==='Home'?0:e.key==='End'?items.length-1:(index+(e.key==='ArrowDown'?1:-1)+items.length)%items.length]?.focus();}if(e.key==='Tab')closeReportPeriodMenu();});
+  document.addEventListener('pointerdown',e=>{if(!picker.contains(e.target))closeReportPeriodMenu();});
+  const originalShow=showAppPage;showAppPage=function(page){originalShow(page);renderReportHeaderFilters();};
+  renderReportHeaderFilters();
+}
+
+function setupCompactSubscriptionForm(){
+  const frequency=document.getElementById('subFrequencySelect');frequency.onchange=()=>{subFrequency=frequency.value;subRefreshSchedule(true);};
+  const popup=document.createElement('div');popup.className='amc-date-popover';popup.id='amcSingleDateCalendar';popup.hidden=true;popup.setAttribute('role','dialog');popup.setAttribute('aria-label','选择日期');document.body.append(popup);
+  let activeInput=null,viewMonth=null;
+  function closeCalendar(focus=false){popup.hidden=true;if(activeInput){activeInput.setAttribute('aria-expanded','false');if(focus)activeInput.focus();}activeInput=null;}
+  function openCalendar(input){if(activeInput===input&&!popup.hidden){closeCalendar();return;}if(activeInput)activeInput.setAttribute('aria-expanded','false');activeInput=input;viewMonth=subDate(input.value||input.min||subToday());viewMonth.setUTCDate(1);popup.hidden=false;input.setAttribute('aria-expanded','true');renderCalendar();positionCalendar();}
+  function positionCalendar(){if(!activeInput)return;const r=activeInput.getBoundingClientRect(),h=popup.getBoundingClientRect().height;popup.style.left=Math.max(8,Math.min(r.left,innerWidth-294))+'px';popup.style.top=Math.max(8,r.bottom+h+6>innerHeight?r.top-h-5:r.bottom+5)+'px';}
+  function renderCalendar(){
+    const input=activeInput,year=viewMonth.getUTCFullYear(),month=viewMonth.getUTCMonth(),offset=(viewMonth.getUTCDay()+6)%7;
+    popup.innerHTML='<div class="amc-date-header"><button type="button" aria-label="上个月">‹</button><span>'+year+' 年 '+(month+1)+' 月</span><button type="button" aria-label="下个月">›</button></div><div class="amc-date-week">'+['一','二','三','四','五','六','日'].map(d=>'<span>'+d+'</span>').join('')+'</div><div class="amc-date-grid" role="grid" aria-label="单选日期"></div>';
+    const grid=popup.querySelector('.amc-date-grid');
+    for(let i=0;i<42;i++){
+      const date=new Date(Date.UTC(year,month,1-offset+i,12)),value=subISO(date),button=document.createElement('button');button.type='button';button.textContent=date.getUTCDate();button.setAttribute('role','gridcell');button.setAttribute('aria-label',value);button.setAttribute('aria-selected',String(value===input.value));button.classList.toggle('is-outside',date.getUTCMonth()!==month);button.classList.toggle('is-today',value===subToday());button.disabled=!!(input.min&&value<input.min||input.max&&value>input.max);
+      button.onclick=()=>{const target=activeInput;target.value=value;closeCalendar(true);target.dispatchEvent(new Event('change',{bubbles:true}));};grid.append(button);
+    }
+    popup.querySelector('[aria-label="上个月"]').onclick=()=>{viewMonth.setUTCMonth(month-1);renderCalendar();};popup.querySelector('[aria-label="下个月"]').onclick=()=>{viewMonth.setUTCMonth(month+1);renderCalendar();};
+  }
+  for(const id of ['subFirstRun','subEndDate']){
+    const input=document.getElementById(id),wasHidden=input.hidden;input.type='text';input.readOnly=true;input.placeholder='请选择日期';input.classList.add('sub-date-input');input.setAttribute('aria-haspopup','dialog');input.setAttribute('aria-expanded','false');input.setAttribute('aria-controls',popup.id);
+    const wrap=document.createElement('div');wrap.className='sub-date-field';wrap.hidden=wasHidden;input.before(wrap);wrap.append(input);wrap.insertAdjacentHTML('beforeend','<svg class="sub-date-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="14" height="13" rx="1"/><path d="M3 8h14M6 2v4m8-4v4M6 11h2m2 0h2m2 0h1m-9 3h2m2 0h2"/></svg>');
+    new MutationObserver(()=>{wrap.hidden=input.hidden;}).observe(input,{attributes:true,attributeFilter:['hidden']});
+    input.addEventListener('click',()=>openCalendar(input));input.addEventListener('keydown',e=>{if(['Enter',' ','ArrowDown'].includes(e.key)){e.preventDefault();openCalendar(input);popup.querySelector('[aria-selected=true]:not(:disabled)')?.focus();}if(e.key==='Escape')closeCalendar();});
+  }
+  popup.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeCalendar(true);}if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){const list=Array.from(popup.querySelectorAll('[role=gridcell]')),index=list.indexOf(document.activeElement),step={ArrowLeft:-1,ArrowRight:1,ArrowUp:-7,ArrowDown:7}[e.key];if(index>=0){e.preventDefault();let next=index+step;while(next>=0&&next<list.length&&list[next].disabled)next+=step;list[next]?.focus();}}if(e.key==='Tab')closeCalendar();});
+  document.addEventListener('pointerdown',e=>{if(activeInput&&!popup.contains(e.target)&&e.target!==activeInput)closeCalendar();});
+  document.addEventListener('scroll',e=>{if(activeInput&&!popup.contains(e.target))closeCalendar();},true);window.addEventListener('resize',()=>closeCalendar());
+}
+
+function subRenderDetail(page){
+const periodLabel=document.getElementById("topPeriodLabel"),control=document.getElementById("subscriptionPeriodControl");control.classList.remove("is-subscription");if(page!=="basket")return;
+const report=subCurrentReport,subscribed=report.mode==="subscription";
+const badge=document.getElementById("reportDetailMode");badge.textContent=subscribed?"订阅报告 · "+subFrequencyNames[report.frequency]:"单次查询";badge.classList.toggle("single",!subscribed);
+const breadcrumb=document.querySelector("#pageBreadcrumb .breadcrumb-current");if(breadcrumb)breadcrumb.textContent=report.name;
+const info=document.getElementById("subDetailInfo"),empty=document.getElementById("subDetailWaiting");info.hidden=report.legacy===true;
+const hasData=report.periods.length>0;document.querySelectorAll("#basketPage > :not(.sub-detail-info):not(.sub-waiting)").forEach(el=>el.hidden=!hasData);empty.hidden=hasData;
+document.getElementById("pageStatus").textContent=!hasData?(!report.active?"已取消订阅":"待首次执行"):"已完成";
+info.replaceChildren();const text=document.createElement("div");
+text.innerHTML=subscribed?`<strong>${subFrequencyNames[report.frequency]}订阅</strong>　${report.active?"订阅中":"已取消订阅"} · ${report.frequency==="week"?"每周"+["一","二","三","四","五","六","日"][report.day-1]:report.frequency==="month"?"每月"+report.day+"日":"每季度首月"+report.day+"日"}执行 · ${report.end?"结束于 "+escapeHtml(report.end):"永久订阅"}`:"<strong>单次查询</strong>　"+escapeHtml(report.periods[0]||"");
+text.innerHTML+='<div class="sub-demo-note">原型演示 · 报告数据为虚拟数据，未连接实际调度服务</div>';info.append(text);
+if(subscribed){
+const cancel=document.createElement("button");cancel.type="button";cancel.className="ghost-btn";cancel.textContent=report.active?"取消订阅":"恢复订阅";cancel.onclick=()=>{report.active=!report.active;subStore();subRenderList();subRenderDetail("basket");subToast(report.active?"已恢复订阅（原型演示）":"已取消订阅，保留历史报告");};info.append(cancel);
+control.classList.add("is-subscription");periodLabel.style.display="none";
+const select=document.getElementById("subscriptionPeriodSelect");select.innerHTML=hasData?report.periods.map(p=>`<option>${escapeHtml(p)}</option>`).join(""):"<option>暂无已生成周期</option>";select.disabled=!hasData;select.value=report.selectedPeriod||report.periods[0]||"暂无已生成周期";
+}
+if(hasData){
+const period=report.selectedPeriod||report.periods[0];state.period=period;
+if(!periodProfiles[period]){const i=report.periods.indexOf(period);periodProfiles[period]={support:1-i*.06,confidence:1-i*.025,lift:1-i*.03};}
+state.selectedRuleId=null;state.selectedRuleIds=[];state.selectedProduct=null;state.ordersBuckets=[];state.ordersSegment=null;
+renderAll();
+}else{
+empty.innerHTML=`<h3>${report.active?"首期报告尚未生成":"订阅已取消"}</h3><p>${report.active?"首次执行时间："+escapeHtml(report.first)+"（GMT-04）":"恢复订阅后将按计划继续生成报告。"}</p><p>数据周期：${escapeHtml(subPreviousPeriod(report.first,report.frequency))}</p><p class="sub-muted">报告生成后，可在顶部切换查看各期报告。</p>`;
+}
+document.getElementById("globalDownloadBtn").disabled=!hasData;
+renderReportHeaderFilters();
+}
+function setupSubscriptionReports(){
+const table=document.querySelector("#reportsPage .reports-table"),head=document.createElement("th");head.textContent="报告模式";table.tHead.rows[0].insertBefore(head,table.tHead.rows[0].cells[1]);
+Array.from(table.tBodies[0].rows).forEach(row=>{row.dataset.reportMode="single";row.insertCell(1).innerHTML=subModeBadge({mode:"single"});});
+const noResult=document.createElement("tr");noResult.id="subListEmpty";noResult.hidden=true;noResult.innerHTML='<td colspan="8" style="text-align:center;padding:40px;color:#6B7890">暂无符合筛选条件的报告</td>';table.tBodies[0].append(noResult);
+try{subReports=JSON.parse(localStorage.getItem("amc-subscriptions-v1")||"null")||[];}catch(e){subReports=[];}
+if(!subReports.length){subReports=[
+{id:"demo-month",name:"购物篮分析月报",mode:"subscription",frequency:"month",day:5,first:"2026-08-05",active:true,created:"2026-07-23",demo:true,periods:["2026-09-01 至 2026-09-30","2026-08-01 至 2026-08-31","2026-07-01 至 2026-07-31"]},
+{id:"demo-week",name:"购物篮分析周报",mode:"subscription",frequency:"week",day:1,first:"2026-10-12",active:true,created:"2026-10-01",demo:true,periods:["2026-10-12 至 2026-10-18","2026-10-05 至 2026-10-11","2026-09-28 至 2026-10-04"]},
+{id:"demo-quarter",name:"购物篮分析季度报告",mode:"subscription",frequency:"quarter",day:5,first:"2026-07-05",active:true,created:"2026-06-23",demo:true,periods:["2026-07-01 至 2026-09-30","2026-04-01 至 2026-06-30"]}
+];subStore();}
+const basket=document.getElementById("basketPage"),info=document.createElement("section"),waiting=document.createElement("section");info.id="subDetailInfo";info.className="sub-detail-info";info.hidden=true;waiting.id="subDetailWaiting";waiting.className="sub-waiting";waiting.hidden=true;basket.prepend(waiting);basket.prepend(info);
+document.querySelectorAll("[data-sub-mode]").forEach(b=>b.onclick=()=>subSetMode(b.dataset.subMode));
+document.querySelectorAll("[data-sub-frequency]").forEach(b=>b.onclick=()=>{subFrequency=b.dataset.subFrequency;subRefreshSchedule(true);});
+document.getElementById("subExecutionDay").onchange=()=>{document.getElementById("subFirstRun").value=subNextRun();subRefreshSchedule();};
+["subFirstRun","subEndDate"].forEach(id=>document.getElementById(id).onchange=()=>subRefreshSchedule());document.querySelectorAll('[name="subEndType"]').forEach(b=>b.onchange=()=>subRefreshSchedule());
+document.getElementById("subReportModeFilter").onchange=subFilterList;document.getElementById("subReportSearch").oninput=subFilterList;
+document.getElementById("subscriptionPeriodSelect").onchange=e=>{subCurrentReport.selectedPeriod=e.target.value;subRenderDetail("basket");};
+subRefreshSchedule(true);subSetMode("single");subRenderList();
+}
+
+let adminEditId=null,adminSelectedIds=new Set(),adminCancelIds=[],adminCancelFocus=null;
+const adminDisabledSnapshot=new Map();
+const adminEditSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5 5 5M4 20l1-6L16 3l5 5L10 19l-6 1ZM3 23h18"/></svg>';
+const adminCancelSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v17l-6-4-6 4V4ZM3 3l18 18"/></svg>';
+function adminSubscriptionState(r){if(r.mode!=='subscription')return '';if(r.active===false)return '已取消';if(r.end&&r.end<subToday())return '已到期';return '订阅中';}
+function adminCanEdit(r){return r.mode==='single'||adminSubscriptionState(r)==='订阅中';}
+function adminCanCancel(r){return r.mode==='subscription'&&adminSubscriptionState(r)==='订阅中';}
+function adminStarted(r){return !!(r.periods?.length||r.hasStarted||r.first&&r.first<=subToday());}
+function adminVisibleStatus(r){const subscription=adminSubscriptionState(r);if(subscription==='已取消'||subscription==='已到期')return subscription;return ['失败','部分失败'].includes(r.latestStatus)?r.latestStatus:r.mode==='subscription'?'订阅中':'已完成';}
+function adminNextExecution(frequency,day){const d=subDate(subToday());for(let i=0;i<370;i++){d.setUTCDate(d.getUTCDate()+1);if(subMatches(subISO(d),frequency,Number(day)))return subISO(d);}return '';}
+function adminLock(el){if(!el)return;if(!adminDisabledSnapshot.has(el))adminDisabledSnapshot.set(el,el.disabled);el.disabled=true;}
+function adminRestoreForm(){
+  adminDisabledSnapshot.forEach((value,el)=>el.disabled=value);adminDisabledSnapshot.clear();
+  document.getElementById('subInstance').innerHTML='<option>US 4kmilesyaheetechus</option>';
+  document.querySelector('.create-models-card').classList.remove('admin-locked-models');document.getElementById('adminEditNote').hidden=true;adminEditId=null;
+  document.querySelector('#createReportPage .create-info-card h2').textContent='报告信息';document.getElementById('submitCreateReport').textContent=subMode==='subscription'?'创建订阅':'创建报告';
+  document.querySelectorAll('#createReportPage .selected-model-card').forEach((card,i)=>card.hidden=subMode==='subscription'&&i===1);
+}
+function adminPrepareCreate(){adminRestoreForm();document.getElementById('newReportName').value='';document.getElementById('subFormError').hidden=true;subSetMode('single');document.querySelector('.create-info-card').scrollTop=0;}
+function adminOpenEdit(id){
+  const r=subReports.find(x=>x.id===id);if(!r||!adminCanEdit(r))return subToast('当前订阅状态不支持编辑');
+  adminRestoreForm();adminEditId=id;subMode=r.mode;subFrequency=r.frequency||'month';subSetMode(r.mode);
+  const name=document.getElementById('newReportName');name.value=r.name;
+  document.getElementById('subInstance').innerHTML='<option>'+escapeHtml(r.instance?'US '+r.instance:'US 4kmilesyaheetechus')+'</option>';
+  if(r.mode==='subscription'){
+    subRefreshSchedule(true);document.getElementById('subExecutionDay').value=String(r.day||5);document.getElementById('subFirstRun').value=r.first||adminNextExecution(subFrequency,r.day||5);
+    document.querySelector('input[name="subEndType"][value="'+(r.end?'date':'forever')+'"]').checked=true;document.getElementById('subEndDate').value=r.end||'';subRefreshSchedule();
+  }else{const dates=(r.periods?.[0]||'').match(/\d{4}-\d{2}-\d{2}/g)||[];document.getElementById('subSingleStart').value=dates[0]||'';document.getElementById('subSingleEnd').value=dates[1]||'';}
+  if(r.source)document.getElementById('createDataSelect').value=r.source;
+  const aggregation=r.aggregation||'子ASIN';document.getElementById('createAggregationSelect').dataset.values=aggregation;document.getElementById('createAggregationSelect').dataset.value=aggregation;
+  document.querySelectorAll('[data-aggregation-value] input').forEach(input=>input.checked=aggregation.split(',').includes(input.value));
+  document.getElementById('createAggregationValue').textContent=aggregation.replaceAll(',', '、');
+  document.querySelectorAll('#createReportPage .selected-model-card').forEach((card,i)=>card.hidden=r.page==='amcFrame'?i!==1:i!==0);
+  ['subInstance','subSingleStart','subSingleEnd'].forEach(id=>adminLock(document.getElementById(id)));
+  document.querySelectorAll('[data-sub-mode]').forEach(adminLock);
+  document.querySelectorAll('.create-models-card button,.create-models-card input,.create-models-card select').forEach(adminLock);document.querySelector('.create-models-card').classList.add('admin-locked-models');
+  if(r.mode==='single')document.querySelectorAll('#subScheduleFields input,#subScheduleFields select').forEach(adminLock);else if(adminStarted(r))adminLock(document.getElementById('subFirstRun'));
+  document.getElementById('submitCreateReport').textContent='保存修改';document.querySelector('#createReportPage .create-info-card h2').textContent='编辑报告';
+  const note=document.getElementById('adminEditNote');note.textContent=r.mode==='single'?'单次查询报告仅支持修改报告名称。':adminStarted(r)?'可修改报告名称、订阅频率、执行日及结束时间。首次执行时间已锁定。':'可修改报告名称、订阅频率、执行日、首次执行时间及结束时间。';note.hidden=false;
+  showAppPage('create');const breadcrumb=document.querySelector('#pageBreadcrumb .breadcrumb-current');if(breadcrumb)breadcrumb.textContent='编辑报告';document.querySelector('.create-info-card').scrollTop=0;
+}
+function adminSaveEdit(){
+  const r=subReports.find(x=>x.id===adminEditId),error=document.getElementById('subFormError');
+  const fail=(message,id)=>{error.textContent=message;error.hidden=false;document.getElementById(id||'newReportName').focus();};
+  if(!r||!adminCanEdit(r))return fail('报告状态已变化，当前订阅不可编辑。');
+  const name=document.getElementById('newReportName').value.trim();if(!name||name.length>100)return fail('请输入 1 至 100 个字符的报告名称。');
+  const changes={name};
+  if(r.mode==='subscription'){
+    const frequency=document.getElementById('subFrequencySelect').value,day=Number(document.getElementById('subExecutionDay').value),first=document.getElementById('subFirstRun').value;
+    const dated=document.querySelector('input[name="subEndType"]:checked').value==='date',end=dated?document.getElementById('subEndDate').value:null,started=adminStarted(r);
+    if(!['week','month','quarter'].includes(frequency)||!day)return fail('请选择订阅频率和执行日。','subExecutionDay');
+    if(!started&&(!first||first<=subToday()||!subMatches(first,frequency,day)))return fail('首次执行时间需为符合所选执行日的未来日期。','subFirstRun');
+    if(dated&&(!end||end<(started?subToday():first)))return fail(started?'结束日期不得早于当前日期。':'结束日期不得早于首次执行时间。','subEndDate');
+    Object.assign(changes,{frequency,day,end,first:started?r.first:first});
+  }
+  if(r.mode==='subscription'){r.periodFrequencies=r.periodFrequencies||{};(r.periods||[]).forEach(period=>{if(!r.periodFrequencies[period])r.periodFrequencies[period]=r.frequency;});}
+  Object.assign(r,changes,{updatedAt:new Date().toISOString()});subStore();adminSelectedIds.clear();subRenderList();adminRestoreForm();showAppPage('reports');subToast('报告设置已更新（原型演示）');
+}
+function adminRenderList(){
+ const table=document.querySelector('#reportsPage .reports-table');table.tHead.innerHTML='<tr><th><input class="admin-check" id="adminSelectAll" type="checkbox" aria-label="选择当前筛选结果中可取消的订阅"></th><th>报告名称</th><th>Instance</th><th>报告模式</th><th>报告时间</th><th>状态</th><th>创建人</th><th>创建时间</th><th>操作</th></tr>';
+ const body=table.tBodies[0];body.replaceChildren();
+ for(const r of subReports){
+  const row=document.createElement('tr');row.dataset.adminId=r.id;row.dataset.reportMode=r.mode;const status=adminVisibleStatus(r),canCancel=adminCanCancel(r),canEdit=adminCanEdit(r);row.className='report-row';
+  const statusClass=['失败'].includes(status)?'failure':status==='部分失败'?'partial':['已取消','已到期'].includes(status)?'stopped':'';
+  const label=r.mode==='subscription'&&!adminStarted(r)&&canCancel?'待首次执行':'';
+  row.innerHTML='<td><input class="admin-check admin-row-check" type="checkbox" aria-label="选择 '+escapeHtml(r.name)+'" '+(!canCancel?'disabled ':'')+(adminSelectedIds.has(r.id)?'checked':'')+'></td><td><div class="admin-name" title="'+escapeHtml(r.name)+'">'+escapeHtml(r.name)+'</div>'+(r.demo?'<div class="sub-row-meta">虚拟演示数据</div>':'')+'</td><td>'+escapeHtml(r.instance||'4kmilesyaheetechus')+'</td><td>'+subModeBadge(r)+'</td><td>'+escapeHtml(r.periods?.[0]||'—')+(!r.periods?.length&&r.first?'<div class="sub-row-meta">首次执行：'+escapeHtml(r.first)+'</div>':'')+'</td><td><span class="admin-status '+statusClass+'">'+status+'</span>'+(label?'<div class="sub-row-meta">'+label+'</div>':'')+'</td><td>'+escapeHtml(r.creator||'Demo.User')+'</td><td>'+escapeHtml(r.created||subToday())+'</td><td><div class="admin-operation-cell">'+(r.page===null?'':'<button type="button" class="row-action admin-open">进入</button>')+'<button type="button" class="admin-icon-button admin-edit" aria-label="编辑 '+escapeHtml(r.name)+'" title="'+(canEdit?'编辑报告设置':'仅订阅中的报告可编辑')+'" '+(!canEdit?'disabled':'')+'>'+adminEditSvg+'</button>'+(r.mode==='subscription'?'<button type="button" class="admin-icon-button admin-cancel" aria-label="取消订阅 '+escapeHtml(r.name)+'" title="'+(canCancel?'取消订阅':'仅订阅中的报告可取消')+'" '+(!canCancel?'disabled':'')+'>'+adminCancelSvg+'</button>':'')+'</div></td>';
+  row.querySelector('.admin-row-check').onchange=e=>{e.stopPropagation();if(e.target.checked)adminSelectedIds.add(r.id);else adminSelectedIds.delete(r.id);adminUpdateSelection();};
+  row.querySelector('.admin-edit').onclick=e=>{e.stopPropagation();adminOpenEdit(r.id);};
+  row.querySelector('.admin-cancel')?.addEventListener('click',e=>{e.stopPropagation();adminRequestCancel([r.id]);});
+  const open=()=>{if(r.page===null)return;subCurrentReport=r;showAppPage(r.page||'basket');};row.querySelector('.admin-open')?.addEventListener('click',e=>{e.stopPropagation();open();});
+  row.addEventListener('click',e=>{if(!e.target.closest('button,input'))open();});body.append(row);
+ }
+ const empty=document.createElement('tr');empty.id='subListEmpty';empty.hidden=true;empty.innerHTML='<td colspan="9" style="padding:32px;text-align:center;color:#8995A8">暂无符合筛选条件的报告</td>';body.append(empty);
+ document.getElementById('adminSelectAll').onchange=e=>{document.querySelectorAll('#reportsPage tr[data-admin-id]:not([hidden]) .admin-row-check:not(:disabled)').forEach(c=>{c.checked=e.target.checked;const id=c.closest('tr').dataset.adminId;if(c.checked)adminSelectedIds.add(id);else adminSelectedIds.delete(id);});adminUpdateSelection();};adminFilterList();
+}
+function adminFilterList(){
+  const mode=document.getElementById('subReportModeFilter').value,status=document.getElementById('adminStatusFilter').value,query=document.getElementById('subReportSearch').value.trim().toLowerCase();let visible=0;
+  for(const row of document.querySelectorAll('#reportsPage tr[data-admin-id]')){const r=subReports.find(x=>x.id===row.dataset.adminId);row.hidden=!!(mode&&r.mode!==mode||status&&adminVisibleStatus(r)!==status||query&&!r.name.toLowerCase().includes(query));if(!row.hidden)visible++;else adminSelectedIds.delete(r.id);row.querySelector('input').checked=adminSelectedIds.has(r.id);}
+  document.getElementById('subListEmpty').hidden=visible>0;document.getElementById('subReportModeFilter').classList.toggle('admin-mode-placeholder',!mode);document.getElementById('adminStatusFilter').classList.toggle('admin-mode-placeholder',!status);adminUpdateSelection();
+}
+function adminUpdateSelection(){
+  for(const id of Array.from(adminSelectedIds)){const r=subReports.find(x=>x.id===id);if(!r||!adminCanCancel(r))adminSelectedIds.delete(id);}
+  const eligible=Array.from(document.querySelectorAll('#reportsPage tr[data-admin-id]:not([hidden]) .admin-row-check:not(:disabled)'));const selected=eligible.filter(c=>adminSelectedIds.has(c.closest('tr').dataset.adminId));
+  const all=document.getElementById('adminSelectAll');if(all){all.disabled=!eligible.length;all.checked=eligible.length>0&&selected.length===eligible.length;all.indeterminate=selected.length>0&&selected.length<eligible.length;}
+  document.getElementById('adminBatchCancel').disabled=!adminSelectedIds.size;document.getElementById('adminSelectionCount').textContent=adminSelectedIds.size?'已选 '+adminSelectedIds.size+' 个订阅报告':'';
+}
+function adminRequestCancel(ids){
+  adminCancelIds=ids.filter(id=>{const r=subReports.find(x=>x.id===id);return r&&adminCanCancel(r);});if(!adminCancelIds.length)return subToast('仅订阅中的报告可以取消');
+  adminCancelFocus=document.activeElement;closeReportPeriodMenu();document.getElementById('adminCancelTitle').textContent=adminCancelIds.length===1?'取消订阅':'批量取消订阅';document.getElementById('adminCancelCount').textContent='确认取消以下 '+adminCancelIds.length+' 个报告的订阅？';
+  document.getElementById('adminCancelNames').innerHTML=adminCancelIds.map(id=>'<p>'+escapeHtml(subReports.find(r=>r.id===id).name)+'</p>').join('');document.getElementById('adminCancelError').textContent='';document.getElementById('adminCancelModal').hidden=false;document.querySelector('.app').inert=true;document.getElementById('adminCancelBack').focus();
+}
+function adminCloseCancel(){document.getElementById('adminCancelModal').hidden=true;document.querySelector('.app').inert=false;if(adminCancelFocus?.isConnected)adminCancelFocus.focus();adminCancelIds=[];}
+function adminConfirmCancel(){
+  const records=adminCancelIds.map(id=>subReports.find(r=>r.id===id));if(records.some(r=>!r||!adminCanCancel(r))){document.getElementById('adminCancelError').textContent='部分报告状态已变化，请关闭弹窗后重新选择。';return;}
+  records.forEach(r=>{r.active=false;r.cancelledAt=new Date().toISOString();adminSelectedIds.delete(r.id);});subStore();adminCloseCancel();adminRenderList();if(document.body.dataset.page==='basket')subRenderDetail('basket');subToast('已取消 '+records.length+' 个报告订阅，历史报告保留（原型演示）');
+}
+function setupReportAdministration(){
+ const table=document.querySelector('#reportsPage .reports-table');Array.from(table.tBodies[0].rows).filter(row=>!row.dataset.subRecord&&row.id!=='subListEmpty').forEach((row,i)=>{const cells=row.cells,id='legacy-report-'+i;if(!subReports.some(r=>r.id===id))subReports.push({id,name:cells[0].textContent.trim(),mode:'single',instance:cells[2].textContent.trim(),periods:[cells[3].textContent.trim()],creator:cells[5].textContent.trim(),created:cells[6].textContent.trim(),page:row.hasAttribute('data-open-basket')?'basket':row.hasAttribute('data-open-amc-frame')?'amcFrame':null,source:'触达后28天内转化数据',aggregation:'子ASIN'});});
+ const samples=[{id:'demo-unstarted',name:'购物篮分析待执行月报',frequency:'month',first:adminNextExecution('month',5),periods:[]},{id:'demo-partial-failure',name:'购物篮分析部分失败示例',frequency:'month',first:'2026-08-05',periods:['2026-09-01 至 2026-09-30'],latestStatus:'部分失败'},{id:'demo-failure',name:'购物篮分析失败示例',frequency:'month',first:'2026-08-05',periods:['2026-08-01 至 2026-08-31'],latestStatus:'失败'}];samples.forEach(r=>{if(!subReports.some(x=>x.id===r.id))subReports.push({mode:'subscription',day:5,active:true,created:subToday(),demo:true,page:'basket',...r});});
+ subReports.forEach(r=>{r.periods=r.periods||[];if(r.page===undefined)r.page='basket';});subStore();
+ const mode=document.getElementById('subReportModeFilter');mode.innerHTML='<option value="" disabled selected>报告模式</option><option value="single">单次查询</option><option value="subscription">订阅报告</option>';
+ const tools=document.querySelector('#reportsPage .reports-tools'),status=document.createElement('select');status.id='adminStatusFilter';status.setAttribute('aria-label','状态');status.innerHTML='<option value="" disabled selected>状态</option>'+['订阅中','已完成','部分失败','失败','已取消','已到期'].map(s=>'<option>'+s+'</option>').join('');mode.after(status);
+ const reset=document.createElement('button');reset.className='admin-reset-filter';reset.type='button';reset.textContent='重置';reset.onclick=()=>{mode.value='';status.value='';document.getElementById('subReportSearch').value='';adminSelectedIds.clear();adminFilterList();};tools.append(reset);
+ const batch=document.createElement('div');batch.className='admin-list-actions';batch.innerHTML='<button class="ghost-btn admin-batch" id="adminBatchCancel" type="button" disabled>批量取消订阅</button><span id="adminSelectionCount" role="status"></span>';document.querySelector('#reportsPage .reports-list .table-wrap').before(batch);document.getElementById('adminBatchCancel').onclick=()=>adminRequestCancel(Array.from(adminSelectedIds));
+ const note=document.createElement('div');note.id='adminEditNote';note.className='admin-edit-note';note.hidden=true;document.querySelector('#createReportPage .report-form').prepend(note);
+ const modal=document.createElement('div');modal.id='adminCancelModal';modal.className='admin-modal-backdrop';modal.hidden=true;modal.innerHTML='<section class="admin-confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="adminCancelTitle" aria-describedby="adminCancelDescription"><header class="admin-confirm-head"><h2 id="adminCancelTitle">取消订阅</h2><button class="admin-icon-button" id="adminCancelClose" type="button" aria-label="关闭取消订阅弹窗">×</button></header><div class="admin-confirm-body"><div id="adminCancelCount"></div><div class="admin-confirm-summary" id="adminCancelNames"></div><p id="adminCancelDescription">取消后不再生成后续周期报告，已生成的报告将保留，可继续查看和下载。</p><div class="admin-inline-error" id="adminCancelError" role="alert"></div></div><footer class="admin-confirm-foot"><button class="ghost-btn" id="adminCancelBack" type="button">暂不取消</button><button class="admin-confirm-primary" id="adminCancelConfirm" type="button">确认取消订阅</button></footer></section>';document.body.append(modal);document.getElementById('adminCancelClose').onclick=adminCloseCancel;document.getElementById('adminCancelBack').onclick=adminCloseCancel;document.getElementById('adminCancelConfirm').onclick=adminConfirmCancel;
+ modal.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();adminCloseCancel();}if(e.key==='Tab'){const controls=Array.from(modal.querySelectorAll('button:not(:disabled)'));const first=controls[0],last=controls.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+ subRenderList=adminRenderList;subFilterList=adminFilterList;mode.onchange=()=>{adminSelectedIds.clear();adminFilterList();};status.onchange=()=>{adminSelectedIds.clear();adminFilterList();};document.getElementById('subReportSearch').oninput=()=>{adminSelectedIds.clear();adminFilterList();};
+ const originalSubmit=subSubmitReport;subSubmitReport=function(){if(adminEditId)return adminSaveEdit();originalSubmit();};
+ const originalRefresh=subRefreshSchedule;subRefreshSchedule=function(reset=false){originalRefresh(reset);if(adminEditId){const r=subReports.find(x=>x.id===adminEditId);if(r&&adminStarted(r)){document.getElementById('subFirstRun').value=r.first||'';document.getElementById('subEndDate').min=subToday();}}};
+ ['createReportEntry','quickCreateBasket'].forEach(id=>document.getElementById(id).addEventListener('click',adminPrepareCreate,true));document.getElementById('cancelCreateReport').addEventListener('click',()=>{adminRestoreForm();},true);
+ const originalDetail=subRenderDetail;subRenderDetail=function(page){originalDetail(page);if(page==='basket'&&subCurrentReport.mode==='subscription'){const button=document.querySelector('#subDetailInfo > button');if(button){button.textContent=adminCanCancel(subCurrentReport)?'取消订阅':adminSubscriptionState(subCurrentReport);button.disabled=!adminCanCancel(subCurrentReport);button.onclick=()=>adminRequestCancel([subCurrentReport.id]);}}};
+ const originalShow=showAppPage;showAppPage=function(page){originalShow(page);if(page==='reports')adminRenderList();};adminRenderList();
+}
+
     setupFrameGlobalMetricAffordances();
     setupPageNavigation();
     setupSectionNotes();
@@ -37374,8 +37834,13 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
       setupCustomLabelExperience();
       setupCustomMappingExperience();
       setupSystemMappingExperience();
-      showAppPage("amcFrame");
+      setupSubscriptionReports();
+      setupReportHeaderFilters();
+      setupCompactSubscriptionForm();
+      setupReportAdministration();
+      showAppPage("reports");
   </script>
 </body>
 </html>
+
 
