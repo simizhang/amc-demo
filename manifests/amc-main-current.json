@@ -1,0 +1,13 @@
+{
+  "version": "AMC-Main",
+  "release_number": null,
+  "status": "published",
+  "published_at": "2026-10-30",
+  "source_snapshot": "preview/amc-main-review/source.html@aab6279027167568b3ccd31887258c2ecda26bf0",
+  "features": {
+    "feat.amc.core": true,
+    "feat.amc.system_mapping": true,
+    "feat.amc.basket_analysis": false,
+    "feat.sub.subscription_report": false
+  }
+}
