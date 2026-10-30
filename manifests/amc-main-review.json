@@ -1,0 +1,8 @@
+{
+  "version": "AMC-Main Review",
+  "status": "review",
+  "features": {
+    "feat.amc.core": true,
+    "feat.sub.subscription_report": false
+  }
+}
