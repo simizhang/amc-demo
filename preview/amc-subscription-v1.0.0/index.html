@@ -10,16 +10,16 @@
   </style>
 </head>
 <body>
-  <iframe id="amcPreview" src="../../index.html" title="AMC-Subscription v1.0.0"></iframe>
+  <iframe id="amcPreview" src="source.html" title="AMC-Subscription v1.0.0"></iframe>
   <script>
     document.getElementById("amcPreview").addEventListener("load", function () {
       const frameDocument = this.contentDocument;
       const meta = frameDocument.createElement("meta");
       meta.name = "amc-version-manifest";
-      meta.content = "manifests/amc-subscription-v1.0.0.json";
+      meta.content = "../../manifests/amc-subscription-v1.0.0.json";
       frameDocument.head.append(meta);
       const runtime = frameDocument.createElement("script");
-      runtime.src = "version-runtime.js";
+      runtime.src = "../../version-runtime.js";
       frameDocument.body.append(runtime);
     });
   </script>
