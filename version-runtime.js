@@ -37,6 +37,13 @@
     element.style.setProperty("display", "none", "important");
   }
 
+  function show(element) {
+    if (!element) return;
+    element.hidden = false;
+    element.removeAttribute("aria-hidden");
+    element.style.removeProperty("display");
+  }
+
   function hideClosest(selector, closestSelector) {
     const element = document.querySelector(selector);
     hide(element?.closest(closestSelector));
@@ -84,6 +91,7 @@
   }
 
   function hideBasketSurfaces() {
+    show(document.getElementById("quickCreateBasket"));
     hide(document.querySelector('.product-tab[data-page-target="basket"]'));
     document.querySelectorAll("[data-open-basket]").forEach((element) => {
       hide(element.closest("tr") || element);
