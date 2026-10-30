@@ -1,0 +1,8 @@
+{
+  "version": "AMC-Subscription v1.0.0",
+  "status": "shelved",
+  "features": {
+    "feat.amc.core": true,
+    "feat.sub.subscription_report": true
+  }
+}
