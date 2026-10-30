@@ -88,7 +88,6 @@
     document.querySelectorAll("[data-open-basket]").forEach((element) => {
       hide(element.closest("tr") || element);
     });
-    hide(document.getElementById("quickCreateBasket"));
     document.querySelectorAll("#basketTemplateCard li").forEach((item) => {
       if (item.textContent.includes("01 购物篮分析模型")) hide(item);
     });
