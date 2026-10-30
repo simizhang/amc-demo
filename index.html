@@ -17,10 +17,10 @@
       const frameDocument = this.contentDocument;
       const meta = frameDocument.createElement("meta");
       meta.name = "amc-version-manifest";
-      meta.content = "manifests/amc-main-current.json";
+      meta.content = "../../manifests/amc-main-current.json";
       frameDocument.head.append(meta);
       const runtime = frameDocument.createElement("script");
-      runtime.src = "version-runtime.js?v=20261030-2";
+      runtime.src = "../../version-runtime.js?v=20261030-3";
       runtime.addEventListener("load", async () => {
         try {
           await frameDocument.defaultView.AMC_VERSION_MANIFEST_READY;
