@@ -3,6 +3,8 @@
   "status": "review",
   "features": {
     "feat.amc.core": true,
+    "feat.amc.system_mapping": true,
+    "feat.amc.basket_analysis": false,
     "feat.sub.subscription_report": false
   }
 }
