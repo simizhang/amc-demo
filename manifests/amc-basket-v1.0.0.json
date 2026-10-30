@@ -1,0 +1,11 @@
+{
+  "version": "AMC-Basket v1.0.0",
+  "status": "shelved",
+  "source_snapshot": "preview/amc-main-review/source.html@aab6279027167568b3ccd31887258c2ecda26bf0",
+  "features": {
+    "feat.amc.core": true,
+    "feat.amc.system_mapping": true,
+    "feat.amc.basket_analysis": true,
+    "feat.sub.subscription_report": false
+  }
+}
