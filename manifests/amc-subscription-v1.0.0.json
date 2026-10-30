@@ -3,6 +3,8 @@
   "status": "shelved",
   "features": {
     "feat.amc.core": true,
+    "feat.amc.system_mapping": true,
+    "feat.amc.basket_analysis": true,
     "feat.sub.subscription_report": true
   }
 }
