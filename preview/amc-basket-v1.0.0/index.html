@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AMC-Basket v1.0.0</title>
+  <style>
+    html, body, iframe { width: 100%; height: 100%; margin: 0; border: 0; overflow: hidden; }
+    body { background: #f5f7fb; }
+  </style>
+</head>
+<body>
+  <iframe id="amcPreview" src="../amc-main-review/source.html" title="AMC-Basket v1.0.0"></iframe>
+  <script>
+    document.getElementById("amcPreview").addEventListener("load", function () {
+      const frameDocument = this.contentDocument;
+      const meta = frameDocument.createElement("meta");
+      meta.name = "amc-version-manifest";
+      meta.content = "../../manifests/amc-basket-v1.0.0.json";
+      frameDocument.head.append(meta);
+      const runtime = frameDocument.createElement("script");
+      runtime.src = "../../version-runtime.js";
+      frameDocument.body.append(runtime);
+    });
+  </script>
+</body>
+</html>
