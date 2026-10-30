@@ -1,0 +1,12 @@
+{
+  "version": "AMC-Subscription v1.0.0",
+  "status": "shelved",
+  "snapshot_at": "2026-10-30",
+  "source_snapshot": "preview/amc-subscription-v1.0.0/source.html@aab6279027167568b3ccd31887258c2ecda26bf0",
+  "features": {
+    "feat.amc.core": true,
+    "feat.amc.system_mapping": true,
+    "feat.amc.basket_analysis": true,
+    "feat.sub.subscription_report": true
+  }
+}
