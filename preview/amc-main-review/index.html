@@ -10,16 +10,16 @@
   </style>
 </head>
 <body>
-  <iframe id="amcPreview" src="../../index.html" title="AMC-Main 公开版预览"></iframe>
+  <iframe id="amcPreview" src="source.html" title="AMC-Main 公开版预览"></iframe>
   <script>
     document.getElementById("amcPreview").addEventListener("load", function () {
       const frameDocument = this.contentDocument;
       const meta = frameDocument.createElement("meta");
       meta.name = "amc-version-manifest";
-      meta.content = "manifests/amc-main-review.json";
+      meta.content = "../../manifests/amc-main-review.json";
       frameDocument.head.append(meta);
       const runtime = frameDocument.createElement("script");
-      runtime.src = "version-runtime.js";
+      runtime.src = "../../version-runtime.js";
       frameDocument.body.append(runtime);
     });
   </script>
