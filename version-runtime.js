@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  let basketFeatureEnabled = true;
+
   const manifestMeta = document.querySelector('meta[name="amc-version-manifest"]');
   if (!manifestMeta) return;
 
@@ -14,8 +16,11 @@
       window.AMC_VERSION_MANIFEST = manifest;
       document.documentElement.dataset.amcVersion = manifest.version || "unknown";
       const subscriptionEnabled = manifest.features?.["feat.sub.subscription_report"] === true;
+      basketFeatureEnabled = manifest.features?.["feat.amc.basket_analysis"] === true;
       document.documentElement.dataset.amcSubscription = subscriptionEnabled ? "on" : "off";
+      document.documentElement.dataset.amcBasketAnalysis = basketFeatureEnabled ? "on" : "off";
       if (!subscriptionEnabled) disableSubscriptionFeatures();
+      if (!basketFeatureEnabled) disableBasketFeatures();
       return manifest;
     })
     .catch((error) => {
@@ -78,6 +83,34 @@
     renderMainReportList();
   }
 
+  function hideBasketSurfaces() {
+    hide(document.querySelector('.product-tab[data-page-target="basket"]'));
+    document.querySelectorAll("[data-open-basket]").forEach((element) => {
+      hide(element.closest("tr") || element);
+    });
+    hide(document.getElementById("quickCreateBasket"));
+    document.querySelectorAll("#basketTemplateCard li").forEach((item) => {
+      if (item.textContent.includes("01 购物篮分析模型")) hide(item);
+    });
+    document.querySelectorAll("#createReportPage .selected-model-card").forEach((card) => {
+      if (card.querySelector("h3")?.textContent.includes("01 购物篮分析模型")) hide(card);
+    });
+  }
+
+  function disableBasketFeatures() {
+    hideBasketSurfaces();
+    const previousShowAppPage = window.showAppPage;
+    if (typeof previousShowAppPage === "function") {
+      window.showAppPage = function (page) {
+        previousShowAppPage(page === "basket" ? "reports" : page);
+        hideBasketSurfaces();
+        if (page === "reports" && document.documentElement.dataset.amcSubscription === "off") {
+          renderMainReportList();
+        }
+      };
+    }
+  }
+
   function prepareMainCreatePage() {
     try {
       if (typeof subSetMode === "function") subSetMode("single");
@@ -103,7 +136,7 @@
   function getSingleReports() {
     try {
       if (typeof subReports !== "undefined" && Array.isArray(subReports)) {
-        return subReports.filter((report) => report.mode === "single");
+        return subReports.filter((report) => report.mode === "single" && (basketFeatureEnabled || report.page !== "basket"));
       }
     } catch (error) {
       console.warn("Unable to read report records.", error);
