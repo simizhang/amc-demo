@@ -1,6 +1,6 @@
 {
   "version": "AMC-Main",
-  "release_number": 34,
+  "release_number": 36,
   "status": "published",
   "published_at": "2026-11-19",
   "features": {
@@ -10,8 +10,8 @@
     "feat.sub.subscription_report": false,
     "feat.amc.attribution_model": true
   },
-  "attribution_source": "AMC_归因模型_demo.html · version 64",
-  "previous_release_source": "index.html@9b5c80e97ec7a85fc1c70d81e341dae9ffe184ae",
+  "attribution_source": "AMC_归因模型_demo.html · version 75",
+  "previous_release_source": "index.html@b8de690ed8d80065529278e2a2be330aa0442755",
   "system_shell_source": "Confirmed attribution model system menu, top tools, tabs and report context toolbar",
   "chart_cursor": "pointer",
   "attribution_chart_badge": "Aligned with corresponding bar group bounds",
@@ -22,6 +22,8 @@
   "attribution_chart_style": "style2 only; style1 and style2 documented",
   "attribution_chart_metric": "Upper-right tabs reuse picker-style-switch; original title/caption flow and 4px margin restored",
   "attribution_absolute_sales": "Not supplied in original exposure/billing workbooks; never substituted with spend",
-  "attribution_model_intro": "Style1 preserved; style2 closer bubble (6px group bottom padding + 8px margin), soft translucent border and layered shadow",
-  "attribution_budget_note": "Removed missing-sales explanatory paragraph as requested"
+  "attribution_model_intro": "Both styles available; category left padding 16px; style1 explanation border and pointer #D5CDF5; style2 retains confirmed bubble spacing",
+  "attribution_budget_note": "Removed missing-sales explanatory paragraph as requested",
+  "attribution_chart_tooltip": "Both models shown together; each has model name, optimization metric raw value and contribution share; left color bars match legend",
+  "attribution_comparison_layout": "Equal-height comparison cards with aligned top and bottom boundaries"
 }

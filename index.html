@@ -43120,8 +43120,8 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module2 .spend-legend
 &lt;/style&gt;
 
 &lt;style id=&quot;amc-compact-comparison-layout&quot;&gt;
-body[data-model=&quot;attribution&quot;] #attributionPage #modelComparisonModule .comparison-grid{align-items:start}
-body[data-model=&quot;attribution&quot;] #attributionPage #modelComparisonModule :is(#module1,#module2){min-height:0;height:auto;align-self:start}
+body[data-model=&quot;attribution&quot;] #attributionPage #modelComparisonModule .comparison-grid{align-items:stretch}
+body[data-model=&quot;attribution&quot;] #attributionPage #modelComparisonModule :is(#module1,#module2){min-height:0;height:auto;align-self:stretch}
 body[data-model=&quot;attribution&quot;] #attributionPage #module2 .dual-donut-wrap{width:100%;max-width:480px;margin:4px auto 0;padding:4px 12px 0;box-sizing:border-box}
 &lt;/style&gt;
 &lt;script&gt;if(new URLSearchParams(location.search).has(&#x27;embedded&#x27;))document.documentElement.dataset.embedded=&#x27;true&#x27;;&lt;/script&gt;
@@ -43130,10 +43130,6 @@ html[data-embedded] body[data-model=&quot;attribution&quot;] .sidebar,
 html[data-embedded] body[data-model=&quot;attribution&quot;] .top-tabs{display:none!important}
 html[data-embedded] body[data-model=&quot;attribution&quot;] .app{display:block!important;grid-template-columns:none!important;min-height:100vh}
 html[data-embedded] body[data-model=&quot;attribution&quot;] .workspace{width:100%!important;margin:0!important;min-width:0!important}
-&lt;/style&gt;&lt;style&gt;
-.sidebar,.top-tabs,.utility{display:none!important}
-body[data-model=&quot;attribution&quot;] .app{display:block!important;min-width:0;grid-template-columns:none!important}
-body[data-model=&quot;attribution&quot;] .workspace{display:block;margin:0!important;width:100%!important;max-width:none;min-width:0;height:auto;min-height:0;overflow:visible}
 &lt;/style&gt;&lt;style id=&quot;attribution-bar-cursor&quot;&gt;
 body[data-model=&quot;attribution&quot;] #barPlot,
 body[data-model=&quot;attribution&quot;] #barPlot svg,
@@ -43178,9 +43174,37 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module1&gt;.card-head
 body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-metric-tabs{position:absolute;right:16px;top:12px;white-space:nowrap}
 body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-metric-tab[aria-selected=&quot;true&quot;]{background:#FFFFFF;color:#1C56FC;box-shadow:none}
 body[data-model=&quot;attribution&quot;] #attributionPage #module1 .bar-chart{margin-top:0}
-body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;2&quot;] .model-picker-group{background:transparent;border:0;border-radius:0;box-shadow:none;padding-bottom:6px}
-body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;2&quot;] #modelIntroPanel{position:relative;margin-top:8px;padding:20px;border:1px solid rgba(115,88,223,.12);border-radius:12px;background:#FAF9FD;box-shadow:0 2px 6px rgba(71,51,120,.035),0 8px 20px rgba(71,51,120,.055)}
-body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;2&quot;] #modelIntroPanel::before{content:&quot;&quot;;position:absolute;top:-8px;left:calc(var(--intro-anchor-x,50%) - 8px);width:14px;height:14px;background:#FAF9FD;border-top:1px solid rgba(115,88,223,.12);border-left:1px solid rgba(115,88,223,.12);transform:rotate(45deg);pointer-events:none}
+/* Shared category geometry prevents option text and wrapping from shifting between styles. */
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card .model-picker-group{padding:16px 8px 0 16px;border:0;border-radius:14px;box-shadow:none}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;2&quot;] .model-picker-group{background:transparent}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;2&quot;] #modelIntroPanel{position:relative;margin-top:12px;padding:12px 16px;border:1px solid rgba(115,88,223,.12);border-radius:12px;background:#FAF9FD;box-shadow:0 2px 6px rgba(71,51,120,.035),0 8px 20px rgba(71,51,120,.055)}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;2&quot;] #modelIntroPanel::before{content:&quot;&quot;;position:absolute;top:-5px;left:calc(var(--intro-anchor-x,50%) - 5px);width:8px;height:8px;background:#FAF9FD;border-top:1px solid rgba(115,88,223,.12);border-left:1px solid rgba(115,88,223,.12);transform:rotate(45deg);pointer-events:none}
+&lt;/style&gt;
+
+&lt;style id=&quot;contribution-comparison-tooltip&quot;&gt;
+body[data-model=&quot;attribution&quot;] #spendTooltip .contribution-tip-model{position:relative;padding-left:12px}
+body[data-model=&quot;attribution&quot;] #spendTooltip .contribution-tip-model::before{content:&quot;&quot;;position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:1px;background:var(--series-color)}
+body[data-model=&quot;attribution&quot;] #spendTooltip .contribution-tip-model+.contribution-tip-model{margin-top:12px}
+body[data-model=&quot;attribution&quot;] #spendTooltip .contribution-tip-model&gt;strong{display:block;font-weight:530}
+body[data-model=&quot;attribution&quot;] #spendTooltip .contribution-tip-model .chart-tip-line{justify-content:space-between;margin-top:4px;gap:16px}
+body[data-model=&quot;attribution&quot;] #spendTooltip .contribution-tip-model .chart-tip-line b{margin-left:0;white-space:nowrap}
+&lt;/style&gt;
+&lt;style id=&quot;model-picker-category-type&quot;&gt;
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card :is(.model-picker-group-label,.model-picker-group-note){font-size:13px}
+&lt;/style&gt;
+&lt;style id=&quot;model-category-separators&quot;&gt;
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card .model-picker-group{position:relative}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card .model-picker-group:not(:last-child)::after{content:&quot;&quot;;position:absolute;top:16px;bottom:0;right:-7px;width:1px;background:#E1E5EA;pointer-events:none}
+@media(max-width:1050px){body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card .model-picker-group:not(:last-child)::after{right:-5px}}
+@media(max-width:760px){body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card .model-picker-group:not(:last-child)::after{top:auto;bottom:-5px;left:8px;right:8px;width:auto;height:1px}}
+&lt;/style&gt;
+&lt;style id=&quot;restored-intro-style-one&quot;&gt;
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;1&quot;] .model-picker-group{background:transparent}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;1&quot;] .model-picker-group::before{content:&quot;&quot;;position:absolute;inset:0 0 -8px;border-radius:14px;background:#F7F6FC;pointer-events:none;z-index:0}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;1&quot;] .model-picker-group&gt;*{position:relative;z-index:1}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;1&quot;] .model-picker-group::after{content:none}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;1&quot;] #modelIntroPanel{position:relative;margin-top:20px;padding:12px 16px;border:1px solid #D5CDF5;border-radius:12px;background:transparent;box-shadow:none}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;1&quot;] #modelIntroPanel::before{content:&quot;&quot;;position:absolute;top:-5px;left:calc(var(--intro-anchor-x,50%) - 5px);width:8px;height:8px;background:#FFFFFF;border-top:1px solid #D5CDF5;border-left:1px solid #D5CDF5;transform:rotate(45deg);pointer-events:none}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body data-page=&quot;amcFrame&quot; data-model=&quot;attribution&quot;&gt;
@@ -43251,10 +43275,10 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[dat
         &lt;/div&gt;
       &lt;/section&gt;
 
-      &lt;section class=&quot;model-picker-card&quot; data-picker-style=&quot;1&quot; aria-labelledby=&quot;modelPickerTitle&quot;&gt;
+      &lt;section class=&quot;model-picker-card&quot; data-picker-style=&quot;2&quot; aria-labelledby=&quot;modelPickerTitle&quot;&gt;
         &lt;div class=&quot;model-picker-head&quot;&gt;
           &lt;div class=&quot;model-picker-title&quot;&gt;&lt;span class=&quot;model-picker-icon&quot; aria-hidden=&quot;true&quot;&gt;☷&lt;/span&gt;&lt;div&gt;&lt;h2 id=&quot;modelPickerTitle&quot;&gt;选择归因模型&lt;/h2&gt;&lt;div class=&quot;model-picker-current&quot;&gt;当前：&lt;strong id=&quot;modelPickerCurrent&quot;&gt;首触归因&lt;/strong&gt; · &lt;span id=&quot;modelPickerUsage&quot;&gt;入口评估&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div class=&quot;model-picker-actions&quot;&gt;&lt;div class=&quot;picker-style-switch&quot; role=&quot;group&quot; aria-label=&quot;模型区域样式&quot;&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;1&quot; aria-pressed=&quot;true&quot;&gt;样式1&lt;/button&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;2&quot; aria-pressed=&quot;false&quot;&gt;样式2&lt;/button&gt;&lt;/div&gt;&lt;button type=&quot;button&quot; class=&quot;model-intro-toggle&quot; id=&quot;modelIntroToggle&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;modelIntroPanel&quot;&gt;&lt;span&gt;模型说明&lt;/span&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m4 6 4 4 4-4&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;model-picker-actions&quot;&gt;&lt;div class=&quot;picker-style-switch&quot; role=&quot;group&quot; aria-label=&quot;模型区域样式&quot;&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;1&quot; aria-pressed=&quot;false&quot;&gt;样式1&lt;/button&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;2&quot; aria-pressed=&quot;true&quot;&gt;样式2&lt;/button&gt;&lt;/div&gt;&lt;button type=&quot;button&quot; class=&quot;model-intro-toggle&quot; id=&quot;modelIntroToggle&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;modelIntroPanel&quot;&gt;&lt;span&gt;模型说明&lt;/span&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m4 6 4 4 4-4&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
         &lt;/div&gt;
         
         &lt;div class=&quot;model-picker-groups&quot;&gt;
@@ -43343,17 +43367,23 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[dat
     svg+=`&lt;path d=&quot;M${left},${top}V${bottom}H${width-right}&quot; fill=&quot;none&quot; stroke=&quot;#d4d9e3&quot;/&gt;`;
     channels.forEach((c,i)=&gt;{
       const center=left+(i+.5)*step,w=36,gap=16,x1=center-(w+gap)/2,x2=center+(w+gap)/2,ys=series.map(values=&gt;bottom-values[i]/max*height);
-      svg+=`&lt;g class=&quot;bar-channel-group&quot; tabindex=&quot;0&quot; data-index=&quot;${i}&quot; aria-label=&quot;${c}${metric===&#x27;contribution&#x27;?&#x27;贡献度&#x27;:meta.label}对比&quot;&gt;&lt;rect class=&quot;bar-hit&quot; x=&quot;${center-step/2+1}&quot; y=&quot;1&quot; width=&quot;${step-2}&quot; height=&quot;${bottom}&quot; fill=&quot;transparent&quot;/&gt;&lt;rect class=&quot;bar-hover-guide&quot; x=&quot;${center-step/2+1}&quot; y=&quot;${top}&quot; width=&quot;${step-2}&quot; height=&quot;${height}&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;.1&quot; pointer-events=&quot;none&quot; style=&quot;visibility:hidden&quot;/&gt;`;
-      [x1,x2].forEach((x,j)=&gt;svg+=`&lt;rect class=&quot;style2-bar-shadow&quot; x=&quot;${x-w/2}&quot; y=&quot;${top}&quot; width=&quot;${w}&quot; height=&quot;${height}&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;${j===0?.045:.075}&quot; pointer-events=&quot;none&quot;/&gt;`);
-      series.forEach((values,j)=&gt;{const x=j===0?x1:x2,v=values[i];svg+=`&lt;rect class=&quot;contribution-bar&quot; x=&quot;${x-w/2}&quot; y=&quot;${ys[j]}&quot; width=&quot;${w}&quot; height=&quot;${v/max*height}&quot; rx=&quot;0&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;${j===0?.4:1}&quot;/&gt;&lt;text x=&quot;${x}&quot; y=&quot;${ys[j]-9}&quot; text-anchor=&quot;middle&quot; class=&quot;bar-data-label&quot; fill=&quot;#808896&quot; font-size=&quot;12&quot;&gt;${valueFormat(v)}&lt;/text&gt;`});
+      svg+=`&lt;g class=&quot;bar-channel-group&quot; data-index=&quot;${i}&quot; aria-label=&quot;${c}${metric===&#x27;contribution&#x27;?&#x27;贡献度&#x27;:meta.label}对比&quot;&gt;&lt;rect class=&quot;bar-hit&quot; x=&quot;${center-step/2+1}&quot; y=&quot;1&quot; width=&quot;${step-2}&quot; height=&quot;${bottom}&quot; fill=&quot;transparent&quot;/&gt;&lt;rect class=&quot;bar-hover-guide&quot; x=&quot;${center-step/2+1}&quot; y=&quot;${top}&quot; width=&quot;${step-2}&quot; height=&quot;${height}&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;.1&quot; pointer-events=&quot;none&quot; style=&quot;visibility:hidden&quot;/&gt;`;
+      [x1,x2].forEach((x,j)=&gt;svg+=`&lt;rect class=&quot;style2-bar-shadow&quot; x=&quot;${x-w/2}&quot; y=&quot;${top}&quot; width=&quot;${w}&quot; height=&quot;${height}&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;${j===0?.045:.075}&quot; data-bar-series=&quot;${j}&quot;/&gt;`);
+      series.forEach((values,j)=&gt;{const x=j===0?x1:x2,v=values[i];svg+=`&lt;rect class=&quot;contribution-bar&quot; tabindex=&quot;0&quot; data-bar-series=&quot;${j}&quot; aria-label=&quot;${c} ${j===0?models.official.name:models[state.model].name}&quot; x=&quot;${x-w/2}&quot; y=&quot;${ys[j]}&quot; width=&quot;${w}&quot; height=&quot;${v/max*height}&quot; rx=&quot;0&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;${j===0?.4:1}&quot;/&gt;&lt;text x=&quot;${x}&quot; y=&quot;${ys[j]-9}&quot; text-anchor=&quot;middle&quot; class=&quot;bar-data-label&quot; data-bar-series=&quot;${j}&quot; fill=&quot;#808896&quot; font-size=&quot;12&quot;&gt;${valueFormat(v)}&lt;/text&gt;`});
       const delta=series[1][i]-series[0][i],flat=Math.abs(delta)&lt;(metric===&#x27;contribution&#x27;?.0005:.005),color=flat?&#x27;#808896&#x27;:delta&gt;0?&#x27;#22a06b&#x27;:&#x27;#de5360&#x27;;
       const badgeY=top-40,badgeWidth=x2-x1+w,label=flat?&#x27;持平&#x27;:(delta&gt;0?&#x27;+&#x27;:&#x27;−&#x27;)+(metric===&#x27;contribution&#x27;?(Math.abs(delta)*100).toFixed(2)+&#x27;pp&#x27;:compactMetric(Math.abs(delta))),iconX=center+badgeWidth/2-19,iconY=badgeY+7,bg=flat?&#x27;#f0f2f6&#x27;:delta&gt;0?&#x27;#eaf8f1&#x27;:&#x27;#fff0f1&#x27;;
       svg+=`&lt;g class=&quot;style2-delta-badge&quot;&gt;&lt;rect x=&quot;${center-badgeWidth/2}&quot; y=&quot;${badgeY}&quot; width=&quot;${badgeWidth}&quot; height=&quot;24&quot; rx=&quot;3&quot; fill=&quot;${bg}&quot;/&gt;&lt;path class=&quot;style2-badge-pointer&quot; d=&quot;M${center-5},${badgeY+24} L${center},${badgeY+30} L${center+5},${badgeY+24} Z&quot; fill=&quot;${bg}&quot;/&gt;&lt;text x=&quot;${flat?center:center-8}&quot; y=&quot;${badgeY+16}&quot; text-anchor=&quot;middle&quot; class=&quot;bar-delta-label&quot; font-size=&quot;12&quot; font-weight=&quot;420&quot; fill=&quot;${color}&quot;&gt;${label}&lt;/text&gt;${flat?&#x27;&#x27;:`&lt;path d=&quot;${delta&gt;0?`M${iconX},${iconY+9}l3-4 3 1 4-5m-3 0h3v3`:`M${iconX},${iconY+1}l3 4 3-1 4 5m-3 0h3v-3`}&quot; fill=&quot;none&quot; stroke=&quot;${color}&quot; stroke-width=&quot;1.2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;/&gt;`}&lt;/g&gt;`;
       svg+=`&lt;circle class=&quot;channel-axis-dot&quot; cx=&quot;${center-17}&quot; cy=&quot;371&quot; r=&quot;3&quot; fill=&quot;${colors[c]}&quot;/&gt;&lt;text class=&quot;contribution-axis&quot; x=&quot;${center+5}&quot; y=&quot;375&quot; text-anchor=&quot;middle&quot;&gt;${c}&lt;/text&gt;&lt;/g&gt;`;
     });host.innerHTML=svg+&#x27;&lt;/svg&gt;&#x27;;
     host.querySelectorAll(&#x27;.bar-channel-group&#x27;).forEach(group=&gt;{
-      const show=e=&gt;{const i=+group.dataset.index,pp=(model[i]-official[i])*100;host.querySelectorAll(&#x27;.bar-hover-guide&#x27;).forEach(rect=&gt;rect.style.visibility=rect.parentElement===group?&#x27;visible&#x27;:&#x27;hidden&#x27;);showChartTip(`&lt;strong&gt;${channels[i]}渠道对比&lt;/strong&gt;&lt;div class=&quot;chart-tip-line&quot;&gt;&lt;i style=&quot;background:${colorOfficial}&quot;&gt;&lt;/i&gt;&lt;span&gt;官方归因${meta.label}&lt;/span&gt;&lt;b&gt;${metricValue(amounts.official?.[i])}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;chart-tip-line&quot;&gt;&lt;span&gt;官方归因贡献度&lt;/span&gt;&lt;b&gt;${pct(official[i],2)}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;chart-tip-line&quot;&gt;&lt;i style=&quot;background:${colorModel}&quot;&gt;&lt;/i&gt;&lt;span&gt;${models[state.model].name}${meta.label}&lt;/span&gt;&lt;b&gt;${metricValue(amounts.model?.[i])}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;chart-tip-line&quot;&gt;&lt;span&gt;${models[state.model].name}贡献度&lt;/span&gt;&lt;b&gt;${pct(model[i],2)}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;chart-tip-diff&quot;&gt;贡献度差异 &lt;b&gt;${pp&gt;0?&#x27;+&#x27;:&#x27;&#x27;}${pp.toFixed(2)}pp&lt;/b&gt;&lt;/div&gt;`,e,group)};
-      const hide=()=&gt;{host.querySelectorAll(&#x27;.bar-hover-guide&#x27;).forEach(rect=&gt;rect.style.visibility=&#x27;hidden&#x27;);document.getElementById(&#x27;spendTooltip&#x27;).hidden=true};group.onpointermove=show;group.onpointerleave=hide;group.onfocus=show;group.onblur=hide;
+      const show=e=&gt;{
+        const i=+group.dataset.index,target=e.target?.closest?.(&#x27;[data-bar-series]&#x27;)||group;
+        host.querySelectorAll(&#x27;.bar-hover-guide&#x27;).forEach(rect=&gt;rect.style.visibility=rect.parentElement===group?&#x27;visible&#x27;:&#x27;hidden&#x27;);
+        const entries=[{name:models.official.name,value:amounts.official?.[i],share:official[i],color:colorOfficial},{name:models[state.model].name,value:amounts.model?.[i],share:model[i],color:colorModel}];
+        const content=entries.map(entry=&gt;`&lt;div class=&quot;contribution-tip-model&quot; style=&quot;--series-color:${entry.color}&quot;&gt;&lt;strong&gt;${entry.name}&lt;/strong&gt;&lt;div class=&quot;chart-tip-line&quot;&gt;&lt;span&gt;${meta.label}&lt;/span&gt;&lt;b&gt;${metricValue(entry.value)}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;chart-tip-line&quot;&gt;&lt;span&gt;${meta.label}贡献度&lt;/span&gt;&lt;b&gt;${pct(entry.share,2)}&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;`).join(&#x27;&#x27;);
+        showChartTip(`&lt;div class=&quot;contribution-comparison-tip&quot;&gt;${content}&lt;/div&gt;`,e,target);
+      };
+      const hide=()=&gt;{host.querySelectorAll(&#x27;.bar-hover-guide&#x27;).forEach(rect=&gt;rect.style.visibility=&#x27;hidden&#x27;);document.getElementById(&#x27;spendTooltip&#x27;).hidden=true};group.onpointermove=show;group.onpointerleave=hide;group.onfocusin=show;group.onfocusout=hide;
     });
   }
   function renderDonuts(official,model){
@@ -43399,7 +43429,7 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[dat
   }
   function positionModelIntroBubble(){
     const card=document.querySelector(&#x27;.model-picker-card&#x27;),panel=document.getElementById(&#x27;modelIntroPanel&#x27;);
-    if(card.dataset.pickerStyle!==&#x27;2&#x27;||panel.hidden)return;
+    if(panel.hidden)return;
     const selected=card.querySelector(&#x27;[data-model-option=&quot;&#x27;+state.model+&#x27;&quot;]&#x27;);if(!selected)return;
     const target=selected.getBoundingClientRect(),bounds=panel.getBoundingClientRect();
     panel.style.setProperty(&#x27;--intro-anchor-x&#x27;,Math.max(18,Math.min(bounds.width-18,target.left+target.width/2-bounds.left))+&#x27;px&#x27;);
@@ -43469,6 +43499,7 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[dat
       trigger.onclick=()=&gt;{const open=list.hidden;document.querySelectorAll(&#x27;.model-select-list&#x27;).forEach(el=&gt;el.hidden=true);document.querySelectorAll(&#x27;.model-select-trigger&#x27;).forEach(el=&gt;el.setAttribute(&#x27;aria-expanded&#x27;,&#x27;false&#x27;));list.hidden=!open;trigger.setAttribute(&#x27;aria-expanded&#x27;,String(open))};wrap.onkeydown=e=&gt;{if(e.key===&#x27;Escape&#x27;){list.hidden=true;trigger.setAttribute(&#x27;aria-expanded&#x27;,&#x27;false&#x27;);trigger.focus()}if(e.key===&#x27;ArrowDown&#x27;||e.key===&#x27;ArrowUp&#x27;){e.preventDefault();if(list.hidden){list.hidden=false;trigger.setAttribute(&#x27;aria-expanded&#x27;,&#x27;true&#x27;);list.querySelector(&#x27;[aria-selected=&quot;true&quot;]&#x27;).focus()}else{const options=Array.from(list.children),i=options.indexOf(document.activeElement);options[(i+(e.key===&#x27;ArrowDown&#x27;?1:-1)+options.length)%options.length].focus()}}};sync();select.addEventListener(&#x27;change&#x27;,sync);select.addEventListener(&#x27;optionschange&#x27;,sync);
     });document.addEventListener(&#x27;click&#x27;,e=&gt;{if(!e.target.closest(&#x27;.model-select&#x27;)){document.querySelectorAll(&#x27;.model-select-list&#x27;).forEach(el=&gt;el.hidden=true);document.querySelectorAll(&#x27;.model-select-trigger&#x27;).forEach(el=&gt;el.setAttribute(&#x27;aria-expanded&#x27;,&#x27;false&#x27;))}});
   }
+
 
   document.querySelectorAll(&#x27;[data-picker-style-option]&#x27;).forEach(button=&gt;button.onclick=()=&gt;{const style=button.dataset.pickerStyleOption;document.querySelector(&#x27;.model-picker-card&#x27;).dataset.pickerStyle=style;document.querySelectorAll(&#x27;[data-picker-style-option]&#x27;).forEach(option=&gt;option.setAttribute(&#x27;aria-pressed&#x27;,String(option.dataset.pickerStyleOption===style)));syncModelIntroContext()});
 
