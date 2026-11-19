@@ -21174,8 +21174,9 @@ body[data-page="reports"] .workspace{background:linear-gradient(110deg,#eaf3ff,#
 #reportsPage .reports-pagination .report-page-current{color:#5264ff;font-weight:600}
 #reportsPage .reports-pagination select{border:1px solid #dfe4ec;background:#fff;color:#526b8c;border-radius:3px;height:32px;padding:0 10px;font-size:13px}
 @media(max-width:1000px){#reportsPage .reports-list-head{flex-wrap:wrap}#reportsPage .reports-tools{width:100%;flex-wrap:wrap}#reportsPage .report-search{flex:1;min-width:180px}}
-</style><style>body[data-page="attribution"] .top-tabs,body[data-page="attribution"] .top-tabs *{font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif!important}</style></head>
-<body data-page="reports" data-customer-plan="paid">
+</style><style>body[data-page="attribution"] .top-tabs,body[data-page="attribution"] .top-tabs *{font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif!important}</style><link rel="stylesheet" href="./amc-system-shell.css?v=28">
+</head>
+<body class="amc-system-shell" data-page="reports" data-customer-plan="paid">
   <div class="app">
     <aside class="sidebar" aria-label="系统导航">
       <div class="logo"><span class="logo-dot"></span>4KMILES</div>
@@ -21216,14 +21217,7 @@ body[data-page="reports"] .workspace{background:linear-gradient(110deg,#eaf3ff,#
     </aside>
 
     <main class="workspace">
-      <div class="top-tabs" role="navigation" aria-label="产品页签">
-        <button class="product-tab" type="button" data-page-target="reports">AMC Reports ×</button>
-        <button class="product-tab" type="button" data-page-target="basket">01 购物篮分析模型 ×</button>
-        <button class="product-tab active" type="button" data-page-target="amcFrame">02 购物篮交叉购买分析模型 ×</button>
-        <button class="product-tab" type="button" data-page-target="attribution">归因模型 ×</button>
-        <button class="product-tab" type="button" data-page-target="systemMappings">系统映射 ×</button>
-        <button class="product-tab" type="button" data-page-target="customMappings">自定义映射 ×</button>
-      </div>
+    <div class="top-tabs" role="navigation" aria-label="产品页签"><div class="top-tab-rail"><button class="product-tab" type="button" data-page-target="reports" aria-current="page">AMC Reports <span class="tab-close" aria-hidden="true">×</span></button><button class="product-tab" type="button" data-page-target="basket">01 购物篮分析模型 <span class="tab-close" aria-hidden="true">×</span></button><button class="product-tab" type="button" data-page-target="amcFrame">02 购物篮交叉购买分析模型 <span class="tab-close" aria-hidden="true">×</span></button><button class="product-tab" type="button" data-page-target="attribution">归因模型 <span class="tab-close" aria-hidden="true">×</span></button><button class="product-tab" type="button" data-page-target="systemMappings">系统映射 <span class="tab-close" aria-hidden="true">×</span></button><button class="product-tab" type="button" data-page-target="customMappings">自定义映射 <span class="tab-close" aria-hidden="true">×</span></button></div><div class="system-top-tools"><span class="system-switch">AMC营销数据系统<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></span><span class="language-switch">简体中文<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></span><span class="system-user"><span class="system-avatar" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 23v-3a8 8 0 0 1 16 0v3"/></svg></span>当前用户</span><span class="system-notice" role="img" aria-label="通知"><svg viewBox="0 0 20 20"><path d="M4 14.5h12l-1.5-2V8a4.5 4.5 0 0 0-9 0v4.5zM8 17h4M10 2V1"/></svg></span></div></div>
 
       <div class="utility">
         <div class="breadcrumb" id="pageBreadcrumb" aria-label="面包屑导航">
@@ -21277,7 +21271,8 @@ body[data-page="reports"] .workspace{background:linear-gradient(110deg,#eaf3ff,#
           </svg>
         </button>
         <span class="status" id="pageStatus">已生成</span>
-        <div class="top-actions" aria-label="报告筛选与下载">
+        <div class="top-actions attribution-context-actions"><button class="select-like top-instance" type="button" aria-label="实例：US 4kmilesggradualus">US 4kmilesggradualus<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><button class="select-like top-timezone" type="button" aria-label="时区：GMT-05">GMT-05</button><button class="select-like top-date" type="button" aria-label="报告周期：2026-06-01 至 2026-08-31"><svg class="top-calendar" viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3.5" width="12" height="10.5" rx="1"/><path d="M5 2v3M11 2v3M2 7h12M5 9h1M9 9h1M5 11.5h1"/></svg><span>2026-06-01</span><span class="date-to">至</span><span>2026-08-31</span></button><button class="top-download-btn" id="attributionShellDownload" type="button" aria-label="下载" title="下载"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v9m-3-3 3 3 3-3M4 12v4h12v-4"/></svg></button></div>
+        <div class="top-actions legacy-context-actions" aria-label="报告筛选与下载">
           <span class="select-like">US 4kmiles</span>
           <span class="select-like">GMT-04</span>
           <span class="select-like" id="topPeriodLabel">2024年Q2</span>
@@ -43139,7 +43134,12 @@ html[data-embedded] body[data-model=&quot;attribution&quot;] .workspace{width:10
 .sidebar,.top-tabs,.utility{display:none!important}
 body[data-model=&quot;attribution&quot;] .app{display:block!important;min-width:0;grid-template-columns:none!important}
 body[data-model=&quot;attribution&quot;] .workspace{display:block;margin:0!important;width:100%!important;max-width:none;min-width:0;height:auto;min-height:0;overflow:visible}
-&lt;/style&gt;&lt;/head&gt;
+&lt;/style&gt;&lt;style id=&quot;attribution-bar-cursor&quot;&gt;
+body[data-model=&quot;attribution&quot;] #barPlot,
+body[data-model=&quot;attribution&quot;] #barPlot svg,
+body[data-model=&quot;attribution&quot;] #barPlot svg *{cursor:pointer!important}
+&lt;/style&gt;
+&lt;/head&gt;
 &lt;body data-page=&quot;amcFrame&quot; data-model=&quot;attribution&quot;&gt;
 &lt;div class=&quot;app&quot;&gt;
   &lt;aside class=&quot;sidebar&quot; aria-label=&quot;系统导航&quot;&gt;
@@ -60285,6 +60285,9 @@ window.frameModule6Data = {"entryRows":[{"r1":"1","r2":"1","user_category":"NTB"
  search.addEventListener('input',filter);creator.addEventListener('change',filter);instance.addEventListener('change',filter);
  list.querySelectorAll('[data-report-sort]').forEach(button=>button.onclick=()=>{const index={period:2,status:3,created:5}[button.dataset.reportSort],desc=button.dataset.direction!=='desc';list.querySelectorAll('[data-report-sort]').forEach(b=>{delete b.dataset.direction;b.removeAttribute('aria-pressed')});button.dataset.direction=desc?'desc':'asc';button.setAttribute('aria-pressed','true');[...body.rows].sort((a,b)=>(desc?-1:1)*a.cells[index].textContent.localeCompare(b.cells[index].textContent,'zh')).forEach(r=>body.append(r))});
  document.querySelectorAll('[data-open-attribution]').forEach(row=>{row.tabIndex=0;row.addEventListener('click',()=>showAppPage('attribution'));row.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===row){e.preventDefault();showAppPage('attribution')}})});
-})();</script></body>
+})();</script><script>
+document.getElementById('attributionShellDownload')?.addEventListener('click',()=>document.getElementById('attributionContentFrame')?.contentWindow?.document.getElementById('downloadDetail')?.click());
+new MutationObserver(()=>document.querySelectorAll('.top-tab-rail [data-page-target]').forEach(tab=>{if(tab.classList.contains('active'))tab.setAttribute('aria-current','page');else tab.removeAttribute('aria-current')})).observe(document.querySelector('.top-tab-rail'),{attributes:true,subtree:true,attributeFilter:['class']});
+</script></body>
 </html>
 
