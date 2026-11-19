@@ -6,3 +6,5 @@
 | 2026-10-30 | 搁置 | 订阅报告 | 策略调整，暂不对外展示 | simizhang | 归属 AMC-Subscription v1.0.0；正式公开版关闭；保留独立预览 |
 
 | 2026-10-30 | 规范更新 | AMC 原型与 UI 验收 SOP | 引入 AMC-Report Figma UI 规范，用于原型生成和上线界面验收 | simizhang | 登记字体、色彩、圆角、组件状态、Browser Use 走查和缺陷分级 |
+
+| 2026-11-19 | 发布 | AMC-Main r27 / 归因模型 | 用户指定原GitHub Pages链接更新最新模型 | simizhang | 更新原首页内嵌模型；样式1恢复纵向虚线，样式2保留10%蓝色背景；沿用其他功能开关 |

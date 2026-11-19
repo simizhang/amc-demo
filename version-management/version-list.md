@@ -5,3 +5,5 @@
 | AMC-Subscription v1.0.0 | 订阅报告版本 | source aab627902716 + amc-subscription-v1.0.0.json | 搁置 | basket_analysis=on；subscription_report=on |  |  | 代码保留，独立预览；不进入正式公开版 |
 
 | AMC-Main r26 | 主干归因模型整合版 | index.html 内置归因模型，统一页签访问 | 已发布 | attribution_model=on；保留现有功能开关 | 2026-11-18 | simizhang | 同一正式链接访问现有功能和归因模型 |
+
+| AMC-Main r27 | 归因模型样式更新版 | 原正式首页内置最新归因模型，保留原页面与功能开关 | 已发布 | attribution_model=on；其余开关沿用r26 | 2026-11-19 | simizhang | 贡献度默认样式2；样式1虚线高亮，样式2为#628AFC的10%背景；同步最新字体、图例和建议花费样式 |
