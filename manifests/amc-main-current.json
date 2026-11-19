@@ -1,6 +1,6 @@
 {
   "version": "AMC-Main",
-  "release_number": 37,
+  "release_number": 38,
   "status": "published",
   "published_at": "2026-11-19",
   "features": {
@@ -11,7 +11,7 @@
     "feat.amc.attribution_model": true
   },
   "attribution_source": "AMC_归因模型_demo.html · version 76",
-  "previous_release_source": "index.html@92db6653c17ca68717796ced8b26e076c458502f",
+  "previous_release_source": "index.html@13bf40308dd65dbaa367fdd1512c8fc439ecaec0",
   "system_shell_source": "Confirmed attribution model system menu, top tools, tabs and report context toolbar",
   "chart_cursor": "pointer",
   "attribution_chart_badge": "Aligned with corresponding bar group bounds",
@@ -26,5 +26,6 @@
   "attribution_budget_note": "Removed missing-sales explanatory paragraph as requested",
   "attribution_chart_tooltip": "Both models shown together; each has model name, optimization metric raw value and contribution share; left color bars match legend",
   "attribution_comparison_layout": "Equal-height comparison cards with aligned top and bottom boundaries",
-  "attribution_contribution_difference": "Positive #00B7A3, negative #F36B6F, displayed zero #808896; semantic field class prevents general table styles overriding colors"
+  "attribution_contribution_difference": "Positive #00B7A3, negative #F36B6F, displayed zero #808896; semantic field class prevents general table styles overriding colors",
+  "attribution_embedding": "Restore existing iframe shell hiding CSS; current model CSS remains intact"
 }
