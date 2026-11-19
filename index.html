@@ -43172,26 +43172,15 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module2 .donut-model-
 body[data-model=&quot;attribution&quot;] #attributionPage #module2 .spend-legend-header&gt;span:last-child{overflow:visible;white-space:normal;line-height:18px}
 &lt;/style&gt;
 &lt;style id=&quot;attribution-tabs-and-model-context&quot;&gt;
-body[data-model=&quot;attribution&quot;] #attributionPage #module1&gt;.card-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px}
-body[data-model=&quot;attribution&quot;] #attributionPage #module1&gt;.card-head&gt;div:first-child{display:contents}
-body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-title-row{grid-column:1;grid-row:1;min-width:0}
-body[data-model=&quot;attribution&quot;] #attributionPage #module1&gt;.card-head p{grid-column:1/-1;grid-row:2}
-body[data-model=&quot;attribution&quot;] #attributionPage #module1&gt;.card-head .legend{grid-column:1/-1;grid-row:3}
-body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-metric-tabs{grid-column:2;grid-row:1;justify-self:end;display:inline-flex;height:24px;gap:0;border-radius:4px;background:#F1F3F7;white-space:nowrap}
-body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-metric-tab{box-sizing:border-box;height:24px;padding:0 12px;border:0;border-radius:4px;background:transparent;color:#808896;font-size:13px;font-weight:400;line-height:24px;cursor:pointer;box-shadow:none}
-body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-metric-tab[aria-selected=&quot;true&quot;]{background:#EEE9FC;color:#7358DF;font-weight:500}
-body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-metric-tab:focus-visible{outline:2px solid #7358DF;outline-offset:2px}
+body[data-model=&quot;attribution&quot;] #attributionPage #module1&gt;.card-head{display:block;position:relative}
+body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-title-row{padding-right:180px;min-width:0}
+body[data-model=&quot;attribution&quot;] #attributionPage #module1&gt;.card-head p{margin:4px 0 0;line-height:16px}
+body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-metric-tabs{position:absolute;right:16px;top:12px;white-space:nowrap}
+body[data-model=&quot;attribution&quot;] #attributionPage #module1 .chart-metric-tab[aria-selected=&quot;true&quot;]{background:#FFFFFF;color:#1C56FC;box-shadow:none}
 body[data-model=&quot;attribution&quot;] #attributionPage #module1 .bar-chart{margin-top:0}
-body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-intro-open=&quot;true&quot;] .model-picker-group[data-intro-selected=&quot;true&quot;]{background:#F5F1FE;box-shadow:inset 0 0 0 1px #D9CEF6}
-body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-intro-open=&quot;true&quot;] .model-option.active{position:relative;box-shadow:0 0 0 3px #E3DAFA}
-body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-intro-open=&quot;true&quot;] .model-option.active::after{content:&quot;&quot;;position:absolute;bottom:-7px;left:calc(50% - 5px);width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #7358DF;pointer-events:none}
-body[data-model=&quot;attribution&quot;] #attributionPage #modelIntroPanel{position:relative;margin-top:16px;padding:18px 20px;border:1px solid #E2DAF5;border-left:3px solid #7358DF;border-radius:8px;background:#FAF8FF}
-body[data-model=&quot;attribution&quot;] #attributionPage #modelIntroPanel .intro-selected-context{display:flex;align-items:center;gap:8px;margin:0 0 6px;color:#7358DF;font-size:13px;line-height:20px}
-body[data-model=&quot;attribution&quot;] #attributionPage #modelIntroPanel .intro-selected-context strong{padding:1px 7px;border-radius:4px;background:#EEE8FC;font-size:12px;font-weight:500}
-body[data-model=&quot;attribution&quot;] #attributionPage #modelIntroPanel h3{color:#7358DF;font-size:20px;line-height:28px;margin-bottom:10px}
-body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-current strong,body[data-model=&quot;attribution&quot;] #attributionPage .model-intro-toggle{color:#7358DF}
-body[data-model=&quot;attribution&quot;] #attributionPage .model-intro-toggle{background:#F1ECFC}
-body[data-model=&quot;attribution&quot;] #attributionPage .model-intro-toggle:hover{background:#E7DEFA}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;2&quot;] .model-picker-group{background:transparent;border:0;border-radius:0;box-shadow:none}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;2&quot;] #modelIntroPanel{position:relative;margin-top:20px;padding:20px;border:1px solid #E2DAF5;border-radius:8px;background:#F7F6FC;box-shadow:0 3px 10px rgba(71,51,120,.04)}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[data-picker-style=&quot;2&quot;] #modelIntroPanel::before{content:&quot;&quot;;position:absolute;top:-8px;left:calc(var(--intro-anchor-x,50%) - 8px);width:14px;height:14px;background:#F7F6FC;border-top:1px solid #E2DAF5;border-left:1px solid #E2DAF5;transform:rotate(45deg);pointer-events:none}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body data-page=&quot;amcFrame&quot; data-model=&quot;attribution&quot;&gt;
@@ -43282,7 +43271,7 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-intro-toggle:ho
         &lt;div class=&quot;model-comparison-content&quot;&gt;
       &lt;section class=&quot;comparison-grid&quot;&gt;
         &lt;article class=&quot;chart-card full-card amc-frame-chart-card&quot; id=&quot;module1&quot; aria-labelledby=&quot;contributionTitle&quot;&gt;
-          &lt;div class=&quot;card-head&quot;&gt;&lt;div&gt;&lt;div class=&quot;chart-title-row&quot;&gt;&lt;h3 id=&quot;contributionTitle&quot;&gt;渠道贡献度对比&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;对比不同渠道下，归因模型与官方归因的贡献度差异。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;chart-metric-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;图表指标&quot;&gt;&lt;button class=&quot;chart-metric-tab&quot; type=&quot;button&quot; role=&quot;tab&quot; id=&quot;chartMetricContributionTab&quot; data-chart-metric=&quot;contribution&quot; aria-selected=&quot;true&quot; aria-controls=&quot;barPlot&quot; tabindex=&quot;0&quot;&gt;贡献度&lt;/button&gt;&lt;button class=&quot;chart-metric-tab&quot; type=&quot;button&quot; role=&quot;tab&quot; id=&quot;chartMetricObjectiveTab&quot; data-chart-metric=&quot;objective&quot; aria-selected=&quot;false&quot; aria-controls=&quot;barPlot&quot; tabindex=&quot;-1&quot;&gt;销售额&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;legend&quot;&gt;&lt;span class=&quot;legend-item&quot;&gt;&lt;i class=&quot;legend-dot&quot; style=&quot;background:#c7c2f5&quot;&gt;&lt;/i&gt;官方归因&lt;/span&gt;&lt;span class=&quot;legend-item&quot;&gt;&lt;i class=&quot;legend-dot&quot; style=&quot;background:#7358df&quot;&gt;&lt;/i&gt;&lt;b id=&quot;modelLegend&quot;&gt;首触归因&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;card-head&quot;&gt;&lt;div&gt;&lt;div class=&quot;chart-title-row&quot;&gt;&lt;h3 id=&quot;contributionTitle&quot;&gt;渠道贡献度对比&lt;/h3&gt;&lt;/div&gt;&lt;p&gt;对比不同渠道下，归因模型与官方归因的贡献度差异。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;chart-metric-tabs picker-style-switch&quot; role=&quot;tablist&quot; aria-label=&quot;图表指标&quot;&gt;&lt;button class=&quot;chart-metric-tab picker-style-option&quot; type=&quot;button&quot; role=&quot;tab&quot; id=&quot;chartMetricContributionTab&quot; data-chart-metric=&quot;contribution&quot; aria-selected=&quot;true&quot; aria-controls=&quot;barPlot&quot; tabindex=&quot;0&quot;&gt;贡献度&lt;/button&gt;&lt;button class=&quot;chart-metric-tab picker-style-option&quot; type=&quot;button&quot; role=&quot;tab&quot; id=&quot;chartMetricObjectiveTab&quot; data-chart-metric=&quot;objective&quot; aria-selected=&quot;false&quot; aria-controls=&quot;barPlot&quot; tabindex=&quot;-1&quot;&gt;销售额&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;legend&quot;&gt;&lt;span class=&quot;legend-item&quot;&gt;&lt;i class=&quot;legend-dot&quot; style=&quot;background:#c7c2f5&quot;&gt;&lt;/i&gt;官方归因&lt;/span&gt;&lt;span class=&quot;legend-item&quot;&gt;&lt;i class=&quot;legend-dot&quot; style=&quot;background:#7358df&quot;&gt;&lt;/i&gt;&lt;b id=&quot;modelLegend&quot;&gt;首触归因&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
           &lt;div class=&quot;bar-chart&quot;&gt;&lt;div class=&quot;y-axis&quot; id=&quot;yAxis&quot;&gt;&lt;/div&gt;&lt;div class=&quot;bar-plot&quot; id=&quot;barPlot&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;chartMetricContributionTab&quot;&gt;&lt;/div&gt;&lt;/div&gt;
         &lt;/article&gt;
         &lt;article class=&quot;chart-card full-card amc-frame-chart-card&quot; id=&quot;module2&quot;&gt;
@@ -43293,7 +43282,7 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-intro-toggle:ho
       &lt;/section&gt;
 
       &lt;section class=&quot;chart-card full-card amc-frame-chart-card&quot; id=&quot;module3&quot;&gt;
-        &lt;div class=&quot;card-head&quot;&gt;&lt;div&gt;&lt;h3&gt;渠道贡献度&amp;amp;花费&lt;/h3&gt;&lt;p&gt;总览当前两种归因下，不同渠道的贡献度、建议花费；建议花费为模型测算值，用于辅助预算讨论，不代表系统自动调整投放。&lt;/p&gt;&lt;p id=&quot;metricDataNote&quot; class=&quot;metric-data-note&quot; role=&quot;status&quot;&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;card-actions&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;card-head&quot;&gt;&lt;div&gt;&lt;h3&gt;渠道贡献度&amp;amp;花费&lt;/h3&gt;&lt;p&gt;总览当前两种归因下，不同渠道的贡献度、建议花费；建议花费为模型测算值，用于辅助预算讨论，不代表系统自动调整投放。&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;card-actions&quot;&gt;&lt;/div&gt;&lt;/div&gt;
         &lt;div class=&quot;table-wrap medium amc-field-table-wrap&quot;&gt;&lt;table class=&quot;attribution-data-table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;渠道&lt;/th&gt;&lt;th id=&quot;officialMetricHead&quot;&gt;官方归因销售额&lt;/th&gt;&lt;th id=&quot;modelMetricHead&quot;&gt;首触归因销售额&lt;/th&gt;&lt;th&gt;官方归因贡献度&lt;/th&gt;&lt;th id=&quot;modelTableHead&quot;&gt;首触归因贡献度&lt;/th&gt;&lt;th&gt;贡献差异（百分点）&lt;/th&gt;&lt;th&gt;当前花费&lt;/th&gt;&lt;th&gt;建议花费&lt;/th&gt;&lt;th&gt;相对当前&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=&quot;budgetBody&quot;&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
       &lt;/section&gt;
 
@@ -43330,8 +43319,6 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-intro-toggle:ho
     syncChartMetricTabs();
     document.getElementById(&#x27;officialMetricHead&#x27;).textContent=&#x27;官方归因&#x27;+label;
     document.getElementById(&#x27;modelMetricHead&#x27;).textContent=models[state.model].name+label;
-    document.getElementById(&#x27;metricDataNote&#x27;).hidden=Boolean(objectiveAmounts(&#x27;official&#x27;)&amp;&amp;objectiveAmounts(state.model));
-    document.getElementById(&#x27;metricDataNote&#x27;).textContent=label+&#x27;原值待补充，相关字段暂显示“—”。&#x27;;
   }
   const modelKeys=[&quot;official&quot;,&quot;first&quot;,&quot;last&quot;,&quot;linear&quot;,&quot;decay&quot;,&quot;uShape&quot;,&quot;markov&quot;,&quot;shapley&quot;,&quot;path&quot;];
   const objectiveShares=v=&gt;v.slice();
@@ -43408,14 +43395,21 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-intro-toggle:ho
     else if(state.model===&#x27;markov&#x27;){example=`&lt;p class=&quot;intro-example-title&quot;&gt;举例 · 三条简化路径（方法示意）&lt;/p&gt;&lt;div class=&quot;intro-paths&quot;&gt;${[[&#x27;SB&#x27;,&#x27;SP&#x27;],[&#x27;DSP&#x27;,&#x27;SP&#x27;],[&#x27;DSP&#x27;,&#x27;SB&#x27;,&#x27;SP&#x27;]].map(path=&gt;`&lt;div class=&quot;intro-path-row&quot;&gt;${path.map(chip).join(arrow)}${arrow}${purchase}&lt;/div&gt;`).join(&#x27;&#x27;)}&lt;/div&gt;&lt;p class=&quot;intro-example-note&quot;&gt;${intro.note}&lt;/p&gt;`}
     else if(state.model===&#x27;shapley&#x27;){example=`&lt;p class=&quot;intro-example-title&quot;&gt;举例 · 无序组合（方法示意）&lt;/p&gt;&lt;div class=&quot;intro-coalition&quot;&gt;&lt;span&gt;不含 SB&lt;/span&gt;&lt;div&gt;${chip(&#x27;DSP&#x27;)}${chip(&#x27;SP&#x27;)}&lt;/div&gt;&lt;span&gt;v(S)&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;intro-coalition&quot;&gt;&lt;span&gt;含 SB&lt;/span&gt;&lt;div&gt;${chip(&#x27;DSP&#x27;)}${chip(&#x27;SB&#x27;)}${chip(&#x27;SP&#x27;)}&lt;/div&gt;&lt;span&gt;v(S∪{SB})&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;intro-formula&quot;&gt;SB 的边际贡献 = v(S∪{SB}) − v(S)&lt;/div&gt;&lt;p class=&quot;intro-example-note&quot;&gt;${intro.note}&lt;/p&gt;`}
     else {example=`&lt;div class=&quot;intro-path-example&quot;&gt;&lt;div class=&quot;intro-path-example-title&quot;&gt;综合关联贡献 = r × β&lt;/div&gt;&lt;table class=&quot;intro-path-table attribution-data-table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;渠道&lt;/th&gt;&lt;th&gt;r&lt;/th&gt;&lt;th&gt;β&lt;/th&gt;&lt;th&gt;贡献份额&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;${[[&#x27;DSP&#x27;,&#x27;0.0521&#x27;,&#x27;0.1612&#x27;,&#x27;31.6%&#x27;],[&#x27;SB&#x27;,&#x27;0.0837&#x27;,&#x27;0.0998&#x27;,&#x27;31.4%&#x27;],[&#x27;SD&#x27;,&#x27;0.0422&#x27;,&#x27;0.0794&#x27;,&#x27;12.6%&#x27;],[&#x27;SP&#x27;,&#x27;0.0679&#x27;,&#x27;0.0952&#x27;,&#x27;24.3%&#x27;]].map(([c,r,b,v])=&gt;`&lt;tr&gt;&lt;td&gt;${chip(c)}&lt;/td&gt;&lt;td&gt;${r}&lt;/td&gt;&lt;td&gt;${b}&lt;/td&gt;&lt;td&gt;${v}&lt;/td&gt;&lt;/tr&gt;`).join(&#x27;&#x27;)}&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;`}
-    panel.innerHTML=`&lt;div class=&quot;intro-explanation&quot;&gt;&lt;p class=&quot;intro-selected-context&quot;&gt;&lt;span&gt;当前选中模型的说明&lt;/span&gt;&lt;strong&gt;${intro.category}&lt;/strong&gt;&lt;/p&gt;&lt;h3 id=&quot;modelIntroHeading&quot;&gt;${models[state.model].name}&lt;small&gt;${intro.english}&lt;/small&gt;&lt;/h3&gt;&lt;p class=&quot;intro-model-description&quot;&gt;${intro.description}&lt;/p&gt;&lt;p class=&quot;intro-model-question&quot;&gt;&lt;span&gt;它回答：&lt;/span&gt;&lt;strong&gt;${intro.question}&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;intro-example&quot;&gt;${example}&lt;/div&gt;`;
+    panel.innerHTML=`&lt;div class=&quot;intro-explanation&quot;&gt;&lt;h3 id=&quot;modelIntroHeading&quot;&gt;${models[state.model].name}&lt;small&gt;${intro.english}&lt;/small&gt;&lt;/h3&gt;&lt;p class=&quot;intro-model-description&quot;&gt;${intro.description}&lt;/p&gt;&lt;p class=&quot;intro-model-question&quot;&gt;&lt;span&gt;它回答：&lt;/span&gt;&lt;strong&gt;${intro.question}&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;intro-example&quot;&gt;${example}&lt;/div&gt;`;
+  }
+  function positionModelIntroBubble(){
+    const card=document.querySelector(&#x27;.model-picker-card&#x27;),panel=document.getElementById(&#x27;modelIntroPanel&#x27;);
+    if(card.dataset.pickerStyle!==&#x27;2&#x27;||panel.hidden)return;
+    const selected=card.querySelector(&#x27;[data-model-option=&quot;&#x27;+state.model+&#x27;&quot;]&#x27;);if(!selected)return;
+    const target=selected.getBoundingClientRect(),bounds=panel.getBoundingClientRect();
+    panel.style.setProperty(&#x27;--intro-anchor-x&#x27;,Math.max(18,Math.min(bounds.width-18,target.left+target.width/2-bounds.left))+&#x27;px&#x27;);
   }
   function syncModelIntroContext(){
     const panel=document.getElementById(&#x27;modelIntroPanel&#x27;),open=!panel.hidden,name=models[state.model].name,card=document.querySelector(&#x27;.model-picker-card&#x27;),toggle=document.getElementById(&#x27;modelIntroToggle&#x27;);
     card.dataset.introOpen=String(open);panel.dataset.model=state.model;panel.setAttribute(&#x27;aria-label&#x27;,name+&#x27;模型说明&#x27;);
-    toggle.setAttribute(&#x27;aria-expanded&#x27;,String(open));toggle.querySelector(&#x27;span&#x27;).textContent=(open?&#x27;收起&#x27;:&#x27;&#x27;)+name+&#x27;说明&#x27;;
-    document.querySelectorAll(&#x27;.model-picker-group&#x27;).forEach(group=&gt;group.dataset.introSelected=String(Boolean(group.querySelector(&#x27;[data-model-option=&quot;&#x27;+state.model+&#x27;&quot;]&#x27;))));
+    toggle.setAttribute(&#x27;aria-expanded&#x27;,String(open));toggle.querySelector(&#x27;span&#x27;).textContent=open?&#x27;收起模型说明&#x27;:&#x27;模型说明&#x27;;
     document.querySelectorAll(&#x27;[data-model-option]&#x27;).forEach(button=&gt;{const selected=button.dataset.modelOption===state.model;button.id=&#x27;model-option-&#x27;+button.dataset.modelOption;button.setAttribute(&#x27;aria-pressed&#x27;,String(selected));if(selected&amp;&amp;open){button.setAttribute(&#x27;aria-describedby&#x27;,&#x27;modelIntroHeading&#x27;);button.setAttribute(&#x27;aria-controls&#x27;,&#x27;modelIntroPanel&#x27;)}else{button.removeAttribute(&#x27;aria-describedby&#x27;);button.removeAttribute(&#x27;aria-controls&#x27;)}});
+    requestAnimationFrame(positionModelIntroBubble);
   }
   document.getElementById(&#x27;modelIntroToggle&#x27;).onclick=()=&gt;{const panel=document.getElementById(&#x27;modelIntroPanel&#x27;);panel.hidden=!panel.hidden;syncModelIntroContext()};
 
@@ -43476,7 +43470,7 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-intro-toggle:ho
     });document.addEventListener(&#x27;click&#x27;,e=&gt;{if(!e.target.closest(&#x27;.model-select&#x27;)){document.querySelectorAll(&#x27;.model-select-list&#x27;).forEach(el=&gt;el.hidden=true);document.querySelectorAll(&#x27;.model-select-trigger&#x27;).forEach(el=&gt;el.setAttribute(&#x27;aria-expanded&#x27;,&#x27;false&#x27;))}});
   }
 
-  document.querySelectorAll(&#x27;[data-picker-style-option]&#x27;).forEach(button=&gt;button.onclick=()=&gt;{const style=button.dataset.pickerStyleOption;document.querySelector(&#x27;.model-picker-card&#x27;).dataset.pickerStyle=style;document.querySelectorAll(&#x27;[data-picker-style-option]&#x27;).forEach(option=&gt;option.setAttribute(&#x27;aria-pressed&#x27;,String(option.dataset.pickerStyleOption===style)))});
+  document.querySelectorAll(&#x27;[data-picker-style-option]&#x27;).forEach(button=&gt;button.onclick=()=&gt;{const style=button.dataset.pickerStyleOption;document.querySelector(&#x27;.model-picker-card&#x27;).dataset.pickerStyle=style;document.querySelectorAll(&#x27;[data-picker-style-option]&#x27;).forEach(option=&gt;option.setAttribute(&#x27;aria-pressed&#x27;,String(option.dataset.pickerStyleOption===style)));syncModelIntroContext()});
 
   function syncChartMetricTabs(){
     document.querySelectorAll(&#x27;[data-chart-metric]&#x27;).forEach(tab=&gt;{const active=tab.dataset.chartMetric===state.chartMetric;tab.setAttribute(&#x27;aria-selected&#x27;,String(active));tab.tabIndex=active?0:-1;if(active)document.getElementById(&#x27;barPlot&#x27;).setAttribute(&#x27;aria-labelledby&#x27;,tab.id)});
@@ -43485,6 +43479,8 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-intro-toggle:ho
     tab.onclick=()=&gt;{state.chartMetric=tab.dataset.chartMetric;syncChartMetricTabs();const d=current();renderBars(d.official,d.model)};
     tab.onkeydown=e=&gt;{if(![&#x27;ArrowLeft&#x27;,&#x27;ArrowRight&#x27;,&#x27;Home&#x27;,&#x27;End&#x27;].includes(e.key))return;e.preventDefault();const tabs=[...document.querySelectorAll(&#x27;[data-chart-metric]&#x27;)],index=tabs.indexOf(tab),next=e.key===&#x27;Home&#x27;?0:e.key===&#x27;End&#x27;?tabs.length-1:(index+(e.key===&#x27;ArrowRight&#x27;?1:-1)+tabs.length)%tabs.length;tabs[next].click();tabs[next].focus()};
   });
+  window.addEventListener(&#x27;resize&#x27;,()=&gt;requestAnimationFrame(positionModelIntroBubble));
+  new ResizeObserver(positionModelIntroBubble).observe(document.querySelector(&#x27;.model-picker-card&#x27;));
   setupModelSelects();
   render();
   const describeCells=()=&gt;document.querySelectorAll(&#x27;.attribution-data-table tbody td&#x27;).forEach(cell=&gt;cell.title=cell.textContent.trim());

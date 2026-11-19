@@ -1,6 +1,6 @@
 {
   "version": "AMC-Main",
-  "release_number": 32,
+  "release_number": 33,
   "status": "published",
   "published_at": "2026-11-19",
   "features": {
@@ -10,8 +10,8 @@
     "feat.sub.subscription_report": false,
     "feat.amc.attribution_model": true
   },
-  "attribution_source": "AMC_归因模型_demo.html · version 62",
-  "previous_release_source": "index.html@cca12743e0699cc933b0b3ebd6e156c93b118591",
+  "attribution_source": "AMC_归因模型_demo.html · version 63",
+  "previous_release_source": "index.html@feabd0e9da343c732f10996322cb1d21b08abef4",
   "system_shell_source": "Confirmed attribution model system menu, top tools, tabs and report context toolbar",
   "chart_cursor": "pointer",
   "attribution_chart_badge": "Aligned with corresponding bar group bounds",
@@ -20,7 +20,8 @@
   "attribution_overview_sort": "DSP/SB/SD/SP raw contribution shares; descending first, toggle ascending; retain across rerenders",
   "attribution_budget_title": "渠道贡献度&花费",
   "attribution_chart_style": "style2 only; style1 and style2 documented",
-  "attribution_chart_metric": "Upper-right 24px tabs in existing title row; contribution default; unchanged plot height",
+  "attribution_chart_metric": "Upper-right tabs reuse picker-style-switch; original title/caption flow and 4px margin restored",
   "attribution_absolute_sales": "Not supplied in original exposure/billing workbooks; never substituted with spend",
-  "attribution_model_intro": "Selected model, group and expanded explanation share purple visual context; names and accessibility relationships follow selection"
+  "attribution_model_intro": "Style1 restored; style2 has no group frames and a speech bubble anchored to selected model",
+  "attribution_budget_note": "Removed missing-sales explanatory paragraph as requested"
 }
