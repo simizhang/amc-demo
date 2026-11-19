@@ -1,6 +1,6 @@
 {
   "version": "AMC-Main",
-  "release_number": 31,
+  "release_number": 32,
   "status": "published",
   "published_at": "2026-11-19",
   "features": {
@@ -10,8 +10,8 @@
     "feat.sub.subscription_report": false,
     "feat.amc.attribution_model": true
   },
-  "attribution_source": "AMC_归因模型_demo.html · version 61",
-  "previous_release_source": "index.html@e8c02b75a54564710ce10532e27e24fbc0073601",
+  "attribution_source": "AMC_归因模型_demo.html · version 62",
+  "previous_release_source": "index.html@cca12743e0699cc933b0b3ebd6e156c93b118591",
   "system_shell_source": "Confirmed attribution model system menu, top tools, tabs and report context toolbar",
   "chart_cursor": "pointer",
   "attribution_chart_badge": "Aligned with corresponding bar group bounds",
@@ -20,6 +20,7 @@
   "attribution_overview_sort": "DSP/SB/SD/SP raw contribution shares; descending first, toggle ascending; retain across rerenders",
   "attribution_budget_title": "渠道贡献度&花费",
   "attribution_chart_style": "style2 only; style1 and style2 documented",
-  "attribution_chart_metric": "contribution default; optimization value axis with explicit missing-data state",
-  "attribution_absolute_sales": "Not supplied in original exposure/billing workbooks; never substituted with spend"
+  "attribution_chart_metric": "Upper-right 24px tabs in existing title row; contribution default; unchanged plot height",
+  "attribution_absolute_sales": "Not supplied in original exposure/billing workbooks; never substituted with spend",
+  "attribution_model_intro": "Selected model, group and expanded explanation share purple visual context; names and accessibility relationships follow selection"
 }
