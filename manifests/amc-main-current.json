@@ -1,6 +1,6 @@
 {
   "version": "AMC-Main",
-  "release_number": 28,
+  "release_number": 29,
   "status": "published",
   "published_at": "2026-11-19",
   "features": {
@@ -10,8 +10,11 @@
     "feat.sub.subscription_report": false,
     "feat.amc.attribution_model": true
   },
-  "attribution_source": "AMC_归因模型_demo.html · version 57",
-  "previous_release_source": "index.html@ed72f540f1843b854584da170f6b7aa6733155aa",
+  "attribution_source": "AMC_归因模型_demo.html · version 59",
+  "previous_release_source": "index.html@02ec2cb6ad25a95b16668ae05bbc6a94d2c42fde",
   "system_shell_source": "Confirmed attribution model system menu, top tools, tabs and report context toolbar",
-  "chart_cursor": "pointer"
+  "chart_cursor": "pointer",
+  "attribution_chart_badge": "Aligned with corresponding bar group bounds",
+  "attribution_table_field_size": "13px",
+  "attribution_dropdown": "Removed legacy fixed white pointer pseudo-element and blocked menu/option decorative pseudo-elements"
 }
