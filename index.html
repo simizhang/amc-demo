@@ -43215,6 +43215,16 @@ body[data-model=&quot;attribution&quot;] #attributionPage .model-picker-card[dat
 body[data-model=&quot;attribution&quot;] .app{display:block!important;min-width:0;grid-template-columns:none!important}
 body[data-model=&quot;attribution&quot;] .workspace{display:block;margin:0!important;width:100%!important;max-width:none;min-width:0;height:auto;min-height:0;overflow:visible}
 &lt;/style&gt;
+&lt;style id=&quot;overview-selected-row-background&quot;&gt;
+body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr.official-row,
+body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr.official-row&gt;td{background:#FFFFFF}
+body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr:hover&gt;td,
+body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr:hover&gt;td:first-child{background:#F7F9FF}
+body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr.selected-row&gt;td,
+body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr.selected-row&gt;td:first-child,
+body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr.selected-row:hover&gt;td,
+body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr.selected-row:hover&gt;td:first-child{background:#F5F6FF}
+&lt;/style&gt;
 &lt;/head&gt;
 &lt;body data-page=&quot;amcFrame&quot; data-model=&quot;attribution&quot;&gt;
 &lt;div class=&quot;app&quot;&gt;&lt;main class=&quot;workspace&quot;&gt;
@@ -43241,10 +43251,10 @@ body[data-model=&quot;attribution&quot;] .workspace{display:block;margin:0!impor
         &lt;/div&gt;
       &lt;/section&gt;
 
-      &lt;section class=&quot;model-picker-card&quot; data-picker-style=&quot;2&quot; aria-labelledby=&quot;modelPickerTitle&quot;&gt;
+      &lt;section class=&quot;model-picker-card&quot; data-picker-style=&quot;1&quot; aria-labelledby=&quot;modelPickerTitle&quot;&gt;
         &lt;div class=&quot;model-picker-head&quot;&gt;
           &lt;div class=&quot;model-picker-title&quot;&gt;&lt;span class=&quot;model-picker-icon&quot; aria-hidden=&quot;true&quot;&gt;☷&lt;/span&gt;&lt;div&gt;&lt;h2 id=&quot;modelPickerTitle&quot;&gt;选择归因模型&lt;/h2&gt;&lt;div class=&quot;model-picker-current&quot;&gt;当前：&lt;strong id=&quot;modelPickerCurrent&quot;&gt;首触归因&lt;/strong&gt; · &lt;span id=&quot;modelPickerUsage&quot;&gt;入口评估&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div class=&quot;model-picker-actions&quot;&gt;&lt;div class=&quot;picker-style-switch&quot; role=&quot;group&quot; aria-label=&quot;模型区域样式&quot;&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;1&quot; aria-pressed=&quot;false&quot;&gt;样式1&lt;/button&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;2&quot; aria-pressed=&quot;true&quot;&gt;样式2&lt;/button&gt;&lt;/div&gt;&lt;button type=&quot;button&quot; class=&quot;model-intro-toggle&quot; id=&quot;modelIntroToggle&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;modelIntroPanel&quot;&gt;&lt;span&gt;模型说明&lt;/span&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m4 6 4 4 4-4&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;model-picker-actions&quot;&gt;&lt;div class=&quot;picker-style-switch&quot; role=&quot;group&quot; aria-label=&quot;模型区域样式&quot;&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;1&quot; aria-pressed=&quot;true&quot;&gt;样式1&lt;/button&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;2&quot; aria-pressed=&quot;false&quot;&gt;样式2&lt;/button&gt;&lt;/div&gt;&lt;button type=&quot;button&quot; class=&quot;model-intro-toggle&quot; id=&quot;modelIntroToggle&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;modelIntroPanel&quot;&gt;&lt;span&gt;模型说明&lt;/span&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m4 6 4 4 4-4&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
         &lt;/div&gt;
         
         &lt;div class=&quot;model-picker-groups&quot;&gt;
