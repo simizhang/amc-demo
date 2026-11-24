@@ -43327,7 +43327,23 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-
 body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr.selected-row&gt;td,
 body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-data-table tbody tr.selected-row:hover&gt;td{background:#F5F6FF}
 &lt;/style&gt;
-&lt;style id=&quot;integrated-shell-only&quot;&gt;.sidebar,.top-tabs,.utility{display:none!important}body[data-model=&quot;attribution&quot;] .app{display:block!important;min-width:0;grid-template-columns:none!important}body[data-model=&quot;attribution&quot;] .workspace{display:block;margin:0!important;width:100%!important;max-width:none;min-width:0;height:auto;min-height:0;overflow:visible}&lt;/style&gt;&lt;style&gt;.invalid-model-donut{height:210px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;font-size:13px;color:#808896}.invalid-model-donut strong{font-size:14px;color:#374151}.invalid-model-row .interpretation{color:#808896}&lt;/style&gt;&lt;/head&gt;
+&lt;style id=&quot;integrated-shell-only&quot;&gt;.sidebar,.top-tabs,.utility{display:none!important}body[data-model=&quot;attribution&quot;] .app{display:block!important;min-width:0;grid-template-columns:none!important}body[data-model=&quot;attribution&quot;] .workspace{display:block;margin:0!important;width:100%!important;max-width:none;min-width:0;height:auto;min-height:0;overflow:visible}&lt;/style&gt;&lt;style&gt;.invalid-model-donut{height:210px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;font-size:13px;color:#808896}.invalid-model-donut strong{font-size:14px;color:#374151}.invalid-model-row .interpretation{color:#808896}&lt;/style&gt;&lt;style id=&quot;model-unavailable-state&quot;&gt;
+body[data-model=&quot;attribution&quot;] #attributionPage #module1.is-model-unavailable .legend,
+body[data-model=&quot;attribution&quot;] #attributionPage #module1.is-model-unavailable .y-axis,
+body[data-model=&quot;attribution&quot;] #attributionPage #module2.is-model-unavailable .dual-donut-wrap,
+body[data-model=&quot;attribution&quot;] #attributionPage #module2.is-model-unavailable #comparisonLegend,
+body[data-model=&quot;attribution&quot;] #attributionPage #module2.is-model-unavailable .spend-total-badge{display:none!important}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-unavailable-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:350px;width:100%;padding:32px;box-sizing:border-box;text-align:center;color:#808896;font-size:13px;line-height:22px}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-unavailable-empty strong{font-size:15px;font-weight:600;color:#374151}
+body[data-model=&quot;attribution&quot;] #attributionPage .model-unavailable-empty span{max-width:450px}
+body[data-model=&quot;attribution&quot;] #attributionPage #module1.is-model-unavailable .bar-chart{display:block;padding:0!important}
+body[data-model=&quot;attribution&quot;] #attributionPage #module1.is-model-unavailable #barPlot{width:100%;margin:0!important;padding:0!important}
+body[data-model=&quot;attribution&quot;] #attributionPage #module2.is-model-unavailable&gt;.model-unavailable-empty{flex:1}
+body[data-model=&quot;attribution&quot;] #attributionPage td[data-model-unavailable]{color:#808896;cursor:help}
+body[data-model=&quot;attribution&quot;] #attributionPage td[data-model-unavailable]:focus-visible{outline:2px solid #1C56FC;outline-offset:-2px}
+#spendTooltip .model-unavailable-tooltip{display:flex;flex-direction:column;gap:8px;max-width:320px;white-space:normal;font-size:13px;line-height:21px}
+#spendTooltip .model-unavailable-tooltip strong{font-size:14px;font-weight:600}
+&lt;/style&gt;&lt;style id=&quot;budget-model-unavailable&quot;&gt;body[data-model=&quot;attribution&quot;] #attributionPage #module3.is-model-unavailable .table-wrap{display:none!important}&lt;/style&gt;&lt;style id=&quot;contribution-tooltip-difference&quot;&gt;.contribution-comparison-tip .chart-tip-diff{gap:16px;margin-top:12px;padding-top:9px;font-size:12px;color:#808896}.contribution-comparison-tip .chart-tip-diff b{color:#374151;font-size:13px;font-weight:500}&lt;/style&gt;&lt;/head&gt;
 &lt;body data-page=&quot;amcFrame&quot; data-model=&quot;attribution&quot;&gt;
 &lt;div class=&quot;app&quot;&gt;
   &lt;aside class=&quot;sidebar&quot; aria-label=&quot;系统导航&quot;&gt;
@@ -43378,11 +43394,9 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-
         &lt;div class=&quot;intro-copy&quot;&gt;
           &lt;h1&gt;&lt;span&gt;归因模型&lt;/span&gt;&lt;/h1&gt;
           &lt;p&gt;以购买为核心转化事件，对比 Amazon 官方归因与 8 个参考模型下 DSP、SB、SD、SP 四渠道的销售额贡献，并将贡献份额转换为预算建议。帮你看清三件事：官方口径是否与你直觉一致、换模型后哪家被高估或低估、钱该往哪挪。&lt;/p&gt;
-          &lt;div class=&quot;amc-frame-intro-metrics&quot; aria-label=&quot;模型固定信息&quot;&gt;
-            &lt;span class=&quot;amc-frame-intro-metric&quot;&gt;&lt;span class=&quot;amc-frame-intro-metric-label&quot;&gt;转化事件&lt;/span&gt;&lt;strong&gt;Purchased&lt;/strong&gt;&lt;/span&gt;
-            &lt;span class=&quot;amc-frame-intro-metric&quot;&gt;&lt;span class=&quot;amc-frame-intro-metric-label&quot;&gt;渠道范围&lt;/span&gt;&lt;strong&gt;DSP、SB、SD、SP&lt;/strong&gt;&lt;/span&gt;
-            &lt;span class=&quot;amc-frame-intro-metric&quot;&gt;&lt;span class=&quot;amc-frame-intro-metric-label&quot;&gt;归因窗口&lt;/span&gt;&lt;strong&gt;沿用平台官方窗口&lt;/strong&gt;&lt;/span&gt;
-            &lt;span class=&quot;amc-frame-intro-metric&quot;&gt;&lt;span class=&quot;amc-frame-intro-metric-label&quot;&gt;时间衰减半衰期&lt;/span&gt;&lt;strong&gt;τ = 7 天&lt;/strong&gt;&lt;/span&gt;
+          &lt;div class=&quot;amc-frame-intro-metrics&quot; aria-label=&quot;报告配置&quot;&gt;
+            &lt;span class=&quot;amc-frame-intro-metric&quot;&gt;&lt;span class=&quot;amc-frame-intro-metric-label&quot;&gt;报告维度&lt;/span&gt;&lt;strong id=&quot;attributionReportDimension&quot;&gt;账号&lt;/strong&gt;&lt;/span&gt;
+            &lt;span class=&quot;amc-frame-intro-metric&quot;&gt;&lt;span class=&quot;amc-frame-intro-metric-label&quot;&gt;回溯周期&lt;/span&gt;&lt;strong id=&quot;attributionReportLookback&quot;&gt;14天&lt;/strong&gt;&lt;/span&gt;
           &lt;/div&gt;
         &lt;/div&gt;
         &lt;button class=&quot;download-btn&quot; id=&quot;downloadDetail&quot; type=&quot;button&quot;&gt;&lt;svg viewBox=&quot;0 0 20 20&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M10 3v9m-3-3 3 3 3-3M4 12v4h12v-4&quot;/&gt;&lt;/svg&gt;&lt;span&gt;下载&lt;/span&gt;&lt;/button&gt;
@@ -43399,7 +43413,7 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-
       &lt;section class=&quot;model-picker-card&quot; data-picker-style=&quot;1&quot; aria-labelledby=&quot;modelPickerTitle&quot;&gt;
         &lt;div class=&quot;model-picker-head&quot;&gt;
           &lt;div class=&quot;model-picker-title&quot;&gt;&lt;span class=&quot;model-picker-icon&quot; aria-hidden=&quot;true&quot;&gt;☷&lt;/span&gt;&lt;div&gt;&lt;h2 id=&quot;modelPickerTitle&quot;&gt;选择归因模型&lt;/h2&gt;&lt;div class=&quot;model-picker-current&quot;&gt;当前：&lt;strong id=&quot;modelPickerCurrent&quot;&gt;首触归因&lt;/strong&gt; · &lt;span id=&quot;modelPickerUsage&quot;&gt;入口评估&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div class=&quot;model-picker-actions&quot;&gt;&lt;div class=&quot;picker-style-switch&quot; role=&quot;group&quot; aria-label=&quot;模型区域样式&quot;&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;1&quot; aria-pressed=&quot;true&quot;&gt;样式1&lt;/button&gt;&lt;button class=&quot;picker-style-option&quot; type=&quot;button&quot; data-picker-style-option=&quot;2&quot; aria-pressed=&quot;false&quot;&gt;样式2&lt;/button&gt;&lt;/div&gt;&lt;button type=&quot;button&quot; class=&quot;model-intro-toggle&quot; id=&quot;modelIntroToggle&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;modelIntroPanel&quot;&gt;&lt;span&gt;模型说明&lt;/span&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m4 6 4 4 4-4&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;model-picker-actions&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;model-intro-toggle&quot; id=&quot;modelIntroToggle&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;modelIntroPanel&quot;&gt;&lt;span&gt;模型说明&lt;/span&gt;&lt;svg viewBox=&quot;0 0 16 16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m4 6 4 4 4-4&quot;/&gt;&lt;/svg&gt;&lt;/button&gt;&lt;/div&gt;
         &lt;/div&gt;
         
         &lt;div class=&quot;model-picker-groups&quot;&gt;
@@ -43477,10 +43491,17 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-
   function ranked(shares){return channels.map((c,i)=&gt;({channel:c,value:shares[i]})).sort((a,b)=&gt;b.value-a.value)}
   function interpretation(key,shares){const r=ranked(shares),a=r[0].channel,b=r[1].channel;return{official:`${a} 获得最高的官方归因销售贡献，体现其在平台归因规则下的转化表现。`,first:`${a} 获得最高的首次触点贡献，说明其更常承担用户进入转化路径的入口角色。`,last:`${a} 获得最高的末次触点贡献，说明其与购买发生前最终触达的关联更突出。`,linear:`平均分配触点价值后，${a} 与 ${b} 的贡献较突出，体现完整转化路径中的参与价值。`,decay:`临近购买的触点获得更高权重后，${a} 仍居首，整体结构反映渠道对近期触点权重的敏感程度。`,uShape:`强化首触与末触后，${a} 贡献最高，同时保留了中间触点不可忽视的转化价值。`,markov:`从渠道移除效应看，${a} 的结构性贡献最高，体现其对转化路径完整性的影响。`,shapley:`综合不同渠道组合的边际贡献，${a} 与 ${b} 的协同价值更突出。`,path:`结合渠道间相关性与购买结果关系，${a} 的综合贡献最高，反映直接与间接作用后的结果。`}[key]}
   function showChartTip(html,e,element){const tip=document.getElementById(&#x27;spendTooltip&#x27;),r=element.getBoundingClientRect();tip.classList.remove(&#x27;is-metric-help&#x27;);tip.innerHTML=html;tip.hidden=false;tip.style.left=Math.max(8,Math.min(innerWidth-tip.offsetWidth-10,(e.clientX||r.x)+14))+&#x27;px&#x27;;tip.style.top=Math.max(8,Math.min(innerHeight-tip.offsetHeight-10,(e.clientY||r.y)+14))+&#x27;px&#x27;}
+  const modelUnavailableTitle=&#x27;模型不适用&#x27;;
+  const modelUnavailableMessage=&#x27;当前优化目标与触点口径下存在负贡献值，贡献度与花费建议暂不可用；请切换筛选或更换归因模型。&#x27;;
+  const modelUnavailableMarkup=()=&gt;`&lt;strong&gt;${modelUnavailableTitle}&lt;/strong&gt;&lt;span&gt;${modelUnavailableMessage.replace(&quot;；请&quot;,&quot;；&lt;br&gt;请&quot;)}&lt;/span&gt;`;
+  const modelUnavailableEmpty=()=&gt;`&lt;div class=&quot;model-unavailable-empty&quot; role=&quot;status&quot;&gt;${modelUnavailableMarkup()}&lt;/div&gt;`;
+  const modelUnavailableCell=(cls=&#x27;&#x27;)=&gt;`&lt;td data-sort-value=&quot;&quot; data-model-unavailable tabindex=&quot;0&quot; aria-label=&quot;--，${modelUnavailableTitle}，${modelUnavailableMessage}&quot; class=&quot;${cls}&quot;&gt;--&lt;/td&gt;`;
   function renderBars(official,model){
     document.getElementById(&#x27;spendTooltip&#x27;).hidden=true;
     const host=document.getElementById(&#x27;barPlot&#x27;),metric=state.chartMetric,meta=optimizationMetric(),amounts=currentAmounts();
-    if(!model){host.innerHTML=&#x27;&lt;div class=&quot;chart-metric-empty&quot; role=&quot;status&quot;&gt;&lt;strong&gt;模型不适用&lt;/strong&gt;&lt;span&gt;当前优化目标和触点口径下存在负贡献值，无法提供贡献对比与花费建议。&lt;/span&gt;&lt;/div&gt;&#x27;;return}
+    document.getElementById(&#x27;module1&#x27;).classList.toggle(&#x27;is-model-unavailable&#x27;,!model);
+    document.querySelector(&#x27;#module1 .legend&#x27;).hidden=!model;
+    if(!model){host.innerHTML=modelUnavailableEmpty();return}
     const series=metric===&#x27;contribution&#x27;?[official,model]:[amounts.official,amounts.model];
     if(series.some(values=&gt;!values)){host.innerHTML=`&lt;div class=&quot;chart-metric-empty&quot; role=&quot;status&quot;&gt;&lt;strong&gt;暂无${meta.label}数据&lt;/strong&gt;&lt;span&gt;当前报告未提供${meta.label}原值，请补充后查看。可切换“贡献度”继续分析。&lt;/span&gt;&lt;/div&gt;`;return}
     const width=Math.max(470,host.clientWidth||600),left=74,right=16,top=78,bottom=350,height=bottom-top,step=(width-left-right)/4;
@@ -43491,7 +43512,7 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-
     svg+=`&lt;path d=&quot;M${left},${top}V${bottom}H${width-right}&quot; fill=&quot;none&quot; stroke=&quot;#d4d9e3&quot;/&gt;`;
     channels.forEach((c,i)=&gt;{
       const center=left+(i+.5)*step,w=36,gap=16,x1=center-(w+gap)/2,x2=center+(w+gap)/2,ys=series.map(values=&gt;bottom-values[i]/max*height);
-      svg+=`&lt;g class=&quot;bar-channel-group&quot; data-index=&quot;${i}&quot; aria-label=&quot;${c}${metric===&#x27;contribution&#x27;?&#x27;贡献度&#x27;:meta.label}对比&quot;&gt;&lt;rect class=&quot;bar-hit&quot; x=&quot;${center-step/2+1}&quot; y=&quot;1&quot; width=&quot;${step-2}&quot; height=&quot;${bottom}&quot; fill=&quot;transparent&quot;/&gt;&lt;rect class=&quot;bar-hover-guide&quot; x=&quot;${center-step/2+1}&quot; y=&quot;${top}&quot; width=&quot;${step-2}&quot; height=&quot;${height}&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;.1&quot; pointer-events=&quot;none&quot; style=&quot;visibility:hidden&quot;/&gt;`;
+      svg+=`&lt;g class=&quot;bar-channel-group&quot; data-index=&quot;${i}&quot; aria-label=&quot;${c}${metric===&#x27;contribution&#x27;?&#x27;贡献度&#x27;:meta.label}对比&quot;&gt;&lt;rect class=&quot;bar-hit&quot; x=&quot;${center-step/2+1}&quot; y=&quot;1&quot; width=&quot;${step-2}&quot; height=&quot;${bottom}&quot; fill=&quot;transparent&quot;/&gt;&lt;rect class=&quot;bar-hover-guide&quot; x=&quot;${center-step/2+1}&quot; y=&quot;${top}&quot; width=&quot;${step-2}&quot; height=&quot;${height}&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;.035&quot; pointer-events=&quot;none&quot; style=&quot;visibility:hidden&quot;/&gt;`;
       [x1,x2].forEach((x,j)=&gt;svg+=`&lt;rect class=&quot;style2-bar-shadow&quot; x=&quot;${x-w/2}&quot; y=&quot;${top}&quot; width=&quot;${w}&quot; height=&quot;${height}&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;${j===0?.045:.075}&quot; data-bar-series=&quot;${j}&quot;/&gt;`);
       series.forEach((values,j)=&gt;{const x=j===0?x1:x2,v=values[i];svg+=`&lt;rect class=&quot;contribution-bar&quot; tabindex=&quot;0&quot; data-bar-series=&quot;${j}&quot; aria-label=&quot;${c} ${j===0?models.official.name:models[state.model].name}&quot; x=&quot;${x-w/2}&quot; y=&quot;${ys[j]}&quot; width=&quot;${w}&quot; height=&quot;${v/max*height}&quot; rx=&quot;0&quot; fill=&quot;#628AFC&quot; fill-opacity=&quot;${j===0?.4:1}&quot;/&gt;&lt;text x=&quot;${x}&quot; y=&quot;${ys[j]-9}&quot; text-anchor=&quot;middle&quot; class=&quot;bar-data-label&quot; data-bar-series=&quot;${j}&quot; fill=&quot;#808896&quot; font-size=&quot;12&quot;&gt;${valueFormat(v)}&lt;/text&gt;`});
       const delta=series[1][i]-series[0][i],flat=Math.abs(delta)&lt;(metric===&#x27;contribution&#x27;?.0005:.005),color=flat?&#x27;#808896&#x27;:delta&gt;0?&#x27;#22a06b&#x27;:&#x27;#de5360&#x27;;
@@ -43505,12 +43526,26 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-
         host.querySelectorAll(&#x27;.bar-hover-guide&#x27;).forEach(rect=&gt;rect.style.visibility=rect.parentElement===group?&#x27;visible&#x27;:&#x27;hidden&#x27;);
         const entries=[{name:models.official.name,value:amounts.official?.[i],share:official[i],color:colorOfficial},{name:models[state.model].name,value:amounts.model?.[i],share:model[i],color:colorModel}];
         const content=entries.map(entry=&gt;`&lt;div class=&quot;contribution-tip-model&quot; style=&quot;--series-color:${entry.color}&quot;&gt;&lt;strong&gt;${entry.name}&lt;/strong&gt;&lt;div class=&quot;chart-tip-line&quot;&gt;&lt;span&gt;${meta.label}&lt;/span&gt;&lt;b&gt;${metricValue(entry.value)}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;chart-tip-line&quot;&gt;&lt;span&gt;${meta.label}贡献度&lt;/span&gt;&lt;b&gt;${pct(entry.share,2)}&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;`).join(&#x27;&#x27;);
-        showChartTip(`&lt;div class=&quot;contribution-comparison-tip&quot;&gt;${content}&lt;/div&gt;`,e,target);
+        const difference=series[1][i]-series[0][i];
+        const differenceText=metric===&#x27;contribution&#x27;?((difference&gt;0?&#x27;+&#x27;:&#x27;&#x27;)+(difference*100).toFixed(2)+&#x27; pp&#x27;):signedMoney(difference);
+        showChartTip(`&lt;div class=&quot;contribution-comparison-tip&quot;&gt;${content}&lt;div class=&quot;chart-tip-diff&quot;&gt;&lt;span&gt;差异值&lt;/span&gt;&lt;b&gt;${differenceText}&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;`,e,target);
       };
       const hide=()=&gt;{host.querySelectorAll(&#x27;.bar-hover-guide&#x27;).forEach(rect=&gt;rect.style.visibility=&#x27;hidden&#x27;);document.getElementById(&#x27;spendTooltip&#x27;).hidden=true};group.onpointermove=show;group.onpointerleave=hide;group.onfocusin=show;group.onfocusout=hide;
     });
   }
   function renderDonuts(official,model){
+    const module=document.getElementById(&#x27;module2&#x27;);
+    module.classList.toggle(&#x27;is-model-unavailable&#x27;,!model);
+    let empty=module.querySelector(&#x27;.model-unavailable-empty&#x27;);
+    if(!model){
+      document.getElementById(&#x27;officialDonut&#x27;).replaceChildren();
+      document.getElementById(&#x27;modelDonut&#x27;).replaceChildren();
+      document.getElementById(&#x27;comparisonLegend&#x27;).replaceChildren();
+      document.getElementById(&#x27;comparisonTotalSpend&#x27;).textContent=&#x27;&#x27;;
+      if(!empty)module.insertAdjacentHTML(&#x27;beforeend&#x27;,modelUnavailableEmpty());
+      return;
+    }
+    empty?.remove();
     const total=totalBudget(),actual=channels.map(c=&gt;objectiveSpend()[c]/total),legend=document.getElementById(&#x27;comparisonLegend&#x27;);
     document.getElementById(&#x27;comparisonTotalSpend&#x27;).textContent=&#x27;$ &#x27;+total.toLocaleString(&#x27;en-US&#x27;,{minimumFractionDigits:2,maximumFractionDigits:2});
     legend.innerHTML=`&lt;div class=&quot;spend-legend-compact&quot; aria-label=&quot;渠道花费图例&quot;&gt;&lt;div class=&quot;spend-legend-header&quot;&gt;&lt;span&gt;渠道&lt;/span&gt;&lt;span&gt;当前花费&lt;/span&gt;&lt;span title=&quot;建议花费（${models[state.model].name}）&quot;&gt;建议花费（${models[state.model].name}）&lt;/span&gt;&lt;/div&gt;${channels.map((c,i)=&gt;`&lt;div class=&quot;spend-legend-compact-row&quot; data-legend-channel=&quot;${c}&quot;&gt;&lt;span class=&quot;legend-channel&quot;&gt;&lt;i style=&quot;background:${colors[c]}&quot;&gt;&lt;/i&gt;${c}&lt;/span&gt;&lt;span class=&quot;legend-value&quot; aria-label=&quot;${c}当前花费&quot;&gt;&lt;span class=&quot;legend-amount&quot;&gt;${money(objectiveSpend()[c])}&lt;/span&gt;&lt;small class=&quot;spend-share&quot;&gt;(${pct(actual[i],2)})&lt;/small&gt;&lt;/span&gt;&lt;span class=&quot;legend-value&quot; aria-label=&quot;${c}建议花费（${models[state.model].name}）&quot;&gt;&lt;span class=&quot;legend-amount&quot;&gt;${model?money(model[i]*total):&#x27;—&#x27;}&lt;/span&gt;&lt;small class=&quot;spend-share&quot;&gt;${model?&#x27;(&#x27;+pct(model[i],2)+&#x27;)&#x27;:&#x27;&#x27;}&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;`).join(&#x27;&#x27;)}&lt;/div&gt;`;
@@ -43520,16 +43555,25 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-
     }if(model)draw(&#x27;modelDonut&#x27;,model,true);else document.getElementById(&#x27;modelDonut&#x27;).innerHTML=&#x27;&lt;div class=&quot;invalid-model-donut&quot;&gt;&lt;strong&gt;模型不适用&lt;/strong&gt;&lt;span&gt;贡献度存在负值&lt;/span&gt;&lt;/div&gt;&#x27;;draw(&#x27;officialDonut&#x27;,actual,false);
   }
   function renderBudget(official,model){
+    const module=document.getElementById(&#x27;module3&#x27;);
+    module.classList.toggle(&#x27;is-model-unavailable&#x27;,!model);
+    const empty=module.querySelector(&#x27;.model-unavailable-empty&#x27;);
+    if(!model){
+      document.getElementById(&#x27;budgetBody&#x27;).replaceChildren();
+      if(!empty)module.insertAdjacentHTML(&#x27;beforeend&#x27;,modelUnavailableEmpty());
+      return;
+    }
+    empty?.remove();
     const total=totalBudget(),amounts=currentAmounts();
     const cell=(value,format=metricValue,cls=&#x27;&#x27;)=&gt;`&lt;td data-sort-value=&quot;${Number.isFinite(value)?value:&#x27;&#x27;}&quot;${cls?` class=&quot;${cls}&quot;`:&#x27;&#x27;}&gt;${Number.isFinite(value)?format(value):&#x27;—&#x27;}&lt;/td&gt;`;
-    document.getElementById(&#x27;budgetBody&#x27;).innerHTML=channels.map((c,i)=&gt;{const currentSpend=objectiveSpend()[c],suggested=model?total*model[i]:null,amount=model?suggested-currentSpend:null,rate=model?amount/currentSpend:null,diff=model?(model[i]-official[i])*100:null;return`&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;channel-name&quot; style=&quot;--c:${colors[c]}&quot;&gt;&lt;i&gt;&lt;/i&gt;${c}&lt;/span&gt;&lt;/td&gt;${cell(amounts.official?.[i])}${cell(amounts.model?.[i])}${cell(official[i],v=&gt;pct(v,2))}${cell(model?.[i],v=&gt;pct(v,2))}${cell(diff,v=&gt;(v&gt;0?&#x27;+&#x27;:&#x27;&#x27;)+v.toFixed(2)+&#x27; pp&#x27;,&#x27;contribution-difference &#x27;+(Number(diff?.toFixed(2))&gt;0?&#x27;positive&#x27;:Number(diff?.toFixed(2))&lt;0?&#x27;negative&#x27;:&#x27;neutral&#x27;))}${cell(currentSpend,money)}${cell(suggested,money,&#x27;suggested-spend&#x27;)}&lt;td data-sort-value=&quot;${amount??&#x27;&#x27;}&quot; class=&quot;${amount&gt;0?&#x27;positive&#x27;:amount&lt;0?&#x27;negative&#x27;:&#x27;neutral&#x27;}&quot;&gt;${amount===null?&#x27;—&#x27;:`&lt;span class=&quot;relative-current&quot;&gt;${amount&gt;0?&#x27;&lt;span class=&quot;trend-arrow&quot; aria-hidden=&quot;true&quot;&gt;↑&lt;/span&gt; &#x27;:amount&lt;0?&#x27;&lt;span class=&quot;trend-arrow&quot; aria-hidden=&quot;true&quot;&gt;↓&lt;/span&gt; &#x27;:&#x27;&#x27;}&lt;span class=&quot;relative-amount&quot;&gt;${money(Math.abs(amount))}&lt;/span&gt; &lt;span class=&quot;relative-rate&quot;&gt;(${pct(Math.abs(rate),2)})&lt;/span&gt;&lt;/span&gt;`}&lt;/td&gt;&lt;/tr&gt;`}).join(&#x27;&#x27;);
+    document.getElementById(&#x27;budgetBody&#x27;).innerHTML=channels.map((c,i)=&gt;{const currentSpend=objectiveSpend()[c],suggested=model?total*model[i]:null,amount=model?suggested-currentSpend:null,rate=model?amount/currentSpend:null,diff=model?(model[i]-official[i])*100:null;return`&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;channel-name&quot; style=&quot;--c:${colors[c]}&quot;&gt;&lt;i&gt;&lt;/i&gt;${c}&lt;/span&gt;&lt;/td&gt;${cell(amounts.official?.[i])}${model?cell(amounts.model?.[i]):modelUnavailableCell()}${cell(official[i],v=&gt;pct(v,2))}${model?cell(model?.[i],v=&gt;pct(v,2)):modelUnavailableCell()}${model?cell(diff,v=&gt;(v&gt;0?&#x27;+&#x27;:&#x27;&#x27;)+v.toFixed(2)+&#x27; pp&#x27;,&#x27;contribution-difference &#x27;+(Number(diff?.toFixed(2))&gt;0?&#x27;positive&#x27;:Number(diff?.toFixed(2))&lt;0?&#x27;negative&#x27;:&#x27;neutral&#x27;)):modelUnavailableCell(&#x27;contribution-difference neutral&#x27;)}${cell(currentSpend,money)}${model?cell(suggested,money,&#x27;suggested-spend&#x27;):modelUnavailableCell(&#x27;suggested-spend&#x27;)}&lt;td ${!model?`data-model-unavailable tabindex=&quot;0&quot; aria-label=&quot;--，${modelUnavailableTitle}，${modelUnavailableMessage}&quot;`:&quot;&quot;} data-sort-value=&quot;${amount??&#x27;&#x27;}&quot; class=&quot;${amount&gt;0?&#x27;positive&#x27;:amount&lt;0?&#x27;negative&#x27;:&#x27;neutral&#x27;}&quot;&gt;${amount===null?&#x27;--&#x27;:`&lt;span class=&quot;relative-current&quot;&gt;${amount&gt;0?&#x27;&lt;span class=&quot;trend-arrow&quot; aria-hidden=&quot;true&quot;&gt;↑&lt;/span&gt; &#x27;:amount&lt;0?&#x27;&lt;span class=&quot;trend-arrow&quot; aria-hidden=&quot;true&quot;&gt;↓&lt;/span&gt; &#x27;:&#x27;&#x27;}&lt;span class=&quot;relative-amount&quot;&gt;${money(Math.abs(amount))}&lt;/span&gt; &lt;span class=&quot;relative-rate&quot;&gt;(${pct(Math.abs(rate),2)})&lt;/span&gt;&lt;/span&gt;`}&lt;/td&gt;&lt;/tr&gt;`}).join(&#x27;&#x27;);
   }
   function applyBudgetSorting(){
     const body=document.getElementById(&#x27;budgetBody&#x27;);
     if(state.budgetSort){const {index,desc}=state.budgetSort,value=row=&gt;{const raw=row.cells[index].dataset.sortValue;return raw===&#x27;&#x27;||raw==null?null:Number(raw)};const rows=[...body.rows];rows.sort((a,b)=&gt;{const av=value(a),bv=value(b);return av===null?(bv===null?0:1):bv===null?-1:desc?bv-av:av-bv});rows.forEach(row=&gt;body.appendChild(row))}
     document.querySelectorAll(&#x27;#module3 th&#x27;).forEach((th,index)=&gt;{const button=th.querySelector(&#x27;.table-sort-button&#x27;);if(!button)return;const active=state.budgetSort?.index===index;button.disabled=[...body.rows].every(row=&gt;row.cells[index].dataset.sortValue===&#x27;&#x27;);button.title=button.disabled?(!modelApplicable()?&#x27;模型不适用：贡献度存在负值&#x27;:&#x27;当前未提供该指标原值&#x27;):&#x27;&#x27;;button.classList.toggle(&#x27;is-sorted&#x27;,active);th.setAttribute(&#x27;aria-sort&#x27;,active?(state.budgetSort.desc?&#x27;descending&#x27;:&#x27;ascending&#x27;):&#x27;none&#x27;);if(active)button.dataset.direction=state.budgetSort.desc?&#x27;desc&#x27;:&#x27;asc&#x27;;else button.removeAttribute(&#x27;data-direction&#x27;)});
   }
-  function renderOverview(){document.querySelectorAll(&#x27;#module4 .channel-head i&#x27;).forEach((dot,i)=&gt;dot.style.setProperty(&#x27;--c&#x27;,colors[channels[i]]));const source=currentDataset(),body=document.getElementById(&quot;overviewBody&quot;);body.innerHTML=modelKeys.map(key=&gt;{if(!modelApplicable(key))return `&lt;tr class=&quot;invalid-model-row&quot;&gt;&lt;td&gt;&lt;div class=&quot;model-label&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;${models[key].name}&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;${channels.map(()=&gt;&#x27;&lt;td data-sort-value=&quot;&quot;&gt;—&lt;/td&gt;&#x27;).join(&#x27;&#x27;)}&lt;td class=&quot;interpretation&quot;&gt;模型不适用：当前优化目标和触点口径下贡献度存在负值。&lt;/td&gt;&lt;/tr&gt;`;const shares=objectiveShares(source[key]),max=Math.max(...shares),row=key===&quot;official&quot;?&quot;official-row&quot;:key===state.model?&quot;selected-row&quot;:&quot;&quot;,label=`&lt;div class=&quot;model-label&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;${models[key].name}&lt;/span&gt;${key===&quot;official&quot;?&#x27;&lt;small class=&quot;official-baseline-badge&quot;&gt;官方基准&lt;/small&gt;&#x27;:&quot;&quot;}&lt;/div&gt;`,cells=shares.map((v,i)=&gt;`&lt;td data-sort-value=&quot;${v}&quot;&gt;&lt;div class=&quot;share-cell ${Math.abs(v-max)&lt;1e-9?&quot;max&quot;:&quot;&quot;}&quot; style=&quot;--c:${colors[channels[i]]}&quot;&gt;&lt;strong&gt;${pct(v,2)}&lt;/strong&gt;&lt;span class=&quot;mini-track&quot;&gt;&lt;i style=&quot;width:${Math.max(2,v*100)}%&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;`).join(&quot;&quot;);return`&lt;tr class=&quot;${row}&quot;&gt;&lt;td&gt;${label}&lt;/td&gt;${cells}&lt;td class=&quot;interpretation&quot;&gt;${interpretation(key,shares)}&lt;/td&gt;&lt;/tr&gt;`}).join(&quot;&quot;);applyOverviewSorting()}
+  function renderOverview(){document.querySelectorAll(&#x27;#module4 .channel-head i&#x27;).forEach((dot,i)=&gt;dot.style.setProperty(&#x27;--c&#x27;,colors[channels[i]]));const source=currentDataset(),body=document.getElementById(&quot;overviewBody&quot;);body.innerHTML=modelKeys.map(key=&gt;{if(!modelApplicable(key))return `&lt;tr class=&quot;invalid-model-row&quot;&gt;&lt;td&gt;&lt;div class=&quot;model-label&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;${models[key].name}&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;${channels.map(()=&gt;modelUnavailableCell()).join(&#x27;&#x27;)}${modelUnavailableCell(&#x27;interpretation&#x27;)}&lt;/tr&gt;`;const shares=objectiveShares(source[key]),max=Math.max(...shares),row=key===&quot;official&quot;?&quot;official-row&quot;:key===state.model?&quot;selected-row&quot;:&quot;&quot;,label=`&lt;div class=&quot;model-label&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;${models[key].name}&lt;/span&gt;${key===&quot;official&quot;?&#x27;&lt;small class=&quot;official-baseline-badge&quot;&gt;官方基准&lt;/small&gt;&#x27;:&quot;&quot;}&lt;/div&gt;`,cells=shares.map((v,i)=&gt;`&lt;td data-sort-value=&quot;${v}&quot;&gt;&lt;div class=&quot;share-cell ${Math.abs(v-max)&lt;1e-9?&quot;max&quot;:&quot;&quot;}&quot; style=&quot;--c:${colors[channels[i]]}&quot;&gt;&lt;strong&gt;${pct(v,2)}&lt;/strong&gt;&lt;span class=&quot;mini-track&quot;&gt;&lt;i style=&quot;width:${Math.max(2,v*100)}%&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;`).join(&quot;&quot;);return`&lt;tr class=&quot;${row}&quot;&gt;&lt;td&gt;${label}&lt;/td&gt;${cells}&lt;td class=&quot;interpretation&quot;&gt;${interpretation(key,shares)}&lt;/td&gt;&lt;/tr&gt;`}).join(&quot;&quot;);applyOverviewSorting()}
 
   const modelIntroductions={
     first:{category:&#x27;单触点归因&#x27;,english:&#x27;First Touch&#x27;,description:&#x27;全部归因给首触广告：转化价值 100% 记入用户首次接触的渠道，后续触点不计功劳。&#x27;,question:&#x27;谁带来了用户？&#x27;,shares:[100,0,0],note:&#x27;这单的功劳全部记在第一个触点上：&lt;em&gt;SB 100%&lt;/em&gt;，后面的 DSP、SP 记 0。谁最常做入口，谁的首触份额就高。&#x27;},
@@ -43626,7 +43670,6 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-
   }
 
 
-  document.querySelectorAll(&#x27;[data-picker-style-option]&#x27;).forEach(button=&gt;button.onclick=()=&gt;{const style=button.dataset.pickerStyleOption;document.querySelector(&#x27;.model-picker-card&#x27;).dataset.pickerStyle=style;document.querySelectorAll(&#x27;[data-picker-style-option]&#x27;).forEach(option=&gt;option.setAttribute(&#x27;aria-pressed&#x27;,String(option.dataset.pickerStyleOption===style)));syncModelIntroContext()});
 
   function syncChartMetricTabs(){
     document.querySelectorAll(&#x27;[data-chart-metric]&#x27;).forEach(tab=&gt;{const active=tab.dataset.chartMetric===state.chartMetric;tab.setAttribute(&#x27;aria-selected&#x27;,String(active));tab.tabIndex=active?0:-1;if(active)document.getElementById(&#x27;barPlot&#x27;).setAttribute(&#x27;aria-labelledby&#x27;,tab.id)});
@@ -43637,9 +43680,27 @@ body[data-model=&quot;attribution&quot;] #attributionPage #module4 .attribution-
   });
   window.addEventListener(&#x27;resize&#x27;,()=&gt;requestAnimationFrame(positionModelIntroBubble));
   new ResizeObserver(positionModelIntroBubble).observe(document.querySelector(&#x27;.model-picker-card&#x27;));
+  const showUnavailableTip=e=&gt;{
+    const cell=e.target.closest?.(&#x27;[data-model-unavailable]&#x27;);if(!cell)return;
+    showChartTip(`&lt;div class=&quot;model-unavailable-tooltip&quot;&gt;${modelUnavailableMarkup()}&lt;/div&gt;`,e,cell);
+    const tip=document.getElementById(&#x27;spendTooltip&#x27;),r=cell.getBoundingClientRect(),margin=20,gap=12;
+    let visibleWidth=window.visualViewport?.width||innerWidth,visibleHeight=window.visualViewport?.height||innerHeight;
+    if(window.frameElement){const frameRect=window.frameElement.getBoundingClientRect();visibleHeight=Math.min(visibleHeight,parent.innerHeight-frameRect.top);visibleWidth=Math.min(visibleWidth,parent.innerWidth-frameRect.left);}
+    const width=tip.offsetWidth,height=tip.offsetHeight,below=r.bottom+gap,above=r.top-gap-height;
+    const fitsBelow=below+height&lt;=visibleHeight-margin;
+    const top=fitsBelow?below:above;
+    tip.style.left=Math.max(margin,Math.min(visibleWidth-width-margin,r.left+(r.width-width)/2))+&#x27;px&#x27;;
+    tip.style.top=Math.max(margin,Math.min(visibleHeight-height-margin,top))+&#x27;px&#x27;;
+  };
+  const hideUnavailableTip=e=&gt;{if(e.target.closest?.(&#x27;[data-model-unavailable]&#x27;)&amp;&amp;!e.relatedTarget?.closest?.(&#x27;[data-model-unavailable]&#x27;))document.getElementById(&#x27;spendTooltip&#x27;).hidden=true};
+  document.addEventListener(&#x27;pointerover&#x27;,showUnavailableTip);
+  document.addEventListener(&#x27;pointermove&#x27;,showUnavailableTip);
+  document.addEventListener(&#x27;focusin&#x27;,showUnavailableTip);
+  document.addEventListener(&#x27;pointerout&#x27;,hideUnavailableTip);
+  document.addEventListener(&#x27;focusout&#x27;,hideUnavailableTip);
   setupModelSelects();
   render();
-  const describeCells=()=&gt;document.querySelectorAll(&#x27;.attribution-data-table tbody td&#x27;).forEach(cell=&gt;cell.title=cell.textContent.trim());
+  const describeCells=()=&gt;document.querySelectorAll(&#x27;.attribution-data-table tbody td&#x27;).forEach(cell=&gt;{if(!cell.hasAttribute(&#x27;data-model-unavailable&#x27;))cell.title=cell.textContent.trim()});
   describeCells();new MutationObserver(describeCells).observe(document.getElementById(&#x27;attributionPage&#x27;),{childList:true,subtree:true});
 &lt;/script&gt;
 &lt;script&gt;
@@ -60617,6 +60678,29 @@ document.getElementById('modelPickerCancel').onclick=()=>picker.close();document
 const originalShowAppPage=showAppPage;
 showAppPage=function(page){originalShowAppPage(page);window.scrollTo(0,0);document.querySelector(".workspace")?.scrollTo(0,0);const ids={reports:'reportsPage',create:'createReportPage',basket:'basketPage',amcFrame:'amcFramePage',attribution:'attributionAppPage',customMappings:'customMappingsPage',systemMappings:'systemMappingsPage'};Object.entries(ids).forEach(([key,id])=>{const element=document.getElementById(id);if(element){element.hidden=key!==page;if(key===page)element.style.removeProperty('display')}})};
 render();const route=location.hash.slice(1);showAppPage(['reports','create','basket','amcFrame','attribution','customMappings','systemMappings'].includes(route)?route:'reports');
-})();</script></body>
+})();</script><script id="attribution-report-config-summary">
+(()=>{
+ const frame=document.getElementById('attributionContentFrame');
+ let savedConfig={dimension:'account',lookback:'14'},previewConfig=null;
+ const readForm=()=>({dimension:document.getElementById('createAttributionDimension')?.value==='brandProductLine'?'brandProductLine':'account',lookback:document.getElementById('createAttributionLookback')?.value==='28'?'28':'14'});
+ function sync(config=savedConfig){
+   const doc=frame?.contentDocument;
+   const dimension=doc?.getElementById('attributionReportDimension'),lookback=doc?.getElementById('attributionReportLookback');
+   if(dimension)dimension.textContent=config.dimension==='brandProductLine'?'品牌产品线':'账号';
+   if(lookback)lookback.textContent=config.lookback+'天';
+ }
+ frame?.addEventListener('load',()=>sync());
+ document.querySelector('#createReportPage .selected-model-grid')?.addEventListener('click',event=>{
+   if(event.target.closest('.model-preview-btn')?.closest('[data-model-name="归因模型"]'))previewConfig=readForm();
+ },true);
+ document.getElementById('submitCreateReport')?.addEventListener('click',()=>{
+   const card=document.querySelector('#createReportPage [data-model-name="归因模型"]');
+   if(card&&!card.hidden){savedConfig=readForm();sync();}
+ },true);
+ const original=showAppPage;
+ showAppPage=function(page){original(page);if(page==='attribution'){sync(previewConfig||savedConfig);previewConfig=null;}};
+ sync();
+})();
+</script></body>
 </html>
 
